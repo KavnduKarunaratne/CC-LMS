@@ -52,6 +52,13 @@ class gradeController extends Controller
     return redirect('dashboard')->with('success','grade deleted succesfully');
   }
 
+  public function showClasses(Grade $grade)
+  {
+      $classes = $grade->classes; // Assuming you have a relationship set up
+  
+      return view('classes.show', compact('grade', 'classes'));
+  }
+
 
 
 

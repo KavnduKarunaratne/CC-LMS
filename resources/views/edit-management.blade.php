@@ -11,8 +11,8 @@
 <body class="bg-black">
 
 <div class="container mx-auto py-8 mt-12">
-<h2 class="text-2xl font-bold mb-6 text-center text-white">Edit Student</h2>
-  <form method="post" action="{{route ('update-student' , ['id' => $student->id]) }}" class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" >
+<h2 class="text-2xl font-bold mb-6 text-center text-white">Management Student</h2>
+  <form method="post" action="{{route ('update-management' , ['id' => $management->id]) }}" class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" >
   
   @csrf 
   <div class="mb-4">
@@ -33,25 +33,7 @@
                     <input type="text" name="year_of_registration" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
                 </div>
 
-             <!--   <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="grade_id">select Grade</label>
-                    <Select name="grade_id">
-                        @foreach($grades as $grade)
-                        <option value="{{$grade->id}}">{{$grade->id}}</option>
-                        @endforeach
-
-                    </Select>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="class_id">select Class</label>
-                    <Select name="class_id">
-                        @foreach($classes as $classes)
-                        <option value="{{$classes->id}}">{{$classes->class_name}}</option>
-                        @endforeach
-
-                    </Select>
-                </div>-->
-
+     
 <br>
    
     <div class="flex items-center justify-around">
@@ -59,7 +41,7 @@
         Update
       </button>
       
-      <a href="{{ url('dashboard') }}" class="text-black no-underline hover:underline" >Back</a>
+      <a href="{{ url('user-management') }}" class="text-black no-underline hover:underline" >Back</a>
    
     </div>
   </form>
@@ -68,4 +50,3 @@
 
 </body>
 </html>
-

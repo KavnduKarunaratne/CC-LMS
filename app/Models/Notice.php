@@ -5,19 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Grade extends Model
+class Notice extends Model
 {
     use HasFactory;
 
     protected $fillable=[
-        'grade',
-      
+        
+        'notice',
+        'date_of_notice',
+       
     ];
-
-    public function classes()
-    {
-        return $this->hasMany(Classes::class);
-    } 
-
-    
 }

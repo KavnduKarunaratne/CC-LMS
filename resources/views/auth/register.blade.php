@@ -41,9 +41,15 @@
                 <x-label for="year_of_registration" value="{{ __('Year of Registration') }}" />
                 <x-input id="year_of_registration" class="block mt-1 w-full" type="text" name="year_of_registration" />
             </div>
+            <div class="mt-4">
+                <x-label for="role_id" value="{{ __('Role') }}" />
+                <select name="role_id">
+                @foreach (config('auth.roles') as $role_id => $role_value)
+                    <option value="{{ $role_id }}">{{ $role_value }}</option>
+                @endforeach
+                </select>
 
-            
-
+            </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">

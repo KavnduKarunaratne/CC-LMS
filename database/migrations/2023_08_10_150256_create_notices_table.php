@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('classes', function (Blueprint $table) {
-            $table->char('id', 1)->primary();
-            $table->foreignId('grade_id')->constrained('grades');
+        Schema::create('notices', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
+            $table->string('notice');
+            $table->date('date_of_notice');
+            
         });
     }
 
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('notices');
     }
 };

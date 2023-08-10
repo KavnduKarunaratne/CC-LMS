@@ -15,8 +15,8 @@
             @csrf 
          
                 <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="student_name">Name</label>
-                    <input type="text" name="student_name" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
+                    <input type="text" name="name" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
                 </div>
 
                 <div class="mb-4">
@@ -32,7 +32,7 @@
                     <input type="text" name="year_of_registration" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
                 </div>
 
-                <div class="mb-4">
+               <!-- <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="grade_id">Select Grade</label>
                     <Select name="grade_id">
                         @foreach($grades as $grade)
@@ -49,7 +49,7 @@
                         @endforeach
 
                     </Select>
-                </div>
+                </div>-->
 
                 
 

@@ -16,7 +16,7 @@
     <div class="flex flex-col">
         <div class="w-full">
             <div class="border-b border-gray-200 shadow">
-            <a href="{{ url('add-student') }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Add New student</a>
+            <a href="{{ url('add-management') }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Add New Management</a>
             
             <table class="table-auto mt-4 ">
                 <thead class="bg-black divide-y divide-gray-300">
@@ -39,37 +39,25 @@
                                         <th class="px-6 py-2 text-xs text-gray-500">
                                             Grade
                                         </th>
-                                        <th class="px-6 py-2 text-xs text-gray-500">
-                                            Class
-                                        </th>
-                                    
-                                        
-                                        <th class="px-6 py-2 text-xs text-gray-500">
-                                            Delete
-                                        </th>
-                                        <th class="px-6 py-2 text-xs text-gray-500">
-                                            Edit
-                                        </th>
+                                      
                     </tr>
                 </thead>
                 <tbody class="bg-black divide-y divide-gray-300">
-                            @foreach($student as $student)
+                            @foreach($management as $management)
                             
                             <tr class="whitespace-nowrap">
-                                <td class="px-6 py-4 text-sm text-white">{{ $student-> id}}</td>
-                                <td class="px-6 py-4 text-sm text-white">{{$student->student_name}}</td>
-                                <td class="px-6 py-4 text-sm text-white"> {{$student->email}}</td>
-                                <td class="px-6 py-4 text-sm text-white"> {{$student->admission_number}}</td>
-                                <td class="px-6 py-4 text-sm text-white"> {{$student->year_of_registration}}</td>
-                                <td class="px-6 py-4 text-sm text-white"> {{$student->grade_id}}</td>
-                                <td class="px-6 py-4 text-sm text-white"> {{$student->class_id}}</td>
+                                <td class="px-6 py-4 text-sm text-white">{{ $management-> id}}</td>
+                                <td class="px-6 py-4 text-sm text-white">{{$management->name}}</td>
+                                <td class="px-6 py-4 text-sm text-white"> {{$management->email}}</td>
+                                <td class="px-6 py-4 text-sm text-white"> {{$management->admission_number}}</td>
+                                <td class="px-6 py-4 text-sm text-white"> {{$management->year_of_registration}}</td>
+                               
                             
                                 <td class="px-6 py-4 text-sm text-white">
-                                    <a href="{{ url('delete-student/'.$student->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
+                                    <a href="{{ url('delete-management/'.$management->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-white">
-                                    <a href="{{ url('edit-student/'.$student->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
-
+                                    <a href="{{ url('edit-management/'.$management->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
 
                             
                                 
@@ -89,11 +77,3 @@
 
     
 </div>
-
-
-
-
-
-
-</body>
-</html>

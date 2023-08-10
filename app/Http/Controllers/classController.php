@@ -4,30 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Grade;
 use App\Models\Role;
+use App\Models\Student;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Models\Classes;
 
 class classController extends Controller
 {
-    public function Index(){
+    public function Class(){
         $classes = Classes::all();
-        return view('dashboard',compact('classes'));
+        return view('class-management',compact('classes'));
     }
 
-    public function Grade(){
+    /*public function Grade(){
         $grade = Grade::all();
         return view('add-class', compact('grade'));
-    }
+    }*/
 
     public function AddClass(){
         return view('add-class',[
             'grades' => (new Grade())->all(),
             'classes' => (new Classes())->all(),
-           
-        
+
+
         ]);
     }
-    
+
     public function saveClass(Request $request)
     {
         $request->validate([
@@ -36,12 +38,12 @@ class classController extends Controller
         ]);
         $class_name = $request->class_name;
         $grade_id=$request->grade_id;
-    
+
         $class = new Classes;
         $class->class_name = $class_name;
         $class->grade_id=$grade_id;
-        
-    
+
+
         $class->save();
         return redirect('dashboard')->with('success', 'class added successfully');
     }
@@ -51,27 +53,39 @@ class classController extends Controller
         $class = Classes::where('id','=',$id)->first();
         return view('edit-class',compact('class'));
       }
-    
+
       public function updateClass(Request $request, $id)
     {
-        $newClassNameValue = $request->class_name; 
-        $newClassGradeValue = $request->grade_id; 
-    
+        $newClassNameValue = $request->class_name;
+        $newClassGradeValue = $request->grade_id;
+
         Classes::where('id', '=', $id)->update([
             'class_name' => $newClassNameValue ,
             'grade_id' => $newClassGradeValue
-            
+
         ]);
-    
+
         return redirect('dashboard')->with('success', 'class updated successfully');
     }
-    
-    
+
+
       public function deleteClass($id){
         Classes::where('id','=',$id)->delete();
         return redirect('dashboard')->with('success','class deleted succesfully');
       }
-
+      public function showDetails(Classes $class)
+      {
+          $students = Student::where('grade_id', $class->grade_id)
+              ->where('class_id', $class->id)
+              ->get();
+      
+          $subjects = Subject::where('grade_id', $class->grade_id)
+              ->where('class_id', $class->id)
+             // ->with('teachername')
+              ->get();
+      
+          return view('class-details', compact('class', 'students', 'subjects'));
+      }
 
 
 

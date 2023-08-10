@@ -17,7 +17,7 @@
             <span class="sr-only">Open main menu</span>
             <!--
               Icon when menu is closed.
-  
+
               Menu open: "hidden", Menu closed: "block"
             -->
             <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -25,7 +25,7 @@
             </svg>
             <!--
               Icon when menu is open.
-  
+
               Menu open: "block", Menu closed: "hidden"
             -->
             <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -45,12 +45,12 @@
             </div>
           </div>
         </div>
-  
+
           </div>
         </div>
       </div>
     </div>
-  
+
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="sm:hidden" id="mobile-menu">
       <div class="space-y-1 px-2 pb-3 pt-2">
@@ -69,18 +69,18 @@
         <div class="flex flex-col">
             <div class="w-full">
                 <div class="border-b border-gray-200 shadow">
-                    <a href="{{ url('add-annoucement') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Add Announcement</a>
-                    @foreach ($annoucement as $annoucement)
+                    <a href="{{ url('add-notice') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Add Notice</a>
+                    @foreach ($notice as $notice)
                         <div class="text-white mt-4">
 
                             <div class="text-black w-full max-w-sm mx-auto bg-white p-4 mb-4 rounded-md shadow-md">
-                                {{ $annoucement->announcement }}<br>
-                                <span class="text-black">{{ $annoucement->date_of_announcement }}</span><br>
+                                {{ $notice->notice }}<br>
+                                <span class="text-black">{{ $notice->date_of_notice }}</span><br>
                             </div>
-                            
 
-                            <td class="px-6 py-4 text-sm text-amber-500"><a href="{{ url ('edit-ann/'.$annoucement->id)}}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a></td>
-                            <td class="px-6 py-4 text-sm text-red-600"><a href="{{ url ('delete-ann/'.$annoucement->id)}}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a></td>
+
+                            <td class="px-6 py-4 text-sm text-amber-500"><a href="{{ url ('edit-notice/'.$notice->id)}}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a></td>
+                            <td class="px-6 py-4 text-sm text-red-600"><a href="{{ url ('delete-notice/'.$notice->id)}}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a></td>
                         </div>
                         <br>
                     @endforeach

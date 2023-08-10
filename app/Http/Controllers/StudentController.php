@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classes;
 use App\Models\Grade;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Student;
 
@@ -11,9 +12,13 @@ class StudentController extends Controller
 {
 
     public function Student(){
-        $student=Student::all();
+        $student= User::where('role_id',3)->get();
         
         return view('student-list',compact('student'));
+
+        
+        // return $data;
+         
     }
     public function Grade(){
         $grade = Grade::all();
@@ -35,43 +40,74 @@ class StudentController extends Controller
     public function saveStudent(Request $request){
 
         $request->validate([
-            'student_name'=> 'required',
+            'name'=> 'required',
             'email'=>'required|email',
 
 
            
             'year_of_registration'=>'required',
             'admission_number'=>'required',
-            'class_id'=>'required',
-            'grade_id'=>'required',
+           // 'class_id'=>'required',
+           // 'grade_id'=>'required',
 
 
   
         ]);
 
-        $student_name=$request->student_name;
+        $name=$request->name;
         $email=$request->email;
        
         $year_of_registration=$request->year_of_registration;
         $admission_number=$request->admission_number;
-        $class_id=$request->class_id;
-        $grade_id=$request->grade_id;
+      //  $class_id=$request->class_id;
+      //  $grade_id=$request->grade_id;
 
 
-        $student = new Student;
-        $student->student_name=$student_name;
+        $student = new User;
+        $student->name=$name;
         $student->email=$email;
+        $student->role_id=3;
         $student->year_of_registration=$year_of_registration;
         $student->admission_number=$admission_number;
-        $student->class_id=$class_id;
-        $student->grade_id=$grade_id;
+        //$student->class_id=$class_id;
+       // $student->grade_id=$grade_id;
         $student->save();
         return redirect()->back()->with('success','student added succesfully');
        
 
     } 
+
+
+    public function editStudent($id){
+        $student = User::where('id','=',$id)->first();
+        return view('edit-student',compact('student'));
+    }
+
+    public function updateStudent(Request $request){
+        $id=$request->id;
+
+        $newStudentNameValue = $request->name;
+        $newStudentEmailValue = $request->email;
+        $newStudentYearOfRegistrationValue = $request->year_of_registration;
+        $newStudentAdmissionNumberValue = $request->admission_number;
+      //  $newStudentClassIdValue = $request->class_id;
+      //  $newStudentGradeIdValue = $request->grade_id;
+
+        User::where('id', '=', $id)->update([
+            'name' => $newStudentNameValue ,
+            'email' => $newStudentEmailValue,
+            'year_of_registration' => $newStudentYearOfRegistrationValue,
+            'admission_number' => $newStudentAdmissionNumberValue,
+         //   'class_id' => $newStudentClassIdValue,
+         //   'grade_id' => $newStudentGradeIdValue,
+
+        ]);
+
+        return redirect('student-list')->with('success', 'student updated successfully');
+
+    }
     public function deleteStudent($id){
-        Student::where('id','=',$id)->delete();
+        User::where('id','=',$id)->delete();
         return redirect('student-list')->with('success','student deleted succesfully');
 
     }

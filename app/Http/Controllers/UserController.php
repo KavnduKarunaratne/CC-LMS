@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classes;
+use App\Models\Grade;
+use App\Models\Notice;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\User;
@@ -11,8 +14,8 @@ class UserController extends Controller
 {
 
     public function Role(){
-        $role = Role::all();
-        return view('register-user',compact('role'));
+        $roles = Role::all();
+        return view('register',compact('roles'));
     }
 
     public function User(){
@@ -21,10 +24,11 @@ class UserController extends Controller
     }
 
     public function AddUser(){
-        return view('register-user', [
+        return view('register', [
             'roles' => (new Role())->all()
         ]);
     }
+
 
     public function  SaveUser(Request $request){
 
@@ -100,20 +104,26 @@ class UserController extends Controller
 
 
 
-    if($role_id==0){
-        return view('dashboard');
-    }
-    else if($role_id==1){
-        return view('management');
+    if($role_id==1){
+        return view('dashboard',[
+            'grades' => (new Grade())->all(),
+            'classes' => (new Classes())->all(),
+        ]);
     }
     else if($role_id==2){
+        return view('management',[
+            'notice' => (new Notice())->all(),
+        ]);
+    }
+    else if($role_id==3){
         return view('student-panel');
     }
-    else{
+    else if ($role_id==4){
         return view('teacher-panel');
     }
-
-
+    else{
+        return view('welcome');
+    }
     }
 
     public function logout(Request $request)

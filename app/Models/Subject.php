@@ -5,19 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Grade extends Model
+class Subject extends Model
 {
     use HasFactory;
 
     protected $fillable=[
-        'grade',
-      
+        'subject_name','grade_id', 'class_id', 'teacher_id'
     ];
-
-    public function classes()
-    {
-        return $this->hasMany(Classes::class);
-    } 
-
     
 }
