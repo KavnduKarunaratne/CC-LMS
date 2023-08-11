@@ -20,7 +20,10 @@
                 <h3 class="text-lg font-semibold">Subjects You Are In Charge Of:</h3>
                 <ul>
                     @foreach ($subjects as $subject)
-                        <li>{{ $subject->subject_name }}</li>
+                      <!--  <li>{{ $subject->subject_name }}</li>-->
+                      <a href="{{ route('subject.detail', ['subject_id' => $subject->id]) }}">
+            {{ $subject->subject_name }}
+        </a>
                     @endforeach
                 </ul>
             </div>
