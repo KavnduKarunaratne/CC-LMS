@@ -6,6 +6,7 @@ use App\Models\Grade;
 use App\Models\Role;
 use App\Models\Student;
 use App\Models\Subject;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Classes;
 
@@ -73,19 +74,35 @@ class classController extends Controller
         Classes::where('id','=',$id)->delete();
         return redirect('dashboard')->with('success','class deleted succesfully');
       }
-      public function showDetails(Classes $class)
+     /* public function showDetails(Classes $class)
       {
-          $students = Student::where('grade_id', $class->grade_id)
+          $students = User::where('grade_id', $class->grade_id, $role_id=3)
               ->where('class_id', $class->id)
+              ->with('studentname')
               ->get();
       
           $subjects = Subject::where('grade_id', $class->grade_id)
               ->where('class_id', $class->id)
-             // ->with('teachername')
+              ->with('teachername')
               ->get();
       
           return view('class-details', compact('class', 'students', 'subjects'));
-      }
+      }*/
+
+      public function showDetails(Classes $class)
+{
+    $students = User::where('grade_id', $class->grade_id)
+        ->where('class_id', $class->id)
+        ->where('role_id', 3) // Assuming 3 is the role_id for students
+        ->get();
+
+    $subjects = Subject::where('grade_id', $class->grade_id)
+        ->where('class_id', $class->id)
+        ->with('teacher') // Assuming you have defined the relationship as 'teacher'
+        ->get();
+
+    return view('class-details', compact('class', 'students', 'subjects'));
+}
 
 
 

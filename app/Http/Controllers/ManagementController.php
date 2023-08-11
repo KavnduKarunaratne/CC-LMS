@@ -55,6 +55,8 @@ class ManagementController extends Controller
         $management ->name=$name;
         $management ->email=$email;
         $management ->role_id=2;
+        $management->class_id=null;
+        $management->grade_id=null;
         $management ->year_of_registration=$year_of_registration;
         $management ->admission_number=$admission_number;
       

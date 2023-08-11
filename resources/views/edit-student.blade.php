@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<!--heere-->
 <html lang="en">
     <head>
     <meta charset="utf-8">
@@ -33,7 +33,7 @@
                     <input type="text" name="year_of_registration" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
                 </div>
 
-             <!--   <div class="mb-4">
+               <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="grade_id">select Grade</label>
                     <Select name="grade_id">
                         @foreach($grades as $grade)
@@ -50,7 +50,7 @@
                         @endforeach
 
                     </Select>
-                </div>-->
+                </div>
 
 <br>
    

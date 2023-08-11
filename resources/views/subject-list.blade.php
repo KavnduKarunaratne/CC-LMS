@@ -49,9 +49,10 @@
                             <td class="px-6 py-4 text-sm text-white">{{ $subject->subject_name }}</td>
                             <td class="px-6 py-4 text-sm text-white">{{ $subject->grade_id }}</td>
                             <td class="px-6 py-4 text-sm text-white">{{ $subject->class_id }}</td>
+                            <td class="px-6 py-4 text-sm text-white">{{ $subject->teacher->name }}</td>
                             <td class="px-6 py-4 text-sm text-white">
-        @if ($subject->teachername)
-            {{ $subject->teachername->teacher_name }}
+        @if ($subject->teacher_id)
+            {{ $subject->teacher_id}}
         @else
             No Teacher Assigned
         @endif

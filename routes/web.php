@@ -187,3 +187,8 @@ Route::post('save-management', [ManagementController::class, 'saveManagement']);
 Route::get('edit-management/{id}', [ManagementController::class, 'editManagement']);
 Route::post('update-management/{id}', [ManagementController::class, 'updateManagement']);
 Route::get('delete-management/{id}', [ManagementController::class, 'deleteManagement']);
+
+
+Route::get('teacher-panel',[TeacherController::class,'teacherPanel']);
+
+Route::get('subject-detail/{subject_id}', [SubjectController::class,'showDynamicDetail'])->name('subject.detail');

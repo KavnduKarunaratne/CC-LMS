@@ -27,10 +27,28 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="year_of_registration">Year of registration</label>
                 <input type="text" name="year_of_registration" value="{{ $teacher->year_of_registration }}" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
             </div>
-            <!-- You can add more fields for teacher-specific attributes here -->
 
-            
-            <br>
+            <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="class_id">Class</label>
+    <select name="class_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">
+        <option value="">Select Class</option>
+        @foreach($classes as $class)
+            <option value="{{ $class->id }}">{{ $class->class_name }}</option>
+        @endforeach
+    </select>
+</div>
+
+<div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="grade_id">Grade</label>
+    <select name="grade_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">
+        <option value="">Select Grade</option>
+        @foreach($grades as $grade)
+            <option value="{{ $grade->id }}">{{ $grade->grade }}</option>
+        @endforeach
+    </select>
+</div>
+
+           
    
             <div class="flex items-center justify-around">
                 <button class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">

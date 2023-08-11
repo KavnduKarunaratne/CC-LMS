@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Classes;
 use App\Models\Grade;
 use App\Models\Notice;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\User;
@@ -119,7 +120,9 @@ class UserController extends Controller
         return view('student-panel');
     }
     else if ($role_id==4){
-        return view('teacher-panel');
+        return view('teacher-panel',[
+            'subjects'=>(new Subject())->all(),
+        ]);
     }
     else{
         return view('welcome');

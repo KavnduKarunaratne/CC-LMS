@@ -13,4 +13,11 @@ class Classes extends Model
          'class_name','grade_id'
       
     ];
+
+    public function subjects()
+{
+    return $this->hasManyThrough(Subject::class, Grade::class, 'id', 'grade_id')
+                ->where('subjects.class_id', $this->id);
+}
+
 }

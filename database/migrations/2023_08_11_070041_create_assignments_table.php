@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        
+        Schema::create('assignments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('subject_name');
-            $table->foreignId('grade_id')->constrained('grades');
-            $table->foreignId('class_id')->constrained('classes');
+            $table->string('assignment_name');
+            $table->foreignId('subject_id')->constrained('subjects');
+            $table->datetime('due_date');
+            $table->string('description');
+            $table->string('file');
             $table->foreignId('teacher_id')->constrained('users')->nullable();
-          
+            $table->datetime('upload_date');
 
         });
     }
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('assignments');
     }
 };

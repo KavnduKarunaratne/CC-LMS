@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'email', 'password','role_id', 'admission_number', 'year_of_registration'
+        'name', 'email', 'password','role_id', 'admission_number', 'year_of_registration','class_id','grade_id','teacher_id'
     ];
 
     /**
@@ -58,4 +58,25 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function role()
+{
+    return $this->belongsTo(Role::class);
+}
+
+public function subjects()
+{
+    return $this->hasMany(Subject::class, 'teacher_id');
+}
+
+public function grade()
+{
+    return $this->belongsTo(Grade::class);
+}
+
+public function class()
+{
+    return $this->belongsTo(Classes::class, 'class_id');
+}
+
 }

@@ -7,6 +7,7 @@ use App\Models\Grade;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -47,8 +48,9 @@ class StudentController extends Controller
            
             'year_of_registration'=>'required',
             'admission_number'=>'required',
-           // 'class_id'=>'required',
-           // 'grade_id'=>'required',
+
+           'class_id'=>'required',
+        'grade_id'=>'required',
 
 
   
@@ -59,8 +61,9 @@ class StudentController extends Controller
        
         $year_of_registration=$request->year_of_registration;
         $admission_number=$request->admission_number;
-      //  $class_id=$request->class_id;
-      //  $grade_id=$request->grade_id;
+     //  $password = $request->password?$request->password:Auth::user()->password;
+        $class_id=$request->class_id;
+       $grade_id=$request->grade_id;
 
 
         $student = new User;
@@ -69,8 +72,10 @@ class StudentController extends Controller
         $student->role_id=3;
         $student->year_of_registration=$year_of_registration;
         $student->admission_number=$admission_number;
-        //$student->class_id=$class_id;
-       // $student->grade_id=$grade_id;
+      //  $student->password=bcrypt($password);
+
+        $student->class_id=$class_id;
+        $student->grade_id=$grade_id;
         $student->save();
         return redirect()->back()->with('success','student added succesfully');
        
@@ -80,7 +85,12 @@ class StudentController extends Controller
 
     public function editStudent($id){
         $student = User::where('id','=',$id)->first();
-        return view('edit-student',compact('student'));
+        return view('edit-student',compact('student'),[
+            'grades' => (new Grade())->all(),
+            'classes' => (new Classes())->all(),
+        
+        
+        ]);
     }
 
     public function updateStudent(Request $request){
@@ -90,16 +100,16 @@ class StudentController extends Controller
         $newStudentEmailValue = $request->email;
         $newStudentYearOfRegistrationValue = $request->year_of_registration;
         $newStudentAdmissionNumberValue = $request->admission_number;
-      //  $newStudentClassIdValue = $request->class_id;
-      //  $newStudentGradeIdValue = $request->grade_id;
+       $newStudentClassIdValue = $request->class_id;
+        $newStudentGradeIdValue = $request->grade_id;
 
         User::where('id', '=', $id)->update([
             'name' => $newStudentNameValue ,
             'email' => $newStudentEmailValue,
             'year_of_registration' => $newStudentYearOfRegistrationValue,
             'admission_number' => $newStudentAdmissionNumberValue,
-         //   'class_id' => $newStudentClassIdValue,
-         //   'grade_id' => $newStudentGradeIdValue,
+            'class_id' => $newStudentClassIdValue,
+           'grade_id' => $newStudentGradeIdValue,
 
         ]);
 

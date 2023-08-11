@@ -32,7 +32,7 @@
                     <input type="text" name="year_of_registration" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
                 </div>
 
-               <!-- <div class="mb-4">
+            <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="grade_id">Select Grade</label>
                     <Select name="grade_id">
                         @foreach($grades as $grade)
@@ -45,11 +45,11 @@
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="class_id">Select Class</label>
                     <Select name="class_id">
                         @foreach($classes as $classes)
-                        <option value="{{$classes->id}}">{{$classes->class}}</option>
+                        <option value="{{$classes->id}}">{{$classes->class_name}}</option>
                         @endforeach
 
                     </Select>
-                </div>-->
+                </div>
 
                 
 

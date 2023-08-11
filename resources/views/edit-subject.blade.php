@@ -21,7 +21,7 @@
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="grade_id">Select Grade</label>
             <select name="grade_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">
-                @foreach($grades as $grade)
+                @foreach($grade as $grade)
                 <option value="{{ $grade->id }}" {{ $grade->id == $subject->grade_id ? 'selected' : '' }}>{{ $grade->id }}</option>
                 @endforeach
             </select>
@@ -35,15 +35,17 @@
                 @endforeach
             </select>
         </div>
-
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="teacher_id">Select Teacher</label>
-            <select name="teacher_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">
-                @foreach($teachers as $teacher)
-                <option value="{{ $teacher->id }}" {{ $teacher->id == $subject->teacher_id ? 'selected' : '' }}>{{ $teacher->teacher_name }}</option>
-                @endforeach
-            </select>
-        </div>
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="teacher_id">Select Teacher</label>
+    <select name="teacher_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">
+        @foreach($teachers as $teacher)
+        <option value="{{$teacher->id}}">{{$teacher->name}}</option>
+        @endforeach
+    </select>
+</div>
+
+
+        
         
         <br>
         <div class="flex items-center justify-around">
