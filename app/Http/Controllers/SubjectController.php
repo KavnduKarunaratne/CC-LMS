@@ -113,8 +113,9 @@ class SubjectController extends Controller
     // Retrieve the subject based on the subject_id parameter
     $subject = Subject::findOrFail($subject_id);
     $materials = $subject->materials;
+    $assignments = $subject->assignments; 
 
-    return view('subject-detail', compact('subject','materials'));
+    return view('subject-detail', compact('subject','materials','assignments'));
 }
 
 

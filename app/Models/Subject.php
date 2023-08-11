@@ -31,7 +31,10 @@ class Subject extends Model
 {
     return $this->hasMany(Material::class, 'subject_id');
 }
+public function assignments()
+{
+    return $this->hasMany(Assignment::class, 'subject_id');
 
-
+}
 
 }

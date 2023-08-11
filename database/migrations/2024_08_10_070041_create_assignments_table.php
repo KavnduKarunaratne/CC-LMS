@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('file');
             $table->foreignId('teacher_id')->constrained('users')->nullable();
             $table->datetime('upload_date');
+            
 
         });
     }
