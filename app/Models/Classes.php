@@ -25,5 +25,9 @@ public function subjects()
 {
     return $this->hasMany(Subject::class, 'class_id');
 }
+public function students()
+{
+    return $this->hasMany(User::class, 'class_id')->where('role_id', 3);
+}
 
 }

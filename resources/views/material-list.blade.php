@@ -34,7 +34,8 @@
                                 <td class="px-6 py-4 text-sm text-white">{{ $material->id }}</td>
                                 <td class="px-6 py-4 text-sm text-white">{{ $material->material_name }}</td>
                                 <td class="px-6 py-4 text-sm text-white">{{ $material->description }}</td>
-                                <td class="px-6 py-4 text-sm text-white">{{ $material->subject->subject_name }}</td>
+                                <td class="px-6 py-4 text-sm text-white">{{ $material->subject->subject_name ?? 'N/A' }}</td>
+
                                 <td class="px-6 py-4 text-sm text-white">{{ $material->file }}</td>
 
                                 <td class="px-6 py-4 text-sm text-white">{{ $material->link }}</td>

@@ -40,6 +40,19 @@
     <a href="{{ url('add-material') }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Upload Materials</a>
 @endif
 </div>
+<div>
+@if ($subject->class && $subject->class->students->count() > 0)
+    <h4>Students in {{ $subject->class->class_name }}:</h4>
+    <ul>
+        @foreach ($subject->class->students as $student)
+            <li>{{ $student->name }} ({{ $student->email }})</li>
+        @endforeach
+    </ul>
+@else
+    <p>No students in this class.</p>
+@endif
+
+</div>
 
 </body>
 </html>

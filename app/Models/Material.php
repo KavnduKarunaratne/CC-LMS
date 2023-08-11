@@ -12,4 +12,10 @@ class Material extends Model
     protected $fillable=[
         'material_name','subject_id','description','file','teacher_id','upload_date','link'
     ];
+
+    public function subject()
+{
+    return $this->belongsTo(Subject::class, 'subject_id');
+}
+
 }

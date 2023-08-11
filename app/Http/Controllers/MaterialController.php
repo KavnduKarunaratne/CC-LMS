@@ -13,6 +13,7 @@ class MaterialController extends Controller
     $material=Material::all();
     return view('material-list',compact('material'),[
         'materials' => (new Material())->all(),
+        'subject'=>(new Subject())->all(),
     ]);
   }
   public function AddMaterial(){
@@ -29,7 +30,7 @@ class MaterialController extends Controller
         'description'=>'required',
        // 'upload_date'=>'required',
        
-        'link'=>'null',
+        'link'=>'nullable',
       
         'subject_id'=>'required',
         ]);
@@ -62,7 +63,10 @@ class MaterialController extends Controller
 
     public function editMaterial($id){
         $material=Material::find($id);
-        return view('edit-material',compact('material'));
+        return view('edit-material',compact('material'),[
+            'materials' => (new Material())->all(),
+            'subjects'=>(new Subject())->all(),
+        ]);
     }
 
     public function updateMaterial(Request $request,$id){
