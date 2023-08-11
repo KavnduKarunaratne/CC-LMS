@@ -20,13 +20,18 @@ class noticeController extends Controller
 
     public function saveNotice(Request $request)
     {
+        $request->validate([
+
+            'notice'=>'required',
+        ]);
             
             $noticeValue = $request->notice;
     
-            $noticeValue = $request->notice;
     
             $notice = new Notice;
             $notice->notice = $noticeValue;
+            $notice->upload_date = now();
+
             $notice->save();
     
             return redirect('management')->with('success', 'notice added successfully');

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\gradeController;
 use App\Http\Controllers\ManagementController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\classController;
@@ -192,3 +193,11 @@ Route::get('delete-management/{id}', [ManagementController::class, 'deleteManage
 Route::get('teacher-panel',[TeacherController::class,'teacherPanel']);
 
 Route::get('subject-detail/{subject_id}', [SubjectController::class,'showDynamicDetail'])->name('subject.detail');
+
+
+Route::get('material-list',[MaterialController::class,'Material']);
+Route::get('add-material',[MaterialController::class,'AddMaterial']);
+Route::post('save-material',[MaterialController::class,'saveMaterial']);
+Route::get('edit-material/{id}',[MaterialController::class,'editMaterial']);
+Route::post('update-material/{id}',[MaterialController::class,'updateMaterial'])->name('update-material');
+Route::get('delete-material/{id}',[MaterialController::class,'deleteMaterial']);

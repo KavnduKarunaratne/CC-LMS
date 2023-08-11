@@ -105,6 +105,8 @@ class TeacherController extends Controller
         
          $teacher = auth()->user();
          $subjects = $teacher->subjects;
+        
+         
  
          return view('teacher-panel', compact('subjects'));
     }

@@ -11,8 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
-        Schema::create('material', function (Blueprint $table) {
+        Schema::create('materials', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('material_name');
@@ -21,7 +20,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('file');
             $table->datetime('upload_date');
-
+            $table->string('link')->nullable();
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('material');
+        Schema::dropIfExists('materials');
     }
 };

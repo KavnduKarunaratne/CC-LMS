@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Classes;
 use App\Models\Grade;
+use App\Models\Material;
 use App\Models\Student;
 use App\Models\Subject;
 
@@ -111,11 +112,12 @@ class SubjectController extends Controller
 {
     // Retrieve the subject based on the subject_id parameter
     $subject = Subject::findOrFail($subject_id);
+    $materials = $subject->materials;
 
-    return view('subject-detail', compact('subject'));
+    return view('subject-detail', compact('subject','materials'));
 }
 
-   
+
     
 
 

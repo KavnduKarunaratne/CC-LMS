@@ -18,10 +18,7 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="notice">Notice</label>
                 <textarea name="notice" rows="5" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"></textarea>
             </div>
-            <div>
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="date_of_notice">Date</label>
-                <input type="date" name="date_of_notice" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
-
+            
             <br>
             <button type="submit" class="w-full bg-green-500 text-white text-sm font-bold py-2 px-4 mb-4 rounded-md hover:bg-green-600 transition duration-300">Save</button>
             <a href="{{ url('dashboard') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 px-3 rounded my-3 mt-1">Back</a>

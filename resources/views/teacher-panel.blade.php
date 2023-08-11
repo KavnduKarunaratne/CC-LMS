@@ -19,12 +19,15 @@
             <div class="bg-white p-4 rounded-md shadow-md">
                 <h3 class="text-lg font-semibold">Subjects You Are In Charge Of:</h3>
                 <ul>
-                    @foreach ($subjects as $subject)
-                      <!--  <li>{{ $subject->subject_name }}</li>-->
-                      <a href="{{ route('subject.detail', ['subject_id' => $subject->id]) }}">
+                @foreach ($subjects as $subject)
+    <li>
+        <a href="{{ route('subject.detail', ['subject_id' => $subject->id]) }}">
             {{ $subject->subject_name }}
         </a>
-                    @endforeach
+        | Class: {{ $subject->class->class_name ?? 'N/A' }}
+        | Grade: {{ $subject->grade->grade }}
+    </li>
+@endforeach
                 </ul>
             </div>
         @else

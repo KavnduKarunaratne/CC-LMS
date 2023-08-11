@@ -122,6 +122,9 @@ class UserController extends Controller
     else if ($role_id==4){
         return view('teacher-panel',[
             'subjects'=>(new Subject())->all(),
+            'grades' => (new Grade())->all(),
+            'classes' => (new Classes())->all(),
+            'students'=>(new User())->all(),
         ]);
     }
     else{

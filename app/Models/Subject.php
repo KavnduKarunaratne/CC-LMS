@@ -17,4 +17,21 @@ class Subject extends Model
         return $this->belongsTo(User::class, 'teacher_id');
     }
 
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class);
+    }
+
+    public function class()
+    {
+        return $this->belongsTo(Classes::class, 'class_id');
+    }
+
+    public function materials()
+{
+    return $this->hasMany(Material::class, 'subject_id');
+}
+
+
+
 }
