@@ -35,7 +35,7 @@
                                 <td class="px-6 py-4 text-sm text-white">{{ $submission->description }}</td>
                                 <td class="px-6 py-4 text-sm text-white">{{ $submission->file }}</td>
                                 <td class="px-6 py-4 text-sm text-white">{{ $submission->assignment->assignment_name }}</td>
-                                <td class="px-6 py-4 text-sm text-white">{{ $submission->student->id ?? 'N/A'}}</td>
+                                <td class="px-6 py-4 text-sm text-white">{{ $submission->student->name ?? 'N/A'}}</td>
 
                                 <td class="px-6 py-4 text-sm text-white">{{ $submission->submit_date }}</td>
                                 <td class="px-6 py-4 text-sm text-white">

@@ -67,7 +67,14 @@
                 @endif
 
                 @if (Auth::user() && Auth::user()->role_id == 3)
-                <a href="{{ url('add-submission') }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Add Submission</a>
+                <a href="{{ url('add-submission', ['assignment_id' => $assignment->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Add Submission for Assignment</a>
+
+                @endif
+                @if (Auth::user() && Auth::user()->role_id == 4)
+                <td class="px-6 py-2 text-xs text-gray-500">
+    <a href="{{ route('view-submissions', ['assignment_id' => $assignment->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">View Submission</a>
+</td>
+
                 @endif
             </li>
         @endforeach

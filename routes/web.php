@@ -212,8 +212,10 @@ Route::post('update-assignment/{id}',[AssignmentController::class,'updateAssignm
 Route::get('delete-assignment/{id}',[AssignmentController::class,'deleteAssignment']);
 
 Route::get('submission-list',[SubmissionController::class,'index']);
-Route::get('add-submission',[SubmissionController::class,'AddSubmission']);
-Route::post('save-submission',[SubmissionController::class,'saveSubmission']);
+Route::get('add-submission/{assignment_id}',[SubmissionController::class,'AddSubmission']);
+Route::post('save-submission', [SubmissionController::class, 'saveSubmission'])->name('save-submission');
 Route::get('edit-submission/{id}',[SubmissionController::class,'editSubmission']);
 Route::post('update-submission/{id}',[SubmissionController::class,'updateSubmission'])->name('update-submission');
 Route::get('delete-submission/{id}',[SubmissionController::class,'deleteSubmission']);
+
+Route::get('view-submissions/{assignment_id}', [SubmissionController::class, 'viewSubmissions'])->name('view-submissions');

@@ -15,13 +15,10 @@ class submissionController extends Controller
         return view('submission-list',compact('submission'));
     }
 
-    public function AddSubmission(){
+    public function AddSubmission($assignment_id){
         $user = Auth::user();
-        return view('add-submission',[
-            'assignments' => (new Assignment())->all(),
-            'students' => (new User())->all(),
-        
-        ]);
+        $assignment = Assignment::find($assignment_id);
+        return view('add-submission',compact('assignment'));
         
     }
 
@@ -39,7 +36,7 @@ class submissionController extends Controller
             $description=$request->description;
             $file=$request->file;
           
-            $assignment_id=$request->assignment_id;
+            $assignment_id = $request->input('assignment_id');
 
             $submission = new Submission;
             $submission->name=$name;
@@ -58,23 +55,25 @@ class submissionController extends Controller
     }
 
     public function editSubmission($id)
-    {
-        $submission=Submission::find($id);
-        return view('edit-submission',compact('submission'));
-    }
+{
+    $submission = Submission::find($id);
+    $assignment = Assignment::find($submission->assignment_id); // Fetch the associated assignment
+    
+    return view('edit-submission', compact('submission', 'assignment'));
+}
 
-    public function updateMaterial(Request $request,$id){
+    public function updateSubmission(Request $request,$id){
         $newSubmissionName=$request->name;
         $newSubmissionDescription=$request->description;
         $newSubmissionFile=$request->file;
-        $newSubmissionSubmitDate=$request->submit_date;
+        
         $newSubmissionAssignmentId=$request->assignment_id;
 
         Submission::where('id','=',$id)->update([
             'name'=>$newSubmissionName,
             'description'=>$newSubmissionDescription,
             'file'=>$newSubmissionFile,
-            'submit_date'=>$newSubmissionSubmitDate,
+            
             'assignment_id'=>$newSubmissionAssignmentId
         ]);
 
@@ -84,5 +83,14 @@ class submissionController extends Controller
         Submission::where('id','=',$id)->delete();
         return redirect('submission-list')->with('success','submission deleted succesfully');
     }
+
+    public function viewSubmissions($assignment_id)
+{
+    $submissions = Submission::where('assignment_id', $assignment_id)->get();
+    $assignment = Assignment::find($assignment_id);
+    
+    return view('view-submissions', compact('submissions', 'assignment'));
+}
+
 
 }
