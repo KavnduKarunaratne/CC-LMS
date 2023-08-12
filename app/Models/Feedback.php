@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Feedback extends Model
 {
     use HasFactory;
+    protected $table = 'feedbacks';
+        protected $fillable=[
+            'feedback','date','marks','submission_id'
+        ];
+
+        public function submission()
+   {
+       return $this->belongsTo(Submission::class, 'submission_id');
+   }
 }

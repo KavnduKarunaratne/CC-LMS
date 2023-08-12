@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Submission extends Model
 {
@@ -23,10 +24,16 @@ class Submission extends Model
     {
         return $this->hasMany(Submission::class, 'student_id');
     }
+    
 
     
     public function student(): BelongsTo
     {
         return $this->belongsTo(User::class, 'student_id');
+    }
+
+    public function feedback()
+    {
+        return $this->hasMany(Feedback::class, 'submission_id');
     }
 }

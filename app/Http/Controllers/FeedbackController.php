@@ -1,0 +1,90 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Feedback;
+use App\Models\Submission;
+use Illuminate\Http\Request;
+
+class FeedbackController extends Controller
+{
+    public function feedback(){
+
+        $feedback =Feedback::all();
+            return view('feedback-list',compact('feedback'),[
+                'submissions' => (new Submission())->all(),
+            ]);
+        
+        
+    }
+
+    public function AddFeedback(){
+        return view('add-feedback',[
+            'submissions' => (new Submission())->all(),
+        ]);
+        
+    }
+
+    public function saveFeedback(Request $request){
+        $request->validate([
+            'feedback' => 'required',
+            'marks' => 'required',
+            'submission_id' => 'required',
+        ]);
+    
+        $feedbackText = $request->feedback; // Use a different variable name
+        $marks = $request->marks;
+        $submission_id = $request->submission_id;
+    
+        $feedback = new Feedback;
+        $feedback->feedback = $feedbackText;
+        $feedback->date = now();
+        $feedback->marks = $marks;
+        $feedback->submission_id = $submission_id;
+    
+        $feedback->save();
+    
+        return redirect('feedback-list')->with('success', 'feedback added successfully');
+    }
+    
+    public function editFeedback($id)
+    {
+        $feedback=Feedback::where('id','=',$id)->first();
+        return view('edit-feedback',compact('feedback'),[
+            'submissions' => (new Submission())->all(),
+        
+        ]);
+    }
+
+    public function updateFeedback(Request $request, $id)
+    {
+        $request->validate([
+            'feedback'=>'required',
+            'date'=>'required',
+            'marks'=>'required',
+            'submission_id'=>'required',
+        ]);
+
+
+        $newFeedback = $request->feedback;
+        $newMarks = $request->marks;
+        $newDate = $request->date;
+        $newSubmission_id = $request->submission_id;
+        
+        // Use the correct variable name for the feedback value
+        $feedback = Feedback::where('id','=',$id)->update([
+            'feedback' => $newFeedback,
+            'marks' => $newMarks,
+            'date' => $newDate,
+            'submission_id' => $newSubmission_id,
+        ]);
+     
+        
+        return redirect('feedback-list')->with('success', 'feedback updated successfully');
+    }
+
+    public function deleteFeedback($id){
+        Feedback::where('id','=',$id)->delete();
+        return redirect('feedback-list')->with('success','feedback deleted succesfully');
+    }
+}

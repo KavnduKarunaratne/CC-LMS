@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\gradeController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\MaterialController;
@@ -219,3 +220,10 @@ Route::post('update-submission/{id}',[SubmissionController::class,'updateSubmiss
 Route::get('delete-submission/{id}',[SubmissionController::class,'deleteSubmission']);
 
 Route::get('view-submissions/{assignment_id}', [SubmissionController::class, 'viewSubmissions'])->name('view-submissions');
+
+Route::get('feedback-list',[FeedbackController::class,'Feedback']);
+Route::get('add-feedback',[FeedbackController::class,'AddFeedback']);
+Route::post('save-feedback',[FeedbackController::class,'saveFeedback']);
+Route::get('edit-feedback/{id}',[FeedbackController::class,'editFeedback']);
+Route::post('update-feedback/{id}',[FeedbackController::class,'updateFeedback'])->name('update-feedback');
+Route::get('delete-feedback/{id}',[FeedbackController::class,'deleteFeedback']);

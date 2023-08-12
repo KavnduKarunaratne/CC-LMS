@@ -24,6 +24,10 @@
                     <strong>Submission Upload Date:</strong> {{ $submission->upload_date }}
 
                     <br>
+                    @if (Auth::user() && Auth::user()->role_id == 4)
+              <!--<a href="{{ url('add-feedback', ['submission_id' => $submission->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Give feedback</a>-->
+
+                @endif
                   
 
                     <!-- Display other submission details -->
