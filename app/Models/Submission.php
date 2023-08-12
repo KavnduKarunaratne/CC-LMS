@@ -9,12 +9,23 @@ class Submission extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
-        'submission_name','uploaded_date','description','submission_file','assignment_id','student_id','submission_link'
-    ];
+   protected  $fillable=[
+       'name','description','file','assignment_id','student_id','submit_date'
+   ];
 
-    public function subject()
+   public function assignment()
+   {
+       return $this->belongsTo(Assignment::class, 'assignment_id');
+   }
+
+   public function submissions()
     {
-        return $this->belongsTo(Subject::class, 'subject_id');
+        return $this->hasMany(Submission::class, 'student_id');
+    }
+
+    
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id');
     }
 }

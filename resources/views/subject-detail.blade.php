@@ -65,6 +65,10 @@
                 <a href="{{ url('edit-assignment', $assignment->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
                 <a href="{{ url('delete-assignment', $assignment->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
                 @endif
+
+                @if (Auth::user() && Auth::user()->role_id == 3)
+                <a href="{{ url('add-submission') }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Add Submission</a>
+                @endif
             </li>
         @endforeach
     </ul>

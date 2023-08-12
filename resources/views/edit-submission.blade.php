@@ -9,9 +9,9 @@
 
 <body class="bg-black">
     <div class="container mx-auto py-8 mt-12">
-        <h2 class="text-2xl font-bold mb-6 text-center text-white">Add your submission</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center text-white">Edit your submission</h2>
 
-        <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post" action="{{ url('save-submission') }}">
+        <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post" action="{{ route('update-submission',['id'=> $submission->id])  }}">
             @csrf
 
             <div class="mb-4">

@@ -204,14 +204,16 @@ Route::get('edit-material/{id}',[MaterialController::class,'editMaterial']);
 Route::post('update-material/{id}',[MaterialController::class,'updateMaterial'])->name('update-material');
 Route::get('delete-material/{id}',[MaterialController::class,'deleteMaterial']);
 
-
-Route::get('add-submission',[SubmissionController::class,'AddSubmission']);
-Route::post('save-submission', [SubmissionController::class,'saveSubmission']);
-
-
 Route::get('assignment-list',[AssignmentController::class,'Assignment']);
 Route::get('add-assignment',[AssignmentController::class,'AddAssignment']);
 Route::post('save-assignment',[AssignmentController::class,'saveAssignment']);
 Route::get('edit-assignment/{id}',[AssignmentController::class,'editAssignment']);
 Route::post('update-assignment/{id}',[AssignmentController::class,'updateAssignment'])->name('update-assignment');
 Route::get('delete-assignment/{id}',[AssignmentController::class,'deleteAssignment']);
+
+Route::get('submission-list',[SubmissionController::class,'index']);
+Route::get('add-submission',[SubmissionController::class,'AddSubmission']);
+Route::post('save-submission',[SubmissionController::class,'saveSubmission']);
+Route::get('edit-submission/{id}',[SubmissionController::class,'editSubmission']);
+Route::post('update-submission/{id}',[SubmissionController::class,'updateSubmission'])->name('update-submission');
+Route::get('delete-submission/{id}',[SubmissionController::class,'deleteSubmission']);

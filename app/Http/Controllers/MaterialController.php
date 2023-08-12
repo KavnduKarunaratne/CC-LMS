@@ -79,7 +79,7 @@ class MaterialController extends Controller
       
         $newSubjectId=$request->subject_id;
 
-        Material::where('id',$id)->update([
+        Material::where('id','=',$id)->update([
             'material_name'=>$newMaterialName,
             'file'=>$newMaterialFile,
             'description'=>$newDescription,
@@ -95,7 +95,7 @@ class MaterialController extends Controller
     }
     public function deleteMaterial($id){
 
-        Material::where('id',$id)->delete();
+        Material::where('id','=',$id)->delete();
         return redirect()->back()->with('success','Material Deleted Successfully');
 
     }
