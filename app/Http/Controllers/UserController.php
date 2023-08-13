@@ -20,13 +20,16 @@ class UserController extends Controller
     }
 
     public function User(){
-        $user = User::all();
-        return view('user-management',compact('user'));
+        $user = User::where('is_archived',0)->get();
+        $archivedUsers = User::where('is_archived', true)->get();
+
+        return view('user-management',compact('user','archivedUsers'));
     }
 
     public function AddUser(){
         return view('register', [
-            'roles' => (new Role())->all()
+            'roles' => (new Role())->all(),
+            'is_archived' => '0',
         ]);
     }
 
@@ -53,6 +56,7 @@ class UserController extends Controller
 
 
         $user = new User;
+        $user->is_archived=0;
         $user->name=$name;
         $user->email=$email;
         $user->role_id=$role_id;
@@ -67,7 +71,7 @@ class UserController extends Controller
     }
 
     public function editUser($id){
-        $user = User::where('id','=',$id)->first();
+        $user = User::findOrFail($id);
         return view('edit-user',compact('user'));
 
     }
@@ -138,6 +142,32 @@ class UserController extends Controller
 
         return view('/welcome');
     }
+    public function archiveUser($id) {
+        User::where('id', $id)->update([
+            'is_archived' => true,
+            'archived_at' => now(),
+        ]);
+    
+        return redirect('user-management')->with('success', 'User archived successfully');
+    }
+    public function archivedUsers() {
+        $archivedUsers = User::where('is_archived', true)->get();
+        return view('user-management', compact('archivedUsers'));
+    }
+
+    public function unarchiveUser($id) {
+        User::where('id', $id)->update([
+            'is_archived' => false,
+            'archived_at' => null,
+        ]);
+    
+        return redirect('user-management')->with('success', 'User unarchived successfully');
+    }
+    
+
+
+
+
 
 
 

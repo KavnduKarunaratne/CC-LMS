@@ -14,7 +14,9 @@ class TeacherController extends Controller
 {
     public function Teachers(){
 
-        $teachers= User::where('role_id',4)->get();
+        $teachers= User::where('role_id',4)
+                      ->where('is_archived',false)
+                      ->get();
         return view('teacher-list', compact('teachers'));
     }
 

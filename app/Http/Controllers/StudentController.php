@@ -13,7 +13,9 @@ class StudentController extends Controller
 {
 
     public function Student(){
-        $student= User::where('role_id',3)->get();
+        $student= User::where('role_id',3)
+        ->where('is_archived',false)
+        ->get();
         
         return view('student-list',compact('student'));
 

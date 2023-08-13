@@ -227,3 +227,6 @@ Route::post('save-feedback',[FeedbackController::class,'saveFeedback'])->name('s
 Route::get('edit-feedback/{id}',[FeedbackController::class,'editFeedback']);
 Route::post('update-feedback/{id}',[FeedbackController::class,'updateFeedback'])->name('update-feedback');
 Route::get('delete-feedback/{id}',[FeedbackController::class,'deleteFeedback']);
+
+Route::post('archive-user/{id}', [UserController::class,'archiveUser']);
+Route::post('unarchive-user/{id}', [UserController::class,'unarchiveUser']);

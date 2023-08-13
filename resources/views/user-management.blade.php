@@ -17,35 +17,74 @@
         <div class="w-full">
             <div class="border-b border-gray-200 shadow">
 
-            <table class="text-white">
-                <thead>
-                    <tr>
-                        <th>Name </th>
-                        <th>Email  </th>
-                    
-                        <th>Admission Number</th>
-                        <th>Year of Registration</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($user as $user)
-                        <tr>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                        
-                            <td>{{ $user->admission_number }}</td>
-                            <td>{{ $user->year_of_registration }}</td>
-                            <td class="px-6 py-4 text-sm text-white">
-                                    <a href="{{ url('edit-user/'.$user->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
-                                </td>
-                                <td class="px-6 py-4 text-sm text-white">
-                                    <a href="{{ url('delete-user/'.$user->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
-                                </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <!-- Display Active Users -->
+<table class="text-white">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Admission Number</th>
+            <th>Year of Registration</th>
+            <th>status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($user as $user)
+            <tr>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->admission_number }}</td>
+                <td>{{ $user->year_of_registration }}</td>
+                <td>{{ $user->is_archived ? 'Inactive' : 'Active' }}</td>
+                <td class="px-6 py-4 text-sm text-white">
+                    <a href="{{ url('edit-user/'.$user->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
+                    <a href="{{ url('delete-user/'.$user->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
+                    <form action="{{ url('archive-user/'.$user->id) }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="bg-gray-500 hover:bg-gray-700 text-white py-1 px-3 rounded my-3 mt-1">Archive</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+
+<!-- Display Archived Users -->
+<h2 class="text-white">Archived Users</h2>
+<table class="text-white">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Admission Number</th>
+            <th>Year of Registration</th>
+            <th>status</th>
+            <th>date of archive</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($archivedUsers as $user)
+            <tr>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->admission_number }}</td>
+                <td>{{ $user->year_of_registration }}</td>
+                <td>{{ $user->is_archived ? 'Inactive' : 'Active' }}</td>
+                <td>{{ $user->date_of_archive }}</td>
+
+                <td class="px-6 py-4 text-sm text-white">
+                <form action="{{ url('unarchive-user/'.$user->id) }}" method="POST" class="inline">
+    @csrf
+    <button type="submit" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Unarchive</button>
+</form>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+
             <a href="{{url ('dashboard') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 px-3 rounded my-3 mt-1">Back To Dashboard</a>
         </div>
     </div>
