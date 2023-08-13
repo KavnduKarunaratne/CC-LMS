@@ -222,8 +222,8 @@ Route::get('delete-submission/{id}',[SubmissionController::class,'deleteSubmissi
 Route::get('view-submissions/{assignment_id}', [SubmissionController::class, 'viewSubmissions'])->name('view-submissions');
 
 Route::get('feedback-list',[FeedbackController::class,'Feedback']);
-Route::get('add-feedback',[FeedbackController::class,'AddFeedback']);
-Route::post('save-feedback',[FeedbackController::class,'saveFeedback']);
+Route::get('add-feedback/{submission_id}',[FeedbackController::class,'AddFeedback']);
+Route::post('save-feedback',[FeedbackController::class,'saveFeedback'])->name('save-feedback');
 Route::get('edit-feedback/{id}',[FeedbackController::class,'editFeedback']);
 Route::post('update-feedback/{id}',[FeedbackController::class,'updateFeedback'])->name('update-feedback');
 Route::get('delete-feedback/{id}',[FeedbackController::class,'deleteFeedback']);
