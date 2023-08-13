@@ -17,7 +17,14 @@ class Grade extends Model
     public function classes()
     {
         return $this->hasMany(Classes::class);
-    } 
+    }
+
+    public function notices()
+    {
+        return $this->hasMany(Notice::class);
+    }
+    
+   
 
     
 }

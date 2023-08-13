@@ -51,16 +51,7 @@
       </div>
     </div>
 
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="sm:hidden" id="mobile-menu">
-      <div class="space-y-1 px-2 pb-3 pt-2">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="#" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
-      </div>
-    </div>
+  
   </nav>
 
 
@@ -76,6 +67,7 @@
                             <div class="text-black w-full max-w-sm mx-auto bg-white p-4 mb-4 rounded-md shadow-md">
                                 {{ $notice->notice }}<br>
                                 <span class="text-black">{{ $notice->date_of_notice }}</span><br>
+                                <span>{{ $notice -> grade_id}}</span>
                             </div>
 
 

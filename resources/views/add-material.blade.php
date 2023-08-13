@@ -33,9 +33,6 @@
                 <input type="text" name="link" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
 
 </div>
-
-        
-
            <div class="mb-4">
             <label lass="block text-gray-700 text-sm font-bold mb-2" for="">Select Subject</label>
             <select name="subject_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">

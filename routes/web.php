@@ -186,7 +186,7 @@ Route::get('delete-teacher/{id}', [TeacherController::class, 'deleteTeacher']);
 //management
 Route::get('management-list',[ManagementController::class,'index']);
 
-Route::get('add-management', [ManagementController::class, 'AddTeacher']);
+Route::get('add-management', [ManagementController::class, 'AddManagement']);
 Route::post('save-management', [ManagementController::class, 'saveManagement']);
 Route::get('edit-management/{id}', [ManagementController::class, 'editManagement']);
 Route::post('update-management/{id}', [ManagementController::class, 'updateManagement']);

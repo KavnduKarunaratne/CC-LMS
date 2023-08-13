@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grade;
 use App\Models\Notice;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class noticeController extends Controller
     }
 
     public function AddNotice(){
-        return view('add-notice');
+        return view('add-notice',[
+            'grades' => (new Grade())->all(),
+        ]);
         
     }
 
@@ -23,14 +26,18 @@ class noticeController extends Controller
         $request->validate([
 
             'notice'=>'required',
+            'grade_id'=>'nullable',
         ]);
             
             $noticeValue = $request->notice;
+            $gradeValue=$request->grade_id;
     
     
             $notice = new Notice;
             $notice->notice = $noticeValue;
-            $notice->upload_date = now();
+            $notice->grade_id=$gradeValue;
+           
+            $notice->date_of_notice = now();
 
             $notice->save();
     
@@ -45,10 +52,18 @@ class noticeController extends Controller
 
     public function updateNotice(Request $request, $id)
     {
-        $newNotice = $request->notice; // Use the correct variable name for the notice value
-        $notice = Notice::where('id','=',$id)->first();
-        $notice->notice = $newNotice;
-        $notice->save();
+        $newNotice = $request->notice;
+        $newGrade = $request->grade_id;
+
+         // Use the correct variable name for the notice value
+        $notice = Notice::where('id','=',$id)->update([
+
+            'notice'=>$newNotice,
+            'grade_id'=>$newGrade
+        
+        ]);
+       
+       
 
         return redirect('management')->with('success', 'notice updated successfully');
     }

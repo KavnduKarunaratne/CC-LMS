@@ -35,11 +35,23 @@
                 <p>No subjects assigned.</p>
             </div>
         @endif
+        
     @else
         <div class="bg-white p-4 rounded-md shadow-md">
             <p>You do not have access to this page.</p>
         </div>
     @endif
+    <div class="bg-white p-4 rounded-md shadow-md">
+                <h3 class="text-lg font-semibold">Notices for Your Grade:</h3>
+                <ul>
+                    @foreach (Auth::user()->grade->notices as $notice)
+                        <li>
+                            Notice: {{ $notice->notice }}
+                            | Date: {{ $notice->date_of_notice }}
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
 </div>
 
 </body>

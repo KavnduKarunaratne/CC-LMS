@@ -13,6 +13,12 @@ class Notice extends Model
         
         'notice',
         'date_of_notice',
+        'grade_id',
        
     ];
+
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class);
+    }
 }
