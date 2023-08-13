@@ -14,6 +14,9 @@
     <div class="flex flex-col">
         <div class="w-full">
             <div class="border-b border-gray-200 shadow">
+
+            <a href="{{ url('add-class') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"> Add Class</a>
+
                 <a href="{{ url('add-subject') }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Add New Subject</a>
             
                 <table class="table-auto ">

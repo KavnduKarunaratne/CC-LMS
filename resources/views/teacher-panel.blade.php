@@ -16,22 +16,24 @@
         </div>
 
         @if($subjects->count() > 0)
-            <div class="bg-white p-4 rounded-md shadow-md">
+            <div class="bg-white p-4 rounded-md shadow-md mb-4">
                 <h3 class="text-lg font-semibold">Subjects You Are In Charge Of:</h3>
                 <ul>
-                @foreach ($subjects as $subject)
-    <li>
-        <a href="{{ route('subject.detail', ['subject_id' => $subject->id]) }}">
-            {{ $subject->subject_name }}
-        </a>
-        | Class: {{ $subject->class->class_name ?? 'N/A' }}
-        | Grade: {{ $subject->grade->grade }}
-    </li>
-@endforeach
+                    @foreach ($subjects as $subject)
+                        <li>
+                            <a href="{{ route('subject.detail', ['subject_id' => $subject->id]) }}">
+                                {{ $subject->subject_name }}
+                            </a>
+                            | Class: {{ $subject->class->class_name ?? 'N/A' }}
+                            | Grade: {{ $subject->grade->grade }}
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         @else
-            <p>No subjects assigned.</p>
+            <div class="bg-white p-4 rounded-md shadow-md mb-4">
+                <p>No subjects assigned.</p>
+            </div>
         @endif
     @else
         <div class="bg-white p-4 rounded-md shadow-md">

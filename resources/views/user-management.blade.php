@@ -16,6 +16,7 @@
     <div class="flex flex-col">
         <div class="w-full">
             <div class="border-b border-gray-200 shadow">
+            <a href="{{ url('add-management') }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Add New Management</a>
 
             <!-- Display Active Users -->
 <table class="text-white">
@@ -36,7 +37,7 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->admission_number }}</td>
                 <td>{{ $user->year_of_registration }}</td>
-                <td>{{ $user->is_archived ? 'Inactive' : 'Active' }}</td>
+                <td><span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">{{ $user->is_archived ? 'Inactive' : 'Active' }}</span></td>
                 <td class="px-6 py-4 text-sm text-white">
                     <a href="{{ url('edit-user/'.$user->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
                     <a href="{{ url('delete-user/'.$user->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
@@ -71,7 +72,7 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->admission_number }}</td>
                 <td>{{ $user->year_of_registration }}</td>
-                <td>{{ $user->is_archived ? 'Inactive' : 'Active' }}</td>
+                <td><span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">{{ $user->is_archived ? 'Inactive' : 'Active' }}</span></td>
                 <td>{{ $user->date_of_archive }}</td>
 
                 <td class="px-6 py-4 text-sm text-white">

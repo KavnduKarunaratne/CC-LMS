@@ -16,24 +16,22 @@
     <div class="relative flex h-16 items-center justify-between">
 
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-        <div class="flex flex-shrink-0 items-center">
-          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-        </div>
+       
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="{{url ('student-list')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">Dashobard</a>
+            <a href="{{url ('student-list')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
             <!--<a href="{{url ('register-user')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Register User</a>-->
             <a href="{{ url ('user-management') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">User Management</a>
-            <a href="{{ url('add-class') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"> Add Class</a>
             <a href="{{ url('management') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Management Panel</a>
            <!-- <a href="{{ url('class-management') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">class management</a>-->
-            <a href="{{ url('teacher-panel') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">teacher Panel</a>
+         <!--   <a href="{{ url('teacher-panel') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">teacher Panel</a>
 
-            <a href="{{ url('auth.register') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Register User</a>
-            <a href="{{ url('add-student') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"> Enroll Student</a>
-            <a href="{{ url('subject-list') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Subjects</a>
+            <a href="{{ url('auth.register') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Register User</a>-->
+            <a href="{{ url('subject-list') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Course Management</a>
             <a href="{{ url('add-teacher') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Enroll Teacher</a>
+            <a href="{{ url('add-student') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"> Enroll Student</a>
+
 
             <a href="{{ route('logout') }}" class="block mt-4 lg:inline-block lg:mt-0 text-amber-100 mr-4 px-3 py-2 no-underline hover:underline  sm:block"
                                          @click.prevent="$root.submit();">
@@ -61,7 +59,7 @@
 </br>
 <div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    @foreach($grade as $grade)
+    @foreach($grades as $grade)
         <div class="bg-black text-white p-4 rounded-md shadow-md">
             <p class="text-xs text-gray-500">Grade</p>
             <p class="text-sm">{{ $grade->grade }}</p>
