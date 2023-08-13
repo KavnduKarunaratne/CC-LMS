@@ -6,6 +6,7 @@ use App\Models\Material;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class MaterialController extends Controller
 {
@@ -20,79 +21,88 @@ class MaterialController extends Controller
     $user = Auth::user(); // Get the logged-in user (teacher)
     $subjects = $user->subjects; // Retrieve the subjects associated with the teacher
 
-    return view('add-material', compact('subjects'));
+    $teacherClass = Auth::user()->class;
+    $classStudents = $teacherClass->students;
+    return view('add-material', compact('subjects','classStudents'));
   }
-    public function saveMaterial(Request $request){
-    
-        $request->validate([
-        'material_name'=> 'required',
-        'file'=>'required',
-        'description'=>'required',
-       // 'upload_date'=>'required',
-       
-        'link'=>'nullable',
-      
-        'subject_id'=>'required',
-        ]);
 
-        $material_name=$request->material_name;
-        $material_file=$request->file;
-        $description=$request->description;
-    
-        $link=$request->link;
-       
-        $subject_id=$request->subject_id;
-    
-      
-    
-        $material = new Material;
-        $material->material_name=$material_name;
-        $material->file=$material_file;
-        $material->description=$description;
-          $material->upload_date = now();
-        $material->link=$link;
-     
-        $material->subject_id=$subject_id;
+  public function saveMaterial(Request $request)
+{
+    $request->validate([
+        'material_name' => 'required',
+        'file' => 'required',
+        'description' => 'required',
+        'link' => 'nullable',
+        'subject_id' => 'required',
+    ]);
 
-        $material->teacher_id = Auth::id();
+    $material = new Material;
+    $material->material_name = $request->material_name;
+    $material->file = $request->file;
+    $material->description = $request->description;
+    $material->upload_date = now();
+    $material->link = $request->link;
+    $material->subject_id = $request->subject_id;
+    $material->teacher_id = Auth::id();
+    $material->save();
 
-        $material->save();
-
-        return redirect()->back()->with('success','Material Added Successfully');
+    // Attach selected students to the material
+    if ($request->has('users')) {
+        $material->users()->attach($request->input('users'));
     }
+
+    return redirect()->back()->with('success', 'Material Added Successfully');
+}
 
     public function editMaterial($id){
         $material=Material::find($id);
-        return view('edit-material',compact('material'),[
+        $teacherClass = Auth::user()->class;
+        $classStudents = $teacherClass->students;
+
+
+        return view('edit-material',compact('material','classStudents'),[
             'materials' => (new Material())->all(),
             'subjects'=>(new Subject())->all(),
         ]);
     }
 
-    public function updateMaterial(Request $request,$id){
+    public function updateMaterial(Request $request, $id)
+{
+    $request->validate([
+        'material_name' => 'required',
+        'description' => 'required',
+        'link' => 'nullable',
+        'subject_id' => 'required',
+    ]);
 
-        $newMaterialName=$request->material_name;
-        $newMaterialFile=$request->file;
-        $newDescription=$request->description;
-     
-        $newLink=$request->link;
-      
-        $newSubjectId=$request->subject_id;
+    $material = Material::findOrFail($id); // Find the material by its ID
 
-        Material::where('id','=',$id)->update([
-            'material_name'=>$newMaterialName,
-            'file'=>$newMaterialFile,
-            'description'=>$newDescription,
-         
-            'link'=>$newLink,
-            
-            'subject_id'=>$newSubjectId,
-        ]);
+    // Update material details
+    $material->material_name = $request->material_name;
+    $material->description = $request->description;
+    $material->link = $request->link;
+    $material->subject_id = $request->subject_id;
 
-        return redirect()->back()->with('success','Material Updated Successfully');
-
-
+    
+    if ($request->hasFile('file')) {
+        // Delete old file
+        Storage::delete($material->file);
+        // Store new file
+        $filePath = $request->file('file')->store('materials');
+        $material->file = $filePath;
+       
     }
+
+    $material->save(); 
+
+   
+    if ($request->has('users')) {
+        $material->users()->sync($request->input('users')); // Use sync() to update the pivot table
+    }
+
+    return redirect()->back()->with('success', 'Material Updated Successfully');
+}
+
     public function deleteMaterial($id){
 
         Material::where('id','=',$id)->delete();

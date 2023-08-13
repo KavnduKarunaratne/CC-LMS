@@ -67,5 +67,28 @@
                 </ul>
             </div>
 
+            <div class="bg-white p-4 rounded-md shadow-md">
+    <h3 class="text-lg font-semibold">Materials Accessible to You:</h3>
+    <ul>
+        @foreach (Auth::user()->materials as $material)
+            <li>
+                Material: {{ $material->material_name }}
+                | Description: {{ $material->description }}
+                | Upload Date: {{ $material->upload_date }}
+                <br>
+                @if ($material->file)
+                    <a href="{{ asset('storage/' . $material->file) }}" download>Download File</a>
+                    <br>
+                @endif
+                @if ($material->link)
+                    <a href="{{ $material->link }}" target="_blank">Visit Link</a>
+                    <br>
+                @endif
+                <!-- Display other material details -->
+            </li>
+        @endforeach
+    </ul>
+</div>
+
 </body>
 </html>

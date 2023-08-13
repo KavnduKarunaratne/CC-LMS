@@ -23,7 +23,6 @@
                             <th class="px-6 py-2 text-xs text-gray-500">Subject</th>
                             <th class="px-6 py-2 text-xs text-gray-500">File</th>
                             <th class="px-6 py-2 text-xs text-gray-500">Link</th>
-
                             <th class="px-6 py-2 text-xs text-gray-500">Upload Date</th>
                             <th class="px-6 py-2 text-xs text-gray-500">Actions</th>
                         </tr>
@@ -44,7 +43,9 @@
                                     <a href="{{ url('edit-material', $material->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
                                     <a href="{{ url('delete-material', $material->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
                                 </td>
+                                
                             </tr>
+                                    
                         @endforeach
                     </tbody>
                 </table>

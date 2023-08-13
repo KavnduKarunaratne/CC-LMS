@@ -78,5 +78,10 @@ public function class()
 {
     return $this->belongsTo(Classes::class, 'class_id');
 }
+public function materials()
+{
+    return $this->belongsToMany(Material::class, 'material_user');
+}
+
 
 }
