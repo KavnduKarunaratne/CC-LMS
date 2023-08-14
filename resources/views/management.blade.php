@@ -67,7 +67,13 @@
                             <div class="text-black w-full max-w-sm mx-auto bg-white p-4 mb-4 rounded-md shadow-md">
                                 {{ $notice->notice }}<br>
                                 <span class="text-black">{{ $notice->date_of_notice }}</span><br>
-                                <span>{{ $notice -> grade_id}}</span>
+                                <span>Grade : {{ $notice -> grade_id}}</span><br>
+                                @if ($notice->management)
+                <span>Management: {{ $notice->management->name }}</span>
+            @else
+                <span>Management: Not available</span>
+            @endif
+                                
                             </div>
 
 

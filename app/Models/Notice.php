@@ -14,11 +14,18 @@ class Notice extends Model
         'notice',
         'date_of_notice',
         'grade_id',
+        'management_id'
        
     ];
 
     public function grade()
     {
         return $this->belongsTo(Grade::class);
+    }
+
+    public function management()
+    {
+        return $this->belongsTo(User::class,
+        'management_id');
     }
 }

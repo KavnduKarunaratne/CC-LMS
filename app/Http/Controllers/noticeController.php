@@ -17,6 +17,7 @@ class noticeController extends Controller
     public function AddNotice(){
         return view('add-notice',[
             'grades' => (new Grade())->all(),
+          
         ]);
         
     }
@@ -36,6 +37,7 @@ class noticeController extends Controller
             $notice = new Notice;
             $notice->notice = $noticeValue;
             $notice->grade_id=$gradeValue;
+            $notice->management_id = auth()->user()->id;
            
             $notice->date_of_notice = now();
 

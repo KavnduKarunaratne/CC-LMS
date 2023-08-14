@@ -39,7 +39,7 @@ class UserController extends Controller
         $request->validate([
             'name'=> 'required',
             'email'=>'required|email',
-            'role_id'=>'required',
+           
             'admission_number'=>'required',
             'year_of_registration'=>'required',
 
@@ -49,7 +49,7 @@ class UserController extends Controller
 
         $name=$request->name;
         $email=$request->email;
-        $role_id=$request->role_id;
+    
         $admission_number=$request->admission_number;
         $year_of_registration=$request->year_of_registration;
         $password=$request->password;
@@ -59,7 +59,7 @@ class UserController extends Controller
         $user->is_archived=0;
         $user->name=$name;
         $user->email=$email;
-        $user->role_id=$role_id;
+        $user->role_id=2;
         $user->admission_number=$admission_number;
         $user->year_of_registration=$year_of_registration;
         $user->password=$password;

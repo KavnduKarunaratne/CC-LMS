@@ -83,5 +83,11 @@ public function materials()
     return $this->belongsToMany(Material::class, 'material_user');
 }
 
+public function management()
+{
+  
+    return $this->hasMany(Notice::class, 'management_id');
+}
+
 
 }
