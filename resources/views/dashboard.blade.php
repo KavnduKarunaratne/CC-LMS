@@ -59,7 +59,7 @@
 </br>
 <div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    @foreach($grade as $grade)
+    @foreach($grades as $grade)
         <div class="bg-black text-white p-4 rounded-md shadow-md">
             <p class="text-xs text-gray-500">Grade</p>
             <p class="text-sm">{{ $grade->grade }}</p>

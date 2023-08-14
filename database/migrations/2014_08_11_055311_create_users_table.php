@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('role_id')->default('1')->constrained('roles');
             $table->integer('admission_number')->nullable();
             $table->year('year_of_registration')->nullable();
-            $table->string('password')->default('password');
+            $table->string('password')->default(Hash::make('password'));
             $table->integer('class_id')->constrained('classes')->nullable();
             $table->integer('grade_id')->constrained('grades')->nullable();
             
