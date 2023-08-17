@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('notices', function (Blueprint $table) {
-            $table->foreignId('grade_id')->nullable()->constrained('grades');
+        Schema::create('questions', function (Blueprint $table) {
+            $table->id();
+            $table->string('question');
+            $table->foreignId('quiz_id')->constrained('quizzes')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('notices', function (Blueprint $table) {
-            $table->dropColumn(['grade_id']);
-        });
+        Schema::dropIfExists('questions');
     }
 };

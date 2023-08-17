@@ -39,13 +39,16 @@ class UserController extends Controller
         $request->validate([
             'name'=> 'required',
             'email'=>'required|email',
-           
-            'admission_number'=>'required',
             'year_of_registration'=>'required',
 
             'password'=>'required|min:5|max:12',
-
+           
+            'admission_number' => 'required|starts_with:SU',
+    
         ]);
+           
+
+        
 
         $name=$request->name;
         $email=$request->email;
@@ -163,12 +166,30 @@ class UserController extends Controller
     
         return redirect('user-management')->with('success', 'User unarchived successfully');
     }
+
+    public function searchUsers(Request $request)
+{
+    $searchTerm = $request->input('search');
+
+    $user = User::where(function ($query) use ($searchTerm) {
+        $query->where('name', 'LIKE', "%$searchTerm%")
+            ->orWhere('email', 'LIKE', "%$searchTerm%")
+            ->orWhere('admission_number', 'LIKE', "%$searchTerm%")
+            ->orWhere('year_of_registration', 'LIKE', "%$searchTerm%");
+    })
+    ->get();
+
+    $archivedUsers = User::where('is_archived', true)
+        ->where(function ($query) use ($searchTerm) {
+            $query->where('name', 'LIKE', "%$searchTerm%")
+                ->orWhere('email', 'LIKE', "%$searchTerm%")
+                ->orWhere('admission_number', 'LIKE', "%$searchTerm%")
+                ->orWhere('year_of_registration', 'LIKE', "%$searchTerm%");
+        })
+        ->get();
+
+    return view('user-management', compact('user', 'archivedUsers'));
+}
+
     
-
-
-
-
-
-
-
 }

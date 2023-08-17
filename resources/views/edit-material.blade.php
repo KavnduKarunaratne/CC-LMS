@@ -34,14 +34,15 @@
 </div>
 
 
-            <div class="mb-4">
-            <label lass="block text-gray-700 text-sm font-bold mb-2" for="">Select Subject</label>
-            <select name="subject_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">
-                @foreach($subjects as $subject)
-                <option value="{{$subject->id}}">{{$subject->subject_name}}</option>
-                @endforeach
-                </select>
-            </div>
+<div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2">Select Students to Make Material Accessible To:</label>
+    @foreach ($classStudents as $student)
+        <div class="flex items-center mt-2">
+            <input type="checkbox" name="users[]" value="{{ $student->id }}" class="mr-2">
+            <label>{{ $student->name }}</label>
+        </div>
+    @endforeach
+</div>
             <div class="mb-4">
     <label class="block text-gray-700 text-sm font-bold mb-2">Select Students to Make Material Accessible To:</label>
     <select name="users[]" multiple class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">

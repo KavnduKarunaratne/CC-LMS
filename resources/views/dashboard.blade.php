@@ -57,6 +57,7 @@
 </nav>
 
 </br>
+<p>Logged-in User: {{ auth()->user()->name }}</p>
 <div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     @foreach($grades as $grade)

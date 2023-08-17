@@ -10,6 +10,12 @@
 </head>
 
 <body class="bg-black">
+<div class="mb-4">
+    <form action="{{ route('search-users') }}" method="GET">
+        <input type="text" name="search" placeholder="Search users">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded">Search</button>
+    </form>
+</div>
 
 
 <div class="container flex justify-center mx-auto mt-10">
@@ -31,6 +37,11 @@
         </tr>
     </thead>
     <tbody>
+        @if($user->count() == 0)
+            <tr>
+                <td colspan="6" class="text-center">No users found.</td>
+            </tr>
+      @else
         @foreach ($user as $user)
             <tr>
                 <td>{{ $user->name }}</td>
@@ -48,6 +59,7 @@
                 </td>
             </tr>
         @endforeach
+        @endif
     </tbody>
 </table>
 

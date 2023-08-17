@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('notices', function (Blueprint $table) {
-            
-          $table->foreignId('management_id')->references('id')->constrained('users')->default(2);
-
+        Schema::table('users', function (Blueprint $table) {
+         $table->string('admission_number');
         });
     }
 
@@ -23,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('notices', function (Blueprint $table) {
-            //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('admission_number');
         });
     }
 };

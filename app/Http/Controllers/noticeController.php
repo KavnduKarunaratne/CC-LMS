@@ -27,7 +27,7 @@ class noticeController extends Controller
         $request->validate([
 
             'notice'=>'required',
-            'grade_id'=>'nullable',
+            'grade_id'=>'array|nullable',
         ]);
             
             $noticeValue = $request->notice;
@@ -41,7 +41,22 @@ class noticeController extends Controller
            
             $notice->date_of_notice = now();
 
+            
+
             $notice->save();
+
+            
+    if (in_array('all', $gradeValue)) {
+        // If 'All Grades' is selected, assign to all grades
+        $grades = Grade::all();
+        $notice->grades()->sync($grades);
+    } else {
+        // Assign to selected grades
+        $grades = Grade::whereIn('id', $gradeValue)->get();
+        $notice->grades()->sync($grades);
+    }
+            
+
     
             return redirect('management')->with('success', 'notice added successfully');
     }
@@ -53,22 +68,37 @@ class noticeController extends Controller
     }
 
     public function updateNotice(Request $request, $id)
-    {
-        $newNotice = $request->notice;
-        $newGrade = $request->grade_id;
+{
+    $request->validate([
+        'notice' => 'required',
+        'grade_id' => 'array', // Validate it as an array
+    ]);
 
-         // Use the correct variable name for the notice value
-        $notice = Notice::where('id','=',$id)->update([
+    $newNotice = $request->notice;
+    $newGradeValues = $request->grade_id;
 
-            'notice'=>$newNotice,
-            'grade_id'=>$newGrade
-        
-        ]);
-       
-       
+    $notice = Notice::findOrFail($id); // Find the notice by ID
 
-        return redirect('management')->with('success', 'notice updated successfully');
+    $notice->update([
+        'notice' => $newNotice,
+        'management_id' => auth()->user()->id,
+    ]);
+
+    if (in_array('all', $newGradeValues)) {
+        // If 'All Grades' is selected, assign to all grades
+        $grades = Grade::all();
+        $notice->grades()->sync($grades);
+    } else {
+        // Assign to selected grades
+        $grades = Grade::whereIn('id', $newGradeValues)->get();
+        $notice->grades()->sync($grades);
     }
+
+    return redirect('management')->with('success', 'Notice updated successfully');
+}
+
+
+  
 
     public function deleteNotice($id){
         Notice::where('id','=',$id)->delete();

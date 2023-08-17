@@ -7,6 +7,17 @@
     <title>Submissions</title>
 </head>
 <body>
+
+<div class="mb-4">
+    <form action="{{ route('search-submissions', $assignment->id) }}" method="GET">
+        <input type="text" name="search" placeholder="Search submissions">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded">Search</button>
+    </form>
+</div>
+
+
+
+    <div> <p>Logged-in User: {{ auth()->user()->name }}</p></div>
     <div class="container mx-auto p-4">
         <h2 class="text-2xl font-semibold mb-4">Submissions for Assignment: {{ $assignment->assignment_name }}</h2>
         @if ($submissions->count() > 0)
@@ -56,7 +67,7 @@
                 </ul>
             </div>
         @else
-            <p>No submissions available for this assignment.</p>
+            <p>No submissions available </p>
         @endif
     </div>
     <!-- Add other page content or links as needed -->

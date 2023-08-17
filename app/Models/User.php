@@ -89,5 +89,10 @@ public function management()
     return $this->hasMany(Notice::class, 'management_id');
 }
 
+public function createdQuizzes()
+    {
+        return $this->hasMany(Quizzes::class, 'teacher_id');
+    }
+
 
 }

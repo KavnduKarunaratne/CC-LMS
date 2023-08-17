@@ -32,7 +32,7 @@ class AssignmentController extends Controller
     {
         $request->validate([
             'assignment_name' => 'required',
-            'file' => 'required',
+            'file' => 'required|mimes:doc,pdf,docx,xls,xlsx,zip,ppt,pptx',
             'description' => 'required',
             'due_date' => 'required|date',
             'subject_id' => 'required',

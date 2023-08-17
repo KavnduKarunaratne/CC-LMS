@@ -38,8 +38,8 @@ class ManagementController extends Controller
 
            
             'year_of_registration'=>'required',
-            'admission_number'=>'required',
-
+            'admission_number' => 'required|starts_with:SU',
+    
         ]);
 
         $name=$request->name;

@@ -30,7 +30,7 @@ class MaterialController extends Controller
 {
     $request->validate([
         'material_name' => 'required',
-        'file' => 'required',
+        'file' => 'nullable|mimes:doc,pdf,docx,xls,xlsx,zip,ppt,pptx',
         'description' => 'required',
         'link' => 'nullable',
         'subject_id' => 'required',

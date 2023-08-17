@@ -46,11 +46,11 @@ class StudentController extends Controller
             'name'=> 'required',
             'email'=>'required|email',
             'year_of_registration'=>'required',
-            'admission_number'=>'required',
+           
            'class_id'=>'required',
         'grade_id'=>'required',
-
-
+        'admission_number' => 'required|starts_with:SU',
+      
   
         ]);
 

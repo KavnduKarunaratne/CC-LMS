@@ -9,6 +9,7 @@ use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Classes;
+use TijsVerkoyen\CssToInlineStyles\Css\Rule\Rule;
 
 class classController extends Controller
 {

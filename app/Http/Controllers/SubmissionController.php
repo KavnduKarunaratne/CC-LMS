@@ -27,7 +27,7 @@ class submissionController extends Controller
 
             'name'=>'required',
             'description'=>'required',
-            'file'=>'required',
+            'file' => 'required',
            
             'assignment_id'=>'required'
             
@@ -49,7 +49,7 @@ class submissionController extends Controller
 
             $submission->save();
     
-            return redirect('submission-list')->with('success', 'submission added successfully');
+            return redirect()->back()->with('success', 'submission added successfully');
 
 
     }
@@ -91,6 +91,22 @@ class submissionController extends Controller
     
     return view('view-submissions', compact('submissions', 'assignment'));
 }
+
+public function searchSubmissions(Request $request, $assignment_id)
+{
+    $assignment = Assignment::findOrFail($assignment_id);
+    $searchTerm = $request->input('search');
+
+    $submissions = Submission::where('assignment_id', $assignment_id)
+        ->where(function ($query) use ($searchTerm) {
+            $query->where('name', 'LIKE', "%$searchTerm%")
+                ->orWhere('description', 'LIKE', "%$searchTerm%");
+        })
+        ->get();
+
+    return view('view-submissions', compact('assignment', 'submissions'));
+}
+
 
 
 }

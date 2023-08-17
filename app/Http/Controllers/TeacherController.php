@@ -32,14 +32,20 @@ class TeacherController extends Controller
 
     public function saveTeacher(Request $request){
 
+
+        
         $request->validate([
             'name'=> 'required',
             'email'=>'required|email',
-            'admission_number'=>'required',
+           
             'year_of_registration'=>'required',
             'class_id'=>'required',
             'grade_id'=>'required',
+            'admission_number' => 'required|starts_with:SU',
+        
         ]);
+
+        
 
         $teacherName = $request->name; // Use a different variable name for teacher name from the request
         $teacherEmail = $request->email; // Use a different variable name for teacher email from the request

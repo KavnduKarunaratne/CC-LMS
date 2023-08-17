@@ -12,12 +12,18 @@
     <div class="bg-white p-4 rounded-md shadow-md mb-4">
         <h2 class="text-lg font-semibold">Subject Detail</h2>
         <p>Subject Name: {{ $subject->subject_name }}</p>
+        <p>Logged-in User: {{ auth()->user()->name }}</p>
+       
     </div>
     <div class="bg-white p-4 rounded-md shadow-md mb-4">
 <h3 class="text-lg font-semibold">Materials:</h3>
 @if ($materials->count() > 0)
     <ul>
         @foreach ($materials as $material)
+        @php
+                    $isAccessible = in_array(Auth::user()->id, $material->users->pluck('id')->toArray());
+                @endphp
+                @if ($isAccessible || $material->users->isEmpty() || Auth::user()->role_id == 4)
             <li>
                 <strong>Material Name:</strong> {{ $material->material_name }}
                 <br>
@@ -38,8 +44,9 @@
                 <a href="{{ url('edit-material', $material->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
                 <a href="{{ url('delete-material', $material->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
                 @endif
-                <!-- Display other material details -->
+             
             </li>
+            @endif
         @endforeach
     </ul>
 @else
@@ -69,10 +76,10 @@
                 <a href="{{ url('edit-assignment', $assignment->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
                 <a href="{{ url('delete-assignment', $assignment->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
                 @endif
-
-                @if (Auth::user() && Auth::user()->role_id == 3)
+              
+                @if (Auth::user() && Auth::user()->role_id == 3 && strtotime($assignment->due_date) > time())
                 <a href="{{ url('add-submission', ['assignment_id' => $assignment->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Add Submission for Assignment</a>
-
+              
                 @endif
                 @if (Auth::user() && Auth::user()->role_id == 4)
                 <td class="px-6 py-2 text-xs text-gray-500">
@@ -94,7 +101,7 @@
     <a href="{{ url('add-material') }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Upload Materials</a>
     <a href="{{ url('add-assignment') }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Upload Assignment</a>
     </div>
-@endif
+
 </div>
 <div class="bg-white p-4 rounded-md shadow-md mb-4">
 @if ($subject->class && $subject->class->students->count() > 0)
@@ -108,6 +115,7 @@
     <p>No students in this class.</p>
 @endif
 </div>
+@endif
 
 </div>
 

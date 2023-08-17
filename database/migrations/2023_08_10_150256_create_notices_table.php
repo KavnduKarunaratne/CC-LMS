@@ -16,6 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('notice');
             $table->date('date_of_notice');
+            $table->foreignId('grade_id')->nullable()->constrained('grades');
+            $table->foreignId('management_id')->constrained('users')->default(2);
             
         });
     }

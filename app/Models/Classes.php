@@ -30,4 +30,6 @@ public function students()
     return $this->hasMany(User::class, 'class_id')->where('role_id', 3);
 }
 
+
+
 }

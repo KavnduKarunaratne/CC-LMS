@@ -20,7 +20,7 @@ class Notice extends Model
 
     public function grade()
     {
-        return $this->belongsTo(Grade::class);
+        return $this->belongsToMany(Grade::class);
     }
 
     public function management()

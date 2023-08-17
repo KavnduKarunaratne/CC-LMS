@@ -43,17 +43,16 @@
             </div>
             <div class="mb-4">
     <label class="block text-gray-700 text-sm font-bold mb-2">Select Students to Make Material Accessible To:</label>
-    <select name="users[]" multiple class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">
-        @foreach ($classStudents as $student)
-            <option value="{{ $student->id }}">{{ $student->name }}</option>
-        @endforeach
-    </select>
+    @foreach ($classStudents as $student)
+        <div class="flex items-center mt-2">
+            <input type="checkbox" name="users[]" value="{{ $student->id }}" class="mr-2">
+            <label>{{ $student->name }}</label>
+        </div>
+    @endforeach
 </div>
 
-           
 
-
-
+        
             <br>
             <button type="submit" class="w-full bg-green-500 text-white text-sm font-bold py-2 px-4 mb-4 rounded-md hover:bg-green-600 transition duration-300">Save</button>
             <a href="{{ url('material-list') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 px-3 rounded my-3 mt-1">Back</a>
