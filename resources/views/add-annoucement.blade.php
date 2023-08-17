@@ -11,7 +11,7 @@
     <div class="container mx-auto py-8 mt-12">
         <h2 class="text-2xl font-bold mb-6 text-center text-white">Add Announcement</h2>
 
-        <form  class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md"     method="post" action="{{ url('save-Annoucement') }} ">
+        <form  class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post" action="{{ url('save-Annoucement') }} ">
             @csrf
 
                 <div class="mb-4">
