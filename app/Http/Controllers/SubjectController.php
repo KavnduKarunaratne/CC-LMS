@@ -123,7 +123,7 @@ class SubjectController extends Controller
 
     public function showDynamicDetail($subject_id)
 {
-    // Retrieve the subject based on the subject_id parameter
+    // Retrieve the subject based on the subject_id parameter. this is a dynamic page. materials under that subject id is shown
     $subject = Subject::findOrFail($subject_id);
     $materials = $subject->materials;
     $assignments = $subject->assignments; 

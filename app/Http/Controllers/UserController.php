@@ -20,7 +20,7 @@ class UserController extends Controller
         return view('register',compact('roles'));
     }
 
-    public function User(){
+    public function User(){  //role id is 2 for management 
         $user = User::where('is_archived',0)->get();
         $archivedUsers = User::where('is_archived', true)->get();
 
@@ -160,7 +160,7 @@ try {
 
         return view('/welcome');
     }
-    public function archiveUser($id) {
+    public function archiveUser($id) {//users are made inactive
         User::where('id', $id)->update([
             'is_archived' => true,
             'archived_at' => now(),

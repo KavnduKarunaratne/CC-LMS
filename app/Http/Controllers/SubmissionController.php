@@ -121,7 +121,7 @@ public function searchSubmissions(Request $request, $assignment_id)
     return view('view-submissions', compact('assignment', 'submissions'));
 }
 
-public function viewMySubmissions()
+public function viewMySubmissions()//students id is taken from the auth, then if there are feedbacks or submissions with the same id, it will be displayed dynamically
 {
     $studentId = Auth::id();
     $submissions = Submission::where('student_id', $studentId)->with('feedback')->get();

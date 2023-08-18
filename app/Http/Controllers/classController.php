@@ -104,12 +104,12 @@ class classController extends Controller
 {
     $students = User::where('grade_id', $class->grade_id)
         ->where('class_id', $class->id)
-        ->where('role_id', 3) // Assuming 3 is the role_id for students
+        ->where('role_id', 3) //role 3 is for students
         ->get();
 
     $subjects = Subject::where('grade_id', $class->grade_id)
         ->where('class_id', $class->id)
-        ->with('teacher') // Assuming you have defined the relationship as 'teacher'
+        ->with('teacher')
         ->get();
 
     return view('class-details', compact('class', 'students', 'subjects'));

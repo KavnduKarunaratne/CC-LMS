@@ -37,7 +37,7 @@ class noticeController extends Controller
             $notice = new Notice;
             $notice->notice = $noticeValue;
             $notice->grade_id=$gradeValue;
-            $notice->management_id = auth()->user()->id;
+            $notice->management_id = auth()->user()->id;//checks the logged in users id and sets the id automatically
            
             $notice->date_of_notice = now();
 

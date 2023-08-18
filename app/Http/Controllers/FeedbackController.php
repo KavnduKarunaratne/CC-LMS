@@ -82,7 +82,7 @@ class FeedbackController extends Controller
         $newSubmission_id = $request->submission_id;
         
       
-        $feedback = Feedback::where('id','=',$id)->update([
+        Feedback::where('id','=',$id)->update([
             'feedback' => $newFeedback,
             'marks' => $newMarks,
             'date' => $newDate,

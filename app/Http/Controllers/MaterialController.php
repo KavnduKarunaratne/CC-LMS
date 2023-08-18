@@ -52,7 +52,7 @@ class MaterialController extends Controller
     $material->teacher_id = Auth::id();
     $material->save();
 
-    // Attach selected students to the material
+    
     if ($request->has('users')) {
         $material->users()->attach($request->input('users'));
     }

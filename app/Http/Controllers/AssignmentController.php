@@ -32,13 +32,13 @@ class AssignmentController extends Controller
     {
         $request->validate([
             'assignment_name' => 'required',
-            'file' => 'required|mimes:doc,pdf,docx,xls,xlsx,zip,ppt,pptx',
+            'file' => 'required|mimes:doc,pdf,docx,xls,xlsx,zip,ppt,pptx', //validating file type
             'description' => 'nullable',
             'due_date' => 'required|date',
             'subject_id' => 'required',
         ]);
 
-        $filePath = $request->file('file')->store('assignments');
+        $filePath = $request->file('file')->store('assignments');//storing files under the folder assignments
          $subject_id = $request->input('subject_id'); 
 try{
         $assignment = new Assignment;

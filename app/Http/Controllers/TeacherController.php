@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
-    public function Teachers(){
+    public function Teachers(){//role id is 4 for teacher
 
         $teachers= User::where('role_id',4)
                       ->where('is_archived',false)
