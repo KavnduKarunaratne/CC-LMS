@@ -31,14 +31,14 @@
                                 <strong>Submission Description:</strong> {{ $submission->description }}
                                 <br>
                                 @if ($submission->file)
-                                    <strong>File:</strong> <a href="{{ asset('storage/' . $submission->file) }}" download>{{ $submission->file }}</a>
+                                    <strong>File:</strong> <a href="{{ asset('storage/app/submissions' . $submission->file) }}" download>{{ $submission->file }}</a>
                                     <br>
                                 @endif
                                 <strong>Student Name:</strong> {{ $submission->student->name }}
                                 <br>
                                 <strong>Student Admission:</strong> {{ $submission->student->admission_number }}
                                 <br>
-                                <strong>Submission Upload Date:</strong> {{ $submission->upload_date }}
+                                <strong>Submission Upload Date:</strong> {{ $submission->submit_date}}
                             </div>
 
                             <div class="bg-gray-200 p-4 mt-4 rounded-md shadow-md">

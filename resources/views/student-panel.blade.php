@@ -15,6 +15,7 @@
             <p>Your role ID: {{ Auth::user()->role_id }}</p>
             <p>Logged-in User: {{ auth()->user()->name }}</p>
             <a href="{{ route('logout') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Log Out</a>
+            <a href="{{ route('view-my-submissions')  }}"      class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">View my submission</a>
 
         </div>
 
@@ -39,21 +40,22 @@
         @else
             <p>No classes assigned.</p>
         @endif
-
         @if (Auth::user()->grade && Auth::user()->class)
-            <div class="bg-white p-4 rounded-md shadow-md">
-                <h3 class="text-lg font-semibold">Subjects for Your Class and Grade:</h3>
-                <ul>
-                    @foreach (Auth::user()->class->subjects as $subject)
-                        <li>
-                            <a href="{{ route('subject.detail', ['subject_id' => $subject->id]) }}">
-                                {{ $subject->subject_name }}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    <div class="bg-white p-4 rounded-md shadow-md">
+        <h3 class="text-lg font-semibold">Subjects for Your Class and Grade:</h3>
+        <ul>
+            @foreach (Auth::user()->class->subjects()->where('grade_id', Auth::user()->grade->id)->get() as $subject)
+                <li>
+                    <a href="{{ route('subject.detail', ['subject_id' => $subject->id]) }}">
+                        {{ $subject->subject_name }}
+                    </a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+        
     </div>
 @else
     <p>You do not have access to this page.</p>

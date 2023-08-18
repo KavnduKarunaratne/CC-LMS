@@ -48,7 +48,7 @@
                 </div>
             </div>
             <br>
-            <a href="{{ url('teacher-list') }}" class="text-white">Back To Dashboard</a>
+            <a href="{{ url('dashboard') }}" class="text-white">Back To Dashboard</a>
         </div>
     </div>
 </body>

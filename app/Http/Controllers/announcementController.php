@@ -25,9 +25,7 @@ class announcementController extends Controller
         
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function saveAnnouncement(Request $request)
 {
     
@@ -43,18 +41,14 @@ class announcementController extends Controller
 }
 
 
-    /**
-     * Display the specified resource.
-     */
+  
     public function editAnnoucement($id)
     {
         $annoucement=Annoucement::where('id','=',$id)->first();
         return view('edit-ann',compact('annoucement'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function updateAnnouncement(Request $request, $id)
 {
     $newAnnouncement = $request->announcement; // Use the correct variable name for the announcement value

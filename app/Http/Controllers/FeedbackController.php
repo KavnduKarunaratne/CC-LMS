@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Feedback;
 use App\Models\Submission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FeedbackController extends Controller
 {
@@ -28,6 +29,9 @@ class FeedbackController extends Controller
     }
 
     public function saveFeedback(Request $request){
+      
+        try{
+      
         $request->validate([
             'feedback' => 'required',
             'marks' => 'required',
@@ -49,6 +53,10 @@ class FeedbackController extends Controller
     
         return redirect('feedback-list')->with('success', 'feedback added successfully');
     }
+    catch(\Exception $e){
+        return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while saving the feedback.']);
+    }
+}
     
     public function editFeedback($id)
     {
@@ -89,4 +97,8 @@ class FeedbackController extends Controller
         Feedback::where('id','=',$id)->delete();
         return redirect('view-submissions')->with('success','feedback deleted succesfully');
     }
+
+
+ 
+
 }

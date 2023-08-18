@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Rules\ValidSuNumber;
 use Illuminate\Http\Request;
 
 class ManagementController extends Controller
@@ -34,21 +35,22 @@ class ManagementController extends Controller
         $request->validate([
             'name'=> 'required',
             'email'=>'required|email',
-
-
-           
             'year_of_registration'=>'required',
-            'admission_number' => 'required|starts_with:SU',
+            'admission_number' => ['required',new ValidSuNumber],
     
         ]);
 
         $name=$request->name;
         $email=$request->email;
-       
         $year_of_registration=$request->year_of_registration;
         $admission_number=$request->admission_number;
-      //  $class_id=$request->class_id;
-      //  $grade_id=$request->grade_id;
+     
+
+try{        $existingUser = User::where('admission_number', $admission_number)->first();
+    if ($existingUser) {
+        return redirect()->back()->with('error', 'User with this admission number already exists');
+    }
+
 
 
         $management = new User;
@@ -62,7 +64,9 @@ class ManagementController extends Controller
       
         $management ->save();
         return redirect()->back()->with('success','student added succesfully');
-       
+}catch(\Exception $e){
+    return redirect()->back()->with('error','An error occured');
+}  
 
 
     }
@@ -83,6 +87,17 @@ class ManagementController extends Controller
      */
     public function updateManagement(Request $request)
     {
+
+  
+            $request->validate([
+            'name'=> 'required',
+            'email'=>'required|email',
+            'year_of_registration'=>'required',
+            'admission_number' => ['required',new ValidSuNumber],
+    
+        ]);
+
+
         $id=$request->id;
         $newManagementName=$request->name;
         $newManagementEmail=$request->email;
@@ -98,11 +113,8 @@ class ManagementController extends Controller
          ]);
             return redirect('user-management')->with('success','student updated succesfully');
 
-
-
-
+        
        
-
     }
 
 

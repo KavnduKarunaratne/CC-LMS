@@ -53,6 +53,7 @@ class SubjectController extends Controller
         $class_id=$request->class_id;
        $teacher_id=$request->teacher_id;
 
+       try{
         $subject = new Subject;
         $subject->subject_name=$subject_name;
         $subject->grade_id=$grade_id;
@@ -61,7 +62,9 @@ class SubjectController extends Controller
 
         $subject->save();
         return redirect()->back()->with('success','subject added succesfully');
-
+       }catch(\Exception $e){
+        return redirect()->back()->with('error', 'subject already exists');
+       }
     }
 
     public function editSubject($id){
@@ -84,6 +87,15 @@ class SubjectController extends Controller
     
         public function updateSubject(Request $request, $id)
         {
+          
+             $request->validate([
+                'subject_name'=> 'required',
+                'grade_id'=>'required',
+                'class_id'=>'required',
+                'teacher_id'=>'required']);
+
+
+
             $newSubjectNameValue = $request->subject_name;
             $newSubjectGradeValue = $request->grade_id;
             $newSubjectClassValue = $request->class_id;
@@ -102,6 +114,7 @@ class SubjectController extends Controller
     
             return redirect('dashboard')->with('success', 'subject updated successfully');
     }
+    
 
     public function deleteSubject($id){
         Subject::where('id','=',$id)->delete();

@@ -27,13 +27,13 @@ class noticeController extends Controller
         $request->validate([
 
             'notice'=>'required',
-            'grade_id'=>'array|nullable',
+            'grade_id'=>'array|required',
         ]);
             
             $noticeValue = $request->notice;
             $gradeValue=$request->grade_id;
     
-    
+    try{
             $notice = new Notice;
             $notice->notice = $noticeValue;
             $notice->grade_id=$gradeValue;
@@ -56,10 +56,12 @@ class noticeController extends Controller
         $notice->grades()->sync($grades);
     }
             
-
     
             return redirect('management')->with('success', 'notice added successfully');
+    }catch(\Exception $e){
+        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
     }
+}
 
     public function editNotice($id)
     {
@@ -69,6 +71,7 @@ class noticeController extends Controller
 
     public function updateNotice(Request $request, $id)
 {
+ 
     $request->validate([
         'notice' => 'required',
         'grade_id' => 'array', // Validate it as an array

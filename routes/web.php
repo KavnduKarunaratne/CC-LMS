@@ -200,14 +200,14 @@ Route::get('subject-detail/{subject_id}', [SubjectController::class,'showDynamic
 
 
 Route::get('material-list',[MaterialController::class,'Material']);
-Route::get('add-material',[MaterialController::class,'AddMaterial']);
+Route::get('add-material/{subject_id}',[MaterialController::class,'AddMaterial']);
 Route::post('save-material',[MaterialController::class,'saveMaterial']);
 Route::get('edit-material/{id}',[MaterialController::class,'editMaterial']);
 Route::post('update-material/{id}',[MaterialController::class,'updateMaterial'])->name('update-material');
 Route::get('delete-material/{id}',[MaterialController::class,'deleteMaterial']);
 
 Route::get('assignment-list',[AssignmentController::class,'Assignment']);
-Route::get('add-assignment',[AssignmentController::class,'AddAssignment']);
+Route::get('add-assignment/{subject_id}',[AssignmentController::class,'AddAssignment']);
 Route::post('save-assignment',[AssignmentController::class,'saveAssignment']);
 Route::get('edit-assignment/{id}',[AssignmentController::class,'editAssignment']);
 Route::post('update-assignment/{id}',[AssignmentController::class,'updateAssignment'])->name('update-assignment');
@@ -247,3 +247,7 @@ Route::post('save-question/{quiz_id}', [QuizController::class, 'saveQuestion'])-
 Route::get('search-users', [UserController::class, 'searchUsers'])->name('search-users');
 
 Route::get('search-submissions/{assignment_id}', [SubmissionController::class, 'searchSubmissions'])->name('search-submissions');
+Route::get('view-student-feedback/{submission_id}', 'FeedbackController@viewStudentFeedback')->name('view-student-feedback');
+
+
+Route::get('view-my-submissions', [SubmissionController::class,'viewMySubmissions'])->name('view-my-submissions');

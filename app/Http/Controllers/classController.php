@@ -40,14 +40,17 @@ class classController extends Controller
         ]);
         $class_name = $request->class_name;
         $grade_id=$request->grade_id;
-
+  try{
         $class = new Classes;
         $class->class_name = $class_name;
         $class->grade_id=$grade_id;
 
 
         $class->save();
-        return redirect('dashboard')->with('success', 'class added successfully');
+        return redirect('subject-list')->with('success', 'class added successfully');
+  }catch(\Exception $e){
+    return redirect()->back()->with('error', 'class already exists');
+  }
     }
 
     public function editClass($id){
@@ -58,6 +61,13 @@ class classController extends Controller
 
       public function updateClass(Request $request, $id)
     {
+     
+        $request->validate([
+            'class_name'=> 'required',
+            'grade_id'=>'required',
+        ]);
+
+
         $newClassNameValue = $request->class_name;
         $newClassGradeValue = $request->grade_id;
 
@@ -67,9 +77,9 @@ class classController extends Controller
 
         ]);
 
-        return redirect('dashboard')->with('success', 'class updated successfully');
+        return redirect('subject-list')->with('success', 'class updated successfully');
+   
     }
-
 
       public function deleteClass($id){
         Classes::where('id','=',$id)->delete();

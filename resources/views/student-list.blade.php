@@ -57,7 +57,7 @@
                             
                             <tr class="whitespace-nowrap">
                                 <td class="px-6 py-4 text-sm text-white">{{ $student-> id}}</td>
-                                <td class="px-6 py-4 text-sm text-white">{{$student->student_name}}</td>
+                                <td class="px-6 py-4 text-sm text-white">{{$student->name}}</td>
                                 <td class="px-6 py-4 text-sm text-white"> {{$student->email}}</td>
                                 <td class="px-6 py-4 text-sm text-white"> {{$student->admission_number}}</td>
                                 <td class="px-6 py-4 text-sm text-white"> {{$student->year_of_registration}}</td>

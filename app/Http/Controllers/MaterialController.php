@@ -17,32 +17,38 @@ class MaterialController extends Controller
         'subject'=>(new Subject())->all(),
     ]);
   }
-  public function AddMaterial(){
+  public function AddMaterial($subject_id){
     $user = Auth::user(); // Get the logged-in user (teacher)
     $subjects = $user->subjects; // Retrieve the subjects associated with the teacher
-
+    $subject = Subject::find($subject_id);//to send the material under the selected subject
     $teacherClass = Auth::user()->class;
     $classStudents = $teacherClass->students;
-    return view('add-material', compact('subjects','classStudents'));
+    return view('add-material', compact('subjects','classStudents','subject_id','subject'));
   }
 
   public function saveMaterial(Request $request)
 {
+    
+    
     $request->validate([
         'material_name' => 'required',
-        'file' => 'nullable|mimes:doc,pdf,docx,xls,xlsx,zip,ppt,pptx',
+        'file' => 'nullable',
         'description' => 'required',
         'link' => 'nullable',
         'subject_id' => 'required',
     ]);
 
+    $filePath = $request->file('file')->store('materials');
+    $subject_id = $request->input('subject_id'); 
+
+ try{
     $material = new Material;
     $material->material_name = $request->material_name;
-    $material->file = $request->file;
+    $material->file = $filePath;
     $material->description = $request->description;
     $material->upload_date = now();
     $material->link = $request->link;
-    $material->subject_id = $request->subject_id;
+    $material->subject_id = $subject_id;
     $material->teacher_id = Auth::id();
     $material->save();
 
@@ -52,6 +58,9 @@ class MaterialController extends Controller
     }
 
     return redirect()->back()->with('success', 'Material Added Successfully');
+}catch(\Exception $e){
+    return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while saving the material.']);
+}
 }
 
     public function editMaterial($id){
@@ -68,6 +77,8 @@ class MaterialController extends Controller
 
     public function updateMaterial(Request $request, $id)
 {
+ 
+  
     $request->validate([
         'material_name' => 'required',
         'description' => 'required',

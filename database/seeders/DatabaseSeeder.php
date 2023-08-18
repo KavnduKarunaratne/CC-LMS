@@ -24,5 +24,8 @@ class DatabaseSeeder extends Seeder
         foreach ($grades as $grade) {
             DB::table('grades')->insert(['grade' => $grade]);
         }
+
+
+       
     }
 }

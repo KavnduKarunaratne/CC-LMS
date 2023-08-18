@@ -12,7 +12,7 @@
     <div class="bg-white p-4 rounded-md shadow-md mb-4">
         <h2 class="text-lg font-semibold">Subject Detail</h2>
         <p>Subject Name: {{ $subject->subject_name }}</p>
-        <p>Logged-in User: {{ auth()->user()->name }}</p>
+      
        
     </div>
     <div class="bg-white p-4 rounded-md shadow-md mb-4">
@@ -30,7 +30,7 @@
                 <strong>Description:</strong> {{ $material->description }}
                 <br>
                 @if ($material->file)
-                <strong>File:</strong> <a href="{{ asset('storage/' . $material->file) }}" download>{{ $material->file }}</a>
+                <strong>File:</strong> <a href="{{ asset('storage/app/materials' . $material->file) }}" download>{{ $material->file }}</a>
                 <br>
                 @endif
                 <strong>Link:</strong> {{ $material->link }}
@@ -65,7 +65,7 @@
                 <strong>Description:</strong> {{ $assignment->description }}
                 <br>
                 @if ($assignment->file)
-                <strong>File:</strong> <a href="{{ asset('storage/' . $assignment->file) }}" download>{{ $assignment->file }}</a>
+                <strong>File:</strong> <a href="{{ asset('storage/app/assignments' . $assignment->file) }}" download>{{ $assignment->file }}</a>
                 <br>
                 @endif
                 <strong>Due Date:</strong> {{ $assignment->due_date }}
@@ -98,8 +98,8 @@
 
 @if (Auth::user() && Auth::user()->role_id == 4)
 <div class="bg-white p-4 rounded-md shadow-md mb-4">
-    <a href="{{ url('add-material') }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Upload Materials</a>
-    <a href="{{ url('add-assignment') }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Upload Assignment</a>
+    <a href="{{ url('add-material', ['subject_id' => $subject->id]) }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Upload Materials</a>
+    <a href="{{ url('add-assignment',['subject_id' => $subject->id]) }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Upload Assignment</a>
     </div>
 
 </div>

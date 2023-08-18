@@ -7,6 +7,7 @@ use App\Models\Grade;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
+use App\Rules\ValidSuNumber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,7 +42,7 @@ class TeacherController extends Controller
             'year_of_registration'=>'required',
             'class_id'=>'required',
             'grade_id'=>'required',
-            'admission_number' => 'required|starts_with:SU',
+            'admission_number' => ['required',new ValidSuNumber],
         
         ]);
 
@@ -54,6 +55,11 @@ class TeacherController extends Controller
         $teacherClass = $request->class_id;
         $teacherGrade=$request->grade_id;
 
+try{
+    $existingUser = User::where('admission_number', $teacherAdmissionNumber)->first();
+    if ($existingUser) {
+        return redirect()->back()->with('error', 'User with this admission number already exists');
+    }
 
         $teacher = new User;
         $teacher->name = $teacherName;
@@ -67,7 +73,10 @@ class TeacherController extends Controller
         $teacher->save();
 
         return redirect('teacher-list')->with('success', 'Teacher added successfully');
+    } catch (\Exception $e) {
+        return redirect('teacher-list')->with('error', 'Error adding teacher');
     }
+}
 
     public function deleteTeacher($id){
         User::where('id','=',$id)->delete();
@@ -89,6 +98,19 @@ class TeacherController extends Controller
     }
 
     public function updateTeacher(Request $request, $id){
+
+        $request->validate([
+            'name'=> 'required',
+            'email'=>'required|email',
+           
+            'year_of_registration'=>'required',
+            'class_id'=>'required',
+            'grade_id'=>'required',
+            'admission_number' => ['required',new ValidSuNumber],
+        
+        ]);
+
+
         $newTeacherNameValue = $request->name; // Use a different variable name for teacher name from the request
         $newTeacherEmailValue = $request->email; // Use a different variable name for teacher email from the request
         $newTeacherAdmissionNumberValue = $request->admission_number; // Use a different variable name for teacher phone from the request
@@ -106,7 +128,8 @@ class TeacherController extends Controller
         ]);
         return redirect('teacher-list')->with('success', 'Teacher updated successfully');
     }
-
+   
+    
     public function teacherPanel()
     {
         // Fetch the logged-in teacher's subjects

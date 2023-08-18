@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Rules\ValidSuNumber;
 
 class UserController extends Controller
 {
@@ -43,7 +44,7 @@ class UserController extends Controller
 
             'password'=>'required|min:5|max:12',
            
-            'admission_number' => 'required|starts_with:SU',
+            'admission_number' => ['required',new ValidSuNumber],
     
         ]);
            
@@ -57,7 +58,7 @@ class UserController extends Controller
         $year_of_registration=$request->year_of_registration;
         $password=$request->password;
 
-
+try {
         $user = new User;
         $user->is_archived=0;
         $user->name=$name;
@@ -69,7 +70,9 @@ class UserController extends Controller
 
         $user->save();
         return redirect()->back()->with('success','user added succesfully');
-
+} catch (\Exception $e) {
+    return redirect()->back()->with('error','This user already exists');
+}
 
     }
 
@@ -79,6 +82,17 @@ class UserController extends Controller
 
     }
     public function updateUser(Request $request, $id){
+ 
+        $request->validate([
+            'name'=> 'required',
+            'email'=>'required|email',
+            'year_of_registration'=>'required',
+            'admission_number' => ['required',new ValidSuNumber],
+    
+        ]);
+
+
+
         $newName = $request->input('name');
     $newEmail = $request->input('email');
     $newAdmissionNumber = $request->input('admission_number');
@@ -96,6 +110,7 @@ class UserController extends Controller
 
         return redirect('user-management')->with('success','user updated succesfully');
     }
+    
     public function deleteUser($id){
         User::where('id','=',$id)->delete();
         return redirect('user-management')->with('success','user deleted succesfully');

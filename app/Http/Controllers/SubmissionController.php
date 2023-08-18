@@ -27,21 +27,21 @@ class submissionController extends Controller
 
             'name'=>'required',
             'description'=>'required',
-            'file' => 'required',
-           
+            'file' => 'required|mimes:doc,pdf,docx,xls,xlsx,zip,ppt,pptx',   
             'assignment_id'=>'required'
             
         ]);
+            $filePath = $request->file('file')->store('submissions');
             $name=$request->name;
             $description=$request->description;
-            $file=$request->file;
+            
           
             $assignment_id = $request->input('assignment_id');
-
+try{
             $submission = new Submission;
             $submission->name=$name;
             $submission->description=$description;
-            $submission->file=$file;
+            $submission->file=$filePath;
             $submission->submit_date=now();
             $submission->assignment_id=$assignment_id;
             $submission->student_id=Auth::id();
@@ -49,7 +49,10 @@ class submissionController extends Controller
 
             $submission->save();
     
-            return redirect()->back()->with('success', 'submission added successfully');
+            return redirect('subject-detail')->with('success', 'submission added successfully');
+}catch(\Exception $e){
+    return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while saving the submission.']);
+}
 
 
     }
@@ -63,6 +66,15 @@ class submissionController extends Controller
 }
 
     public function updateSubmission(Request $request,$id){
+
+       
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'file' => 'required',   
+            'assignment_id'=>'required'
+        ]);
+
         $newSubmissionName=$request->name;
         $newSubmissionDescription=$request->description;
         $newSubmissionFile=$request->file;
@@ -79,7 +91,7 @@ class submissionController extends Controller
 
         return redirect()->back()->with('success','submission updated succesfully');
     }
-    public function deleteSubmission($id){
+       public function deleteSubmission($id){
         Submission::where('id','=',$id)->delete();
         return redirect('submission-list')->with('success','submission deleted succesfully');
     }
@@ -91,6 +103,8 @@ class submissionController extends Controller
     
     return view('view-submissions', compact('submissions', 'assignment'));
 }
+
+
 
 public function searchSubmissions(Request $request, $assignment_id)
 {
@@ -106,6 +120,15 @@ public function searchSubmissions(Request $request, $assignment_id)
 
     return view('view-submissions', compact('assignment', 'submissions'));
 }
+
+public function viewMySubmissions()
+{
+    $studentId = Auth::id();
+    $submissions = Submission::where('student_id', $studentId)->with('feedback')->get();
+    
+    return view('view-my-submissions', compact('submissions'));
+}
+
 
 
 
