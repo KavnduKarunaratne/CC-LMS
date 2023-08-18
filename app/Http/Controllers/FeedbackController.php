@@ -81,7 +81,7 @@ class FeedbackController extends Controller
         $newDate = $request->date;
         $newSubmission_id = $request->submission_id;
         
-        // Use the correct variable name for the feedback value
+      
         $feedback = Feedback::where('id','=',$id)->update([
             'feedback' => $newFeedback,
             'marks' => $newMarks,

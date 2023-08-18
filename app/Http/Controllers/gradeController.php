@@ -54,7 +54,7 @@ class gradeController extends Controller
 
   public function showClasses(Grade $grade)
   {
-      $classes = $grade->classes; // Assuming you have a relationship set up
+      $classes = $grade->classes; 
   
       return view('classes.show', compact('grade', 'classes'));
   }
