@@ -98,6 +98,10 @@ public function createdQuizzes()
         return $this->hasMany(Flashcard::class, 'teacher_id');
     }
 
+    public function submissions()
+{
+    return $this->hasMany(Submission::class, 'student_id');
+}
 
 
 }

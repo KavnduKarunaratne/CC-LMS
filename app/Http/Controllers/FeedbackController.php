@@ -34,7 +34,7 @@ class FeedbackController extends Controller
       
         $request->validate([
             'feedback' => 'required',
-            'marks' => 'required',
+            'marks' => 'required|integer|min:0|max:100',
             'submission_id' => 'required',
         ]);
     
@@ -71,7 +71,7 @@ class FeedbackController extends Controller
         $request->validate([
             'feedback'=>'required',
             'date'=>'required',
-            'marks'=>'required',
+            'marks'=>'required|integer|min:0|max:100',
             'submission_id'=>'required',
         ]);
 

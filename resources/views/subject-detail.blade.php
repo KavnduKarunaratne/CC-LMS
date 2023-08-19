@@ -12,8 +12,9 @@
     <div class="bg-white p-4 rounded-md shadow-md mb-4">
         <h2 class="text-lg font-semibold">Subject Detail</h2>
         <p>Subject Name: {{ $subject->subject_name }}</p>
-      
-       
+        @if (Auth::user() && Auth::user()->role_id == 4)
+      <p><a href="{{ route('student-progress', ['subject_id' => $subject->id]) }}">Student Progress</a></p>
+       @endif
     </div>
    
     <div>

@@ -15,6 +15,7 @@ use App\Http\Controllers\classController;
 use App\Http\Controllers\noticeController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\ProgressController;
 use App\Models\Annoucement;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\RoleController;
@@ -259,3 +260,5 @@ Route::post('update-flashcard/{id}', [flashcardController::class, 'updateFlashca
 Route::get('delete-flashcard/{id}', [flashcardController::class, 'deleteFlashcard']);
 
 Route::get('subject/{subject_id}/flashcards', [FlashcardController::class, 'showFlashcards'])->name('subject.flashcards');
+
+Route::get('student-progress/{subject_id}', [ProgressController::class,'studentProgress'])->name('student-progress');
