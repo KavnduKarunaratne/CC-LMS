@@ -94,5 +94,10 @@ public function createdQuizzes()
         return $this->hasMany(Quizzes::class, 'teacher_id');
     }
 
+    public function createdCards(){
+        return $this->hasMany(Flashcard::class, 'teacher_id');
+    }
+
+
 
 }

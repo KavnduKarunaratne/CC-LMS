@@ -3,6 +3,7 @@
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\flashcardController;
 use App\Http\Controllers\gradeController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\MaterialController;
@@ -238,16 +239,23 @@ Route::post('save-quiz', [QuizController::class, 'saveQuiz'])->name('save-quiz')
 Route::get('edit-quiz/{id}', [QuizController::class, 'editQuiz']);
 Route::post('update-quiz/{id}', [QuizController::class, 'updateQuiz'])->name('update-quiz');
 Route::get('delete-quiz/{id}', [QuizController::class, 'deleteQuiz']);
-
 Route::get('quiz-details/{quiz_id}', [QuizController::class, 'showDetails'])->name('quiz-details');
 Route::get('add-question/{quiz_id}',[ QuizController::class,'addQuestion']);
-
 Route::post('save-question/{quiz_id}', [QuizController::class, 'saveQuestion'])->name('save-question');
 
 Route::get('search-users', [UserController::class, 'searchUsers'])->name('search-users');
-
 Route::get('search-submissions/{assignment_id}', [SubmissionController::class, 'searchSubmissions'])->name('search-submissions');
+
 Route::get('view-student-feedback/{submission_id}', 'FeedbackController@viewStudentFeedback')->name('view-student-feedback');
-
-
 Route::get('view-my-submissions', [SubmissionController::class,'viewMySubmissions'])->name('view-my-submissions');
+
+
+Route::get('flashcard-list',[flashcardController::class,'Flashcard']);
+Route::get('add-card/{subject_id}',[flashcardController::class,'addFlashcard']);
+Route::post('save-card',[flashcardController::class,'saveFlashcard'])->name('save-card');
+Route::get('edit-card/{id}', [flashcardController::class, 'editFlashcard']);
+Route::post('update-flashcard/{id}', [flashcardController::class, 'updateFlashcard'])->name('update-flashcard');
+
+Route::get('delete-flashcard/{id}', [flashcardController::class, 'deleteFlashcard']);
+
+Route::get('subject/{subject_id}/flashcards', [FlashcardController::class, 'showFlashcards'])->name('subject.flashcards');

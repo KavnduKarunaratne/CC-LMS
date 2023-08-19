@@ -15,6 +15,12 @@
       
        
     </div>
+   
+    <div>
+        <a href="{{ route('subject.flashcards', ['subject_id' => $subject->id]) }}">View Flashcards</a>
+    </div>
+
+  
     <div class="bg-white p-4 rounded-md shadow-md mb-4">
 <h3 class="text-lg font-semibold">Materials:</h3>
 @if ($materials->count() > 0)
@@ -52,6 +58,10 @@
 @else
     <p>No materials available for this subject.</p>
 @endif
+</div>
+
+<div>
+    
 </div>
 
 <div class="bg-white p-4 rounded-md shadow-md mb-4">

@@ -11,7 +11,7 @@ class noticeController extends Controller
     
     public function Notice(){
         $notice=Notice::all();
-        return view('management',compact('notice'));
+        return view('management,',compact('notice'));
     }
 
     public function AddNotice(){
@@ -27,34 +27,21 @@ class noticeController extends Controller
         $request->validate([
 
             'notice'=>'required',
-            'grade_id'=>'array|required',
+            'grade_id'=>'nullable',
         ]);
             
-            $noticeValue = $request->notice;
-            $gradeValue=$request->grade_id;
+           
+           
     
     try{
             $notice = new Notice;
-            $notice->notice = $noticeValue;
-            $notice->grade_id=$gradeValue;
+            $notice->notice = $request->notice;
             $notice->management_id = auth()->user()->id;//checks the logged in users id and sets the id automatically
-           
             $notice->date_of_notice = now();
 
-            
-
+          
             $notice->save();
 
-            
-    if (in_array('all', $gradeValue)) {
-        // If 'All Grades' is selected, assign to all grades
-        $grades = Grade::all();
-        $notice->grades()->sync($grades);
-    } else {
-        // Assign to selected grades
-        $grades = Grade::whereIn('id', $gradeValue)->get();
-        $notice->grades()->sync($grades);
-    }
             
     
             return redirect('management')->with('success', 'notice added successfully');
@@ -65,8 +52,12 @@ class noticeController extends Controller
 
     public function editNotice($id)
     {
-        $notice=Notice::where('id','=',$id)->first();
-        return view('edit-notice',compact('notice'));
+        $notice=Notice::find($id);
+        return view('edit-notice',[
+            'notice'=>$notice,
+            'grades' => (new Grade())->all(),
+        
+        ]);
     }
 
     public function updateNotice(Request $request, $id)
@@ -74,29 +65,18 @@ class noticeController extends Controller
  
     $request->validate([
         'notice' => 'required',
-        'grade_id' => 'array', // Validate it as an array
+        'grade_id' => 'nullable', // Validate it as an array
     ]);
 
     $newNotice = $request->notice;
     $newGradeValues = $request->grade_id;
 
-    $notice = Notice::findOrFail($id); // Find the notice by ID
-
-    $notice->update([
+    Notice::where('id', $id)->update([
         'notice' => $newNotice,
-        'management_id' => auth()->user()->id,
+        'grade_id' => $newGradeValues
     ]);
 
-    if (in_array('all', $newGradeValues)) {
-        // If 'All Grades' is selected, assign to all grades
-        $grades = Grade::all();
-        $notice->grades()->sync($grades);
-    } else {
-        // Assign to selected grades
-        $grades = Grade::whereIn('id', $newGradeValues)->get();
-        $notice->grades()->sync($grades);
-    }
-
+  
     return redirect('management')->with('success', 'Notice updated successfully');
 }
 

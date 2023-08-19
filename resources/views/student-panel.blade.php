@@ -61,16 +61,60 @@
     <p>You do not have access to this page.</p>
 @endif
 <div class="bg-white p-4 rounded-md shadow-md">
-                <h3 class="text-lg font-semibold">Notices for Your Grade:</h3>
-                <ul>
-                    @foreach (Auth::user()->grade->notices as $notice)
-                        <li>
-                            Notice: {{ $notice->notice }}
-                            | Date: {{ $notice->date_of_notice }}
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+    <h3 class="text-lg font-semibold">Notices for Your Grade:</h3>
+    <ul>
+        @foreach (Auth::user()->grade->notices as $notice)
+            @if ($notice->grade_id == Auth::user()->grade->id || $notice->grade_id == null)
+                <li>
+                    Notice: {{ $notice->notice }}
+                    | Date: {{ $notice->date_of_notice }}
+                </li>
+            @endif
+        @endforeach
+    </ul>
+</div>
+
+<div>
+    @if ($notices->count() > 0)
+        @foreach ($notices as $notice)
+            @if ($notice->grade_id == null)
+                <div class="text-white mt-4">
+                    <div class="text-black w-full max-w-sm mx-auto bg-white p-4 mb-4 rounded-md shadow-md">
+                        {{ $notice->notice }}<br>
+                        <span class="text-black">{{ $notice->date_of_notice }}</span><br>
+                        
+                        @if ($notice->management)
+                            <span>Management: {{ $notice->management->name }}</span>
+                        @else
+                            <span>Management: Not available</span>
+                        @endif
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    @else
+        <p>No notices available.</p>
+    @endif
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <div class="bg-white p-4 rounded-md shadow-md">
     <h3 class="text-lg font-semibold">Materials Accessible to You:</h3>
@@ -89,7 +133,7 @@
                     <a href="{{ $material->link }}" target="_blank">Visit Link</a>
                     <br>
                 @endif
-                <!-- Display other material details -->
+            
             </li>
         @endforeach
     </ul>

@@ -139,14 +139,18 @@ try {
         ]);
     }
     else if($role_id==3){
-        return view('student-panel');
+        return view('student-panel',[
+            'notices'=>(new Notice())->all(),
+        ]);
     }
     else if ($role_id==4){
         return view('teacher-panel',[
+            
             'subjects'=>(new Subject())->all(),
             'grades' => (new Grade())->all(),
             'classes' => (new Classes())->all(),
             'students'=>(new User())->all(),
+            'notices'=>(new Notice())->all(),
         ]);
     }
     else{

@@ -36,5 +36,9 @@ public function assignments()
     return $this->hasMany(Assignment::class, 'subject_id');
 
 }
+public function flashcards()
+{
+    return $this->hasMany(Flashcard::class, 'subject_id');
+}
 
 }

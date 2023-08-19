@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notices', function (Blueprint $table) {
+        Schema::create('flashcards', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('notice');
-            $table->date('date_of_notice');
-         
-            $table->foreignId('grade_id')->nullable()->constrained('grades');
-            $table->foreignId('management_id')->constrained('users')->default(2);
-            
+            $table->string('content');
+            $table->string('answer');
+            $table->date('upload_date');
+            $table->foreignId('subject_id')->constrained('subjects');
+            $table->foreignId('teacher_id')->constrained('users');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notices');
+        Schema::dropIfExists('flashcards');
     }
 };
