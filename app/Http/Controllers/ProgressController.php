@@ -15,7 +15,10 @@ class ProgressController extends Controller
         
         $students = User::where('role_id', 3)->get(); // 3 is the student role id
         
+
+        
         return view('student-progress', compact('subject', 'students'));
     }
     
+     
 }

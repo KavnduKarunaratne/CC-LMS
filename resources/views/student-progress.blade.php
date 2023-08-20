@@ -4,6 +4,8 @@
     <title>Student Progress - {{ $subject->subject_name }}</title>
 </head>
 <body>
+
+
     <h1>Student Progress - {{ $subject->subject_name }}</h1>
     <table>
         <thead>
@@ -25,10 +27,10 @@
                 <td>{{ $student->admission_number}}</td>
                 <td>
                     @php
-                        $marks = $student->submissions <!--use the subject id to find the related assignments and submission and the feedback for those submissions-->
+                        $marks = $student->submissions 
                             ->where('assignment.subject_id', $subject->id)
                             ->flatMap(function ($submission) {
-                                return $submission->feedback->pluck('marks'); <!--the flatmap function extracts the marks from the feedback-->
+                                return $submission->feedback->pluck('marks'); 
                             })
                             ->sum();
 
@@ -52,7 +54,7 @@
             </tr>
         </thead>
         <tbody>
-             <!-- the marks are calculated and the  students are arranged(sorted) in the descending order of marks-->
+            
             @php
                 $topScoringStudents = $students->sortByDesc(function ($student) use ($subject) {
                     return $student->submissions
@@ -81,7 +83,6 @@
             @endforeach
         </tbody>
     </table>
-
     <h2>Least Scoring Students</h2>
     <table>
         <thead>
@@ -91,12 +92,11 @@
             </tr>
         </thead>
         <tbody>
-            <!-- the marks are calculated and the  students are arranged(sorted) in the ascending order of marks-->
             @php
                 $leastScoringStudents = $students->sortBy(function ($student) use ($subject) {
                     return $student->submissions
                         ->where('assignment.subject_id', $subject->id)
-                        ->flatMap(function ($submission) {           <!-- the flatmap function extracts the marks from the feedback-->
+                        ->flatMap(function ($submission) {           
                             return $submission->feedback->pluck('marks');
                         })
                         ->sum();
@@ -123,3 +123,8 @@
     </table>
 </body>
 </html>
+ <!-- the marks are calculated and the  students are arranged(sorted) in the descending order of marks-->
+<!-- the flatmap function extracts the marks from the feedback-->
+  <!-- the marks are calculated and the  students are arranged(sorted) in the ascending order of marks-->
+<!--use the subject id to find the related assignments and submission and the feedback for those submissions-->
+<!--the flatmap function extracts the marks from the feedback-->
