@@ -127,23 +127,23 @@ try {
 
 
 
-    if($role_id==1){
+    if($role_id==1){ //role id is 1 for admin
         return view('dashboard',[
             'grades' => (new Grade())->all(),
             'classes' => (new Classes())->all(),
         ]);
     }
-    else if($role_id==2){
+    else if($role_id==2){ //role id is 2 for management
         return view('management',[
             'notice' => (new Notice())->all(),
         ]);
     }
-    else if($role_id==3){
+    else if($role_id==3){ //role id is 3 for student
         return view('student-panel',[
             'notices'=>(new Notice())->all(),
         ]);
     }
-    else if ($role_id==4){
+    else if ($role_id==4){ //role id is 4 for teacher
         return view('teacher-panel',[
             
             'subjects'=>(new Subject())->all(),

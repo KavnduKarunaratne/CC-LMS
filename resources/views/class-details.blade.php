@@ -10,6 +10,8 @@
     <div class="bg-white p-4 rounded-md shadow-md">
         <p class="text-xs text-gray-500">Class Name</p>
         <p class="text-sm">{{ $class->class_name }}</p>
+        <a href="{{   url('edit-class/'.$class->id)    }}">Edit</a><br>
+        <a href="{{   url('delete-class/'.$class->id)    }}">Delete</a>
     </div>
     
     <div class="mt-4">
