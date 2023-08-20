@@ -32,7 +32,7 @@ class MaterialController extends Controller
     
     $request->validate([
         'material_name' => 'required',
-        'file' => 'nullable',
+        'file' => 'nullable|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',
         'description' => 'required',
         'link' => 'nullable',
         'subject_id' => 'required',
@@ -80,10 +80,11 @@ class MaterialController extends Controller
  
   
     $request->validate([
-        'material_name' => 'required',
-        'description' => 'required',
+        'material_name' => 'nullable',
+        'description' => 'nullable',
         'link' => 'nullable',
-        'subject_id' => 'required',
+        
+        'file'=>'nullable|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800'
     ]);
 
     $material = Material::findOrFail($id); // Find the material by its ID
@@ -92,7 +93,7 @@ class MaterialController extends Controller
     $material->material_name = $request->material_name;
     $material->description = $request->description;
     $material->link = $request->link;
-    $material->subject_id = $request->subject_id;
+    
 
     
     if ($request->hasFile('file')) {

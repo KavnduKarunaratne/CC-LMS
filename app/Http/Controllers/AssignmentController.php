@@ -32,7 +32,7 @@ class AssignmentController extends Controller
     {
         $request->validate([
             'assignment_name' => 'required',
-            'file' => 'required|mimes:doc,pdf,docx,xls,xlsx,zip,ppt,pptx', //validating file type
+            'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800', //validating file type
             'description' => 'nullable',
             'due_date' => 'required|date',
             'subject_id' => 'required',
@@ -68,17 +68,15 @@ try{
 
     public function updateAssignment(Request $request, $id)
     {
-       
         $request->validate([
-            'assignment_name' => 'required',
-            'description' => 'required',
+            'assignment_name' => 'nullable',
+            'description' => 'nullable',
             'due_date' => 'required|date',
-            'subject_id' => 'required',
-            'file' => 'required|mimes:doc,pdf,docx,xls,xlsx,zip,ppt,pptx',
+            'file' => 'nullable|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',
         ]);
-
+    
         $assignment = Assignment::findOrFail($id);
-
+    
         if ($request->hasFile('file')) {
             // Delete old file
             Storage::delete($assignment->file);
@@ -86,21 +84,20 @@ try{
             $filePath = $request->file('file')->store('assignments');
             $assignment->file = $filePath;
         }
-
+    
         $assignment->assignment_name = $request->assignment_name;
         $assignment->description = $request->description;
         $assignment->due_date = $request->due_date;
-        $assignment->subject_id = $request->subject_id;
         $assignment->save();
-
+    
         return redirect()->back()->with('success', 'Assignment Updated Successfully');
-   
     }
+    
 
 
     public function deleteAssignment($id)
     {
         Assignment::findOrFail($id)->delete();
-        return redirect()->route('assignments.index')->with('success', 'Assignment Deleted Successfully');
+        return redirect()->back()->with('success', 'Assignment Deleted Successfully');
     }
 }

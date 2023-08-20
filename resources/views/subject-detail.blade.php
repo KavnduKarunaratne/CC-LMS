@@ -88,13 +88,23 @@
                 <a href="{{ url('delete-assignment', $assignment->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
                 @endif
               
-                @if (Auth::user() && Auth::user()->role_id == 3 && strtotime($assignment->due_date) > time())
-                <a href="{{ url('add-submission', ['assignment_id' => $assignment->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Add Submission for Assignment</a>
-              
-                @endif
+                @if (Auth::user() && Auth::user()->role_id == 3)<!--php code is used to excute php directly inside the blade file-->
+    @php
+        $hasSubmitted = Auth::user()->submissions->contains('assignment_id', $assignment->id);
+    @endphp
+<!--checks if the student has already made a submission for this assignment-->
+    @if ($hasSubmitted)
+        <p>You have already submitted for this assignment.</p>
+    @elseif (strtotime($assignment->due_date) > time())<!--checks if the due date is passed for submissions. if so the link is hidden-->
+        <a href="{{ url('add-submission', ['assignment_id' => $assignment->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Add Submission for Assignment</a>
+    @endif
+
+@endif
+
+
                 @if (Auth::user() && Auth::user()->role_id == 4)
                 <td class="px-6 py-2 text-xs text-gray-500">
-    <a href="{{ route('view-submissions', ['assignment_id' => $assignment->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">View Submission</a>
+    <a href="{{ route('view-submissions', ['assignment_id' => $assignment->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">View Submissions</a>
 </td>
 
                 @endif

@@ -6,7 +6,8 @@
 <body>
 
 
-    <h1>Student Progress - {{ $subject->subject_name }}</h1>
+@foreach($assignments as $assignment)
+    <h2>Student Progress for Assignment: {{ $assignment->assignment_name }}</h2>
     <table>
         <thead>
             <tr>
@@ -36,7 +37,13 @@
 
                         $totalMarks += $marks;
                     @endphp
-                    {{ $marks }} / 100
+                   
+                    @if ($marks !== 0)
+                        {{ $marks }} / 100
+                    @else
+                        N/A
+                    @endif
+                   
                 </td>
             </tr>
             @endforeach
@@ -77,7 +84,13 @@
                             })
                             ->sum();
                     @endphp
-                    {{ $marks }} / 100
+                   
+                    @if ($marks !== 0)
+                        {{ $marks }} / 100
+                    @else
+                        N/A
+                    @endif
+                 
                 </td>
             </tr>
             @endforeach
@@ -115,12 +128,18 @@
                             })
                             ->sum();
                     @endphp
-                    {{ $marks }} / 100
+                   @if ($marks !== 0)
+                        {{ $marks }} / 100
+                    @else
+                        N/A
+                    @endif
+                 
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
+@endforeach
 </body>
 </html>
  <!-- the marks are calculated and the  students are arranged(sorted) in the descending order of marks-->

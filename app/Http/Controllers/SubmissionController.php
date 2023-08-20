@@ -27,7 +27,7 @@ class submissionController extends Controller
 
             'name'=>'required',
             'description'=>'required',
-            'file' => 'required|mimes:doc,pdf,docx,xls,xlsx,zip,ppt,pptx',   
+            'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',   
             'assignment_id'=>'required'
             
         ]);
@@ -71,7 +71,7 @@ try{
         $request->validate([
             'name'=>'required',
             'description'=>'required',
-            'file' => 'required',   
+            'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',   
             'assignment_id'=>'required'
         ]);
 

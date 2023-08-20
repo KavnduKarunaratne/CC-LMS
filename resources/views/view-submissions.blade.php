@@ -40,6 +40,7 @@
                                 <br>
                                 <strong>Submission Upload Date:</strong> {{ $submission->submit_date}}
                             </div>
+                            <a href="{{ url('delete-submission', $submission->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
 
                             <div class="bg-gray-200 p-4 mt-4 rounded-md shadow-md">
                                 <h3 class="text-lg font-semibold mb-2">Feedback for Submission:</h3>
