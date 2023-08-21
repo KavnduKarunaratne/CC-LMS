@@ -94,7 +94,7 @@ Route::get('add-student',[StudentController::class,'Grade']);
 
 Route::get('class-list',[StudentController::class,'Classes']);
 
-//Route::get('grade-list',[classController::class,'Grade']);//
+
 
 Route::get('dashboard',[gradeController::class,'Grade']);
 
@@ -146,7 +146,7 @@ Route::get('delete-class/{id}',[classController::class,'deleteClass']);
 
 Route::get('user-management',[UserController::class,'User']);
 
-//Route::get('dashboard',[classController::class,'Index']);//
+
 
 Route::get('edit-user/{id}',[UserController::class,'editUser']);
 
@@ -233,17 +233,7 @@ Route::get('delete-feedback/{id}',[FeedbackController::class,'deleteFeedback']);
 
 Route::post('archive-user/{id}', [UserController::class,'archiveUser']);
 Route::post('unarchive-user/{id}', [UserController::class,'unarchiveUser']);
-/*
-Route::get('quiz-list', [QuizController::class, 'Quiz']);
-Route::get('add-quiz', [QuizController::class, 'addQuiz']);
-Route::post('save-quiz', [QuizController::class, 'saveQuiz'])->name('save-quiz');
-Route::get('edit-quiz/{id}', [QuizController::class, 'editQuiz']);
-Route::post('update-quiz/{id}', [QuizController::class, 'updateQuiz'])->name('update-quiz');
-Route::get('delete-quiz/{id}', [QuizController::class, 'deleteQuiz']);
-Route::get('quiz-details/{quiz_id}', [QuizController::class, 'showDetails'])->name('quiz-details');
-Route::get('add-question/{quiz_id}',[ QuizController::class,'addQuestion']);
-Route::post('save-question/{quiz_id}', [QuizController::class, 'saveQuestion'])->name('save-question');
-*/
+
 Route::get('search-users', [UserController::class, 'searchUsers'])->name('search-users');
 Route::get('search-submissions/{assignment_id}', [SubmissionController::class, 'searchSubmissions'])->name('search-submissions');
 

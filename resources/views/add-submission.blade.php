@@ -38,6 +38,9 @@
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="file">Your submission</label>
                 <input type="file" name="file" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" required/>
+                @error('file')
+    <p class="text-red-500 text-sm">{{ $message }}</p>
+    @enderror
             </div>
 
             <input type="hidden" name="assignment_id" value="{{ $assignment->id }}" />

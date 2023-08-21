@@ -40,7 +40,8 @@
                 <strong>File:</strong> <a href="{{ asset('storage/app/materials' . $material->file) }}" download>{{ $material->file }}</a>
                 <br>
                 @endif
-                <strong>Link:</strong> {{ $material->link }}
+                <strong>Link:</strong> <a href="{{ $material->link }}" target="_blank">{{ $material->link }}</a>
+
                 <br>
                 <strong>Upload Date:</strong> {{ $material->upload_date }}
     

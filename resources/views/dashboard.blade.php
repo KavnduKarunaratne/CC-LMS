@@ -19,15 +19,11 @@
        
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          
             <a href="{{url ('student-list')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
-            <!--<a href="{{url ('register-user')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Register User</a>-->
+        
             <a href="{{ url ('user-management') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">User Management</a>
-            <a href="{{ url('management') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Management Panel</a>
-           <!-- <a href="{{ url('class-management') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">class management</a>-->
-         <!--   <a href="{{ url('teacher-panel') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">teacher Panel</a>
-
-            <a href="{{ url('auth.register') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Register User</a>-->
+       
             <a href="{{ url('subject-list') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Course Management</a>
             <a href="{{ url('add-teacher') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Enroll Teacher</a>
             <a href="{{ url('add-student') }}"  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"> Enroll Student</a>
