@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Grade;
 use Illuminate\Http\Request;
 
-class gradeController extends Controller
+class GradeController extends Controller
 {
     public function Grade(){
 

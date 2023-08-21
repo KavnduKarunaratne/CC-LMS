@@ -14,7 +14,11 @@
         {{ session('error') }}
     </div>
 @endif
-          
+@if (session('success'))
+    <div class="bg-green-200 text-green-700 p-2 rounded my-3 mt-1">
+        {{ session('success') }}
+    </div>
+@endif
         <h2 class="text-2xl font-bold mb-6 text-center text-white">Add Feedback</h2>
 
         <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post" action="{{ route('save-feedback',['submission_id'=> $submission->id]) }}">

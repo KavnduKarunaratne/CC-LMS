@@ -6,7 +6,7 @@ use App\Models\Grade;
 use App\Models\Notice;
 use Illuminate\Http\Request;
 
-class noticeController extends Controller
+class NoticeController extends Controller
 {
     
     public function Notice(){

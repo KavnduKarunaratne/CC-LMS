@@ -6,7 +6,7 @@ use App\Models\Flashcard;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
-class flashcardController extends Controller
+class FlashcardController extends Controller
 {
     public function Flashcard()
     {

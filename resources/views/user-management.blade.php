@@ -51,7 +51,7 @@
                 <td><span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">{{ $user->is_archived ? 'Inactive' : 'Active' }}</span></td>
                 <td class="px-6 py-4 text-sm text-white">
                     <a href="{{ url('edit-user/'.$user->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
-                    <a href="{{ url('delete-user/'.$user->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
+                  
                     <form action="{{ url('archive-user/'.$user->id) }}" method="POST" class="inline">
                         @csrf
                         <button type="submit" class="bg-gray-500 hover:bg-gray-700 text-white py-1 px-3 rounded my-3 mt-1">Archive</button>

@@ -11,17 +11,13 @@ use Illuminate\Http\Request;
 use App\Models\Classes;
 use TijsVerkoyen\CssToInlineStyles\Css\Rule\Rule;
 
-class classController extends Controller
+class ClassesController extends Controller
 {
     public function Class(){
         $classes = Classes::all();
         return view('class-management',compact('classes'));
     }
 
-    /*public function Grade(){
-        $grade = Grade::all();
-        return view('add-class', compact('grade'));
-    }*/
 
     public function AddClass(){
         return view('add-class',[
@@ -85,21 +81,7 @@ class classController extends Controller
         Classes::where('id','=',$id)->delete();
         return redirect('dashboard')->with('success','class deleted succesfully');
       }
-     /* public function showDetails(Classes $class)
-      {
-          $students = User::where('grade_id', $class->grade_id, $role_id=3)
-              ->where('class_id', $class->id)
-              ->with('studentname')
-              ->get();
-      
-          $subjects = Subject::where('grade_id', $class->grade_id)
-              ->where('class_id', $class->id)
-              ->with('teachername')
-              ->get();
-      
-          return view('class-details', compact('class', 'students', 'subjects'));
-      }*/
-
+    
       public function showDetails(Classes $class)
 {
     $students = User::where('grade_id', $class->grade_id)

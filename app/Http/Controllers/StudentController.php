@@ -61,7 +61,7 @@ class StudentController extends Controller
        
         $year_of_registration=$request->year_of_registration;
         $admission_number=$request->admission_number;
-     //  $password = $request->password?$request->password:Auth::user()->password;
+ 
         $class_id=$request->class_id;
        $grade_id=$request->grade_id;
 
@@ -77,7 +77,7 @@ class StudentController extends Controller
         $student->role_id=3;
         $student->year_of_registration=$year_of_registration;
         $student->admission_number=$admission_number;
-      //  $student->password=bcrypt($password);
+     
 
         $student->class_id=$class_id;
         $student->grade_id=$grade_id;

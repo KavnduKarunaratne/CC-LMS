@@ -3,16 +3,16 @@
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FeedbackController;
-use App\Http\Controllers\flashcardController;
-use App\Http\Controllers\gradeController;
+use App\Http\Controllers\FlashcardController;
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\classController;
-use App\Http\Controllers\noticeController;
+use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ProgressController;
@@ -96,49 +96,49 @@ Route::get('class-list',[StudentController::class,'Classes']);
 
 
 
-Route::get('dashboard',[gradeController::class,'Grade']);
+Route::get('dashboard',[GateradeController::class,'Grade']);
 
-Route::get('add-grade',[gradeController::class,'AddGrade']);
+Route::get('add-grade',[GradeController::class,'AddGrade']);
 
-Route::post('save-Grade',[gradeController::class,'saveGrade']);
+Route::post('save-Grade',[GradeController::class,'saveGrade']);
 
-Route::post('update-grade',[gradeController::class,'updateGrade']);
+Route::post('update-grade',[GradeController::class,'updateGrade']);
 
-Route::get('edit-grade/{id}',[gradeController::class,'editGrade']);
+Route::get('edit-grade/{id}',[GradeController::class,'editGrade']);
 
-Route::get('delete-grade/{id}',[gradeController::class,'deleteGrade']);
+Route::get('delete-grade/{id}',[GradeController::class,'deleteGrade']);
 
-Route::post('update-grade/{id}', [gradeController::class, 'updateGrade'])->name('update-grade');
-
-
+Route::post('update-grade/{id}', [GradeController::class, 'updateGrade'])->name('update-grade');
 
 
 
-Route::post('update-notice/{id}',[noticeController::class,'updateNotice'])->name('update-annoucement');
-
-Route::get('delete-notice/{id}',[noticeController::class,'deleteNotice']);
-
-Route::get('management',[noticeController::class,'Notice']);
-
-Route::get('add-notice',[noticeController::class,'AddNotice']);
-
-Route::post('save-notice',[noticeController::class,'saveNotice']);
-
-Route::get('edit-notice/{id}',[noticeController::class,'editNotice']);
 
 
+Route::post('update-notice/{id}',[NoticeController::class,'updateNotice'])->name('update-annoucement');
 
-Route::get('add-class',[classController::class,'AddClass']);
+Route::get('delete-notice/{id}',[NoticeController::class,'deleteNotice']);
 
-Route:: get ('class-management',[classController::class,'Class']);
+Route::get('management',[NoticeController::class,'Notice']);
 
-Route::post('save-Class',[classController::class,'saveClass']);
+Route::get('add-notice',[NoticeController::class,'AddNotice']);
 
-Route::get('edit-class/{id}',[classController::class,'editClass']);
+Route::post('save-notice',[NoticeController::class,'saveNotice']);
 
-Route::post('update-class/{id}', [classController::class, 'updateClass'])->name('update-class');
+Route::get('edit-notice/{id}',[NoticeController::class,'editNotice']);
 
-Route::get('delete-class/{id}',[classController::class,'deleteClass']);
+
+
+Route::get('add-class',[ClassesController::class,'AddClass']);
+
+Route:: get ('class-management',[ClassesController::class,'Class']);
+
+Route::post('save-Class',[ClassesController::class,'saveClass']);
+
+Route::get('edit-class/{id}',[ClassesController::class,'editClass']);
+
+Route::post('update-class/{id}', [ClassesController::class, 'updateClass'])->name('update-class');
+
+Route::get('delete-class/{id}',[ClassesController::class,'deleteClass']);
 
 
 
@@ -241,13 +241,13 @@ Route::get('view-student-feedback/{submission_id}', 'FeedbackController@viewStud
 Route::get('view-my-submissions', [SubmissionController::class,'viewMySubmissions'])->name('view-my-submissions');
 
 
-Route::get('flashcard-list',[flashcardController::class,'Flashcard']);
-Route::get('add-card/{subject_id}',[flashcardController::class,'addFlashcard']);
-Route::post('save-card',[flashcardController::class,'saveFlashcard'])->name('save-card');
-Route::get('edit-card/{id}', [flashcardController::class, 'editFlashcard']);
-Route::post('update-flashcard/{id}', [flashcardController::class, 'updateFlashcard'])->name('update-flashcard');
+Route::get('flashcard-list',[FlashcardController::class,'Flashcard']);
+Route::get('add-card/{subject_id}',[FlashcardController::class,'addFlashcard']);
+Route::post('save-card',[FlashcardController::class,'saveFlashcard'])->name('save-card');
+Route::get('edit-card/{id}', [FlashcardController::class, 'editFlashcard']);
+Route::post('update-flashcard/{id}', [FlashcardController::class, 'updateFlashcard'])->name('update-flashcard');
 
-Route::get('delete-flashcard/{id}', [flashcardController::class, 'deleteFlashcard']);
+Route::get('delete-flashcard/{id}', [FlashcardController::class, 'deleteFlashcard']);
 
 Route::get('subject/{subject_id}/flashcards', [FlashcardController::class, 'showFlashcards'])->name('subject.flashcards');
 

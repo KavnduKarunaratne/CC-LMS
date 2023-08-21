@@ -5,7 +5,6 @@
 </head>
 <body>
 
-
 @foreach($assignments as $assignment)
     <h2>Student Progress for Assignment: {{ $assignment->assignment_name }}</h2>
     <table>
@@ -18,52 +17,101 @@
         </thead>
         <tbody>
             @php
-                $totalMarks = 0;
-                $totalStudents = $students->count();
+                $totalMarks = 0; //set the intital value to 0
+                $totalStudents = $students->count();  //get the total number of students
             @endphp
 
             @foreach($students as $student)
             <tr>
                 <td>{{ $student->name }}</td>
-                <td>{{ $student->admission_number}}</td>
+                <td>{{ $student->admission_number }}</td>
                 <td>
                     @php
-                        $marks = $student->submissions 
-                            ->where('assignment.subject_id', $subject->id)
+                        $marks = $student->submissions
+                            ->where('assignment_id', $assignment->id) // Get submissions for this assignment
                             ->flatMap(function ($submission) {
-                                return $submission->feedback->pluck('marks'); 
+                                return $submission->feedback->pluck('marks');
                             })
-                            ->sum();
+                            ->sum(); 
 
                         $totalMarks += $marks;
                     @endphp
-                   
+
                     @if ($marks !== 0)
                         {{ $marks }} / 100
                     @else
                         N/A
                     @endif
-                   
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
+   
+@endforeach
+
+
+        </tbody>
+    </table>
+
     <h2>Class Average: {{ $totalMarks / $totalStudents }} / 100</h2>
 
-    <h2>Top Scoring Students</h2>
+
+<h2>Overall Top Scoring Students</h2>
     <table>
         <thead>
             <tr>
                 <th>Student</th>
-                <th>Marks</th>
+                <th>Total Marks</th>
             </tr>
         </thead>
         <tbody>
-            
             @php
-                $topScoringStudents = $students->sortByDesc(function ($student) use ($subject) {
+                $overallTopStudents = $students->sortByDesc(function ($student) use ($subject) {
+                    return $student->submissions
+                        ->where('assignment.subject_id', $subject->id)
+                        ->flatMap(function ($submission) {
+                            return $submission->feedback->pluck('marks');
+                        })
+                        ->sum();
+                });
+                @endphp
+                @foreach($overallTopStudents as $student)
+            <tr>
+                <td>{{ $student->name }}</td>
+                <td>
+                    @php
+                        $totalMarks = $student->submissions
+                            ->where('assignment.subject_id', $subject->id)
+                            ->flatMap(function ($submission) {
+                                return $submission->feedback->pluck('marks');
+                            })
+                            ->sum();
+                    @endphp
+                   
+                    @if ($totalMarks !== 0)
+                        {{ $totalMarks }} / {{ $assignments->count() * 100 }}
+                    @else
+                        N/A
+                    @endif
+                    </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    <h2>Overall Least Scoring Students</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>Total Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php
+                $overallLeastStudents = $students->sortBy(function ($student) use ($subject) {
                     return $student->submissions
                         ->where('assignment.subject_id', $subject->id)
                         ->flatMap(function ($submission) {
@@ -72,12 +120,13 @@
                         ->sum();
                 });
             @endphp
-            @foreach($topScoringStudents as $student)
+   
+            @foreach($overallLeastStudents as $student)
             <tr>
                 <td>{{ $student->name }}</td>
                 <td>
                     @php
-                        $marks = $student->submissions
+                        $totalMarks = $student->submissions
                             ->where('assignment.subject_id', $subject->id)
                             ->flatMap(function ($submission) {
                                 return $submission->feedback->pluck('marks');
@@ -85,8 +134,8 @@
                             ->sum();
                     @endphp
                    
-                    @if ($marks !== 0)
-                        {{ $marks }} / 100
+                    @if ($totalMarks !== 0)
+                        {{ $totalMarks }} / {{ $assignments->count() * 100 }}
                     @else
                         N/A
                     @endif
@@ -96,50 +145,7 @@
             @endforeach
         </tbody>
     </table>
-    <h2>Least Scoring Students</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Student</th>
-                <th>Marks</th>
-            </tr>
-        </thead>
-        <tbody>
-            @php
-                $leastScoringStudents = $students->sortBy(function ($student) use ($subject) {
-                    return $student->submissions
-                        ->where('assignment.subject_id', $subject->id)
-                        ->flatMap(function ($submission) {           
-                            return $submission->feedback->pluck('marks');
-                        })
-                        ->sum();
-                });
-            @endphp
-   
-            @foreach($leastScoringStudents as $student)
-            <tr>
-                <td>{{ $student->name }}</td>
-                <td>
-                    @php
-                        $marks = $student->submissions
-                            ->where('assignment.subject_id', $subject->id)
-                            ->flatMap(function ($submission) {
-                                return $submission->feedback->pluck('marks');
-                            })
-                            ->sum();
-                    @endphp
-                   @if ($marks !== 0)
-                        {{ $marks }} / 100
-                    @else
-                        N/A
-                    @endif
-                 
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-@endforeach
+
 </body>
 </html>
  <!-- the marks are calculated and the  students are arranged(sorted) in the descending order of marks-->

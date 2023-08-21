@@ -49,7 +49,7 @@ try{
 
             $submission->save();
     
-            return redirect('subject-detail')->with('success', 'submission added successfully');
+            return redirect()->back()->with('success', 'submission added successfully');
 }catch(\Exception $e){
     return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while saving the submission.']);
 }
