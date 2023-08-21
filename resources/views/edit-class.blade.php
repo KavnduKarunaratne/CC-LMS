@@ -11,6 +11,11 @@
 <body class="bg-black">
 
 <div class="container mx-auto py-8 mt-12">
+@if (session('success'))
+    <div class="bg-green-200 text-green-700 p-2 rounded my-3 mt-1">
+        {{ session('success') }}
+    </div>
+@endif
 @if (session('error'))
     <div class="bg-red-200 text-red-700 p-2 rounded my-3 mt-1">
         {{ session('error') }}

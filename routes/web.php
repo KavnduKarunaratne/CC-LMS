@@ -233,7 +233,7 @@ Route::get('delete-feedback/{id}',[FeedbackController::class,'deleteFeedback']);
 
 Route::post('archive-user/{id}', [UserController::class,'archiveUser']);
 Route::post('unarchive-user/{id}', [UserController::class,'unarchiveUser']);
-
+/*
 Route::get('quiz-list', [QuizController::class, 'Quiz']);
 Route::get('add-quiz', [QuizController::class, 'addQuiz']);
 Route::post('save-quiz', [QuizController::class, 'saveQuiz'])->name('save-quiz');
@@ -243,7 +243,7 @@ Route::get('delete-quiz/{id}', [QuizController::class, 'deleteQuiz']);
 Route::get('quiz-details/{quiz_id}', [QuizController::class, 'showDetails'])->name('quiz-details');
 Route::get('add-question/{quiz_id}',[ QuizController::class,'addQuestion']);
 Route::post('save-question/{quiz_id}', [QuizController::class, 'saveQuestion'])->name('save-question');
-
+*/
 Route::get('search-users', [UserController::class, 'searchUsers'])->name('search-users');
 Route::get('search-submissions/{assignment_id}', [SubmissionController::class, 'searchSubmissions'])->name('search-submissions');
 

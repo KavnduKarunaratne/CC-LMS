@@ -23,11 +23,11 @@
          
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="content">content</label>
-                <textarea name="content" rows="5" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" required></textarea>
+                <textarea name="content" rows="5"   class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">{{ $flashcard->content}}</textarea>
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="answer">answer</label>
-                <textarea name="answer" rows="5" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" required></textarea>
+                <textarea name="answer" rows="5"         class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" >{{ $flashcard->answer }}  </textarea>
             </div>
             <br>
             <button type="submit" class="w-full bg-green-500 text-white text-sm font-bold py-2 px-4 mb-4 rounded-md hover:bg-green-600 transition duration-300">Save</button>

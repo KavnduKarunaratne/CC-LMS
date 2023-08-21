@@ -28,14 +28,17 @@
                     <strong>Feedback:</strong>
                     @foreach ($submission->feedback as $feedback)
                         <p>{{ $feedback->feedback }}</p>
+                        <p>{{ $feedback->marks}}</p>
                     @endforeach
                 </li>
+                <hr>
             @endforeach
         </ul>
     @else
         <p>No submissions and feedback available.</p>
     @endif
 </div>
+
 
 </body>
 </html>

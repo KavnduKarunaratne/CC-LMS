@@ -9,6 +9,11 @@
 
 <body class="bg-black">
     <div class="container mx-auto py-8 mt-12">
+    @if (session('success'))
+    <div class="bg-green-200 text-green-700 p-2 rounded my-3 mt-1">
+        {{ session('success') }}
+    </div>
+@endif
     @if (session('error'))
     <div class="bg-red-200 text-red-700 p-2 rounded my-3 mt-1">
         {{ session('error') }}
@@ -30,11 +35,11 @@
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="file">File</label>
-                <input type="file" name="file" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
+                <input type="file" name="file"              class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="link">Add any links</label>
-                <input type="text" name="link" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
+                <input type="text" name="link"  value="{{ $material->link }}" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
 
 </div>
 

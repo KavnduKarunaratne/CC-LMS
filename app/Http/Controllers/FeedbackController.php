@@ -68,29 +68,32 @@ class FeedbackController extends Controller
 
     public function updateFeedback(Request $request, $id)
     {
+        
+        try{
         $request->validate([
             'feedback'=>'required',
-            'date'=>'required',
+            
             'marks'=>'required|integer|min:0|max:100',
-            'submission_id'=>'required',
+          
         ]);
 
 
-        $newFeedback = $request->feedback;
-        $newMarks = $request->marks;
-        $newDate = $request->date;
-        $newSubmission_id = $request->submission_id;
+   
         
+        $feedback = Feedback::findOrFail($id);
       
-        Feedback::where('id','=',$id)->update([
-            'feedback' => $newFeedback,
-            'marks' => $newMarks,
-            'date' => $newDate,
-            'submission_id' => $newSubmission_id,
-        ]);
+        $feedback->feedback = $request->feedback;
+        $feedback->marks = $request->marks;
+
+        $feedback->save();
+    
      
         
-        return redirect('view-submissions')->with('success', 'feedback updated successfully');
+        return redirect('teacher-panel')->with('success', 'feedback updated successfully');
+    }
+    catch(\Exception $e){
+        return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while saving the feedback.']);}
+
     }
 
     public function deleteFeedback($id){

@@ -79,7 +79,7 @@ class flashcardController extends Controller
 
 
 
-    return redirect('flashcard-list')->back()->with('success', 'Flashcard updated successfully');
+    return redirect()->back()->with('success', 'Flashcard updated successfully');
     
     }
     public function deleteFlashcard($id){
