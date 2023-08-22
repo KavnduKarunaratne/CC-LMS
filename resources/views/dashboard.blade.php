@@ -74,10 +74,10 @@
 </div>
 
 
-<!--
+
 <div>
 <a href="{{ url('add-grade') }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Add Grade</a>
-</div> -->
+</div>
 </br>
 
 </body>

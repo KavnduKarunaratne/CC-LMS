@@ -7,7 +7,7 @@
     <title>Student Panel</title>
 </head>
 <body class="bg-white">
-
+@if (Auth::check() && Auth::user()->is_archived==0) <!--checks if user is archived-->
 @if (Auth::check() && Auth::user()->role_id == 3)
     <div class="container mx-auto p-4">
         <div class="bg-white p-4 rounded-md shadow-md mb-4">
@@ -97,25 +97,6 @@
     @endif
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="bg-white p-4 rounded-md shadow-md">
     <h3 class="text-lg font-semibold">Materials Accessible to You:</h3>
     <ul>
@@ -138,6 +119,9 @@
         @endforeach
     </ul>
 </div>
-
+@else
+    <p>You do not have access to this.</p>
+    <a href="{{ route('logout') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Log Out</a>
+@endif
 </body>
 </html>

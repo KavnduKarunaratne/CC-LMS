@@ -54,7 +54,7 @@ class FeedbackController extends Controller
         return redirect('feedback-list')->with('success', 'feedback added successfully');
     }
     catch(\Exception $e){
-        return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while saving the feedback.']);
+        return redirect()->back()->with('error', 'Error adding feedback');
     }
 }
     
@@ -92,9 +92,9 @@ class FeedbackController extends Controller
         return redirect('teacher-panel')->with('success', 'feedback updated successfully');
     }
     catch(\Exception $e){
-        return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while saving the feedback.']);}
+        return redirect()->back()->with('error', 'Error adding feedback');
 
-    }
+    }}
 
     public function deleteFeedback($id){
         Feedback::where('id','=',$id)->delete();

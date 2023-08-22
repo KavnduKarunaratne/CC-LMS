@@ -43,7 +43,8 @@ class StudentController extends Controller
 
     public function saveStudent(Request $request){
 
-       
+        try{
+
         $request->validate([
             'name'=> 'required',
             'email'=>'required|email',
@@ -65,8 +66,7 @@ class StudentController extends Controller
         $class_id=$request->class_id;
        $grade_id=$request->grade_id;
 
-       try{
-
+    
         $existingUser = User::where('admission_number', $admission_number)->first();
         if ($existingUser) {
             return redirect()->back()->with('error', 'User with this admission number already exists');
@@ -102,7 +102,7 @@ class StudentController extends Controller
 
     public function updateStudent(Request $request){
 
-
+try{
         $request->validate([
             'name'=> 'required',
             'email'=>'required|email',
@@ -132,6 +132,9 @@ class StudentController extends Controller
         ]);
 
         return redirect('student-list')->with('success', 'student updated successfully');
+    }catch(\Exception $e){
+        return redirect()->back()->with('error', 'Error updating student');
+    }
     }
    
     public function deleteStudent($id){

@@ -37,7 +37,7 @@
                 <strong>Description:</strong> {{ $material->description }}
                 <br>
                 @if ($material->file)
-                <strong>File:</strong> <a href="{{ asset('storage/app/materials' . $material->file) }}" download>{{ $material->file }}</a>
+                <strong>File:</strong> <a href="{{ asset('storage/app/' . $material->file) }}" download>{{ $material->file }}</a>
                 <br>
                 @endif
                 <strong>Link:</strong> <a href="{{ $material->link }}" target="_blank">{{ $material->link }}</a>
@@ -78,7 +78,7 @@
                 <strong>Description:</strong> {{ $assignment->description }}
                 <br>
                 @if ($assignment->file)
-                <strong>File:</strong> <a href="{{ asset('storage/app/assignments' . $assignment->file) }}" download>{{ $assignment->file }}</a>
+                <strong>File:</strong> <a href="{{ asset('storage/app/' . $assignment->file) }}" download>{{ $assignment->file }}</a>
                 <br>
                 @endif
                 <strong>Due Date:</strong> {{ $assignment->due_date }}
@@ -135,7 +135,9 @@
     <h4>Students in {{ $subject->class->class_name }}:</h4>
     <ul>
         @foreach ($subject->class->students as $student)
+          @if ($student->is_archived==0)
             <li> Name :{{ $student->name }}  Admission No:   {{$student->admission_number}}  Student Email : {{ $student->email }}</li>
+            @endif
         @endforeach
     </ul>
 @else

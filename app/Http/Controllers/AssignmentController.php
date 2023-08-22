@@ -29,7 +29,7 @@ class AssignmentController extends Controller
     }
 
     public function saveAssignment(Request $request)
-    {
+    {try{
         $request->validate([
             'assignment_name' => 'required',
             'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800', //validating file type
@@ -40,7 +40,7 @@ class AssignmentController extends Controller
 
         $filePath = $request->file('file')->store('assignments');//storing files under the folder assignments
          $subject_id = $request->input('subject_id'); 
-try{
+
         $assignment = new Assignment;
         $assignment->assignment_name = $request->assignment_name;
         $assignment->file = $filePath;
@@ -53,7 +53,7 @@ try{
 
         return redirect('assignment-list')->with('success', 'Assignment Added Successfully');
     }catch(\Exception $e){
-        return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while saving the assignment.']);
+        return redirect()->back()->with('error', 'Error adding assignment');
     }
 
 }
@@ -68,6 +68,8 @@ try{
 
     public function updateAssignment(Request $request, $id)
     {
+       try{
+       
         $request->validate([
             'assignment_name' => 'nullable',
             'description' => 'nullable',
@@ -91,6 +93,9 @@ try{
         $assignment->save();
     
         return redirect()->back()->with('success', 'Assignment Updated Successfully');
+    }catch(\Exception $e){
+        return redirect()->back()->with('error', 'Error updating assignment');
+    }
     }
     
 

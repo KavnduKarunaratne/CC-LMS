@@ -57,6 +57,7 @@ class ClassesController extends Controller
 
       public function updateClass(Request $request, $id)
     {
+        try{
      
         $request->validate([
             'class_name'=> 'required',
@@ -75,7 +76,9 @@ class ClassesController extends Controller
 
         return redirect('subject-list')->with('success', 'class updated successfully');
    
-    }
+    }catch(\Exception $e){
+        return redirect()->back()->with('error', 'Error updating class');
+    }}
 
       public function deleteClass($id){
         Classes::where('id','=',$id)->delete();

@@ -36,7 +36,7 @@ class UserController extends Controller
 
 
     public function  SaveUser(Request $request){
-
+        try {
         $request->validate([
             'name'=> 'required',
             'email'=>'required|email',
@@ -58,7 +58,12 @@ class UserController extends Controller
         $year_of_registration=$request->year_of_registration;
         $password=$request->password;
 
-try {
+        $existingUser = User::where('admission_number', $admission_number)->first();
+        if ($existingUser) {
+            return redirect()->back()->with('error', 'User with this admission number already exists');
+        }
+
+
         $user = new User;
         $user->is_archived=0;
         $user->name=$name;
@@ -83,6 +88,7 @@ try {
     }
     public function updateUser(Request $request, $id){
  
+        try{
         $request->validate([
             'name'=> 'required',
             'email'=>'required|email',
@@ -109,6 +115,9 @@ try {
 
 
         return redirect('user-management')->with('success','user updated succesfully');
+    }catch(\Exception $e){
+        return redirect()->back()->with('error','An error occured');
+    }
     }
     
     public function deleteUser($id){

@@ -34,7 +34,7 @@ class TeacherController extends Controller
     public function saveTeacher(Request $request){
 
 
-        
+     try{   
         $request->validate([
             'name'=> 'required',
             'email'=>'required|email',
@@ -55,7 +55,7 @@ class TeacherController extends Controller
         $teacherClass = $request->class_id;
         $teacherGrade=$request->grade_id;
 
-try{
+
     $existingUser = User::where('admission_number', $teacherAdmissionNumber)->first();
     if ($existingUser) {
         return redirect()->back()->with('error', 'User with this admission number already exists');
@@ -98,7 +98,7 @@ try{
     }
 
     public function updateTeacher(Request $request, $id){
-
+         try{
         $request->validate([
             'name'=> 'required',
             'email'=>'required|email',
@@ -127,6 +127,9 @@ try{
             'grade_id'=>$newTeacherGradeValue,
         ]);
         return redirect('teacher-list')->with('success', 'Teacher updated successfully');
+    }catch(\Exception $e){
+        return redirect()->back()->with('error', 'Error updating teacher');
+    }
     }
    
     

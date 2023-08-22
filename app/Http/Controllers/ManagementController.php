@@ -31,7 +31,7 @@ class ManagementController extends Controller
      */
     public function saveManagement(Request $request)
     {
-        
+        try{   
         $request->validate([
             'name'=> 'required',
             'email'=>'required|email',
@@ -46,7 +46,7 @@ class ManagementController extends Controller
         $admission_number=$request->admission_number;
      
 
-try{        $existingUser = User::where('admission_number', $admission_number)->first();
+      $existingUser = User::where('admission_number', $admission_number)->first();
     if ($existingUser) {
         return redirect()->back()->with('error', 'User with this admission number already exists');
     }
@@ -87,7 +87,7 @@ try{        $existingUser = User::where('admission_number', $admission_number)->
      */
     public function updateManagement(Request $request)
     {
-
+     try{
   
             $request->validate([
             'name'=> 'required',
@@ -115,6 +115,9 @@ try{        $existingUser = User::where('admission_number', $admission_number)->
 
         
        
+    }catch(\Exception $e){
+        return redirect()->back()->with('error','An error occured');
+    }
     }
 
 

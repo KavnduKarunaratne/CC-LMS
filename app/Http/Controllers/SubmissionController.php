@@ -23,6 +23,7 @@ class submissionController extends Controller
     }
 
     public function saveSubmission(Request $request){
+        try{
         $request->validate([
 
             'name'=>'required',
@@ -37,7 +38,7 @@ class submissionController extends Controller
             
           
             $assignment_id = $request->input('assignment_id');
-try{
+
             $submission = new Submission;
             $submission->name=$name;
             $submission->description=$description;
@@ -51,7 +52,7 @@ try{
     
             return redirect()->back()->with('success', 'submission added successfully');
 }catch(\Exception $e){
-    return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while saving the submission.']);
+    return redirect()->back()->with('error', 'Error adding submission');
 }
 
 
@@ -67,7 +68,7 @@ try{
 
     public function updateSubmission(Request $request,$id){
 
-       
+       try{
         $request->validate([
             'name'=>'required',
             'description'=>'required',
@@ -90,7 +91,9 @@ try{
         ]);
 
         return redirect()->back()->with('success','submission updated succesfully');
-    }
+    }catch(\Exception $e){
+        return redirect()->back()->with('error','Error updating submission');
+    }}
        public function deleteSubmission($id){
         Submission::where('id','=',$id)->delete();
         return redirect('submission-list')->with('success','submission deleted succesfully');

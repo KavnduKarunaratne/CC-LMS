@@ -40,7 +40,7 @@ class SubjectController extends Controller
   
 
     public function saveSubject(Request $request){
-
+        try{
         $request->validate([
             'subject_name'=> 'required',
             'grade_id'=>'required',
@@ -53,7 +53,7 @@ class SubjectController extends Controller
         $class_id=$request->class_id;
        $teacher_id=$request->teacher_id;
 
-       try{
+       
         $subject = new Subject;
         $subject->subject_name=$subject_name;
         $subject->grade_id=$grade_id;
@@ -87,7 +87,7 @@ class SubjectController extends Controller
     
         public function updateSubject(Request $request, $id)
         {
-          
+          try{
              $request->validate([
                 'subject_name'=> 'required',
                 'grade_id'=>'required',
@@ -113,7 +113,9 @@ class SubjectController extends Controller
             ]);
     
             return redirect('dashboard')->with('success', 'subject updated successfully');
-    }
+    }catch(\Exception $e){
+      return redirect()->back()->with('error', 'Error updating subject');
+    }}
     
 
     public function deleteSubject($id){

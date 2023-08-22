@@ -42,7 +42,7 @@ class FlashcardController extends Controller
             $flashcard->save();
             return redirect()->back()->with('success','Flashcard added successfully');
         }catch(\Exception $e){
-            return redirect()->back()->with('error',$e->getMessage());
+            return redirect()->back()->with('error','Error adding Flashcard');
         }
     
 
@@ -59,6 +59,8 @@ class FlashcardController extends Controller
 
     }
     public function updateFlashcard(Request $request,$id){
+
+    try{
         $request->validate([
             'content'=> 'required',
             'answer'=>'required',
@@ -81,6 +83,9 @@ class FlashcardController extends Controller
 
     return redirect()->back()->with('success', 'Flashcard updated successfully');
     
+    }catch(\Exception $e){
+        return redirect()->back()->with('error', 'Error updating Flashcard');
+    }
     }
     public function deleteFlashcard($id){
         Flashcard::where('id','=',$id)->delete();

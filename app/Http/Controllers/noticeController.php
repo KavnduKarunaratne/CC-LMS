@@ -24,6 +24,7 @@ class NoticeController extends Controller
 
     public function saveNotice(Request $request)
     {
+        try{
         $request->validate([
 
             'notice'=>'required',
@@ -33,7 +34,7 @@ class NoticeController extends Controller
            
            
     
-    try{
+    
             $notice = new Notice;
             $notice->notice = $request->notice;
             $notice->management_id = auth()->user()->id;//checks the logged in users id and sets the id automatically
@@ -46,7 +47,7 @@ class NoticeController extends Controller
     
             return redirect('management')->with('success', 'notice added successfully');
     }catch(\Exception $e){
-        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        return redirect()->back()->with('error', 'Error adding notice');
     }
 }
 
@@ -62,7 +63,7 @@ class NoticeController extends Controller
 
     public function updateNotice(Request $request, $id)
 {
- 
+ try{
     $request->validate([
         'notice' => 'required',
         'grade_id' => 'nullable', // Validate it as an array
@@ -78,7 +79,9 @@ class NoticeController extends Controller
 
   
     return redirect('management')->with('success', 'Notice updated successfully');
-}
+}catch(\Exception $e){
+    return redirect()->back()->with('error', 'Error updating notice');
+}}
 
 
   

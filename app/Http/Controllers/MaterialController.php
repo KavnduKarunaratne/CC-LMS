@@ -59,7 +59,7 @@ class MaterialController extends Controller
 
     return redirect()->back()->with('success', 'Material Added Successfully');
 }catch(\Exception $e){
-    return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while saving the material.']);
+    return redirect()->back()->with('error','An error occured');
 }
 }
 
@@ -78,7 +78,7 @@ class MaterialController extends Controller
     public function updateMaterial(Request $request, $id)
 {
  
-  
+  try{
     $request->validate([
         'material_name' => 'nullable',
         'description' => 'nullable',
@@ -113,6 +113,9 @@ class MaterialController extends Controller
     }
 
     return redirect()->back()->with('success', 'Material Updated Successfully');
+}catch(\Exception $e){
+    return redirect()->back()->with('error','An error occured');
+}
 }
 
     public function deleteMaterial($id){
