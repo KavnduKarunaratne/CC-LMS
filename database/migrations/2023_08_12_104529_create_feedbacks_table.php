@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('feedback');
             $table->date('date');
             $table->integer('marks');
-            $table->foreignId('submission_id')->nullable()->index();
+            $table->foreignId('submission_id')->nullable()->index()->onDelete('cascade');
         });
     }
 

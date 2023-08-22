@@ -96,7 +96,7 @@ Route::get('class-list',[StudentController::class,'Classes']);
 
 
 
-Route::get('dashboard',[GateradeController::class,'Grade']);
+Route::get('dashboard',[GradeController::class,'Grade']);
 
 Route::get('add-grade',[GradeController::class,'AddGrade']);
 

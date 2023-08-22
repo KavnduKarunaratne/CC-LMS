@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('file');
             $table->datetime('submit_date');
-            $table->foreignId('assignment_id')->constrained('assignments');
+            $table->foreignId('assignment_id')->constrained('assignments')->onDelete('cascade');
             $table->foreignId('student_id')->constrained('users');
 
           
