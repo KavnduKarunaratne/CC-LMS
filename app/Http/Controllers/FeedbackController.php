@@ -100,6 +100,7 @@ class FeedbackController extends Controller
         Feedback::where('id','=',$id)->delete();
         return redirect('view-submissions')->with('success','feedback deleted succesfully');
     }
+    
 
 
  

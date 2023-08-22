@@ -60,6 +60,7 @@
 @else
     <p>No materials available for this subject.</p>
 @endif
+<hr>
 </div>
 
 <div>
@@ -96,6 +97,8 @@
 <!--checks if the student has already made a submission for this assignment-->
     @if ($hasSubmitted)
         <p>You have already submitted for this assignment.</p>
+
+        
     @elseif (strtotime($assignment->due_date) > time())<!--checks if the due date is passed for submissions. if so the link is hidden-->
         <a href="{{ url('add-submission', ['assignment_id' => $assignment->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Add Submission for Assignment</a>
     @endif
@@ -111,10 +114,12 @@
                 @endif
             </li>
         @endforeach
+        
     </ul>
 @else
     <p>No assignments available for this subject.</p>
 @endif
+
 </div>
 
 

@@ -15,7 +15,7 @@
             <p>Your role ID: {{ Auth::user()->role_id }}</p>
             <p>Logged-in User: {{ auth()->user()->name }}</p>
             <a href="{{ route('logout') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Log Out</a>
-            <a href="{{ route('view-my-submissions')  }}"      class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">View my submission</a>
+            <a href="{{ route('view-my-submissions')  }}"      class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">My Grades</a>
 
         </div>
 

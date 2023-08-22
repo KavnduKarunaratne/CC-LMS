@@ -71,6 +71,6 @@
             <p>No submissions available </p>
         @endif
     </div>
-    <!-- Add other page content or links as needed -->
+   
 </body>
 </html>
