@@ -258,4 +258,4 @@ Route::get('subject/{subject_id}/flashcards', [FlashcardController::class, 'show
 
 Route::get('student-progress/{subject_id}', [ProgressController::class,'studentProgress'])->name('student-progress');
 
-Route::get('profile/show',[UserController::class,'showProfile'])->name('profile.show');
+Route::get('profile/show',[UserController::class,'showProfile']);

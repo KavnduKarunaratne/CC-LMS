@@ -219,5 +219,9 @@ class UserController extends Controller
     return view('user-management', compact('user', 'archivedUsers'));
 }
 
+public function showProfile(){
+    $user = Auth::user();
+    return view('profile/show',compact('user'));
+}
     
 }

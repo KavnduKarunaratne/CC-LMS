@@ -7,15 +7,39 @@
     <title>Student Panel</title>
 </head>
 <body class="bg-white">
-@if (Auth::check() && Auth::user()->is_archived==0) <!--checks if user is archived-->
-@if (Auth::check() && Auth::user()->role_id == 3)
+@if (Auth::check() && Auth::user()->is_archived==0 && Auth::user()->role_id == 3) <!--checks if user is archived and the roleid is 3-->
+
+<nav class="bg-gray-800">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-between">
+
+      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+       
+        <div class="hidden sm:ml-6 sm:block">
+            <div class="flex space-x-4">
+            <a href="{{ url('profile/show') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Profile</a>
+
+<a href="{{ route('logout') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Log Out</a>
+<a href="{{ route('view-my-submissions')  }}"      class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">My Grades</a>
+
+
+</div>
+        </div>
+      </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</nav>
     <div class="container mx-auto p-4">
         <div class="bg-white p-4 rounded-md shadow-md mb-4">
             <h2 class="text-lg font-semibold">Welcome to the Student Panel</h2>
             <p>Your role ID: {{ Auth::user()->role_id }}</p>
             <p>Logged-in User: {{ auth()->user()->name }}</p>
-            <a href="{{ route('logout') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Log Out</a>
-            <a href="{{ route('view-my-submissions')  }}"      class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">My Grades</a>
+            
 
         </div>
 
@@ -57,9 +81,7 @@
 
         
     </div>
-@else
-    <p>You do not have access to this page.</p>
-@endif
+
 <div class="bg-white p-4 rounded-md shadow-md">
     <h3 class="text-lg font-semibold">Notices for Your Grade:</h3>
     <ul>
