@@ -17,6 +17,8 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ProgressController;
 use App\Models\Annoucement;
+use App\Models\Material;
+use App\Models\Submission;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\RoleController;
 use Illuminate\Routing\Controllers\Middleware;
@@ -206,21 +208,24 @@ Route::get('add-material/{subject_id}',[MaterialController::class,'AddMaterial']
 Route::post('save-material',[MaterialController::class,'saveMaterial']);
 Route::get('edit-material/{id}',[MaterialController::class,'editMaterial']);
 Route::post('update-material/{id}',[MaterialController::class,'updateMaterial'])->name('update-material');
-Route::get('delete-material/{id}',[MaterialController::class,'deleteMaterial']);
+Route::match(['get', 'delete'], 'delete-material/{id}', [MaterialController::class, 'deleteMaterial'])->name('delete-material');
+
 
 Route::get('assignment-list',[AssignmentController::class,'Assignment']);
 Route::get('add-assignment/{subject_id}',[AssignmentController::class,'AddAssignment']);
 Route::post('save-assignment',[AssignmentController::class,'saveAssignment']);
 Route::get('edit-assignment/{id}',[AssignmentController::class,'editAssignment']);
 Route::post('update-assignment/{id}',[AssignmentController::class,'updateAssignment'])->name('update-assignment');
-Route::get('delete-assignment/{id}',[AssignmentController::class,'deleteAssignment']);
+Route::match(['get', 'delete'], 'delete-assignment/{id}', [AssignmentController::class, 'deleteAssignment'])->name('delete-assignment');
+
+
 
 Route::get('submission-list',[SubmissionController::class,'index']);
 Route::get('add-submission/{assignment_id}',[SubmissionController::class,'AddSubmission']);
 Route::post('save-submission', [SubmissionController::class, 'saveSubmission'])->name('save-submission');
 Route::get('edit-submission/{id}',[SubmissionController::class,'editSubmission']);
 Route::post('update-submission/{id}',[SubmissionController::class,'updateSubmission'])->name('update-submission');
-Route::get('delete-submission/{id}',[SubmissionController::class,'deleteSubmission']);
+Route::match(['get', 'delete'], 'delete-submission/{id}', [SubmissionController::class, 'deleteSubmission'])->name('delete-submission');
 
 Route::get('view-submissions/{assignment_id}', [SubmissionController::class, 'viewSubmissions'])->name('view-submissions');
 
@@ -252,3 +257,5 @@ Route::get('delete-flashcard/{id}', [FlashcardController::class, 'deleteFlashcar
 Route::get('subject/{subject_id}/flashcards', [FlashcardController::class, 'showFlashcards'])->name('subject.flashcards');
 
 Route::get('student-progress/{subject_id}', [ProgressController::class,'studentProgress'])->name('student-progress');
+
+Route::get('profile/show',[UserController::class,'showProfile'])->name('profile.show');

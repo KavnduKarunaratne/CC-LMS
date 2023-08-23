@@ -45,7 +45,7 @@
             
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="due_date">Due Date</label>
-                <input type="datetime-local" name="due_date"  class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
+                <input type="datetime-local" value="{{$assignment->due_date}}" name="due_date"  class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
             </div>
 
             <div class="mb-4">

@@ -34,7 +34,7 @@ class AssignmentController extends Controller
             'assignment_name' => 'required',
             'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800', //validating file type
             'description' => 'nullable',
-            'due_date' => 'required|date',
+            'due_date' => 'required|date|after:today',
             'subject_id' => 'required',
         ]);
 
@@ -73,7 +73,7 @@ class AssignmentController extends Controller
         $request->validate([
             'assignment_name' => 'nullable',
             'description' => 'nullable',
-            'due_date' => 'required|date',
+            'due_date' => 'required|date|after:today',
             'file' => 'nullable|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',
         ]);
     
@@ -105,4 +105,5 @@ class AssignmentController extends Controller
         Assignment::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'Assignment Deleted Successfully');
     }
+
 }

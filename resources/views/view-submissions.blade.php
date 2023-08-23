@@ -4,6 +4,8 @@
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Submissions</title>
 </head>
 <body>
@@ -40,7 +42,28 @@
                                 <br>
                                 <strong>Submission Upload Date:</strong> {{ $submission->submit_date}}
                             </div>
-                            <a href="{{ url('delete-submission', $submission->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
+                            <a href="#" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $submission->id }}">Delete</a>
+<div class="modal fade" id="deleteModal{{ $submission->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this Submission?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary  bg-black hover:bg-black" data-bs-dismiss="modal">Cancel</button>
+                <form action="{{ route('delete-submission', ['id' => $submission->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger bg-red-700 hover:bg-red-700">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>                          
 
                             <div class="bg-gray-200 p-4 mt-4 rounded-md shadow-md">
                                 <h3 class="text-lg font-semibold mb-2">Feedback for Submission:</h3>

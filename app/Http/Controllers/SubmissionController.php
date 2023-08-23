@@ -29,7 +29,7 @@ class submissionController extends Controller
             'name'=>'required',
             'description'=>'required',
             'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',   
-            'assignment_id'=>'required'
+           
             
         ]);
             $filePath = $request->file('file')->store('submissions');
