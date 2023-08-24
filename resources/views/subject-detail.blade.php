@@ -44,7 +44,7 @@
                                 <strong>Description:</strong> {{ $material->description }}
                                 <br>
                                 @if ($material->file)
-                                    <strong>File:</strong> <a href="{{ asset('storage/app/' . $material->file) }}" download>{{ $material->file }}</a>
+                                    <strong>File:</strong> <a href="{{ asset('storage/' . $material->file) }}" download>download</a>
                                     <br>
                                 @endif
                                 <strong>Link:</strong> <a href="{{ $material->link }}" target="_blank">{{ $material->link }}</a>
@@ -103,7 +103,7 @@
                             <strong>Description:</strong> {{ $assignment->description }}
                             <br>
                             @if ($assignment->file)
-                                <strong>File:</strong> <a href="{{ asset('storage/assignments/' . $assignment->file) }}" download>{{ $assignment->file }}</a>
+                                <strong>File:</strong> <a href="{{ asset('storage/' . $assignment->file) }}" download>download</a>
                                 <br>
                             @endif
                             <strong>Due Date:</strong> {{ $assignment->due_date }}

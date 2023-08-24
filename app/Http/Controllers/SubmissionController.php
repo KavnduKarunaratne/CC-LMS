@@ -32,7 +32,7 @@ class submissionController extends Controller
            
             
         ]);
-            $filePath = $request->file('file')->store('submissions');
+            $filePath = $request->file('file')->store('submissions', 'public');
             $name=$request->name;
             $description=$request->description;
             

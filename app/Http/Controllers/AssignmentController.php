@@ -39,7 +39,7 @@ class AssignmentController extends Controller
             'subject_id' => 'required',
         ]);
 
-         $filePath = $request->file('file')->store('assignments');//storing files under the folder assignments
+         $filePath = $request->file('file')->store('assignments', 'public');//storing files under the folder assignments
          $subject_id = $request->input('subject_id'); 
 
         $assignment = new Assignment;
@@ -84,7 +84,7 @@ class AssignmentController extends Controller
             // Delete old file
             Storage::delete($assignment->file);
             // Store new file
-            $filePath = $request->file('file')->store('assignments');
+            $filePath = $request->file('file')->store('assignments', 'public');
             $assignment->file = $filePath;
         }
     

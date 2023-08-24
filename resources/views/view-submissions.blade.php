@@ -32,7 +32,7 @@
                                 <strong>Submission Description:</strong> {{ $submission->description }}
                                 <br>
                                 @if ($submission->file)
-                                    <strong>File:</strong> <a href="{{ asset('storage/app/' . $submission->file) }}" download>{{ $submission->file }}</a>
+                                    <strong>File:</strong> <a href="{{ asset('storage/' . $submission->file) }}" download>download</a>
                                     <br>
                                 @endif
                                 <strong>Student Name:</strong> {{ $submission->student->name }}

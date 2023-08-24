@@ -41,7 +41,7 @@ class MaterialController extends Controller
         'subject_id' => 'required',
     ]);
 
-    $filePath = $request->file('file')->store('materials');
+    $filePath = $request->file('file')->store('materials', 'public');
     $subject_id = $request->input('subject_id'); 
 
  try{
@@ -103,7 +103,7 @@ class MaterialController extends Controller
         // Delete old file
         Storage::delete($material->file);
         // Store new file
-        $filePath = $request->file('file')->store('materials');
+        $filePath = $request->file('file')->store('materials', 'public');
         $material->file = $filePath;
        
     }
