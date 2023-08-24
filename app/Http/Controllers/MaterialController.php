@@ -21,13 +21,16 @@ class MaterialController extends Controller
     $user = Auth::user(); // Get the logged-in user (teacher)
     $subjects = $user->subjects; // Retrieve the subjects associated with the teacher
     $subject = Subject::find($subject_id);//to send the material under the selected subject
-    $teacherClass = Auth::user()->class;
-    $classStudents = $teacherClass->students;
+    $teacher =Auth::user();
+    $assignedClass = $teacher->assignedClass;
+    $assignedGrade = $teacher->grade;
+
+    $classStudents = $assignedClass->students()->where('grade_id', $assignedGrade->id)->get();
     return view('add-material', compact('subjects','classStudents','subject_id','subject'));
   }
 
   public function saveMaterial(Request $request)
-{
+   {
     
     
     $request->validate([
@@ -42,32 +45,35 @@ class MaterialController extends Controller
     $subject_id = $request->input('subject_id'); 
 
  try{
-    $material = new Material;
-    $material->material_name = $request->material_name;
-    $material->file = $filePath;
-    $material->description = $request->description;
-    $material->upload_date = now();
-    $material->link = $request->link;
-    $material->subject_id = $subject_id;
-    $material->teacher_id = Auth::id();
-    $material->save();
+       $material = new Material;
+       $material->material_name = $request->material_name;
+       $material->file = $filePath;
+       $material->description = $request->description;
+       $material->upload_date = now();
+       $material->link = $request->link;
+       $material->subject_id = $subject_id;
+       $material->teacher_id = Auth::id();
+       $material->save();
 
     
-    if ($request->has('users')) {
+      if ($request->has('users')) {
         $material->users()->attach($request->input('users'));
-    }
+       }
 
-    return redirect()->back()->with('success', 'Material Added Successfully');
-}catch(\Exception $e){
-    return redirect()->back()->with('error','An error occured');
-}
-}
+      return redirect()->back()->with('success', 'Material Added Successfully');
+    }catch(\Exception $e){
+      return redirect()->back()->with('error','An error occured');
+    }
+    }
 
     public function editMaterial($id){
         $material=Material::find($id);
-        $teacherClass = Auth::user()->class;
-        $classStudents = $teacherClass->students;
-
+        $teacher =Auth::user();
+        $assignedClass = $teacher->assignedClass;
+        $assignedGrade = $teacher->grade;
+    
+        $classStudents = $assignedClass->students()->where('grade_id', $assignedGrade->id)->get();
+       
 
         return view('edit-material',compact('material','classStudents'),[
             'materials' => (new Material())->all(),
@@ -76,14 +82,13 @@ class MaterialController extends Controller
     }
 
     public function updateMaterial(Request $request, $id)
-{
+    {
  
   try{
-    $request->validate([
+         $request->validate([
         'material_name' => 'nullable',
         'description' => 'nullable',
         'link' => 'nullable',
-        
         'file'=>'nullable|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800'
     ]);
 
@@ -93,9 +98,7 @@ class MaterialController extends Controller
     $material->material_name = $request->material_name;
     $material->description = $request->description;
     $material->link = $request->link;
-    
 
-    
     if ($request->hasFile('file')) {
         // Delete old file
         Storage::delete($material->file);
@@ -112,11 +115,11 @@ class MaterialController extends Controller
         $material->users()->sync($request->input('users')); // Use sync() to update the pivot table
     }
 
-    return redirect()->back()->with('success', 'Material Updated Successfully');
-}catch(\Exception $e){
-    return redirect()->back()->with('error','An error occured');
-}
-}
+     return redirect()->back()->with('success', 'Material Updated Successfully');
+    }catch(\Exception $e){
+       return redirect()->back()->with('error','An error occured');
+    }
+    }
 
     public function deleteMaterial($id){
 
@@ -124,8 +127,6 @@ class MaterialController extends Controller
         return redirect()->back()->with('success','Material Deleted Successfully');
 
     }
-
-
 
 
 }

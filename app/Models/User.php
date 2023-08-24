@@ -78,6 +78,9 @@ public function class()
 {
     return $this->belongsTo(Classes::class, 'class_id');
 }
+public function teachers(){
+    return $this->hasMany(User::class);
+}
 public function materials()
 {
     return $this->belongsToMany(Material::class, 'material_user');
@@ -89,18 +92,16 @@ public function management()
     return $this->hasMany(Notice::class, 'management_id');
 }
 
-public function createdQuizzes()
-    {
-        return $this->hasMany(Quizzes::class, 'teacher_id');
-    }
 
-    public function createdCards(){
-        return $this->hasMany(Flashcard::class, 'teacher_id');
-    }
 
     public function submissions()
 {
     return $this->hasMany(Submission::class, 'student_id');
+}
+public function assignedClass()
+{
+    return $this->belongsTo(Classes::class, 'class_id')
+    ->with('grade');
 }
 
 

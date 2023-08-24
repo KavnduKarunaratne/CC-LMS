@@ -23,7 +23,7 @@ class submissionController extends Controller
     }
 
     public function saveSubmission(Request $request){
-        try{
+     try{
         $request->validate([
 
             'name'=>'required',
@@ -51,20 +51,18 @@ class submissionController extends Controller
             $submission->save();
     
             return redirect()->back()->with('success', 'submission added successfully');
-}catch(\Exception $e){
-    return redirect()->back()->with('error', 'Error adding submission');
-}
-
-
+    }catch(\Exception $e){
+        return redirect()->back()->with('error', 'Error adding submission');
+    }
     }
 
     public function editSubmission($id)
-{
-    $submission = Submission::find($id);
-    $assignment = Assignment::find($submission->assignment_id); // Fetch the associated assignment
+    {
+      $submission = Submission::find($id);
+      $assignment = Assignment::find($submission->assignment_id); // Fetch the associated assignment
     
-    return view('edit-submission', compact('submission', 'assignment'));
-}
+      return view('edit-submission', compact('submission', 'assignment'));
+    }
 
     public function updateSubmission(Request $request,$id){
 
@@ -100,38 +98,38 @@ class submissionController extends Controller
     }
 
     public function viewSubmissions($assignment_id)
-{
+   {
     $submissions = Submission::where('assignment_id', $assignment_id)->get();
     $assignment = Assignment::find($assignment_id);
     
     return view('view-submissions', compact('submissions', 'assignment'));
-}
+    }
 
 
 
 public function searchSubmissions(Request $request, $assignment_id)
-{
-    $assignment = Assignment::findOrFail($assignment_id);
-    $searchTerm = $request->input('search');
+   {
+     $assignment = Assignment::findOrFail($assignment_id);
+     $searchTerm = $request->input('search');
 
-    $submissions = Submission::where('assignment_id', $assignment_id)
+     $submissions = Submission::where('assignment_id', $assignment_id)
         ->where(function ($query) use ($searchTerm) {
             $query->where('name', 'LIKE', "%$searchTerm%")
                 ->orWhere('description', 'LIKE', "%$searchTerm%");
         })
         ->get();
 
-    return view('view-submissions', compact('assignment', 'submissions'));
-}
+      return view('view-submissions', compact('assignment', 'submissions'));
+    }
 
 public function viewMySubmissions()
-{
-    $studentId = Auth::id();//get the logged in users ID
-    $submissions = Submission::where('student_id', $studentId)->with('feedback')->get(); //get the feedback for the submission through the stdent id
+   {
+      $studentId = Auth::id();//get the logged in users ID
+      $submissions = Submission::where('student_id', $studentId)->with('feedback')->get(); //get the feedback for the submission through the stdent id
 
-    $submissionsBySubject = [];
+      $submissionsBySubject = [];
       //make an array to store the submissions by subject
-    foreach ($submissions as $submission) {
+     foreach ($submissions as $submission) {
         $subjectName = $submission->assignment->subject->subject_name;
 
         if (!isset($submissionsBySubject[$subjectName])) {
@@ -139,10 +137,10 @@ public function viewMySubmissions()
         }
 
         $submissionsBySubject[$subjectName][] = $submission;
-    }
+       }
     
-    return view('view-my-submissions', compact('submissionsBySubject'));
-}
+     return view('view-my-submissions', compact('submissionsBySubject'));
+   }
 
 
 

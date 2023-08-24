@@ -56,7 +56,7 @@ class FeedbackController extends Controller
     catch(\Exception $e){
         return redirect()->back()->with('error', 'Error adding feedback');
     }
-}
+    }
     
     public function editFeedback($id)
     {

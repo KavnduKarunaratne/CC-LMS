@@ -94,14 +94,11 @@ class FlashcardController extends Controller
     }
 
     public function showFlashcards($subject_id)
-{
+    {
     $subject = Subject::findOrFail($subject_id);
     $flashcards = Flashcard::where('subject_id', $subject_id)->get();
 
     return view('flashcards', compact('subject', 'flashcards'));
-}
-
-
-
+    }
 
 }

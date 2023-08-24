@@ -10,12 +10,14 @@
 
 <div class="container mx-auto p-4">
     <h2 class="text-lg font-semibold">My Grades</h2>
+    <p>User: {{ auth()->user()->name }}</p>
 
     @if (count($submissionsBySubject) > 0)
         @foreach ($submissionsBySubject as $subjectName => $submissions)
-            <h3 class="text-md font-semibold mt-4">{{ $subjectName }}</h3>
+            <h3 class="text-md font-bold mt-4">{{ $subjectName }}</h3>
             <ul>
                 @foreach ($submissions as $submission)
+                <div class="bg-white p-4 rounded-md shadow-md mb-4">
                     <li>
                         <strong>Assignment Name:</strong> {{ $submission->assignment->assignment_name }}
                         <br>
@@ -33,7 +35,8 @@
                             <p>Marks : {{ $feedback->marks }}</p>
                         @endforeach
                     </li>
-                    <hr>
+                   
+                </div>
                 @endforeach
             </ul>
         @endforeach

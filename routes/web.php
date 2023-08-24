@@ -61,125 +61,67 @@ Route::middleware([
 
 Route::get('redirects',[UserController::class,'index']);
 
+//admin routes
+Route::middleware(['App\Http\Middleware\ValidateRole:1'])->group(function () {
 
-//student user
-
+//student
 Route::post('save-Student',[StudentController::class,'saveStudent']);
-
 Route::get('add-student ',[StudentController::class,'addStudent']);
-
 Route::get('edit-student/{id}',[StudentController::class,'editStudent']);
-
 Route::get('student-list',[StudentController::class,'Student']);
-
 Route::post('update-student/{id}', [StudentController::class, 'updateStudent'])->name('update-student');
-
 Route::get('delete-student/{id}',[StudentController::class,'deleteStudent']);
 
-
-
-Route::get('logout', [UserController::class, 'logout'])->name('logout');
-
-
-
+    
 Route::post('save-User',[UserController::class,'SaveUser']);
 
 
-Route::get('register-user',[UserController::class,'AddUser'])
-->middleware('role:0');
-
-
 Route::get('roles-list',[UserController::class,'Role']);
-
-
 Route::get('add-student',[StudentController::class,'Grade']);
-
 Route::get('class-list',[StudentController::class,'Classes']);
-
-
-
 Route::get('dashboard',[GradeController::class,'Grade']);
 
+//grades
 Route::get('add-grade',[GradeController::class,'AddGrade']);
-
 Route::post('save-Grade',[GradeController::class,'saveGrade']);
-
 Route::post('update-grade',[GradeController::class,'updateGrade']);
-
 Route::get('edit-grade/{id}',[GradeController::class,'editGrade']);
-
 Route::get('delete-grade/{id}',[GradeController::class,'deleteGrade']);
-
 Route::post('update-grade/{id}', [GradeController::class, 'updateGrade'])->name('update-grade');
 
 
-
-
-
-Route::post('update-notice/{id}',[NoticeController::class,'updateNotice'])->name('update-annoucement');
-
-Route::get('delete-notice/{id}',[NoticeController::class,'deleteNotice']);
-
-Route::get('management',[NoticeController::class,'Notice']);
-
-Route::get('add-notice',[NoticeController::class,'AddNotice']);
-
-Route::post('save-notice',[NoticeController::class,'saveNotice']);
-
-Route::get('edit-notice/{id}',[NoticeController::class,'editNotice']);
-
-
-
+//class management
 Route::get('add-class',[ClassesController::class,'AddClass']);
-
 Route:: get ('class-management',[ClassesController::class,'Class']);
-
 Route::post('save-Class',[ClassesController::class,'saveClass']);
-
 Route::get('edit-class/{id}',[ClassesController::class,'editClass']);
-
 Route::post('update-class/{id}', [ClassesController::class, 'updateClass'])->name('update-class');
-
 Route::get('delete-class/{id}',[ClassesController::class,'deleteClass']);
-
-
-
-
-
-Route::get('user-management',[UserController::class,'User']);
-
-
-
-Route::get('edit-user/{id}',[UserController::class,'editUser']);
-
-Route::post('update-user/{id}', [UserController::class, 'updateUser'])->name('update-user');
-
-Route::get('delete-user/{id}',[UserController::class,'deleteUser']);
-
-// routes/web.php
 Route::get('classes-for-grade/{grade}', [gradeController::class,'showClasses'])->name('classes.show');
-
-Route::get('auth.register',[UserController::class,'register']);
-
 Route::get('class-details/{class}', [classController::class,'showDetails'])->name('class.details');
+
+
+//user management
+Route::get('user-management',[UserController::class,'User']);
+Route::get('edit-user/{id}',[UserController::class,'editUser']);
+Route::post('update-user/{id}', [UserController::class, 'updateUser'])->name('update-user');
+Route::get('delete-user/{id}',[UserController::class,'deleteUser']);
+Route::post('archive-user/{id}', [UserController::class,'archiveUser']);
+Route::post('unarchive-user/{id}', [UserController::class,'unarchiveUser']);
+Route::get('search-users', [UserController::class, 'searchUsers'])->name('search-users');
+  
 
 //subject
 Route::get('add-subject',[SubjectController::class,'AddSubject']);
-
 Route::post('save-subject',[SubjectController::class,'saveSubject']);
-
 Route::post('update-subject',[SubjectController::class,'updateSubject']);
-
 Route::get('edit-subject/{id}',[SubjectController::class,'editSubject']);
-
 Route::get('delete-subject/{id}',[SubjectController::class,'deleteSubject']);
-
 Route::post('update-subject/{id}', [SubjectController::class, 'updateSubject'])->name('update-subject');
-
 Route::get('subject-list',[SubjectController::class,'Subjects']);
 
 
-// routes/web.php
+// teacher
 
 Route::get('teacher-list', [TeacherController::class, 'Teachers']);
 Route::get('add-teacher', [TeacherController::class, 'AddTeacher']);
@@ -190,19 +132,57 @@ Route::get('delete-teacher/{id}', [TeacherController::class, 'deleteTeacher']);
 
 //management
 Route::get('management-list',[ManagementController::class,'index']);
-
 Route::get('add-management', [ManagementController::class, 'AddManagement']);
 Route::post('save-management', [ManagementController::class, 'saveManagement']);
 Route::get('edit-management/{id}', [ManagementController::class, 'editManagement']);
 Route::post('update-management/{id}', [ManagementController::class, 'updateManagement']);
 Route::get('delete-management/{id}', [ManagementController::class, 'deleteManagement']);
+   
+});
 
 
+
+
+Route::get('logout', [UserController::class, 'logout'])->name('logout');
+
+
+
+//management routes
+Route::middleware(['App\Http\Middleware\ValidateRole:2'])->group(function () {
+    Route::post('update-notice/{id}',[NoticeController::class,'updateNotice'])->name('update-annoucement');
+
+    Route::get('delete-notice/{id}',[NoticeController::class,'deleteNotice']);
+    
+    Route::get('management',[NoticeController::class,'Notice']);
+    
+    Route::get('add-notice',[NoticeController::class,'AddNotice']);
+    
+    Route::post('save-notice',[NoticeController::class,'saveNotice']);
+    
+    Route::get('edit-notice/{id}',[NoticeController::class,'editNotice']);
+    
+    
+});
+
+
+
+
+
+Route::get('auth.register',[UserController::class,'register']);
+
+
+//routes for teachers and students
+Route::middleware(['App\Http\Middleware\ValidateRole:3,4'])->group(function () {
+    Route::get('subject-detail/{subject_id}', [SubjectController::class,'showDynamicDetail'])->name('subject.detail');
+    Route::get('add-submission/{assignment_id}',[SubmissionController::class,'AddSubmission']);
+    Route::post('save-submission', [SubmissionController::class, 'saveSubmission'])->name('save-submission');
+    Route::get('subject/{subject_id}/flashcards', [FlashcardController::class, 'showFlashcards'])->name('subject.flashcards');
+
+});
+
+//teacher routes
+Route::middleware(['App\Http\Middleware\ValidateRole:4'])->group(function () {
 Route::get('teacher-panel',[TeacherController::class,'teacherPanel']);
-
-Route::get('subject-detail/{subject_id}', [SubjectController::class,'showDynamicDetail'])->name('subject.detail');
-
-
 Route::get('material-list',[MaterialController::class,'Material']);
 Route::get('add-material/{subject_id}',[MaterialController::class,'AddMaterial']);
 Route::post('save-material',[MaterialController::class,'saveMaterial']);
@@ -219,14 +199,10 @@ Route::post('update-assignment/{id}',[AssignmentController::class,'updateAssignm
 Route::match(['get', 'delete'], 'delete-assignment/{id}', [AssignmentController::class, 'deleteAssignment'])->name('delete-assignment');
 
 
-
 Route::get('submission-list',[SubmissionController::class,'index']);
-Route::get('add-submission/{assignment_id}',[SubmissionController::class,'AddSubmission']);
-Route::post('save-submission', [SubmissionController::class, 'saveSubmission'])->name('save-submission');
 Route::get('edit-submission/{id}',[SubmissionController::class,'editSubmission']);
 Route::post('update-submission/{id}',[SubmissionController::class,'updateSubmission'])->name('update-submission');
 Route::match(['get', 'delete'], 'delete-submission/{id}', [SubmissionController::class, 'deleteSubmission'])->name('delete-submission');
-
 Route::get('view-submissions/{assignment_id}', [SubmissionController::class, 'viewSubmissions'])->name('view-submissions');
 
 Route::get('feedback-list',[FeedbackController::class,'Feedback']);
@@ -236,26 +212,23 @@ Route::get('edit-feedback/{id}',[FeedbackController::class,'editFeedback']);
 Route::post('update-feedback/{id}',[FeedbackController::class,'updateFeedback'])->name('update-feedback');
 Route::get('delete-feedback/{id}',[FeedbackController::class,'deleteFeedback']);
 
-Route::post('archive-user/{id}', [UserController::class,'archiveUser']);
-Route::post('unarchive-user/{id}', [UserController::class,'unarchiveUser']);
-
-Route::get('search-users', [UserController::class, 'searchUsers'])->name('search-users');
 Route::get('search-submissions/{assignment_id}', [SubmissionController::class, 'searchSubmissions'])->name('search-submissions');
-
-Route::get('view-student-feedback/{submission_id}', 'FeedbackController@viewStudentFeedback')->name('view-student-feedback');
-Route::get('view-my-submissions', [SubmissionController::class,'viewMySubmissions'])->name('view-my-submissions');
-
 
 Route::get('flashcard-list',[FlashcardController::class,'Flashcard']);
 Route::get('add-card/{subject_id}',[FlashcardController::class,'addFlashcard']);
 Route::post('save-card',[FlashcardController::class,'saveFlashcard'])->name('save-card');
 Route::get('edit-card/{id}', [FlashcardController::class, 'editFlashcard']);
 Route::post('update-flashcard/{id}', [FlashcardController::class, 'updateFlashcard'])->name('update-flashcard');
-
 Route::get('delete-flashcard/{id}', [FlashcardController::class, 'deleteFlashcard']);
-
-Route::get('subject/{subject_id}/flashcards', [FlashcardController::class, 'showFlashcards'])->name('subject.flashcards');
 
 Route::get('student-progress/{subject_id}', [ProgressController::class,'studentProgress'])->name('student-progress');
 
+});
+
+Route::middleware(['App\Http\Middleware\ValidateRole:3'])->group(function () {
+    Route::get('view-my-submissions', [SubmissionController::class,'viewMySubmissions'])->name('view-my-submissions');
+});
+
+
 Route::get('profile/show',[UserController::class,'showProfile']);
+

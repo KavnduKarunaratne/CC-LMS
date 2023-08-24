@@ -21,8 +21,6 @@ class TeacherController extends Controller
         return view('teacher-list', compact('teachers'));
     }
 
-   
-
     public function AddTeacher(){
         return view('add-teacher',[
             'grades' => (new Grade())->all(),
@@ -32,9 +30,7 @@ class TeacherController extends Controller
     }
 
     public function saveTeacher(Request $request){
-
-
-     try{   
+    try{   
         $request->validate([
             'name'=> 'required',
             'email'=>'required|email',
@@ -74,9 +70,10 @@ class TeacherController extends Controller
 
         return redirect('teacher-list')->with('success', 'Teacher added successfully');
     } catch (\Exception $e) {
-        return redirect('teacher-list')->with('error', 'Error adding teacher');
+        return redirect()->back()->withErrors(['admission_number' => 'The admission number is not valid'])->withInput();
+
     }
-}
+    }
 
     public function deleteTeacher($id){
         User::where('id','=',$id)->delete();
@@ -128,7 +125,7 @@ class TeacherController extends Controller
         ]);
         return redirect('teacher-list')->with('success', 'Teacher updated successfully');
     }catch(\Exception $e){
-        return redirect()->back()->with('error', 'Error updating teacher');
+        return redirect()->back()->withErrors(['admission_number' => 'The admission number is not valid'])->withInput();
     }
     }
    
@@ -139,9 +136,6 @@ class TeacherController extends Controller
         
          $teacher = auth()->user();
          $subjects = $teacher->subjects;
-        
-         
- 
          return view('teacher-panel', compact('subjects'));
     }
 

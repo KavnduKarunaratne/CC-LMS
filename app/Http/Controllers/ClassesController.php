@@ -29,14 +29,17 @@ class ClassesController extends Controller
     }
 
     public function saveClass(Request $request)
-    {
+    { 
+     
+    try{
+
         $request->validate([
             'class_name'=> 'required',
             'grade_id'=>'required',
         ]);
         $class_name = $request->class_name;
         $grade_id=$request->grade_id;
-  try{
+
         $class = new Classes;
         $class->class_name = $class_name;
         $class->grade_id=$grade_id;
@@ -44,16 +47,16 @@ class ClassesController extends Controller
 
         $class->save();
         return redirect('subject-list')->with('success', 'class added successfully');
-  }catch(\Exception $e){
-    return redirect()->back()->with('error', 'class already exists');
-  }
+     }catch(\Exception $e){
+       return redirect()->back()->with('error', 'class already exists');
+     }
     }
 
     public function editClass($id){
 
         $class = Classes::where('id','=',$id)->first();
         return view('edit-class',compact('class'));
-      }
+    }
 
       public function updateClass(Request $request, $id)
     {
@@ -86,7 +89,7 @@ class ClassesController extends Controller
       }
     
       public function showDetails(Classes $class)
-{
+    {
     $students = User::where('grade_id', $class->grade_id)
         ->where('class_id', $class->id)
         ->where('role_id', 3) //role 3 is for students
@@ -97,8 +100,8 @@ class ClassesController extends Controller
         ->with('teacher')
         ->get();
 
-    return view('class-details', compact('class', 'students', 'subjects'));
-}
+     return view('class-details', compact('class', 'students', 'subjects'));
+    }
 
 
 

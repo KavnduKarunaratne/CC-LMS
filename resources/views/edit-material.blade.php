@@ -49,7 +49,7 @@
 
 <div class="mb-4">
     <label class="block text-gray-700 text-sm font-bold mb-2">Select Students to Make Material Accessible To:</label>
-    @foreach ($classStudents as $student)
+    @foreach ($classStudents  as $student)
         <div class="flex items-center mt-2">
             <input type="checkbox" name="users[]" value="{{ $student->id }}" class="mr-2">
             <label>{{ $student->name }}</label>

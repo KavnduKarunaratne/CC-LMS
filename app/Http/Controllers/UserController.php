@@ -75,9 +75,10 @@ class UserController extends Controller
 
         $user->save();
         return redirect()->back()->with('success','user added succesfully');
-} catch (\Exception $e) {
-    return redirect()->back()->with('error','This user already exists');
-}
+    } catch (\Exception $e) {
+      return redirect()->back()->withErrors(['admission_number' => 'The admission number is not valid'])->withInput();
+
+    }
 
     }
 
@@ -100,23 +101,23 @@ class UserController extends Controller
 
 
         $newName = $request->input('name');
-    $newEmail = $request->input('email');
-    $newAdmissionNumber = $request->input('admission_number');
-    $newYearOfRegistration = $request->input('year_of_registration');
+        $newEmail = $request->input('email');
+        $newAdmissionNumber = $request->input('admission_number');
+        $newYearOfRegistration = $request->input('year_of_registration');
    
 
-    User::where('id', '=', $id)->update([
-        'name' => $newName,
-        'email' => $newEmail,
-        'admission_number' => $newAdmissionNumber,
-        'year_of_registration' => $newYearOfRegistration,
+         User::where('id', '=', $id)->update([
+         'name' => $newName,
+         'email' => $newEmail,
+         'admission_number' => $newAdmissionNumber,
+         'year_of_registration' => $newYearOfRegistration,
         
-    ]);
+        ]);
 
 
         return redirect('user-management')->with('success','user updated succesfully');
     }catch(\Exception $e){
-        return redirect()->back()->with('error','An error occured');
+        return redirect()->back()->withErrors(['admission_number' => 'The admission number is not valid'])->withInput();
     }
     }
     
@@ -125,17 +126,10 @@ class UserController extends Controller
         return redirect('user-management')->with('success','user deleted succesfully');
 
     }
-
-
-
-
     public function index()
     {
 
     $role_id=Auth::user()->role_id;
-
-
-
     if($role_id==1){ //role id is 1 for admin
         return view('dashboard',[
             'grades' => (new Grade())->all(),
@@ -196,7 +190,7 @@ class UserController extends Controller
     }
 
     public function searchUsers(Request $request)
-{
+    {
     $searchTerm = $request->input('search');
 
     $user = User::where(function ($query) use ($searchTerm) {
@@ -217,11 +211,11 @@ class UserController extends Controller
         ->get();
 
     return view('user-management', compact('user', 'archivedUsers'));
-}
+   }
 
 public function showProfile(){
     $user = Auth::user();
     return view('profile/show',compact('user'));
-}
+   }
     
 }

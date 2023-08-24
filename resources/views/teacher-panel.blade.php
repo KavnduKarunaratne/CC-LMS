@@ -39,7 +39,7 @@
         <div class="bg-white p-4 rounded-md shadow-md mb-4">
             <h2 class="text-lg font-semibold">Teacher Panel</h2>
             <p>User: {{ auth()->user()->name }}</p>
-            <p>Your role ID: {{ Auth::user()->role_id }}</p>
+      
           
 
         </div>

@@ -14,13 +14,6 @@ class Classes extends Model
       
     ];
 
-   /* public function subjects()
-{
-    return $this->hasManyThrough(Subject::class, Grade::class, 'id', 'grade_id')
-            ->where('subjects.class_id', $this->id);
-
-          
-}*/
 public function subjects()
 {
     return $this->hasMany(Subject::class, 'class_id');
@@ -28,6 +21,10 @@ public function subjects()
 public function students()
 {
     return $this->hasMany(User::class, 'class_id')->where('role_id', 3);
+}
+public function grade()
+{
+    return $this->belongsTo(Grade::class, 'grade_id');
 }
 
 

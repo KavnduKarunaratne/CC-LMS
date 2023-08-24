@@ -119,30 +119,9 @@
     @endif
 </div>
 
-            <div class="bg-white p-4 rounded-md shadow-md">
-    <h3 class="text-lg font-semibold">Materials Accessible to You:</h3>
-    <ul>
-        @foreach (Auth::user()->materials as $material)
-            <li>
-                Material: {{ $material->material_name }}
-                | Description: {{ $material->description }}
-                | Upload Date: {{ $material->upload_date }}
-                <br>
-                @if ($material->file)
-                    <a href="{{ asset('storage/' . $material->file) }}" download>Download File</a>
-                    <br>
-                @endif
-                @if ($material->link)
-                    <a href="{{ $material->link }}" target="_blank">Visit Link</a>
-                    <br>
-                @endif
-            
-            </li>
-        @endforeach
-    </ul>
-</div>
+           
 @else
-    <p>You do not have access to this.</p>
+    <p>You do not have access to this page.</p>
     <a href="{{ route('logout') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Log Out</a>
 @endif
 </body>

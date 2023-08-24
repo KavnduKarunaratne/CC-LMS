@@ -8,27 +8,18 @@ use Illuminate\Http\Request;
 
 class ManagementController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $management=User::where('role_id',2)->get();
         return view('management-list',compact('management'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function AddManagement()
     {
         return view('add-management');
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function saveManagement(Request $request)
     {
         try{   
@@ -47,9 +38,9 @@ class ManagementController extends Controller
      
 
       $existingUser = User::where('admission_number', $admission_number)->first();
-    if ($existingUser) {
+       if ($existingUser) {
         return redirect()->back()->with('error', 'User with this admission number already exists');
-    }
+       }
 
 
 
@@ -64,27 +55,20 @@ class ManagementController extends Controller
       
         $management ->save();
         return redirect()->back()->with('success','student added succesfully');
-}catch(\Exception $e){
-    return redirect()->back()->with('error','An error occured');
-}  
+        }catch(\Exception $e){
+        return redirect()->back()->withErrors(['admission_number' => 'The admission number is not valid'])->withInput();
+
+         }  
 
 
     }
 
-   
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function editManagement($id)
     {
         $management = User::where('id','=',$id)->first();
         return view('edit-management',compact('management'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function updateManagement(Request $request)
     {
      try{
@@ -105,25 +89,21 @@ class ManagementController extends Controller
         $newManagementAdmission_number=$request->admission_number;
 
 
-       User::where('id','=',$id)->update([
+        User::where('id','=',$id)->update([
               'name'=>$newManagementName,
               'email'=>$newManagementEmail,
               'year_of_registration'=>$newManagementYear_of_registration,
               'admission_number'=>$newManagementAdmission_number,
          ]);
-            return redirect('user-management')->with('success','student updated succesfully');
+         return redirect('user-management')->with('success','student updated succesfully');
 
         
        
-    }catch(\Exception $e){
-        return redirect()->back()->with('error','An error occured');
-    }
+       }catch(\Exception $e){
+         return redirect()->back()->with('error','An error occured');
+       }
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function deleteManagement($id)
     {
         User::where('id','=',$id)->delete();

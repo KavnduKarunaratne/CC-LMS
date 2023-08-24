@@ -24,12 +24,13 @@ class AssignmentController extends Controller
     {
         $user = Auth::user(); // Get the logged-in user (teacher)
         $subjects = $user->subjects; // Retrieve the subjects associated with the teacher
-  $subject = Subject::find($subject_id);//to send the material under the selected subject
+        $subject = Subject::find($subject_id);//to send the material under the selected subject
         return view('add-assignment', compact('subjects','subject'));
     }
 
     public function saveAssignment(Request $request)
-    {try{
+    {
+    try{
         $request->validate([
             'assignment_name' => 'required',
             'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800', //validating file type
@@ -38,7 +39,7 @@ class AssignmentController extends Controller
             'subject_id' => 'required',
         ]);
 
-        $filePath = $request->file('file')->store('assignments');//storing files under the folder assignments
+         $filePath = $request->file('file')->store('assignments');//storing files under the folder assignments
          $subject_id = $request->input('subject_id'); 
 
         $assignment = new Assignment;
@@ -52,11 +53,11 @@ class AssignmentController extends Controller
         $assignment->save();
 
         return redirect('assignment-list')->with('success', 'Assignment Added Successfully');
-    }catch(\Exception $e){
+      }catch(\Exception $e){
         return redirect()->back()->with('error', 'Error adding assignment');
-    }
+      }
 
-}
+    }
 
     public function editAssignment($id)
     {
@@ -105,5 +106,7 @@ class AssignmentController extends Controller
         Assignment::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'Assignment Deleted Successfully');
     }
+
+   
 
 }

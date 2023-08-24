@@ -44,21 +44,22 @@ class GradeController extends Controller
   }
 
   public function updateGrade(Request $request, $id)
-{
- try{
+  {
+    try{
       $request->validate([
         'grade'=>'required|integer|min:0|max:14'
       ]);
-    $newGradeValue = $request->grade; // Use a different variable name for grade value from the request
+      $newGradeValue = $request->grade; // Use a different variable name for grade value from the request
 
-    Grade::where('id', '=', $id)->update([
+      Grade::where('id', '=', $id)->update([
         'grade' => $newGradeValue // Use the new variable name here
-    ]);
+       ]);
 
-    return redirect('dashboard')->with('success', 'grade updated successfully');
-}catch(\Exception $e){
-  return redirect()->back()->with('error', 'Error updating grade');
-}}
+      return redirect('dashboard')->with('success', 'grade updated successfully');
+    }catch(\Exception $e){
+       return redirect()->back()->with('error', 'Error updating grade');
+    }
+  }
 
 
   public function deleteGrade($id){
@@ -72,9 +73,5 @@ class GradeController extends Controller
   
       return view('classes.show', compact('grade', 'classes'));
   }
-
-
-
-
 
 }

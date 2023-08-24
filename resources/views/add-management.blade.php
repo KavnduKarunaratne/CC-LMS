@@ -35,11 +35,11 @@
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="admission_number">Admission</label>
                 <input type="text" name="admission_number" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" required/>
-            </div>
-            @error('admission_number')
-        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @error('admission_number')
+        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
     @enderror
-            
+            </div>
+     
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="year_of_registration">Year of registration</label>
                 <input type="text" name="year_of_registration" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" required/>

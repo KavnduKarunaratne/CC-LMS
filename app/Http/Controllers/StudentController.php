@@ -18,11 +18,7 @@ class StudentController extends Controller
         ->where('is_archived',false)
         ->get();
         
-        return view('student-list',compact('student'));
-
-        
-        // return $data;
-         
+        return view('student-list',compact('student')); 
     }
     public function Grade(){
         $grade = Grade::all();
@@ -85,7 +81,8 @@ class StudentController extends Controller
         return redirect()->back()->with('success','student added succesfully');
        
        }catch(\Exception $e){
-        return redirect()->back()->with('error','an error occured');
+        return redirect()->back()->withErrors(['admission_number' => 'The admission number is not valid'])->withInput();
+
        }
     } 
 
@@ -102,7 +99,7 @@ class StudentController extends Controller
 
     public function updateStudent(Request $request){
 
-try{
+    try{
         $request->validate([
             'name'=> 'required',
             'email'=>'required|email',
@@ -133,7 +130,7 @@ try{
 
         return redirect('student-list')->with('success', 'student updated successfully');
     }catch(\Exception $e){
-        return redirect()->back()->with('error', 'Error updating student');
+        return redirect()->back()->withErrors(['admission_number' => 'The admission number is not valid'])->withInput();
     }
     }
    

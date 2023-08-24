@@ -85,8 +85,8 @@ class SubjectController extends Controller
         }
 
     
-        public function updateSubject(Request $request, $id)
-        {
+     public function updateSubject(Request $request, $id)
+    {
           try{
              $request->validate([
                 'subject_name'=> 'required',
@@ -113,9 +113,10 @@ class SubjectController extends Controller
             ]);
     
             return redirect('dashboard')->with('success', 'subject updated successfully');
-    }catch(\Exception $e){
-      return redirect()->back()->with('error', 'Error updating subject');
-    }}
+        }catch(\Exception $e){
+          return redirect()->back()->with('error', 'Error updating subject');
+        }
+    }
     
 
     public function deleteSubject($id){
@@ -124,17 +125,12 @@ class SubjectController extends Controller
     }
 
     public function showDynamicDetail($subject_id)
-{
-    // Retrieve the subject based on the subject_id parameter. this is a dynamic page. materials under that subject id is shown
-    $subject = Subject::findOrFail($subject_id);
-    $materials = $subject->materials;
-    $assignments = $subject->assignments; 
+    {
+      // Retrieve the subject based on the subject_id parameter. this is a dynamic page. materials under that subject id is shown
+      $subject = Subject::findOrFail($subject_id);
+      $materials = $subject->materials;
+      $assignments = $subject->assignments; 
 
-    return view('subject-detail', compact('subject','materials','assignments'));
-}
-
-
-    
-
-
+      return view('subject-detail', compact('subject','materials','assignments'));
+    }
 }
