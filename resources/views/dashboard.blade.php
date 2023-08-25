@@ -57,8 +57,11 @@
 </br>
 <p>Logged-in User: {{ auth()->user()->name }}</p>
 <div>
+<div>
+<a href="{{ url('add-grade') }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Add Grade</a>
+</div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    @foreach($grades as $grade)
+    @foreach($grade as $grade)
         <div class="bg-black text-white p-4 rounded-md shadow-md">
             <p class="text-xs text-gray-500">Grade</p>
             <p class="text-sm">{{ $grade->grade }}</p>
@@ -75,11 +78,6 @@
     @endforeach
 </div>
 
-
-
-<div>
-<a href="{{ url('add-grade') }}"  class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Add Grade</a>
-</div>
 </br>
 
 </body>

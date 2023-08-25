@@ -39,6 +39,12 @@
                     | No Teacher Assigned
                 @endif
             </li>
+            <td class="px-6 py-4 text-sm text-white">
+                                <a href="{{ url('edit-subject/'.$subject->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-white">
+                                <a href="{{ url('delete-subject/'.$subject->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
+              </td>
         @endforeach
     </ul>
 </div>

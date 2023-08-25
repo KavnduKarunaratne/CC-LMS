@@ -25,7 +25,7 @@
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="subject_name">Subject Name</label>
-            <input type="text" name="subject_name" value="{{ subject->subject_name }}" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" value="{{ $subject->subject_name }}" >
+            <input type="text" name="subject_name" value="{{ $subject->subject_name }}" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" value="{{ $subject->subject_name }}" >
         </div>
 
         <div class="mb-4">

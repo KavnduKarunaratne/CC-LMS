@@ -98,7 +98,7 @@ Route::get('edit-class/{id}',[ClassesController::class,'editClass']);
 Route::post('update-class/{id}', [ClassesController::class, 'updateClass'])->name('update-class');
 Route::get('delete-class/{id}',[ClassesController::class,'deleteClass']);
 Route::get('classes-for-grade/{grade}', [gradeController::class,'showClasses'])->name('classes.show');
-Route::get('class-details/{class}', [classController::class,'showDetails'])->name('class.details');
+Route::get('class-details/{class}', [ClassesController::class,'showDetails'])->name('class.details');
 
 
 //user management
