@@ -7,13 +7,11 @@
     <title>Feedback List</title>
 </head>
 <body class="bg-black">
-
 <div class="container flex justify-center mx-auto mt-10">
     <div class="flex flex-col">
         <div class="w-full">
             <div class="border-b border-gray-200 shadow">
                 <a href="{{ url('add-feedback') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1">Add New feedback</a>
-            
                 <table class="table-auto mt-4">
                     <thead class="bg-black divide-y divide-gray-300">
                         <tr>
@@ -53,6 +51,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

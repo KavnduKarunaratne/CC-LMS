@@ -10,16 +10,16 @@
     <div class="bg-white p-4 rounded-md shadow-md">
         <p class="text-xs text-gray-500">Class Name</p>
         <p class="text-sm">{{ $class->class_name }}</p>
-        <a href="{{   url('edit-class/'.$class->id)    }}">Edit</a><br>
-        <a href="{{   url('delete-class/'.$class->id)    }}">Delete</a>
+        <a href="{{ url('edit-class/'.$class->id) }}">Edit</a><br>
+        <a href="{{ url('delete-class/'.$class->id) }}">Delete</a>
     </div>
     
     <div class="mt-4">
         <h2 class="text-white text-lg font-semibold">Students in {{ $class->class_name }}</h2>
         <ul class="text-white">
             @foreach ($students as $student)
-                <li>{{ $student->name }} (Admission: {{ $student->admission_number }})</li>
                 <li>
+                    {{ $student->name }} (Admission: {{ $student->admission_number }})
                     <a href="{{ url('edit-student/'.$student->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
                     <a href="{{ url('delete-student/'.$student->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1 ml-2">Delete</a>
                 </li>
@@ -28,26 +28,21 @@
     </div>
     
     <div class="mt-4">
-    <h2 class="text-white text-lg font-semibold">Subjects in {{ $class->class_name }}</h2>
-    <ul class="text-white">
-        @foreach ($subjects as $subject)
-            <li>
-                Subject: {{ $subject->subject_name }}
-                @if ($subject->teacher)
-                    | Teacher: {{ $subject->teacher->name }}
-                @else
-                    | No Teacher Assigned
-                @endif
-            </li>
-            <td class="px-6 py-4 text-sm text-white">
-                                <a href="{{ url('edit-subject/'.$subject->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-white">
-                                <a href="{{ url('delete-subject/'.$subject->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
-              </td>
-        @endforeach
-    </ul>
-</div>
-
+        <h2 class="text-white text-lg font-semibold">Subjects in {{ $class->class_name }}</h2>
+        <ul class="text-white">
+            @foreach ($subjects as $subject)
+                <li>
+                    Subject: {{ $subject->subject_name }}
+                    @if ($subject->teacher)
+                        | Teacher: {{ $subject->teacher->name }}
+                    @else
+                        | No Teacher Assigned
+                    @endif
+                    <a href="{{ url('edit-subject/'.$subject->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
+                    <a href="{{ url('delete-subject/'.$subject->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
 </body>
 </html>

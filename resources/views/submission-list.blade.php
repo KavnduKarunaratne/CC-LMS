@@ -22,7 +22,6 @@
                             <th class="px-6 py-2 text-xs text-gray-500">File</th>
                             <th class="px-6 py-2 text-xs text-gray-500">assigment</th>
                             <th class="px-6 py-2 text-xs text-gray-500">student</th>
-
                             <th class="px-6 py-2 text-xs text-gray-500">submitted Date</th>
                             <th class="px-6 py-2 text-xs text-gray-500">Actions</th>
                         </tr>
@@ -46,6 +45,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                
             </div>
         </div>
         <br>
@@ -54,6 +54,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

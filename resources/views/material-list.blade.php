@@ -7,7 +7,6 @@
     <title>Material List</title>
 </head>
 <body class="bg-black">
-
 <div class="container flex justify-center mx-auto mt-10">
     <div class="flex flex-col">
         <div class="w-full">
@@ -57,6 +56,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

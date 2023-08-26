@@ -73,7 +73,7 @@ Route::post('update-student/{id}', [StudentController::class, 'updateStudent'])-
 Route::get('delete-student/{id}',[StudentController::class,'deleteStudent']);
 
     
-Route::post('save-User',[UserController::class,'SaveUser']);
+Route::post('save-User',[UserController::class,'saveUser']);
 
 
 Route::get('roles-list',[UserController::class,'Role']);
@@ -82,7 +82,7 @@ Route::get('class-list',[StudentController::class,'Classes']);
 Route::get('dashboard',[GradeController::class,'Grade']);
 
 //grades
-Route::get('add-grade',[GradeController::class,'AddGrade']);
+Route::get('add-grade',[GradeController::class,'addGrade']);
 Route::post('save-Grade',[GradeController::class,'saveGrade']);
 Route::post('update-grade',[GradeController::class,'updateGrade']);
 Route::get('edit-grade/{id}',[GradeController::class,'editGrade']);
@@ -91,7 +91,7 @@ Route::post('update-grade/{id}', [GradeController::class, 'updateGrade'])->name(
 
 
 //class management
-Route::get('add-class',[ClassesController::class,'AddClass']);
+Route::get('add-class',[ClassesController::class,'addClass']);
 Route:: get ('class-management',[ClassesController::class,'Class']);
 Route::post('save-Class',[ClassesController::class,'saveClass']);
 Route::get('edit-class/{id}',[ClassesController::class,'editClass']);
@@ -112,7 +112,7 @@ Route::get('search-users', [UserController::class, 'searchUsers'])->name('search
   
 
 //subject
-Route::get('add-subject',[SubjectController::class,'AddSubject']);
+Route::get('add-subject',[SubjectController::class,'addSubject']);
 Route::post('save-subject',[SubjectController::class,'saveSubject']);
 Route::post('update-subject',[SubjectController::class,'updateSubject']);
 Route::get('edit-subject/{id}',[SubjectController::class,'editSubject']);
@@ -124,7 +124,7 @@ Route::get('subject-list',[SubjectController::class,'Subjects']);
 // teacher
 
 Route::get('teacher-list', [TeacherController::class, 'Teachers']);
-Route::get('add-teacher', [TeacherController::class, 'AddTeacher']);
+Route::get('add-teacher', [TeacherController::class, 'addTeacher']);
 Route::post('save-teacher', [TeacherController::class, 'saveTeacher']);
 Route::get('edit-teacher/{id}', [TeacherController::class, 'editTeacher']);
 Route::post('update-teacher/{id}', [TeacherController::class, 'updateTeacher'])->name('update-teacher');
@@ -132,7 +132,7 @@ Route::get('delete-teacher/{id}', [TeacherController::class, 'deleteTeacher']);
 
 //management
 Route::get('management-list',[ManagementController::class,'index']);
-Route::get('add-management', [ManagementController::class, 'AddManagement']);
+Route::get('add-management', [ManagementController::class, 'addManagement']);
 Route::post('save-management', [ManagementController::class, 'saveManagement']);
 Route::get('edit-management/{id}', [ManagementController::class, 'editManagement']);
 Route::post('update-management/{id}', [ManagementController::class, 'updateManagement']);
@@ -155,7 +155,7 @@ Route::middleware(['App\Http\Middleware\ValidateRole:2'])->group(function () {
     
     Route::get('management',[NoticeController::class,'Notice']);
     
-    Route::get('add-notice',[NoticeController::class,'AddNotice']);
+    Route::get('add-notice',[NoticeController::class,'addNotice']);
     
     Route::post('save-notice',[NoticeController::class,'saveNotice']);
     
@@ -174,7 +174,7 @@ Route::get('auth.register',[UserController::class,'register']);
 //routes for teachers and students
 Route::middleware(['App\Http\Middleware\ValidateRole:3,4'])->group(function () {
     Route::get('subject-detail/{subject_id}', [SubjectController::class,'showDynamicDetail'])->name('subject.detail');
-    Route::get('add-submission/{assignment_id}',[SubmissionController::class,'AddSubmission']);
+    Route::get('add-submission/{assignment_id}',[SubmissionController::class,'addSubmission']);
     Route::post('save-submission', [SubmissionController::class, 'saveSubmission'])->name('save-submission');
     Route::get('subject/{subject_id}/flashcards', [FlashcardController::class, 'showFlashcards'])->name('subject.flashcards');
 
@@ -184,7 +184,7 @@ Route::middleware(['App\Http\Middleware\ValidateRole:3,4'])->group(function () {
 Route::middleware(['App\Http\Middleware\ValidateRole:4'])->group(function () {
 Route::get('teacher-panel',[TeacherController::class,'teacherPanel']);
 Route::get('material-list',[MaterialController::class,'Material']);
-Route::get('add-material/{subject_id}',[MaterialController::class,'AddMaterial']);
+Route::get('add-material/{subject_id}',[MaterialController::class,'addMaterial']);
 Route::post('save-material',[MaterialController::class,'saveMaterial']);
 Route::get('edit-material/{id}',[MaterialController::class,'editMaterial']);
 Route::post('update-material/{id}',[MaterialController::class,'updateMaterial'])->name('update-material');
@@ -192,7 +192,7 @@ Route::match(['get', 'delete'], 'delete-material/{id}', [MaterialController::cla
 
 
 Route::get('assignment-list',[AssignmentController::class,'Assignment']);
-Route::get('add-assignment/{subject_id}',[AssignmentController::class,'AddAssignment']);
+Route::get('add-assignment/{subject_id}',[AssignmentController::class,'addAssignment']);
 Route::post('save-assignment',[AssignmentController::class,'saveAssignment']);
 Route::get('edit-assignment/{id}',[AssignmentController::class,'editAssignment']);
 Route::post('update-assignment/{id}',[AssignmentController::class,'updateAssignment'])->name('update-assignment');
@@ -206,7 +206,7 @@ Route::match(['get', 'delete'], 'delete-submission/{id}', [SubmissionController:
 Route::get('view-submissions/{assignment_id}', [SubmissionController::class, 'viewSubmissions'])->name('view-submissions');
 
 Route::get('feedback-list',[FeedbackController::class,'Feedback']);
-Route::get('add-feedback/{submission_id}',[FeedbackController::class,'AddFeedback']);
+Route::get('add-feedback/{submission_id}',[FeedbackController::class,'addFeedback']);
 Route::post('save-feedback',[FeedbackController::class,'saveFeedback'])->name('save-feedback');
 Route::get('edit-feedback/{id}',[FeedbackController::class,'editFeedback']);
 Route::post('update-feedback/{id}',[FeedbackController::class,'updateFeedback'])->name('update-feedback');

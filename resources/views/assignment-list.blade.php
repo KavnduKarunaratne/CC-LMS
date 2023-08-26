@@ -7,7 +7,6 @@
     <title>Assignment List</title>
 </head>
 <body class="bg-black">
-
 <div class="container flex justify-center mx-auto mt-10">
     <div class="flex flex-col">
         <div class="w-full">
@@ -48,11 +47,11 @@
             </div>
         </div>
         <br>
+
         <div class="flex-wrap">
             <a href="{{ url('dashboard') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 px-3 rounded my-3 mt-1">Back To Dashboard</a>
         </div>
     </div>
 </div>
-
 </body>
 </html>

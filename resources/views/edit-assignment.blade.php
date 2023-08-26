@@ -9,22 +9,21 @@
 
 <body class="bg-black">
     <div class="container mx-auto py-8 mt-12">
-    @if (session('success'))
-    <div class="bg-green-200 text-green-700 p-2 rounded my-3 mt-1">
-        {{ session('success') }}
-    </div>
-@endif
-    @if (session('error'))
-    <div class="bg-red-200 text-red-700 p-2 rounded my-3 mt-1">
-        {{ session('error') }}
-    </div>
-@endif
+        @if (session('success'))
+            <div class="bg-green-200 text-green-700 p-2 rounded my-3 mt-1">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="bg-red-200 text-red-700 p-2 rounded my-3 mt-1">
+                {{ session('error') }}
+            </div>
+        @endif
         <h2 class="text-2xl font-bold mb-6 text-center text-white">Edit Assignment</h2>
 
-        <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post" action="{{ route('update-assignment', $assignment->id) }}" >
+        <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post" action="{{ route('update-assignment', $assignment->id) }}">
             @csrf
          
-
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="assignment_name">Assignment Name</label>
                 <input type="text" name="assignment_name" value="{{ $assignment->assignment_name }}" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
@@ -39,8 +38,8 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="file">File</label>
                 <input type="file" name="file" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
                 @error('file')
-    <p class="text-red-500 text-sm">{{ $message }}</p>
-    @enderror
+                    <p class="text-red-500 text-sm">{{ $message }}</p>
+                @enderror
             </div>
             
             <div class="mb-4">
@@ -52,7 +51,7 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="subject_id">Select Subject</label>
                 <select name="subject_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">
                     @foreach($subjects as $subject)
-                    <option value="{{$subject->id}}" @if($subject->id === $assignment->subject_id) selected @endif>{{$subject->subject_name}}</option>
+                        <option value="{{$subject->id}}" @if($subject->id === $assignment->subject_id) selected @endif>{{$subject->subject_name}}</option>
                     @endforeach
                 </select>
             </div>

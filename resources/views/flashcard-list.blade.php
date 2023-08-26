@@ -11,8 +11,6 @@
     <div class="flex flex-col">
         <div class="w-full">
             <div class="border-b border-gray-200 shadow">
-  
-            
                 <table class="table-auto mt-4">
                     <thead class="bg-black divide-y divide-gray-300">
                     <tr>
@@ -37,10 +35,8 @@
                                 <td class="px-6 py-4 text-sm text-white">
                                     <a href="{{ url('edit-card', $flashcard->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
                                     <a href="{{ url('delete-flashcard', $flashcard->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
-                                </td>
-                                
-                            </tr>
-                                    
+                                </td>         
+                            </tr>                                   
                         @endforeach
                     </tbody>
                 </table>
@@ -52,6 +48,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

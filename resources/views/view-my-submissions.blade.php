@@ -17,26 +17,25 @@
             <h3 class="text-md font-bold mt-4">{{ $subjectName }}</h3>
             <ul>
                 @foreach ($submissions as $submission)
-                <div class="bg-white p-4 rounded-md shadow-md mb-4">
-                    <li>
-                        <strong>Assignment Name:</strong> {{ $submission->assignment->assignment_name }}
-                        <br>
-                        <strong>Description:</strong> {{ $submission->assignment->description }}
-                        <br>
-                        @if ($submission->file)
-                            <strong>File:</strong> <a href="{{ asset('storage/app/submissions/' . $submission->file) }}" download>{{ $submission->file }}</a>
+                    <div class="bg-white p-4 rounded-md shadow-md mb-4">
+                        <li>
+                            <strong>Assignment Name:</strong> {{ $submission->assignment->assignment_name }}
                             <br>
-                        @endif
-                        <strong>Submit Date:</strong> {{ $submission->submit_date }}
-                        <br>
-                        <strong>Feedback:</strong>
-                        @foreach ($submission->feedback as $feedback)
-                            <p>Feedback :{{ $feedback->feedback }}</p>
-                            <p>Marks : {{ $feedback->marks }}</p>
-                        @endforeach
-                    </li>
-                   
-                </div>
+                            <strong>Description:</strong> {{ $submission->assignment->description }}
+                            <br>
+                            @if ($submission->file)
+                                <strong>File:</strong> <a href="{{ asset('storage/app/submissions/' . $submission->file) }}" download>{{ $submission->file }}</a>
+                                <br>
+                            @endif
+                            <strong>Submit Date:</strong> {{ $submission->submit_date }}
+                            <br>
+                            <strong>Feedback:</strong>
+                            @foreach ($submission->feedback as $feedback)
+                                <p>Feedback: {{ $feedback->feedback }}</p>
+                                <p>Marks: {{ $feedback->marks }}</p>
+                            @endforeach
+                        </li>
+                    </div>
                 @endforeach
             </ul>
         @endforeach

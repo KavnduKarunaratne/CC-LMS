@@ -21,7 +21,6 @@
                                 <th class="px-6 py-2 text-xs text-gray-500">Email</th>
                                 <th class="px-6 py-2 text-xs text-gray-500">Admission</th>
                                 <th class="px-6 py-2 text-xs text-gray-500">Reg</th>
-                                <!-- Add more columns for teacher-specific attributes -->
                                 <th class="px-6 py-2 text-xs text-gray-500">Edit</th>
                                 <th class="px-6 py-2 text-xs text-gray-500">Delete</th>
                             </tr>
@@ -34,7 +33,6 @@
                                 <td class="px-6 py-4 text-sm text-white">{{ $teacher->email }}</td>
                                 <td class="px-6 py-4 text-sm text-white">{{ $teacher->admission_number }}</td>
                                 <td class="px-6 py-4 text-sm text-white">{{ $teacher->year_of_registration }}</td>
-                                <!-- Add more cells for teacher-specific attributes -->
                                 <td class="px-6 py-4 text-sm text-white">
                                     <a href="{{ url('edit-teacher/'.$teacher->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
                                 </td>
