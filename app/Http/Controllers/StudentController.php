@@ -78,9 +78,15 @@ class StudentController extends Controller
 
     public function editStudent($id){
         $student = User::where('id', '=', $id)->first();
-        return view('edit-student', compact('student'), [
-            'grades' => (new Grade())->all(),
-            'classes' => (new Classes())->all(),
+        $grades = Grade::all();
+        $classes = Classes::where('grade_id', $student->grade_id)->get();
+
+        return view('edit-student', [
+            'student' => $student,
+            'grades' => $grades,
+            'classes' => $classes,
+            'grade_id'=>$student->grade_id,
+            
         ]);
     }
 
@@ -122,4 +128,8 @@ class StudentController extends Controller
         User::where('id', '=', $id)->delete();
         return redirect('student-list')->with('success', 'student deleted successfully');
     }
+
+
+
+   
 }

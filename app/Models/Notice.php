@@ -23,9 +23,9 @@ class Notice extends Model
         return $this->belongsToMany(Grade::class);
     }
 
-    public function management()
-    {
-        return $this->belongsTo(User::class,
-        'management_id');
+    public function management(){
+
+        return $this->belongsTo(User::class,'management_id');
+        
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 use App\Models\Submission;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,26 +22,16 @@ class SubmissionController extends Controller
 
     public function saveSubmission(Request $request){
         try{
-            $request->validate([
-                'name' => 'required',
-                'description' => 'required',
-                'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',
-                'assignment_id' => 'required',
-            ]);
+            $this->validateSubmission($request);
 
             $filePath = $request->file('file')->store('submissions', 'public');
-            $name = $request->name;
-            $description = $request->description;
-            $assignment_id = $request->input('assignment_id');
-
             $submission = new Submission;
-            $submission->name = $name;
-            $submission->description = $description;
+            $submission->name = $request->name;
+            $submission->description = $request->description;
             $submission->file = $filePath;
             $submission->submit_date = now();
-            $submission->assignment_id = $assignment_id;
+            $submission->assignment_id = $request->assignment_id;
             $submission->student_id = Auth::id();
-
             $submission->save();
 
             return redirect()->back()->with('success', 'submission added successfully');
@@ -59,23 +48,14 @@ class SubmissionController extends Controller
 
     public function updateSubmission(Request $request, $id){
         try{
-            $request->validate([
-                'name' => 'required',
-                'description' => 'required',
-                'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',
-                'assignment_id' => 'required',
-            ]);
+            $this->validateSubmission($request);
 
-            $newSubmissionName = $request->name;
-            $newSubmissionDescription = $request->description;
-            $newSubmissionFile = $request->file;
-            $newSubmissionAssignmentId = $request->assignment_id;
-
-            Submission::where('id', '=', $id)->update([
-                'name' => $newSubmissionName,
-                'description' => $newSubmissionDescription,
-                'file' => $newSubmissionFile,
-                'assignment_id' => $newSubmissionAssignmentId,
+            $submission = Submission::findOrFail($id);
+            $submission->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'file' => $request->file,
+                'assignment_id' => $request->assignment_id,
             ]);
 
             return redirect()->back()->with('success', 'submission updated successfully');
@@ -85,7 +65,7 @@ class SubmissionController extends Controller
     }
 
     public function deleteSubmission($id){
-        Submission::where('id', '=', $id)->delete();
+        Submission::where('id', $id)->delete();
         return redirect('submission-list')->with('success', 'submission deleted successfully');
     }
 
@@ -127,5 +107,15 @@ class SubmissionController extends Controller
         }
 
         return view('view-my-submissions', compact('submissionsBySubject'));
+    }
+
+    private function validateSubmission(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',
+            'assignment_id' => 'required',
+        ]);
     }
 }

@@ -4,10 +4,43 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Student Progress - {{ $subject->subject_name }}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        h2 {
+            margin-top: 20px;
+            
+
+        }
+    </style>
 </head>
 <body>
-
+<div class="container">
 @foreach($assignments as $assignment)
     <h2>Student Progress for Assignment: {{ $assignment->assignment_name }}</h2>
     <table>
@@ -55,14 +88,16 @@
 <h2>Class Average: {{ $totalMarks / $totalStudents }} / 100</h2>
 
 <h2>Overall Top Scoring Students</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Student</th>
-            <th>Total Marks</th>
-        </tr>
-    </thead>
-    <tbody>
+ <!-- the marks are calculated and the  students are arranged(sorted) in the descending order of marks-->
+<!-- the flatmap function extracts the marks from the feedback-->
+   <table>
+        <thead>
+               <tr>
+                  <th>Student</th>
+                  <th>Total Marks</th>
+               </tr>
+        </thead>
+        <tbody>
         @php
             $overallTopStudents = $students->sortByDesc(function ($student) use ($subject) {
                 return $student->submissions
@@ -73,7 +108,7 @@
                     ->sum();
             });
         @endphp
-        @foreach($overallTopStudents as $student)
+         @foreach($overallTopStudents as $student)
             <tr>
                 <td>{{ $student->name }}</td>
                 <td>
@@ -92,19 +127,21 @@
                     @endif
                 </td>
             </tr>
-        @endforeach
-    </tbody>
-</table>
+         @endforeach
+        </tbody>
+    </table>
 
 <h2>Overall Least Scoring Students</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Student</th>
-            <th>Total Marks</th>
-        </tr>
-    </thead>
-    <tbody>
+  <!-- the marks are calculated and the  students are arranged(sorted) in the ascending order of marks.
+  the flatmap function extracts the marks from the feedback-->
+    <table>
+        <thead>
+            <tr>
+                 <th>Student</th>
+                <th>Total Marks</th>
+            </tr>
+        </thead>
+        <tbody>
         @php
             $overallLeastStudents = $students->sortBy(function ($student) use ($subject) {
                 return $student->submissions
@@ -134,15 +171,11 @@
                     @endif
                 </td>
             </tr>
-        @endforeach
-    </tbody>
-</table>
-
+         @endforeach
+       </tbody>
+    </table>
+</div>
 </body>
 </html>
 
- <!-- the marks are calculated and the  students are arranged(sorted) in the descending order of marks-->
-<!-- the flatmap function extracts the marks from the feedback-->
-  <!-- the marks are calculated and the  students are arranged(sorted) in the ascending order of marks-->
-<!--use the subject id to find the related assignments and submission and the feedback for those submissions-->
-<!--the flatmap function extracts the marks from the feedback-->
+

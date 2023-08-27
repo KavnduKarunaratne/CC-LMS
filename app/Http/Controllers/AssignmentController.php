@@ -12,10 +12,9 @@ class AssignmentController extends Controller
 {
     public function Assignment(){
         $assignments = Assignment::all();
-        return view('assignment-list', compact('assignments'), [
-            'assignments' => (new Assignment())->all(),
-            'subjects' => (new Subject())->all(),
-        ]);
+        $subjects= Subject::all();
+        
+        return view('assignment-list', compact('assignments','subjects'));
     }
 
     public function addAssignment($subject_id){
@@ -35,30 +34,33 @@ class AssignmentController extends Controller
                 'subject_id' => 'required',
             ]);
 
-            $filePath = $request->file('file')->store('assignments', 'public'); // Storing files under the folder assignments
-            $subject_id = $request->input('subject_id');
+            if ($request->hasFile('file')) {
+                $filePath = $request->file('file')->store('assignments', 'public');// Storing the file under assignments folder in public folder
+            } else {
+                $filePath = null;
+            }
+          
 
-            $assignment = new Assignment;
-            $assignment->assignment_name = $request->assignment_name;
-            $assignment->file = $filePath;
-            $assignment->description = $request->description;
-            $assignment->due_date = $request->due_date;
-            $assignment->subject_id = $subject_id;
-            $assignment->teacher_id = Auth::id();
-            $assignment->upload_date = now();
-            $assignment->save();
+            Assignment::create([
+                'assignment_name' => $request->assignment_name,
+                'file' => $filePath,
+                'description' => $request->description,
+                'due_date' => $request->due_date,
+                'subject_id' => $request->subject_id,
+                'teacher_id' => Auth::id(),
+                'upload_date' => now(),
+            ]);
 
             return redirect('assignment-list')->with('success', 'Assignment Added Successfully');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error adding assignment');
+            return redirect()->back()->with('error', 'Error adding assignment. check file type');
         }
     }
 
     public function editAssignment($id){
         $assignment = Assignment::find($id);
-        return view('edit-assignment', compact('assignment'), [
-            'subjects' => (new Subject())->all(),
-        ]);
+        $subjects = Subject::all();
+        return view('edit-assignment', compact('assignment', 'subjects'));
     }
 
     public function updateAssignment(Request $request, $id){
@@ -80,10 +82,11 @@ class AssignmentController extends Controller
                 $assignment->file = $filePath;
             }
 
-            $assignment->assignment_name = $request->assignment_name;
-            $assignment->description = $request->description;
-            $assignment->due_date = $request->due_date;
-            $assignment->save();
+            $assignment->update([
+                'assignment_name' => $request->assignment_name,
+                'description' => $request->description,
+                'due_date' => $request->due_date,
+            ]);
 
             return redirect()->back()->with('success', 'Assignment Updated Successfully');
         } catch (\Exception $e) {

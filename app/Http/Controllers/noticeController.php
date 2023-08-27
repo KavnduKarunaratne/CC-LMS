@@ -14,9 +14,8 @@ class NoticeController extends Controller
     }
 
     public function addNotice(){
-        return view('add-notice', [
-            'grades' => (new Grade())->all(),
-        ]);
+        $grades=Grade::all();
+        return view('add-notice',compact('grades'));
     }
 
     public function saveNotice(Request $request){
@@ -26,11 +25,7 @@ class NoticeController extends Controller
                 'grade_id' => 'nullable',
             ]);
 
-            $notice = new Notice;
-            $notice->notice = $request->notice;
-            $notice->management_id = auth()->user()->id; // checks the logged-in user's id and sets the id automatically
-            $notice->date_of_notice = now();
-            $notice->save();
+            $this->createNotice($request);
 
             return redirect('management')->with('success', 'notice added successfully');
         } catch(\Exception $e){
@@ -40,10 +35,8 @@ class NoticeController extends Controller
 
     public function editNotice($id){
         $notice = Notice::find($id);
-        return view('edit-notice', [
-            'notice' => $notice,
-            'grades' => (new Grade())->all(),
-        ]);
+        $grades = Grade::all();
+        return view('edit-notice', compact('notice', 'grades'));
     }
 
     public function updateNotice(Request $request, $id){
@@ -53,13 +46,7 @@ class NoticeController extends Controller
                 'grade_id' => 'nullable', // Validate it as an array
             ]);
 
-            $newNotice = $request->notice;
-            $newGradeValues = $request->grade_id;
-
-            Notice::where('id', $id)->update([
-                'notice' => $newNotice,
-                'grade_id' => $newGradeValues,
-            ]);
+            $this->updateTheNotice($request, $id);
 
             return redirect('management')->with('success', 'Notice updated successfully');
         } catch(\Exception $e){
@@ -71,4 +58,26 @@ class NoticeController extends Controller
         Notice::where('id', '=', $id)->delete();
         return redirect('management')->with('success', 'notice deleted successfully');
     }
+    //using private helper methods 
+    private function createNotice(Request $request)
+    {
+        $notice = new Notice;
+        $notice->notice = $request->notice;
+        $notice->management_id = auth()->user()->id;
+        $notice->date_of_notice = now();
+        $notice->grade_id = $request->grade_id;
+        $notice->save();
+    }
+
+    private function updateTheNotice(Request $request, $id)
+    {
+        $newNotice = $request->notice;
+        $newGradeValues = $request->grade_id;
+
+        Notice::where('id', $id)->update([
+            'notice' => $newNotice,
+            'grade_id' => $newGradeValues,
+        ]);
+    }
+
 }

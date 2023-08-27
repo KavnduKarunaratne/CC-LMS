@@ -40,7 +40,11 @@ class MaterialController extends Controller
                 'subject_id' => 'required',
             ]);
 
-            $filePath = $request->file('file')->store('materials', 'public');
+            if ($request->hasFile('file')) {
+                $filePath = $request->file('file')->store('materials', 'public');// Storing the file under materials folder in public folder
+            } else {
+                $filePath = null;
+            }
             $subject_id = $request->input('subject_id'); 
 
             $material = new Material;
@@ -59,7 +63,7 @@ class MaterialController extends Controller
 
             return redirect()->back()->with('success', 'Material Added Successfully');
         } catch(\Exception $e){
-            return redirect()->back()->with('error', 'An error occurred');
+            return redirect()->back()->with('error', 'An error occurred while saving the material. check file type');
         }
     }
 

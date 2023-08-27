@@ -19,13 +19,13 @@ class Flashcard extends Model
     ];
 
 
-    public function subject()
-    {
+    public function subject(){
+
         return $this->belongsTo(Subject::class);
     }
 
-    public function teacher()
-    {
+    public function teacher(){
+        
         return $this->belongsTo(User::class, 'teacher_id');
     }
 }

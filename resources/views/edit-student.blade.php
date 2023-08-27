@@ -8,14 +8,13 @@
 </head>
 <body class="bg-black">
     <div class="container mx-auto py-8 mt-12">
-        @if (session('success'))
-            <div class="bg-green-200 text-green-700 p-2 rounded my-3 mt-1">
-                {{ session('success') }}
-            </div>
-        @endif
         @if (session('error'))
             <div class="bg-red-200 text-red-700 p-2 rounded my-3 mt-1">
                 {{ session('error') }}
+            </div>
+         @elseif(session('success'))
+            <div class="bg-green-200 text-green-700 p-2 rounded my-3 mt-1">
+                {{ session('success') }}
             </div>
         @endif
         <h2 class="text-2xl font-bold mb-6 text-center text-white">Edit Student</h2>
@@ -44,7 +43,7 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="grade_id">Select Grade</label>
                 <select name="grade_id">
                     @foreach($grades as $grade)
-                        <option value="{{$grade->id}}">{{$grade->id}}</option>
+                        <option value="{{$grade->id}}">{{$grade->grade}}</option>
                     @endforeach
                 </select>
             </div>
@@ -52,7 +51,9 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="class_id">Select Class</label>
                 <select name="class_id">
                     @foreach($classes as $class)
+                    @if ($class->grade_id == $grade_id)
                         <option value="{{$class->id}}">{{$class->class_name}}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>

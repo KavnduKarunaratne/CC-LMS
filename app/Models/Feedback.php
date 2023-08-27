@@ -13,8 +13,9 @@ class Feedback extends Model
             'feedback','date','marks','submission_id'
         ];
 
-        public function submission()
-   {
-       return $this->belongsTo(Submission::class, 'submission_id');
-   }
+        public function submission(){
+
+          return $this->belongsTo(Submission::class, 'submission_id');
+
+       }
 }

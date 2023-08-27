@@ -13,10 +13,9 @@ class Assignment extends Model
         'assignment_name','subject_id','due_date','description','file','teacher_id','upload_date'
     ];
 
-    public function subject()
-    {
+    public function subject(){
+        
         return $this->belongsTo(Subject::class, 'subject_id');
     }
-
-   
+  
 }

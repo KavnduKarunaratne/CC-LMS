@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('content');
             $table->string('answer');
             $table->date('upload_date');
-            $table->foreignId('subject_id')->constrained('subjects');
+            $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
             $table->foreignId('teacher_id')->constrained('users');
         });
     }

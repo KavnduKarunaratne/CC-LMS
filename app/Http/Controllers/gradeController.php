@@ -22,10 +22,10 @@ class GradeController extends Controller
                 'grade' => 'required|integer|min:0|max:14'
             ]);
 
-            $grade = new Grade;
-            $grade->grade = $request->grade;
+            Grade::create([
+                'grade' => $request->grade,
+            ]);
 
-            $grade->save();
             return redirect()->back()->with('success', 'grade added successfully');
         } catch(\Exception $e){
             return redirect()->back()->with('error', 'Error adding grade');
@@ -33,7 +33,7 @@ class GradeController extends Controller
     }
 
     public function editGrade($id){
-        $grade = Grade::where('id', '=', $id)->first();
+        $grade = Grade::findOrfail($id);
         return view('edit-grade', compact('grade'));
     }
 
@@ -42,10 +42,10 @@ class GradeController extends Controller
             $request->validate([
                 'grade' => 'required|integer|min:0|max:14'
             ]);
-            $newGradeValue = $request->grade; // Use a different variable name for grade value from the request
+           
 
             Grade::where('id', '=', $id)->update([
-                'grade' => $newGradeValue // Use the new variable name here
+                'grade' => $request->grade 
             ]);
 
             return redirect('dashboard')->with('success', 'grade updated successfully');

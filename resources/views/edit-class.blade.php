@@ -9,16 +9,15 @@
 <body class="bg-black">
 
 <div class="container mx-auto py-8 mt-12">
-    @if (session('success'))
-        <div class="bg-green-200 text-green-700 p-2 rounded my-3 mt-1">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if (session('error'))
-        <div class="bg-red-200 text-red-700 p-2 rounded my-3 mt-1">
-            {{ session('error') }}
-        </div>
-    @endif
+        @if (session('error'))
+            <div class="bg-red-200 text-red-700 p-2 rounded my-3 mt-1">
+                {{ session('error') }}
+            </div>
+         @elseif(session('success'))
+            <div class="bg-green-200 text-green-700 p-2 rounded my-3 mt-1">
+                {{ session('success') }}
+            </div>
+        @endif
     <h2 class="text-2xl font-bold mb-6 text-center text-white">Edit Class</h2>
     <form method="post" action="{{ route('update-class', ['id' => $class->id]) }}" class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
         @csrf 

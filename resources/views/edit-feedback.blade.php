@@ -12,6 +12,10 @@
             <div class="bg-red-200 text-red-700 p-2 rounded my-3 mt-1">
                 {{ session('error') }}
             </div>
+         @elseif(session('success'))
+            <div class="bg-green-200 text-green-700 p-2 rounded my-3 mt-1">
+                {{ session('success') }}
+            </div>
         @endif
         <h2 class="text-2xl font-bold mb-6 text-center text-white">Edit Feedback</h2>
 

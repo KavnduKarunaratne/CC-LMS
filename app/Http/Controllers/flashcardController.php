@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Flashcard;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FlashcardController extends Controller
 {
@@ -19,24 +20,21 @@ class FlashcardController extends Controller
     }
 
     public function saveFlashcard(Request $request){
+        try{
         $request->validate([
             'content' => 'required',
             'answer' => 'required',
             'subject_id' => 'required',
         ]);
 
-        $content = $request->content;
-        $answer = $request->answer;
-        $subject_id = $request->input('subject_id');
+        Flashcard::create([
+            'content' => $request->content,
+            'answer' => $request->answer,
+            'subject_id' => $request->subject_id,
+            'teacher_id' => Auth::id(),
+            'upload_date' => now(),
+        ]);
 
-        try{
-            $flashcard = new Flashcard;
-            $flashcard->content = $content;
-            $flashcard->answer = $answer;
-            $flashcard->subject_id = $subject_id;
-            $flashcard->teacher_id = auth()->user()->id;
-            $flashcard->upload_date = now();
-            $flashcard->save();
             return redirect()->back()->with('success', 'Flashcard added successfully');
         } catch(\Exception $e){
             return redirect()->back()->with('error', 'Error adding Flashcard');
@@ -44,7 +42,7 @@ class FlashcardController extends Controller
     }
 
     public function editFlashcard($id){
-        $flashcard = Flashcard::find($id);
+        $flashcard = Flashcard::findOrFail($id);
         $subject = Subject::find($flashcard->subject_id);
         return view('edit-Card', compact('flashcard'));
     }
@@ -56,13 +54,13 @@ class FlashcardController extends Controller
                 'answer' => 'required',
             ]);
 
-            $newContent = $request->content;
-            $newAnswer = $request->answer;
+            $flashcard =Flashcard::findOrFail($id);
 
-            Flashcard::where('id', '=', $id)->update([
-                'content' => $newContent,
-                'answer' => $newAnswer,
+            $flashcard->update([
+                'content' => $request->content,
+                'answer' => $request->answer,
             ]);
+            $flashcard->save();
 
             return redirect()->back()->with('success', 'Flashcard updated successfully');
         } catch(\Exception $e){

@@ -20,20 +20,10 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'name', 'email', 'password','role_id', 'admission_number', 'year_of_registration','class_id','grade_id','teacher_id'
+        'name', 'email', 'password', 'role_id', 'admission_number', 'year_of_registration', 'class_id', 'grade_id', 'teacher_id'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -41,68 +31,56 @@ class User extends Authenticatable
         'two_factor_secret',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array<int, string>
-     */
     protected $appends = [
         'profile_photo_url',
     ];
 
     public function role()
-{
-    return $this->belongsTo(Role::class);
-}
+    {
+        return $this->belongsTo(Role::class);
+    }
 
-public function subjects()
-{
-    return $this->hasMany(Subject::class, 'teacher_id');
-}
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class, 'teacher_id');
+    }
 
-public function grade()
-{
-    return $this->belongsTo(Grade::class);
-}
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class);
+    }
 
-public function class()
-{
-    return $this->belongsTo(Classes::class, 'class_id');
-}
-public function teachers(){
-    return $this->hasMany(User::class);
-}
-public function materials()
-{
-    return $this->belongsToMany(Material::class, 'material_user');
-}
+    public function class()
+    {
+        return $this->belongsTo(Classes::class, 'class_id');
+    }
 
-public function management()
-{
-  
-    return $this->hasMany(Notice::class, 'management_id');
-}
+    public function teachers()
+    {
+        return $this->hasMany(User::class);
+    }
 
+    public function materials()
+    {
+        return $this->belongsToMany(Material::class, 'material_user');
+    }
 
+    public function management()
+    {
+        return $this->hasMany(Notice::class, 'management_id');
+    }
 
     public function submissions()
-{
-    return $this->hasMany(Submission::class, 'student_id');
-}
-public function assignedClass()
-{
-    return $this->belongsTo(Classes::class, 'class_id')
-    ->with('grade');
-}
+    {
+        return $this->hasMany(Submission::class, 'student_id');
+    }
 
-
+    public function assignedClass()
+    {
+        return $this->belongsTo(Classes::class, 'class_id')->with('grade');
+    }
 }

@@ -5,22 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Feedback;
 use App\Models\Submission;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 class FeedbackController extends Controller
 {
     public function feedback(){
         $feedback = Feedback::all();
-        return view('feedback-list', compact('feedback'), [
-            'submissions' => (new Submission())->all(),
-        ]);
+        $submissions = Submission::all();
+        return view('feedback-list', compact('feedback','submissions'));
     }
 
     public function addFeedback($submission_id){
         $submission = Submission::find($submission_id);
-        return view('add-feedback', compact('submission'), [
-            'submissions' => (new Submission())->all(),
-        ]);
+        return view('add-feedback', compact('submission'));
     }
 
     public function saveFeedback(Request $request){
@@ -31,17 +28,12 @@ class FeedbackController extends Controller
                 'submission_id' => 'required',
             ]);
 
-            $feedbackText = $request->feedback;
-            $marks = $request->marks;
-            $submission_id = $request->input('submission_id');
-
-            $feedback = new Feedback;
-            $feedback->feedback = $feedbackText;
-            $feedback->date = now();
-            $feedback->marks = $marks;
-            $feedback->submission_id = $submission_id;
-
-            $feedback->save();
+            Feedback::create([
+                'feedback' => $request->feedback,
+                'date' => now(),
+                'marks' => $request->marks,
+                'submission_id' => $request->submission_id,
+            ]);
 
             return redirect('feedback-list')->with('success', 'feedback added successfully');
         } catch(\Exception $e){
@@ -50,7 +42,7 @@ class FeedbackController extends Controller
     }
     
     public function editFeedback($id){
-        $feedback = Feedback::find($id);
+        $feedback = Feedback::findOrFail($id);
         $submission = Submission::find($feedback->submission_id);
         return view('edit-feedback', compact('feedback', 'submission'));
     }
@@ -63,10 +55,10 @@ class FeedbackController extends Controller
             ]);
 
             $feedback = Feedback::findOrFail($id);
-            $feedback->feedback = $request->feedback;
-            $feedback->marks = $request->marks;
-
-            $feedback->save();
+            $feedback->update([
+                'feedback' => $request->feedback,
+                'marks' => $request->marks,
+            ]);
 
             return redirect('teacher-panel')->with('success', 'feedback updated successfully');
         } catch(\Exception $e){
@@ -75,7 +67,7 @@ class FeedbackController extends Controller
     }
 
     public function deleteFeedback($id){
-        Feedback::where('id', '=', $id)->delete();
+        Feedback::findOrFail($id)->delete();
         return redirect('view-submissions')->with('success', 'feedback deleted successfully');
     }
 }

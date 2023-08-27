@@ -52,7 +52,7 @@
         </div>
         <br>
         <div class="flex-wrap">
-            <a href="{{ url('teacher-panel') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 px-3 rounded my-3 mt-1">Back To Dashboard</a>
+            <a href="{{ url('teacher-panel') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 px-3 rounded my-3 mt-1">Teacher Panel</a>
         </div>
     </div>
 </div>

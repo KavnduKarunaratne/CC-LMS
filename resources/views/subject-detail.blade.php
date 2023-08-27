@@ -166,7 +166,7 @@
                     <h4>Students in Grade:  {{ $subject->grade->grade}}   class {{ $subject->class->class_name }}:</h4>
                     <ul>
                         @foreach ($subject->class ->students as $student) <!--display students enrolled in the specific class-->
-                            @if ($student->is_archived == 0 && $student->grade_id == $subject->class_id)
+                            @if ($student->is_archived == 0 && $student->class_id == $subject->class_id)
                                 <li>  {{ $student->name }}      {{ $student->admission_number }}  </li>
                             @endif
                         @endforeach

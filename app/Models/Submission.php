@@ -15,25 +15,25 @@ class Submission extends Model
        'name','description','file','assignment_id','student_id','submit_date'
    ];
 
-   public function assignment()
-   {
+   public function assignment(){
+    
        return $this->belongsTo(Assignment::class, 'assignment_id');
    }
 
-   public function submissions()
-    {
+   public function submissions(){
+
         return $this->hasMany(Submission::class, 'student_id');
     }
     
 
     
-    public function student(): BelongsTo
-    {
+    public function student(): BelongsTo{
+
         return $this->belongsTo(User::class, 'student_id');
     }
 
-    public function feedback()
-    {
+    public function feedback(){
+
         return $this->hasMany(Feedback::class, 'submission_id');
     }
 }

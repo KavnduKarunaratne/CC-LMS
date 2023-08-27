@@ -14,19 +14,19 @@ class Grade extends Model
       
     ];
 
-    public function classes()
-    {
+    public function classes(){
+        
         return $this->hasMany(Classes::class, 'grade_id');
     }
 
-    public function notices()
-    {
+    public function notices(){
+
         return $this->hasMany(Notice::class);
     }
-    public function students()
-{
-    return $this->hasMany(User::class, 'grade_id')->where('role_id', 3);
-}
+    public function students(){
+
+        return $this->hasMany(User::class, 'grade_id')->where('role_id', 3);
+    }
 
     
 }

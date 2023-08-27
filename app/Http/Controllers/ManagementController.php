@@ -26,9 +26,6 @@ class ManagementController extends Controller
                 'admission_number' => ['required', new ValidSuNumber],
             ]);
 
-            $name = $request->name;
-            $email = $request->email;
-            $year_of_registration = $request->year_of_registration;
             $admission_number = $request->admission_number;
      
             $existingUser = User::where('admission_number', $admission_number)->first();
@@ -36,23 +33,23 @@ class ManagementController extends Controller
                 return redirect()->back()->with('error', 'User with this admission number already exists');
             }
 
-            $management = new User;
-            $management->name = $name;
-            $management->email = $email;
-            $management->role_id = 2;
-            $management->class_id = null;
-            $management->grade_id = null;
-            $management->year_of_registration = $year_of_registration;
-            $management->admission_number = $admission_number;
-            $management->save();
-            return redirect()->back()->with('success', 'student added successfully');
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'role_id' => 2,
+                'class_id' => null,
+                'grade_id' => null,
+                'year_of_registration' => $request->year_of_registration,
+                'admission_number' => $admission_number,
+            ]);
+            return redirect()->back()->with('success', 'Management added successfully');
         } catch(\Exception $e){
             return redirect()->back()->withErrors(['admission_number' => 'The admission number is not valid'])->withInput();
         }  
     }
 
     public function editManagement($id){
-        $management = User::where('id', '=', $id)->first();
+        $management = User::findOrFail($id);
         return view('edit-management', compact('management'));
     }
 
@@ -66,16 +63,12 @@ class ManagementController extends Controller
             ]);
 
             $id = $request->id;
-            $newManagementName = $request->name;
-            $newManagementEmail = $request->email;
-            $newManagementYear_of_registration = $request->year_of_registration;
-            $newManagementAdmission_number = $request->admission_number;
 
-            User::where('id', '=', $id)->update([
-                'name' => $newManagementName,
-                'email' => $newManagementEmail,
-                'year_of_registration' => $newManagementYear_of_registration,
-                'admission_number' => $newManagementAdmission_number,
+             User::where('id', $id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'year_of_registration' => $request->year_of_registration,
+            'admission_number' => $request->admission_number,
             ]);
 
             return redirect('user-management')->with('success', 'student updated successfully');
@@ -83,9 +76,9 @@ class ManagementController extends Controller
             return redirect()->back()->with('error', 'An error occurred');
         }
     }
-
+    
     public function deleteManagement($id){
         User::where('id', '=', $id)->delete();
-        return redirect('user-management')->with('success', 'student deleted successfully');
+        return redirect('user-management')->with('success', 'Management deleted successfully');
     }
 }

@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Classes;
 use App\Models\Grade;
-use App\Models\Material;
-use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
@@ -25,10 +23,10 @@ class SubjectController extends Controller
 
     public function addSubject(){
         $teachers = User::where('role_id', 4)->get();
-    
-        return view('add-subject', [
-            'grades' => (new Grade())->all(),
-            'classes' => (new Classes())->all(),
+        $grades = Grade::all();
+        $classes = Classes::all();
+
+        return view('add-subject',compact('grades','classes') ,[
             'teachers' => $teachers,
         ]);
     }
@@ -42,18 +40,8 @@ class SubjectController extends Controller
                 'teacher_id'=>'required',
             ]);
 
-            $subject_name = $request->subject_name;
-            $grade_id = $request->grade_id;
-            $class_id = $request->class_id;
-            $teacher_id = $request->teacher_id;
+            $this->createSubject($request);
 
-            $subject = new Subject;
-            $subject->subject_name = $subject_name;
-            $subject->grade_id = $grade_id;
-            $subject->class_id = $class_id;
-            $subject->teacher_id = $teacher_id;
-
-            $subject->save();
             return redirect()->back()->with('success', 'subject added successfully');
         } catch(\Exception $e){
             return redirect()->back()->with('error', 'subject already exists');
@@ -61,9 +49,9 @@ class SubjectController extends Controller
     }
 
     public function editSubject($id){
-        $teachers = User::where('role_id', 4)->get();
-            
-        $subject = Subject::where('id','=',$id)->first();
+        $teachers = User::where('role_id', 4)->get();    
+        $subject = Subject::findOrFail($id);
+
         return view('edit-subject', compact('subject'), [
             'grade' => (new Grade())->all(),
             'classes' => (new Classes())->all(),
@@ -80,17 +68,7 @@ class SubjectController extends Controller
                 'teacher_id'=>'required'
             ]);
 
-            $newSubjectNameValue = $request->subject_name;
-            $newSubjectGradeValue = $request->grade_id;
-            $newSubjectClassValue = $request->class_id;
-            $newTeacherValue = $request->teacher_id;
-
-            Subject::where('id', '=', $id)->update([
-                'subject_name' => $newSubjectNameValue,
-                'grade_id' => $newSubjectGradeValue,
-                'class_id' => $newSubjectClassValue,
-                'teacher_id' => $newTeacherValue,
-            ]);
+            $this->update($request, $id);
 
             return redirect('dashboard')->with('success', 'subject updated successfully');
         } catch(\Exception $e){
@@ -110,5 +88,26 @@ class SubjectController extends Controller
         $assignments = $subject->assignments; 
 
         return view('subject-detail', compact('subject', 'materials', 'assignments'));
+    }
+
+    //using private helper functions to break the code down into smaller parts
+    private function createSubject(Request $request)
+    {
+        $subject = new Subject;
+        $subject->subject_name = $request->subject_name;
+        $subject->grade_id = $request->grade_id;
+        $subject->class_id = $request->class_id;
+        $subject->teacher_id = $request->teacher_id;
+        $subject->save();
+    }
+
+    private function update(Request $request, $id)
+    {
+        Subject::where('id', $id)->update([
+            'subject_name' => $request->subject_name,
+            'grade_id' => $request->grade_id,
+            'class_id' => $request->class_id,
+            'teacher_id' => $request->teacher_id,
+        ]);
     }
 }

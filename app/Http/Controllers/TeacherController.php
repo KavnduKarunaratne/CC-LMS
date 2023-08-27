@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Classes;
 use App\Models\Grade;
-use App\Models\Subject;
-use App\Models\Teacher;
 use App\Models\User;
 use App\Rules\ValidSuNumber;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 class TeacherController extends Controller
 {
@@ -21,10 +19,10 @@ class TeacherController extends Controller
     }
 
     public function addTeacher(){
-        return view('add-teacher', [
-            'grades' => (new Grade())->all(),
-            'classes' => (new Classes())->all(),
-        ]);
+
+        $grades=Grade::all();
+        $classes=Classes::all();
+        return view('add-teacher',compact('grades','classes'));
     }
 
     public function saveTeacher(Request $request){
@@ -38,28 +36,14 @@ class TeacherController extends Controller
                 'admission_number' => ['required', new ValidSuNumber],
             ]);
 
-            $teacherName = $request->name;
-            $teacherEmail = $request->email;
-            $teacherAdmissionNumber = $request->admission_number;
-            $teacherReg = $request->year_of_registration;
-            $teacherClass = $request->class_id;
-            $teacherGrade = $request->grade_id;
+            $admission_number = $request->admission_number;
 
-            $existingUser = User::where('admission_number', $teacherAdmissionNumber)->first();
+            $existingUser = User::where('admission_number', $admission_number)->first();
             if ($existingUser) {
                 return redirect()->back()->with('error', 'User with this admission number already exists');
             }
 
-            $teacher = new User;
-            $teacher->name = $teacherName;
-            $teacher->email = $teacherEmail;
-            $teacher->role_id = 4;
-            $teacher->class_id = $teacherClass;
-            $teacher->grade_id = $teacherGrade;
-            $teacher->admission_number = $teacherAdmissionNumber;
-            $teacher->year_of_registration = $teacherReg;
-
-            $teacher->save();
+            $this->createTeacher($request);
 
             return redirect('teacher-list')->with('success', 'Teacher added successfully');
         } catch (\Exception $e) {
@@ -73,11 +57,10 @@ class TeacherController extends Controller
     }
 
     public function editTeacher($id){
-        $teacher = User::where('id', '=', $id)->first();
-        return view('edit-teacher', compact('teacher'), [
-            'grades' => (new Grade())->all(),
-            'classes' => (new Classes())->all(),
-        ]);
+        $teacher = User::findOrFail($id);
+        $grades=Grade::all();
+        $classes=Classes::all();
+        return view('edit-teacher', compact('teacher', 'grades', 'classes'));
     }
 
     public function updateTeacher(Request $request, $id){
@@ -91,21 +74,16 @@ class TeacherController extends Controller
                 'admission_number' => ['required', new ValidSuNumber],
             ]);
 
-            $newTeacherNameValue = $request->name;
-            $newTeacherEmailValue = $request->email;
-            $newTeacherAdmissionNumberValue = $request->admission_number;
-            $newTeacherRegValue = $request->year_of_registration;
-            $newTeacherClassValue = $request->class_id;
-            $newTeacherGradeValue = $request->grade_id;
+            $existingUser = User::where('admission_number', $request->admission_number)
+            ->where('id', '!=', $id) 
+            ->first();
 
-            User::where('id', '=', $id)->update([
-                'name' => $newTeacherNameValue,
-                'email' => $newTeacherEmailValue,
-                'admission_number' => $newTeacherAdmissionNumberValue,
-                'year_of_registration' => $newTeacherRegValue,
-                'class_id' => $newTeacherClassValue,
-                'grade_id' => $newTeacherGradeValue,
-            ]);
+            if ($existingUser) {
+            return redirect()->back()->withErrors(['admission_number' => 'User with this admission number already exists'])->withInput();
+            }
+            
+
+            $this->update($request, $id);
 
             return redirect('teacher-list')->with('success', 'Teacher updated successfully');
         } catch (\Exception $e){
@@ -118,4 +96,32 @@ class TeacherController extends Controller
         $subjects = $teacher->subjects;
         return view('teacher-panel', compact('subjects'));
     }
+
+    private function createTeacher(Request $request)
+    {
+        $student = new User;
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->role_id = 4;
+        $student->year_of_registration = $request->year_of_registration;
+        $student->admission_number = $request->admission_number;
+        $student->class_id = $request->class_id;
+        $student->grade_id = $request->grade_id;
+        $student->save();
+    }
+
+    private function update(Request $request, $id)
+    {
+        User::where('id', $id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'year_of_registration' => $request->year_of_registration,
+            'admission_number' => $request->admission_number,
+            'class_id' => $request->class_id,
+            'grade_id' => $request->grade_id,
+        ]);
+
+    }
+
+
 }

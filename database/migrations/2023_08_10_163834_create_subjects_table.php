@@ -18,7 +18,10 @@ return new class extends Migration
             $table->foreignId('grade_id')->constrained('grades');
             $table->foreignId('class_id')->constrained('classes');
             $table->foreignId('teacher_id')->constrained('users')->nullable();
+
+            $table->unique(['subject_name', 'class_id']);
           
+        
 
         });
     }

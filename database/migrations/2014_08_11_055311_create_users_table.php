@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('password')->default(Hash::make('password'));
             $table->integer('class_id')->constrained('classes')->nullable();
             $table->integer('grade_id')->constrained('grades')->nullable();
+            $table->boolean('is_archived')->default(false);
+            $table->timestamp('archived_at')->nullable();
             
 
 

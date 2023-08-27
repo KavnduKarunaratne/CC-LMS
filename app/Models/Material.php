@@ -13,14 +13,16 @@ class Material extends Model
         'material_name','subject_id','description','file','teacher_id','upload_date','link'
     ];
 
-    public function subject()
-{
-    return $this->belongsTo(Subject::class, 'subject_id');
-}
-public function users()
-{
-    return $this->belongsToMany(User::class);
-}
+    public function subject(){
+
+         return $this->belongsTo(Subject::class, 'subject_id');
+
+    }
+    public function users(){
+
+        return $this->belongsToMany(User::class);
+        
+    }
 
 
 }

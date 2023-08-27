@@ -15,11 +15,6 @@ use App\Rules\ValidSuNumber;
 class UserController extends Controller
 {
 
-    public function Role(){
-        $roles = Role::all();
-        return view('register', compact('roles'));
-    }
-
     public function User(){  
         $user = User::where('is_archived', 0)->get();
         $archivedUsers = User::where('is_archived', true)->get();
@@ -28,10 +23,8 @@ class UserController extends Controller
     }
 
     public function addUser(){
-        return view('register', [
-            'roles' => (new Role())->all(),
-            'is_archived' => '0',
-        ]);
+        $roles=Role::all();
+        return view('register',compact('roles'));
     }
 
     public function saveUser(Request $request){
@@ -112,26 +105,22 @@ class UserController extends Controller
         $role_id = Auth::user()->role_id;
 
         if ($role_id == 1) { 
-            return view('dashboard', [
-                'grade' => (new Grade())->all(),
-                'classes' => (new Classes())->all(),
-            ]);
+            $grade=Grade::all();
+            $classes=Classes::all();
+            return view('dashboard',compact('grade','classes'));
         } else if ($role_id == 2) {
-            return view('management', [
-                'notice' => (new Notice())->all(),
-            ]);
+            $notice=Notice::all();
+            return view('management', compact('notice'));
         } else if ($role_id == 3) {
-            return view('student-panel', [
-                'notices' => (new Notice())->all(),
-            ]);
+            $notices=Notice::all();
+            return view('student-panel', compact('notices'));
         } else if ($role_id == 4) {
-            return view('teacher-panel', [
-                'subjects' => (new Subject())->all(),
-                'grades' => (new Grade())->all(),
-                'classes' => (new Classes())->all(),
-                'students' => (new User())->all(),
-                'notices' => (new Notice())->all(),
-            ]);
+            $grade=Grade::all();
+            $classes=Classes::all();
+            $notices=Notice::all();
+            $students=User::all();
+            $subjects=Subject::all();
+            return view('teacher-panel', compact('grade','classes','notices','students','subjects'));
         } else {
             return view('welcome');
         }

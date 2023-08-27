@@ -45,8 +45,8 @@
                             <tr class="whitespace-nowrap">
                                 <td class="px-6 py-4 text-sm text-white">{{ $subject->id }}</td>
                                 <td class="px-6 py-4 text-sm text-white">{{ $subject->subject_name }}</td>
-                                <td class="px-6 py-4 text-sm text-white">{{ $subject->grade_id }}</td>
-                                <td class="px-6 py-4 text-sm text-white">{{ $subject->class_id }}</td>
+                                <td class="px-6 py-4 text-sm text-white">{{ $subject->grade->grade }}</td>
+                                <td class="px-6 py-4 text-sm text-white">{{ $subject->class->class_name }}</td>
                                 <td class="px-6 py-4 text-sm text-white">{{ $subject->teacher->name }}</td>
                                 <td class="px-6 py-4 text-sm text-white">
                                     @if ($subject->teacher_id)
