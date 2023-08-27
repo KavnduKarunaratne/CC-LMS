@@ -40,6 +40,7 @@
             </div>
 
             <input type="hidden" name="assignment_id" value="{{ $assignment->id }}" />
+            <!--the assignment id is passed through the route-->
             <br>
           
             <button type="submit" class="w-full bg-green-500 text-white text-sm font-bold py-2 px-4 mb-4 rounded-md hover:bg-green-600 transition duration-300">Save</button>

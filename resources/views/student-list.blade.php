@@ -54,7 +54,7 @@
                             <td class="px-6 py-4 text-sm text-white"> {{$student->admission_number}}</td>
                             <td class="px-6 py-4 text-sm text-white"> {{$student->year_of_registration}}</td>
                             <td class="px-6 py-4 text-sm text-white"> {{$student->grade_id}}</td>
-                            <td class="px-6 py-4 text-sm text-white"> {{$student->class_id}}</td>
+                            <td class="px-6 py-4 text-sm text-white"> {{$student->class->class_name}}</td>
                             
                             <td class="px-6 py-4 text-sm text-white">
                                 <a href="{{ url('delete-student/'.$student->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>

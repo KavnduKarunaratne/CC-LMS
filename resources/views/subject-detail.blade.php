@@ -13,7 +13,8 @@
         <div class="bg-white p-4 rounded-md shadow-md mb-4">
             <h2 class="text-lg font-semibold">Subject Detail Panel</h2>
             <p class="text-lg font-semibold">{{ $subject->subject_name }}</p>
-            @if (Auth::user() && Auth::user()->role_id == 4)
+            <p class="text-m font-semibold">Teacher in charge : {{ $subject ->teacher->name}}</p>
+            @if (Auth::user() && Auth::user()->role_id == 4)<!--this link is only visible for authinticated users with role id 4-->
                 <p>
                     <a href="{{ route('student-progress', ['subject_id' => $subject->id]) }}">View Student Progress for this subject</a>
                     <br><br>
@@ -30,7 +31,7 @@
         <!-- Materials -->
         <div class="bg-white p-4 rounded-md shadow-md mb-4">
             <h3 class="text-lg font-semibold">Materials:</h3>
-            @if ($materials->count() > 0)
+            @if ($materials->count() > 0)<!--display the subject materials and special learning materials-->
                 <ul>
                     @foreach ($materials as $material)
                         <div class="border p-4 rounded-md shadow-md mb-4 font-semibold"><!--checks if the material is only accessible to specific students-->
@@ -44,17 +45,17 @@
                                     <strong>Description:</strong> {{ $material->description }}
                                     <br>
                                     @if ($material->file)
-                                        <strong>File:</strong> <a href="{{ asset('storage/' . $material->file) }}" download>download</a>
+                                        <strong>File:</strong> <a href="{{ asset('storage/' . $material->file) }}" download>download</a><!--download the file from storage-->
                                         <br>
                                     @endif
                                     <strong>Link:</strong> <a href="{{ $material->link }}" target="_blank">{{ $material->link }}</a>
                                     <br>
                                     <strong>Upload Date:</strong> {{ $material->upload_date }}
                                     <br>
-                                    @if (Auth::user() && Auth::user()->role_id == 4)
+                                    @if (Auth::user() && Auth::user()->role_id == 4)<!--display if the role id is 4-->
                                         <a href="{{ url('edit-material', $material->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
                                         <a href="#" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $material->id }}">Delete</a>
-
+                                   <!--this is a pop up for deletion confirmation-->
                                         <div class="modal fade" id="deleteModal{{ $material->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -101,7 +102,7 @@
                                 <strong>Description:</strong> {{ $assignment->description }}
                                 <br>
                                 @if ($assignment->file)
-                                    <strong>File:</strong> <a href="{{ asset('storage/' . $assignment->file) }}" download>download</a>
+                                    <strong>File:</strong> <a href="{{ asset('storage/' . $assignment->file) }}" download>download</a><!--download the file from storage-->
                                     <br>
                                 @endif
                                 <strong>Due Date:</strong> {{ $assignment->due_date }}
@@ -111,7 +112,7 @@
                                 @if (Auth::user() && Auth::user()->role_id == 4)
                                     <a href="{{ url('edit-assignment', $assignment->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
                                     <a href="#" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $assignment->id }}">Delete</a>
-
+                                <!--this is a pop up for deletion confirmation-->
                                     <div class="modal fade" id="deleteModal{{ $assignment->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -142,7 +143,7 @@
                                         <div class="border border-green-500 text-green-700 bg-green-400">
                                             <p>You have  submitted for this assignment.</p>
                                         </div>
-                                    @elseif (strtotime($assignment->due_date) > time())
+                                    @elseif (strtotime($assignment->due_date) > time())<!--checks if the due date is passed. if so the link is hidden-->
                                         <a href="{{ url('add-submission', ['assignment_id' => $assignment->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Add Submission for Assignment</a>
                                     @endif
                                 @endif
@@ -160,7 +161,7 @@
             @endif
         </div>
 
-        @if (Auth::user() && Auth::user()->role_id == 4)
+        @if (Auth::user() && Auth::user()->role_id == 4)<!--display this for authenticated user with role id 4-->
             <div class="bg-white p-4 rounded-md shadow-md mb-4">
                 @if ($subject->class && $subject->grade && $subject->class->students->count() > 0)
                     <h4>Students in Grade:  {{ $subject->grade->grade}}   class {{ $subject->class->class_name }}:</h4>

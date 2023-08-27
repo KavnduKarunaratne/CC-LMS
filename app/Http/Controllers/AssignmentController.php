@@ -53,7 +53,7 @@ class AssignmentController extends Controller
 
             return redirect('assignment-list')->with('success', 'Assignment Added Successfully');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error adding assignment. check file type');
+            return redirect()->back()->with('error', 'Error adding assignment.');
         }
     }
 

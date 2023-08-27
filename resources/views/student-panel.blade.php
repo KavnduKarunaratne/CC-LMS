@@ -83,7 +83,7 @@
             @foreach ($notices as $notice)
                 @if ($notice->grade_id == null)
                     <div class="text-white mt-4">
-                        <div class="text-black w-full max-w-sm mx-auto bg-white p-4 mb-4 rounded-md shadow-md">
+                        <div class="text-black w-full bg-white p-4 mb-4 rounded-md shadow-md">
                             {{ $notice->notice }}<br>
                             <span class="text-black">{{ $notice->date_of_notice }}</span><br>
                             @if ($notice->management)

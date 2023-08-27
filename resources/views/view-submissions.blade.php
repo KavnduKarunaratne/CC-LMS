@@ -24,7 +24,7 @@
             @if ($submissions->count() > 0)
             <div class="bg-white p-4 rounded-md shadow-md">
                 <ul>
-                    @foreach ($submissions as $submission)
+                    @foreach ($submissions as $submission)<!--get the submissions for each assignment-->
                         <li class="mb-4">
                             <div class="bg-gray-100 p-4 rounded-md shadow-md">
                                 <strong>Submission Name:</strong> {{ $submission->name }}
@@ -32,15 +32,15 @@
                                 <strong>Submission Description:</strong> {{ $submission->description }}
                                 <br>
                                 @if ($submission->file)
-                                    <strong>File:</strong> <a href="{{ asset('storage/' . $submission->file) }}" download>download</a>
+                                    <strong>File:</strong> <a href="{{ asset('storage/' . $submission->file) }}" download>download</a><!--download the file-->
                                     <br>
                                 @endif
                                 <strong>Student Name:</strong> {{ $submission->student->name }}
                                 <br>
-                                <strong>Student Admission:</strong> {{ $submission->student->admission_number }}
+                                <strong>Student Admission:</strong> {{ $submission->student->admission_number }}<!--get the admission number of the student through the relationship between the student and submission-->
                                 <br>
                                 <strong>Submission Upload Date:</strong> {{ $submission->submit_date}}
-                            </div>
+                            </div><!--this is the pop up for deletion confirmation-->
                             <a href="#" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $submission->id }}">Delete</a>
                             <div class="modal fade" id="deleteModal{{ $submission->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                  <div class="modal-dialog">
@@ -66,7 +66,7 @@
 
                             <div class="bg-gray-200 p-4 mt-4 rounded-md shadow-md">
                                 <h3 class="text-lg font-semibold mb-2">Feedback for Submission:</h3>
-                                <ul>
+                                <ul><!--get the feedback and grades for each submission-->
                                     @foreach ($submission->feedback as $feedback)
                                         <li class="mb-2">
                                             <strong>Feedback:</strong> {{ $feedback->feedback }}
@@ -82,7 +82,7 @@
                                 </ul>
                             </div>
 
-                            @if (Auth::user() && Auth::user()->role_id == 4)
+                            @if (Auth::user() && Auth::user()->role_id == 4)<!-- display this to authenticated users with role id 4 -->
                                 <a href="{{ url('add-feedback', ['submission_id' => $submission->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3">Provide Feedback</a>
                             @endif
                         </li>

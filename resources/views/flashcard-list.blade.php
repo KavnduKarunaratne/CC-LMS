@@ -29,8 +29,8 @@
                                 <td class="px-6 py-4 text-sm text-white">{{ $flashcard->id }}</td>
                                 <td class="px-6 py-4 text-sm text-white">{{ $flashcard->content }}</td>
                                 <td class="px-6 py-4 text-sm text-white">{{ $flashcard->answer }}</td>
-                                <td class="px-6 py-4 text-sm text-white">{{ $flashcard->subject->subject_name ?? 'N/A' }}</td>
-                                <td class="px-6 py-4 text-sm text-white">{{ $flashcard->teacher->name}}</td>
+                                <td class="px-6 py-4 text-sm text-white">{{ $flashcard->subject->subject_name ?? 'N/A' }}</td><!--if the subject is unavailable, it will show N/A-->
+                                <td class="px-6 py-4 text-sm text-white">{{ $flashcard->teacher->name}}</td><!-- the teacher who uploaded the flashcards will be shown-->
                                 <td class="px-6 py-4 text-sm text-white">{{ $flashcard->upload_date }}</td>
                                 <td class="px-6 py-4 text-sm text-white">
                                     <a href="{{ url('edit-card', $flashcard->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>

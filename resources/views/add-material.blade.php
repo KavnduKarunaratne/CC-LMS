@@ -48,8 +48,9 @@
         </div>
 
         <input type="hidden" name="subject_id" value="{{ $subject->id }}">
+        <!--the subject id is passed through the route-->
 
-        <div class="mb-4">
+        <div class="mb-4"><!--display the students in the class-->
             <label class="block text-gray-700 text-sm font-bold mb-2">Select Students to Make Material Accessible To:</label>
             @foreach ($classStudents as $student)
                 <div class="flex items-center mt-2">

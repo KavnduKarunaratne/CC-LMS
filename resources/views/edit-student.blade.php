@@ -48,14 +48,12 @@
                 </select>
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="class_id">Select Class</label>
-                <select name="class_id">
-                    @foreach($classes as $class)
-                    @if ($class->grade_id == $grade_id)
-                        <option value="{{$class->id}}">{{$class->class_name}}</option>
-                    @endif
-                    @endforeach
-                </select>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="class_id">Select Class</label>
+            <select name="class_id" required>
+                @foreach($classes as $class)
+                <option value="{{$class->id}}">{{$class->class_name}}</option>
+                @endforeach
+            </select>
             </div>
             <br>
             <div class="flex items-center justify-around">

@@ -47,7 +47,7 @@
             
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="class_id">Class</label>
-                <select name="class_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" required>
+                <select name="class_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">
                     <option value="">Select Class</option>
                     @foreach($classes as $class)
                     <option value="{{ $class->id }}">{{ $class->class_name }}</option>
@@ -57,7 +57,7 @@
 
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="grade_id">Grade</label>
-                <select name="grade_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" required>
+                <select name="grade_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" >
                     <option value="">Select Grade</option>
                     @foreach($grades as $grade)
                     <option value="{{ $grade->id }}">{{ $grade->grade }}</option>

@@ -10,7 +10,7 @@
 
 <div class="container mx-auto p-4">
     <h2 class="text-lg font-semibold">My Grades</h2>
-    <p>User: {{ auth()->user()->name }}</p>
+    <p>User: {{ auth()->user()->name }}</p><!--display the user name-->
 
     @if (count($submissionsBySubject) > 0)
         @foreach ($submissionsBySubject as $subjectName => $submissions)
@@ -25,15 +25,20 @@
                             <br>
                             @if ($submission->file)
                                 <strong>File:</strong> <a href="{{ asset('storage/app/submissions/' . $submission->file) }}" download>{{ $submission->file }}</a>
-                                <br>
+                                <br><!--downlaod the file from storage-->
                             @endif
                             <strong>Submit Date:</strong> {{ $submission->submit_date }}
                             <br>
                             <strong>Feedback:</strong>
+                            @if (count($submission->feedback) == 0)
+                                <p>No feedback available.</p>
+                                <!--if there is no feedback available, display this message-->
+                            @else
                             @foreach ($submission->feedback as $feedback)
                                 <p>Feedback: {{ $feedback->feedback }}</p>
                                 <p>Marks: {{ $feedback->marks }}</p>
                             @endforeach
+                            @endif
                         </li>
                     </div>
                 @endforeach
@@ -41,6 +46,7 @@
         @endforeach
     @else
         <p>No submissions and feedback available.</p>
+        <!--if there are no submissions and feedback available, display this message-->
     @endif
 </div>
 

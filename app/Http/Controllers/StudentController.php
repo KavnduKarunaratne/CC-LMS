@@ -80,14 +80,12 @@ class StudentController extends Controller
     public function editStudent($id){
         $student = User::where('id', '=', $id)->first();
         $grades = Grade::all();
-        $classes = Classes::where('grade_id', $student->grade_id)->get();
+        $classes = Classes::all();
 
         return view('edit-student', [
             'student' => $student,
             'grades' => $grades,
-            'classes' => $classes,
-            'grade_id'=>$student->grade_id,
-            
+            'classes' => $classes,  
         ]);
     }
 

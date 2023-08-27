@@ -33,8 +33,8 @@
                                 <td class="px-6 py-4 text-sm text-white">{{ $submission->name }}</td>
                                 <td class="px-6 py-4 text-sm text-white">{{ $submission->description }}</td>
                                 <td class="px-6 py-4 text-sm text-white">{{ $submission->file }}</td>
-                                <td class="px-6 py-4 text-sm text-white">{{ $submission->assignment->assignment_name }}</td>
-                                <td class="px-6 py-4 text-sm text-white">{{ $submission->student->name ?? 'N/A'}}</td>
+                                <td class="px-6 py-4 text-sm text-white">{{ $submission->assignment->assignment_name }}</td><!--student name and assignment name is displayed using the relationship-->
+                                <td class="px-6 py-4 text-sm text-white">{{ $submission->student->name ?? 'N/A'}}</td> <!-- ?? 'N/A' is used to show N/A if the student is not assigned to the submission -->
 
                                 <td class="px-6 py-4 text-sm text-white">{{ $submission->submit_date }}</td>
                                 <td class="px-6 py-4 text-sm text-white">
