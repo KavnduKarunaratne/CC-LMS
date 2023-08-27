@@ -42,7 +42,7 @@ class UserController extends Controller
             $admission_number=$request->admission_number;
             $year_of_registration=$request->year_of_registration;
             $password=$request->password;
-
+            //check if the user already exists
             $existingUser = User::where('admission_number', $admission_number)->first();
             if ($existingUser) {
                 return redirect()->back()->with('error', 'User with this admission number already exists');
@@ -75,7 +75,7 @@ class UserController extends Controller
                 'name'=> 'required',
                 'email'=>'required|email',
                 'year_of_registration'=>'required',
-                'admission_number' => ['required', new ValidSuNumber],
+                'admission_number' => ['required', new ValidSuNumber],//validate the SU number
             ]);
 
             $newName = $request->input('name');
@@ -101,7 +101,7 @@ class UserController extends Controller
         return redirect('user-management')->with('success', 'user deleted successfully');
     }
 
-    public function index(){
+    public function index(){  //the users are redirected based on their role
         $role_id = Auth::user()->role_id;
 
         if ($role_id == 1) { 
@@ -139,12 +139,12 @@ class UserController extends Controller
         return redirect('user-management')->with('success', 'User archived successfully');
     }
 
-    public function archivedUsers() {
+    public function archivedUsers() {  //display archived users
         $archivedUsers = User::where('is_archived', true)->get();
         return view('user-management', compact('archivedUsers'));
     }
 
-    public function unarchiveUser($id) {
+    public function unarchiveUser($id) {  //make an inactive user active
         User::where('id', $id)->update([
             'is_archived' => false,
             'archived_at' => null,
@@ -175,7 +175,7 @@ class UserController extends Controller
         return view('user-management', compact('user', 'archivedUsers'));
     }
 
-    public function showProfile(){
+    public function showProfile(){  //get the built in laravel profile page for each user
         $user = Auth::user();
         return view('profile/show', compact('user'));
     }

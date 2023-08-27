@@ -12,7 +12,7 @@ use App\Models\Student;
 
 class StudentController extends Controller
 {
-    public function Student(){
+    public function Student(){ //get the active users
         $student = User::where('role_id', 3)
             ->where('is_archived', false)
             ->get();
@@ -45,7 +45,7 @@ class StudentController extends Controller
                 'year_of_registration'=>'required',
                 'class_id'=>'required',
                 'grade_id'=>'required',
-                'admission_number' => ['required', new ValidSuNumber],
+                'admission_number' => ['required', new ValidSuNumber],//validates the admission number
             ]);
 
             $name = $request->name;
@@ -54,7 +54,8 @@ class StudentController extends Controller
             $admission_number = $request->admission_number;
             $class_id = $request->class_id;
             $grade_id = $request->grade_id;
-
+            
+            //check if the user already exists
             $existingUser = User::where('admission_number', $admission_number)->first();
             if ($existingUser) {
                 return redirect()->back()->with('error', 'User with this admission number already exists');
@@ -63,7 +64,7 @@ class StudentController extends Controller
             $student = new User;
             $student->name = $name;
             $student->email = $email;
-            $student->role_id = 3;
+            $student->role_id = 3; //student role id is 3
             $student->year_of_registration = $year_of_registration;
             $student->admission_number = $admission_number;
             $student->class_id = $class_id;

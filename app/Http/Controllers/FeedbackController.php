@@ -15,13 +15,13 @@ class FeedbackController extends Controller
         return view('feedback-list', compact('feedback','submissions'));
     }
 
-    public function addFeedback($submission_id){
-        $submission = Submission::find($submission_id);
+    public function addFeedback($submission_id){  //send the submission id to the add feedback page
+        $submission = Submission::find($submission_id);//so that the feedback is stored under the submission id
         return view('add-feedback', compact('submission'));
     }
 
     public function saveFeedback(Request $request){
-        try{
+        try{//get the submission id and save the feedback under the submission id
             $request->validate([
                 'feedback' => 'required',
                 'marks' => 'required|integer|min:0|max:100',
@@ -49,7 +49,7 @@ class FeedbackController extends Controller
 
     public function updateFeedback(Request $request, $id){
         try{
-            $request->validate([
+            $request->validate([  //validations for feedback and grades
                 'feedback' => 'required',
                 'marks' => 'required|integer|min:0|max:100',
             ]);

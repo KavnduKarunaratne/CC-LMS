@@ -64,7 +64,7 @@ class NoticeController extends Controller
         $notice = new Notice;
         $notice->notice = $request->notice;
         $notice->management_id = auth()->user()->id;
-        $notice->date_of_notice = now();
+        $notice->date_of_notice = now(); //the current date and time is automatically added
         $notice->grade_id = $request->grade_id;
         $notice->save();
     }

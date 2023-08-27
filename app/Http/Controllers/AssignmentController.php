@@ -47,7 +47,7 @@ class AssignmentController extends Controller
                 'description' => $request->description,
                 'due_date' => $request->due_date,
                 'subject_id' => $request->subject_id,
-                'teacher_id' => Auth::id(),
+                'teacher_id' => Auth::id(), //get the teacher id of the teacher that uploaded the assignment
                 'upload_date' => now(),
             ]);
 

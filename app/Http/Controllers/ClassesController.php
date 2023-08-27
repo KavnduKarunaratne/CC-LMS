@@ -67,12 +67,12 @@ class ClassesController extends Controller
         return redirect('dashboard')->with('success', 'class deleted successfully');
     }
     
-    public function showDetails(Classes $class){
+    public function showDetails(Classes $class){//the students and subjects of the class is displayed
         $students = User::where('grade_id', $class->grade_id)
             ->where('class_id', $class->id)
             ->where('role_id', 3) //role 3 is for students
             ->get();
-
+         
         $subjects = Subject::where('grade_id', $class->grade_id)
             ->where('class_id', $class->id)
             ->with('teacher')

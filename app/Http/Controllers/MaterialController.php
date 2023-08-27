@@ -12,10 +12,8 @@ class MaterialController extends Controller
 {
     public function Material(){
         $material = Material::all();
-        return view('material-list', compact('material'), [
-            'materials' => (new Material())->all(),
-            'subject' => (new Subject())->all(),
-        ]);
+        $subject=Subject::all();
+        return view('material-list', compact('material','subject'));
     }
 
     public function addMaterial($subject_id){
@@ -44,7 +42,7 @@ class MaterialController extends Controller
                 $filePath = $request->file('file')->store('materials', 'public');// Storing the file under materials folder in public folder
             } else {
                 $filePath = null;
-            }
+            }//save the assignment under the relative subject id
             $subject_id = $request->input('subject_id'); 
 
             $material = new Material;
@@ -54,7 +52,7 @@ class MaterialController extends Controller
             $material->upload_date = now();
             $material->link = $request->link;
             $material->subject_id = $subject_id;
-            $material->teacher_id = Auth::id();
+            $material->teacher_id = Auth::id(); //get the id of the teacher that uploaded the material
             $material->save();
 
             if ($request->has('users')) {

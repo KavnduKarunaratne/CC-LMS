@@ -23,11 +23,12 @@ class ManagementController extends Controller
                 'name' => 'required',
                 'email' => 'required|email',
                 'year_of_registration' => 'required',
-                'admission_number' => ['required', new ValidSuNumber],
+                'admission_number' => ['required', new ValidSuNumber], //the validation rule for the SU number
             ]);
 
             $admission_number = $request->admission_number;
-     
+            
+            //check if the user already exists
             $existingUser = User::where('admission_number', $admission_number)->first();
             if ($existingUser) {
                 return redirect()->back()->with('error', 'User with this admission number already exists');
@@ -36,7 +37,7 @@ class ManagementController extends Controller
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'role_id' => 2,
+                'role_id' => 2,//magament has a role id of 2
                 'class_id' => null,
                 'grade_id' => null,
                 'year_of_registration' => $request->year_of_registration,

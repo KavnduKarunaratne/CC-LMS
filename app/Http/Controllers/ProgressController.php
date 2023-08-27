@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ProgressController extends Controller
 {
-    public function studentProgress($subject_id){
+    public function studentProgress($subject_id){ //get the assignments under the student id
         $subject = Subject::findOrFail($subject_id);
     
         $students = User::where('role_id', 3)->get(); // 3 is the student role id

@@ -14,7 +14,7 @@ class SubmissionController extends Controller
         return view('submission-list', compact('submission'));
     }
 
-    public function addSubmission($assignment_id){
+    public function addSubmission($assignment_id){ //carry the assignment id to the add submission page
         $user = Auth::user();
         $assignment = Assignment::find($assignment_id);
         return view('add-submission', compact('assignment'));
@@ -24,14 +24,14 @@ class SubmissionController extends Controller
         try{
             $this->validateSubmission($request);
 
-            $filePath = $request->file('file')->store('submissions', 'public');
+            $filePath = $request->file('file')->store('submissions', 'public');//files are stored in the submissions folder under the public folder
             $submission = new Submission;
             $submission->name = $request->name;
             $submission->description = $request->description;
             $submission->file = $filePath;
             $submission->submit_date = now();
             $submission->assignment_id = $request->assignment_id;
-            $submission->student_id = Auth::id();
+            $submission->student_id = Auth::id(); //get the id of the student that submitted
             $submission->save();
 
             return redirect()->back()->with('success', 'submission added successfully');
@@ -69,7 +69,7 @@ class SubmissionController extends Controller
         return redirect('submission-list')->with('success', 'submission deleted successfully');
     }
 
-    public function viewSubmissions($assignment_id){
+    public function viewSubmissions($assignment_id){ //get the submissions under each assignment
         $submissions = Submission::where('assignment_id', $assignment_id)->get();
         $assignment = Assignment::find($assignment_id);
 

@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class TeacherController extends Controller
 {
     public function Teachers(){
-        $teachers = User::where('role_id', 4)
+        $teachers = User::where('role_id', 4) //get active teachers 
                         ->where('is_archived', false)
                         ->get();
         return view('teacher-list', compact('teachers'));
@@ -71,13 +71,13 @@ class TeacherController extends Controller
                 'year_of_registration' => 'required',
                 'class_id' => 'required',
                 'grade_id' => 'required',
-                'admission_number' => ['required', new ValidSuNumber],
+                'admission_number' => ['required', new ValidSuNumber], //custom validation rule for the SU number
             ]);
-
+           // check if the user already exists
             $existingUser = User::where('admission_number', $request->admission_number)
             ->where('id', '!=', $id) 
             ->first();
-
+           
             if ($existingUser) {
             return redirect()->back()->withErrors(['admission_number' => 'User with this admission number already exists'])->withInput();
             }
@@ -102,7 +102,7 @@ class TeacherController extends Controller
         $student = new User;
         $student->name = $request->name;
         $student->email = $request->email;
-        $student->role_id = 4;
+        $student->role_id = 4;  // 4 is the role id for teacher
         $student->year_of_registration = $request->year_of_registration;
         $student->admission_number = $request->admission_number;
         $student->class_id = $request->class_id;

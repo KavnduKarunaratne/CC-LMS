@@ -73,8 +73,8 @@ class FlashcardController extends Controller
         return redirect()->back()->with('success', 'Flashcard deleted successfully');
     }
 
-    public function showFlashcards($subject_id){
-        $subject = Subject::findOrFail($subject_id);
+    public function showFlashcards($subject_id){  //check the subject ID and flashcards with the associated
+        $subject = Subject::findOrFail($subject_id);//subject ID is displayed
         $flashcards = Flashcard::where('subject_id', $subject_id)->get();
 
         return view('flashcards', compact('subject', 'flashcards'));
