@@ -1,15 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Grade;
-use App\Models\Role;
-use App\Models\Student;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Classes;
-use TijsVerkoyen\CssToInlineStyles\Css\Rule\Rule;
+
 
 class ClassesController extends Controller
 {
@@ -19,10 +16,10 @@ class ClassesController extends Controller
     }
 
     public function addClass(){
-        return view('add-class', [
-            'grades' => (new Grade())->all(),
-            'classes' => (new Classes())->all(),
-        ]);
+
+        $grades=Grade::all();
+        $classes=Classes::all();
+        return view('add-class', compact('grades','classes'));
     }
 
     public function saveClass(Request $request){ 
@@ -31,14 +28,10 @@ class ClassesController extends Controller
                 'class_name'=> 'required',
                 'grade_id'=>'required',
             ]);
-            $class_name = $request->class_name;
-            $grade_id = $request->grade_id;
-
-            $class = new Classes;
-            $class->class_name = $class_name;
-            $class->grade_id = $grade_id;
-
-            $class->save();
+            Classes::create([
+                'class_name' => $request->class_name,
+                'grade_id' => $request->grade_id,
+            ]);
             return redirect('subject-list')->with('success', 'class added successfully');
         }catch(\Exception $e){
             return redirect()->back()->with('error', 'class already exists');
@@ -46,7 +39,7 @@ class ClassesController extends Controller
     }
 
     public function editClass($id){
-        $class = Classes::where('id','=',$id)->first();
+        $class = Classes::findOrfail($id);
         return view('edit-class', compact('class'));
     }
 
@@ -57,12 +50,10 @@ class ClassesController extends Controller
                 'grade_id'=>'required',
             ]);
 
-            $newClassNameValue = $request->class_name;
-            $newClassGradeValue = $request->grade_id;
-
-            Classes::where('id', '=', $id)->update([
-                'class_name' => $newClassNameValue,
-                'grade_id' => $newClassGradeValue
+            $class = Classes::findOrFail($id);
+            $class->update([
+                'class_name' => $request->class_name,
+                'grade_id' => $request->grade_id,
             ]);
 
             return redirect('subject-list')->with('success', 'class updated successfully');
