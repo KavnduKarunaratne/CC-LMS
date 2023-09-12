@@ -45,10 +45,11 @@
             </ul>
         @endforeach
     @else
-        <p>No submissions and feedback available.</p>
-        <!--if there are no submissions and feedback available, display this message-->
+        <p>No feedback available.</p>
+        <!--if there are no feedback available, display this message-->
     @endif
 </div>
 
 </body>
 </html>
+
