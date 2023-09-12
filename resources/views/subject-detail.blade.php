@@ -53,7 +53,8 @@
                                     <strong>Upload Date:</strong> {{ $material->upload_date }}
                                     <br>
                                     @if (Auth::user() && Auth::user()->role_id == 4)<!--display if the role id is 4-->
-                                        <a href="{{ url('edit-material', $material->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
+                                    <a href="{{ route('edit-material', ['subject_id' => $material->subject->id, 'id' => $material->id]) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
+
                                         <a href="#" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $material->id }}">Delete</a>
                                    <!--this is a pop up for deletion confirmation-->
                                         <div class="modal fade" id="deleteModal{{ $material->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -180,3 +181,4 @@
     </div>
 </body>
 </html>
+
