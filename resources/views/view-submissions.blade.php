@@ -67,8 +67,11 @@
                             <div class="bg-gray-200 p-4 mt-4 rounded-md shadow-md">
                                 <h3 class="text-lg font-semibold mb-2">Feedback for Submission:</h3>
                                 <ul><!--get the feedback and grades for each submission-->
+                               
                                     @foreach ($submission->feedback as $feedback)
+                                    
                                         <li class="mb-2">
+                                         
                                             <strong>Feedback:</strong> {{ $feedback->feedback }}
                                             <br>
                                             <strong>Marks:</strong> {{ $feedback->marks }}
@@ -78,7 +81,15 @@
                                             <a href="{{ url('edit-feedback', $feedback->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-1">Edit</a>
                                             <a href="{{ url('delete-feedback', $feedback->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-1">Delete</a>
                                         </li>
+                                   
                                     @endforeach
+                                    @if ($submission->feedback->isEmpty())
+        <li class="mb-2">
+            <strong>Provide Feedback</strong>
+           
+        </li>
+    @endif
+                                    
                                 </ul>
                             </div>
 
@@ -93,6 +104,33 @@
             <p>No submissions available </p>
         @endif
     </div>
-   
+    <div>
+    @if (Auth::user() && Auth::user()->role_id == 4)<!--display this for authenticated user with role id 4-->
+            <div class="bg-white p-4 rounded-md shadow-md mb-4">
+                @if ($subject->class && $subject->grade && $subject->class->students->count() > 0)
+                    <h4>Students in Grade:  {{ $subject->grade->grade}}   class {{ $subject->class->class_name }}:</h4>
+                    <ul>
+                        @foreach ($subject->class ->students as $student) <!--display students enrolled in the specific class-->
+                            @if ($student->is_archived == 0 && $student->class_id == $subject->class_id)
+                            <li>
+                                    {{ $student->name }}
+                                    {{ $student->admission_number }}
+                                    @if ($student->hasSubmission($assignment->id)) <!-- Check if the student has a submission for this assignment -->
+                                        <span class="text-green-500">Submitted</span>
+                                    @else
+                                        <span class="text-red-500">Not Submitted</span>
+                                    @endif
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                @else
+                    <p>No students in this class.</p>
+                @endif
+            </div>
+        @endif
+</div>
+       
 </body>
 </html>
+
