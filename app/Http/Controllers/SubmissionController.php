@@ -72,8 +72,9 @@ class SubmissionController extends Controller
     public function viewSubmissions($assignment_id){ //get the submissions under each assignment
         $submissions = Submission::where('assignment_id', $assignment_id)->get();
         $assignment = Assignment::find($assignment_id);
+        $subject = $assignment->subject; 
 
-        return view('view-submissions', compact('submissions', 'assignment'));
+        return view('view-submissions', compact('submissions', 'assignment','subject'));
     }
 
     public function searchSubmissions(Request $request, $assignment_id){
@@ -114,8 +115,9 @@ class SubmissionController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',
+            'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800', //file size is 204800 kilobytes
             'assignment_id' => 'required',
         ]);
     }
 }
+
