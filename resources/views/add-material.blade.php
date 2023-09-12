@@ -49,13 +49,24 @@
 
         <input type="hidden" name="subject_id" value="{{ $subject->id }}">
         <!--the subject id is passed through the route-->
+      
+        <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2">Select Related Subjects</label>
+    @foreach ($relatedSubjects as $relatedSubject)
+        <div class="flex items-center mt-2">
+            <input type="checkbox" name="subject_ids[]" value="{{ $relatedSubject->id }}" class="mr-2">
+            <label>{{ $relatedSubject->subject_name }} {{ $relatedSubject->class->class_name }} {{ $relatedSubject->grade->grade }}</label>
+        </div>
+    @endforeach
+</div>
+
 
         <div class="mb-4"><!--display the students in the class-->
             <label class="block text-gray-700 text-sm font-bold mb-2">Select Students to Make Material Accessible To:</label>
             @foreach ($classStudents as $student)
                 <div class="flex items-center mt-2">
                     <input type="checkbox" name="users[]" value="{{ $student->id }}" class="mr-2">
-                    <label>{{ $student->name }}</label>
+                    <label>{{ $student->name }} {{$student->admission_number}}</label>
                 </div>
             @endforeach
         </div>
@@ -64,5 +75,40 @@
         <button type="submit" class="w-full bg-green-500 text-white text-sm font-bold py-2 px-4 mb-4 rounded-md hover:bg-green-600 transition duration-300">Save</button>
     </form>
 </div>
+
+<script>
+    // Fetch related subjects based on the selected subject's name and grade
+    function fetchRelatedSubjects() {
+        const selectedSubjectName = "{{ $subject->subject_name }}"; // Get the selected subject name from PHP
+        const selectedGradeId = "{{ $subject->grade_id }}"; // Get the selected grade ID from PHP
+
+        // Make an AJAX request to get related subjects
+        axios.get(`/get-related-subjects/${selectedSubjectName}/${selectedGradeId}`)
+            .then(function (response) {
+                const relatedSubjects = response.data;
+                const selectElement = document.getElementById('subject_id');
+                selectElement.innerHTML = '<option value="">Select Subject</option>'; // Clear previous options
+
+                // Populate the dropdown with related subjects
+                relatedSubjects.forEach(function (relatedSubject) {
+                    const option = document.createElement('option');
+                    option.value = relatedSubject.id;
+                    option.textContent = `${relatedSubject.subject_name} ${relatedSubject.class.class_name} ${relatedSubject.grade.grade}`;
+                    selectElement.appendChild(option);
+                });
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    }
+
+    // Listen for changes on the subject_id dropdown
+    document.getElementById('subject_id').addEventListener('change', fetchRelatedSubjects);
+
+    // Fetch related subjects when the page loads
+    fetchRelatedSubjects();
+</script>
+
 </body>
 </html>
+
