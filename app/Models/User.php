@@ -79,8 +79,18 @@ class User extends Authenticatable
         return $this->hasMany(Submission::class, 'student_id');
     }
 
+    public function hasSubmission($assignmentId)
+    {
+      
+        return $this->submissions()->where('assignment_id', $assignmentId)->exists();
+    }
+
     public function assignedClass()
     {
         return $this->belongsTo(Classes::class, 'class_id')->with('grade');
     }
 }
+
+
+
+
