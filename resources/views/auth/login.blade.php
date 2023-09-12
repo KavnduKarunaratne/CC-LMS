@@ -1,6 +1,6 @@
 <x-guest-layout>
 
-<div class="min-h-screen flex items-center justify-center bg-grey-100 bg-cover" style="background-image: url('{{ asset('images/background2.png') }}');">
+<div class="min-h-screen flex items-center justify-center bg-grey-100 bg-cover" style="background-image: url('{{ asset('images/background.png') }}');">
 
     <x-authentication-card>
         {{--<x-slot name="logo">
