@@ -6,8 +6,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Announcement</title>
 </head>
-<body class="bg-black">
-    <nav class="bg-gray-800">
+<body class="bg-white">
+    {{--<nav class="bg-gray-800">
         <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div class="relative flex h-16 items-center justify-between">
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
@@ -21,9 +21,14 @@
                 </div>
             </div>
         </div>
-    </nav>
+    </nav>--}}
 
-    <div class="container flex justify-center mx-auto mt-10">
+
+    @include('components.managementnav2')
+
+    <!--managementnavbar & managementcards-->
+
+    {{--<div class="container flex justify-center mx-auto mt-10">
         <div class="flex flex-col">
             <div class="w-full">
                 <div class="border-b border-gray-200 shadow">
@@ -49,6 +54,6 @@
                 <br>
             </div>
         </div>
-    </div>
+    </div>--}}
 </body>
 </html>
