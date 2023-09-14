@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @include('components.teacheravatardisplay')
     <title>Student Progress - {{ $subject->subject_name }}</title>
 
     <style>
@@ -42,11 +43,11 @@
 <body>
 <div class="container">
 @foreach($assignments as $assignment)
-    <h2>Student Progress for Assignment: {{ $assignment->assignment_name }}</h2>
-    <table>
-        <thead>
+    <h2 class="font-bold text-xl mt-2 mb-0">Student Progress for Assignment: {{ $assignment->assignment_name }}</h2>
+    <table class="mb-5 mt-2">
+        <thead class="text-indigo-600">
             <tr>
-                <th>Student</th>
+                <th >Student</th>
                 <th>Admission Number</th>
                 <th>Marks</th>
             </tr>
@@ -85,14 +86,14 @@
     </table>
 @endforeach
 
-<h2>Class Average: {{ $totalMarks / $totalStudents }} / 100</h2>
+<h2 class="font-bold text-lg mb-5 underline decoration-solid decoration-indigo-600">Class Average: {{ $totalMarks / $totalStudents }} / 100</h2>
 
-<h2>Overall Top Scoring Students</h2>
+<h2 class="font-bold text-xl">Overall Top Scoring Students</h2>
  <!-- the marks are calculated and the  students are arranged(sorted) in the descending order of marks-->
 <!-- the flatmap function extracts the marks from the feedback-->
-   <table>
+   <table class="mb-5">
         <thead>
-               <tr>
+               <tr class="text-indigo-600 mb-3 mt-4">
                   <th>Student</th>
                   <th>Total Marks</th>
                </tr>
@@ -131,12 +132,12 @@
         </tbody>
     </table>
 
-<h2>Overall Least Scoring Students</h2>
+<h2 class="text-xl font-bold mb-2">Overall Least Scoring Students</h2>
   <!-- the marks are calculated and the  students are arranged(sorted) in the ascending order of marks.
   the flatmap function extracts the marks from the feedback-->
     <table>
         <thead>
-            <tr>
+            <tr class="text-indigo-600 mt-4">
                  <th>Student</th>
                 <th>Total Marks</th>
             </tr>
@@ -177,5 +178,4 @@
 </div>
 </body>
 </html>
-
 

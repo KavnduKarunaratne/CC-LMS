@@ -18,7 +18,7 @@
                             </div>
                             <ul class="mt-12">
                                 {{--<li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">--}}
-                                <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-blue-600  text-gray-800 hover:text-white">
+                                <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-indigo-700  text-indigo-700 hover:text-white">
 
                                     <a href="{{ url('management') }}" class="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-grid" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -33,7 +33,7 @@
                                     
                                 </li>
                                 {{--<li class="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6">--}}
-                                <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-blue-600 text-gray-800 hover:text-white">
+                                <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-indigo-700 text-gray-800 hover:text-white">
                                     <a href="{{ url('profile/show') }}" href="{{ url('profile/show') }}" class="flex items-center focus:outline-none ">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-puzzle" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z"></path>
@@ -44,7 +44,7 @@
                                     
                                 </li>
                                 {{--<li class="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6">--}}
-                                <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-blue-600 text-gray-800 hover:text-white">
+                                <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-indigo-700 text-gray-800 hover:text-white">
                                     <a href="{{ route('logout') }}" class="flex items-center ">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-compass" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z"></path>
@@ -146,11 +146,15 @@
                         </div>
                        
                     </div>
+
+
+
+                    <!--ADD TO MAIN PAGE-->
                     <!-- Sidebar ends -->
                     <!-- Remove class [ h-64 ] when adding a card block -->
-                    <div class="container mx-auto py-10 md:w-4/5 w-11/12 px-6" id="content">
+                    {{--<div class="container mx-auto py-10 md:w-4/5 w-11/12 px-6" id="content">
                         <!-- Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border -->
-                        @include('components.managementcards')
+                        
                             <!-- Place your content here -->
                         </div>
                     </div>
@@ -175,15 +179,17 @@
                 </script>
                 
             </dh-component>
-        </div>
+        </div>--}}
 
 
 
 
 
-        
-       <style>
-            #wrapper {
+
+
+
+        <style>
+#wrapper {
   display: flex;
 }
 
@@ -208,4 +214,3 @@
 
 
         </style>
-

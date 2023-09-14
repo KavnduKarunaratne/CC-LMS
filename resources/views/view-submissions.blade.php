@@ -7,15 +7,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Submissions</title>
+    @include('components.teacheravatardisplay')
 </head>
 <body>
-        <div class="ml-4"> 
-          <p>Logged-in User: {{ auth()->user()->name }}</p>
-        </div>
         <div class="m-10">
             <form action="{{ route('search-submissions', $assignment->id) }}" method="GET">
                 <input type="text" name="search" placeholder="Search submissions">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded">Search</button>
+                <button type="submit" class="bg-green-400 hover:bg-green-300 text-white py-1 px-3 rounded">Search</button>
             </form>
         </div>
 
@@ -101,7 +99,7 @@
                 </ul>
             </div>
         @else
-            <p>No submissions available </p>
+            <p class="font-semi-bold text-lg">No submissions available </p>
         @endif
     </div>
     <div>
@@ -109,7 +107,7 @@
             <div class="bg-white p-4 rounded-md shadow-md mb-4">
                 @if ($subject->class && $subject->grade && $subject->class->students->count() > 0)
                     <h4>Students in Grade:  {{ $subject->grade->grade}}   class {{ $subject->class->class_name }}:</h4>
-                    <ul>
+                    <ul class=>
                         @foreach ($subject->class ->students as $student) <!--display students enrolled in the specific class-->
                             @if ($student->is_archived == 0 && $student->class_id == $subject->class_id)
                             <li>

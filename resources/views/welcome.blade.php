@@ -199,7 +199,7 @@
 </head>
 <body>
     <div class="button-container">
-    <img src="images/book2.png" alt="Your Image" class="custom-image">
+    <img src="images/book.png" alt="Your Image" class="custom-image">
     <h1 class="custom-title">EducateLanka</h1>
         @auth
             <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
