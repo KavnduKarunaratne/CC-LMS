@@ -11,6 +11,7 @@
     <!--checks if user is archived and the roleid is 3-->
 
     @include('components.studentsidenav2')
+    {{--@include('kiddyLMS.kiddypanelnav3')--}}
     
 
 @else
