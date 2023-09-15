@@ -200,7 +200,7 @@
                                             <p>You have  submitted for this assignment.</p>
                                         </div>
                                     @elseif (strtotime($assignment->due_date) > time())<!--checks if the due date is passed. if so the link is hidden-->
-                                        <a href="{{ url('add-submission', ['assignment_id' => $assignment->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Add Submission for Assignment</a>
+                                        <a href="{{ url('add-submission', ['assignment_id' => $assignment->id]) }}" class="bg-indigo-600 hover:bg-indigo-400 text-white py-1 px-3 rounded my-3 mt-1">Add Submission for Assignment</a>
                                     @endif
     @endif
         @endforeach
@@ -244,4 +244,5 @@
 
         </div>
 
-    </div>-->
+    </div>
+</div>-->

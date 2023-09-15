@@ -1,6 +1,6 @@
 <!-- Main navigation container -->
 <nav
-  class="flex-no-wrap relative flex w-full items-center justify-between bg-gray-800 py-2  lg:flex-wrap lg:justify-start ">
+  class="flex-no-wrap relative flex w-full items-center justify-between bg-white py-2  lg:flex-wrap lg:justify-start ">
   <div class="flex w-full flex-wrap items-center justify-between px-3 ">
     <!-- Hamburger button for mobile view -->
     <button
