@@ -6,7 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Student Panel</title>
 </head>
-<body class="bg-white">
+<body class="bg-white dark:bg-black">
 @if (Auth::check() && Auth::user()->is_archived==0 && Auth::user()->role_id == 3)
     <!--checks if user is archived and the roleid is 3-->
 

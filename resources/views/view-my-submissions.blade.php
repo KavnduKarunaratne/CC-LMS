@@ -11,6 +11,7 @@
 
 
 @include('components.studentnav-viewmygrades')
+{{--@include('kiddyLMS.kiddygrades')--}}
 
 
 

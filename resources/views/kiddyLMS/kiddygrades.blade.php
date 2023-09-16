@@ -1,4 +1,3 @@
-
 <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
   <div class="px-3 py-3 lg:px-5 lg:pl-3">
     <div class="flex items-center justify-between">
@@ -123,295 +122,39 @@
 
 <div class="p-4 sm:ml-64">
    <div class="p-4 border-2 border-white border-dashed rounded-lg dark:border-gray-700 mt-14">
+   <div class="text-2xl font-semi-bold text-gray-900 mb-5">My Grades</div>
+    <div><img src="images/kiddy6.png"></div>
       <!--ADDED MY CONTENT HERE-->
-<div class="bg-white py-0 mb-0">
-    <div class="container mx-auto px-0">
-        <h2 class="text-2xl font-semi-bold text-gray-900 mb-1">Hey Alex! Ready to have an Adventure?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
-            <div class="bg-white rounded-lg b p-8">
-                <div class="relative overflow-hidden">
-                    {{--<img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">--}}
-                    <div class="absolute inset-0 bg-black opacity-40"></div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View Product</button>
-                    </div>
-                </div>
-                <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Animation</title>
-</head>
-<body>
-<div class="image-container">
-  <img src="images/cloudbg.png" alt="Image 1" class=" move-left">
-  <img src="images/cloud.png" alt="Image 2" class="move-right">
-</div>
-    
-</body>
-</html>
-            </div>
-        </div>
-    </div>
-</div>
       <!--student information-->
-<div class="bg-white py-5 mb-0">
-    <div class="container mx-auto px-4">
-        <h2 class="text-2xl font-semi-bold text-gray-900 mb-1"></h2>
-        <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
-            <div class="bg-white rounded-lg border-dashed border-2 border-indigo-600 p-8">
-                {{--<div class="object-left overflow-hidden">
-                    <img class=" object-cover w-full h-full" src="images/kiddylogin.png" alt="Product">
-                    <div class="absolute inset-0 bg-black opacity-40"></div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View Product</button>
-                    </div>
-                </div>--}}
-                <!--<img src="images/kiddy4.png" class="place-self: start;">-->
-                <h3 class="text-xl font-semi-bold text-gray-900 mt-1">You're logged in as: {{ auth()->user()->name }} </h3>
-                <h3 class="text-xl font-semi-bold text-gray-900 mt-1">Your role ID: {{ Auth::user()->role_id }}</h3>
-                @if (Auth::user()->grade)
-                <h3 class="text-xl font-semi-bold text-gray-900 mt-1">Your Grade: {{ Auth::user()->grade->grade }}</h3>
-                @else
-                <h3 class="text-xl font-semi-bold text-red-600 mt-1">Not assigned to a grade</h3>
-                @endif
-                @if (Auth::user()->class)
-                <h3 class="text-xl font-semi-bold text-gray-900 mt-1">Your Class: {{ Auth::user()->class->class_name }}</h3>
-                @else 
-                <h3 class="text-xl font-semi-bold text-red-600 mt-1">Not assigned to a class</h3>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
-<!--Subjects for student-->
-@if (Auth::user()->grade && Auth::user()->class)
-<div class="bg-white py-5 mb-0">
-    <div class="container mx-auto px-4">
-        <h2 class="text-2xl font-semi-bold text-gray-900 mb-8">Here are Your Subjects!</h2>
-        <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
-            <div class="bg-white rounded-lg border-solid border-2 border-black p-8">
-                <div class="relative overflow-hidden">
-                    {{--<img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">--}}
-                    <div class="absolute inset-0 bg-black opacity-40"></div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View Product</button>
-                    </div>
-                </div>
-                @foreach (Auth::user()->class->subjects()->where('grade_id', Auth::user()->grade->id)->get() as $subject)
-                <a href="{{ route('subject.detail', ['subject_id' => $subject->id]) }}"><h3 class="text-xl font-bold text-indigo-600 hover:text-indigo-300 mt-3">{{ $subject->subject_name }}</h3></a>
-                @endforeach
-            </div>
-        </div>
-    </div>
-</div>
-@endif
-<!--Notices-->
-{{--<div class="bg-black py-16 mb-10">
-    
-        @foreach (Auth::user()->grade->notices as $notice)
-        @if ($notice->grade_id == Auth::user()->grade->id || $notice->grade_id == null)
-        <li>
-            Notice:{{ $notice->notice }}
-            Date:{{ $notice->date_of_notice }}
-        </li>
+      
+      @if (count($submissionsBySubject) > 0)
+      @foreach ($submissionsBySubject as $subjectName => $submissions)
+      <h2 class="text-xl font-semi-bold text-black mb-3">{{ $subjectName }}</h>
+      @foreach ($submissions as $submission)
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+        <div class="bg-white rounded-lg shadow-lg p-8 mt-3 border-solid border-2 border-gray-900">
+        <h3 class="text-xl font-bold text-gray-900 mt-1">Assignment Name: {{ $submission->assignment->assignment_name }}</h3>
+        <h3 class="text-xl font-bold text-gray-900 mt-1">Description: {{ $submission->assignment->description }}</h3>
+        <h3 class="text-xl font-bold text-gray-900 mt-1"></h3>
+        @if ($submission->file)
+        <a href="{{ asset('storage/app/submissions/' . $submission->file) }}" download>File: Download Here<h3 class="text-xl font-bold text-gray-900 mt-1"></h3></a>
+        @endif 
+        <h3 class="text-xl font-bold text-gray-900 mt-1">Submit Date: {{ $submission->submit_date }}</h3>
+        <h3 class="text-xl font-bold text-gray-900 mt-1"></h3>
+        @if (count($submission->feedback) == 0)
+        <h3 class="text-xl font-bold text-gray-900 mt-1">No Feedback</h3>
+        @else
+        @foreach ($submission->feedback as $feedback)
+        <p>Feedback: {{ $feedback->feedback }}</p>
+        <p>Marks: {{ $feedback->marks }}</p>
+        @endforeach
         @endif
-        @endforeach         
-</div>--}}
-<!--Notices-->
-<div class="bg-white py-5 mb-10">
-    <h2 class="text-2xl font-semi-bold text-gray-900 ml-4 mb-8">Accouncements</h2>
-    @if ($notices->count() > 0)
-    @foreach ($notices as $notice)
-    @if ($notice->grade_id == null)
-    <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
-        <div class="bg-white rounded-lg border-solid border-2 border-black p-8 m-4">
-            <div class="relative overflow-hidden"></div>
-            <h3 class="text-xl font-semi-bold text-gray-900 mt-3">{{ $notice->notice }}</h3>
-            <h3 class="text-xl font-semi-bold text-gray-900 mt-3">Posted on: {{ $notice->date_of_notice }}</h3>
-            @if ($notice->management)
-            <h3 class="text-xl font-semi-bold text-gray-900 mt-3">Posted by: {{ $notice->management->name }}</h3>
-            @else
-            <h3 class="text-xl font-semi-bold text-gray-900 mt-3">Not Available</h3>
-            @endif
+        @endforeach
+        @endforeach 
+        @else 
+        <p>No Feedback</p>
+        @endif            
         </div>
-    </div>
-    @endif
-    @endforeach
-    @else
-    <h3 class="text-xl font-semi-bold text-gray-900 mt-3">No Notices Available</h3>
-    @endif
-</div>
-      
-      
+      </div>           
    </div>
 </div>
-
-<!--<!DOCTYPE html>
-<html>
-<head>
-<style>
-  .image-container {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .image-container img {
-    display: inline-block;
-    animation-duration: 5s; /* Adjust the animation duration as needed */
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-
-  .move-left {
-    animation-name: moveLeft;
-  }
-
-  .move-right {
-    animation-name: moveRight;
-  }
-
-  @keyframes moveLeft {
-    0% {
-      transform: translateX(-100%); /* Start from the left */
-    }
-    100% {
-      transform: translateX(100%); /* Move to the right */
-    }
-  }
-
-  @keyframes moveRight {
-    0% {
-      transform: translateX(100%); /* Start from the right */
-    }
-    100% {
-      transform: translateX(-100%); /* Move to the left */
-    }
-  }
-</style>
-</head>
-<body>
-
-<div class="image-container">
-  <img src="images/cloudbg.png" alt="Image 1" class="move-left">
-  <img src="images/cloud.png" alt="Image 2" class="move-right">
-</div>
-
-</body>
-</html>-->
-
-
-<!--USING-->
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-  .image-container {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .image-container img {
-    display: inline-block;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    /*animation-direction: alternate;*/
-    
-  }
-
-  .move-left {
-    animation-name: moveLeft;
-    animation-duration: 20s; /* Adjust the animation duration for slower movement */
-  }
-
-  .move-right {
-    animation-name: moveRight;
-    animation-duration: 20s; /* Adjust the animation duration for slower movement */
-  }
-
-  @keyframes moveLeft {
-    0% {
-      transform: translateX(-100%); /* Start from the left */
-    }
-    100% {
-      transform: translateX(100%); /* Move to the right */
-    }
-  }
-
-  @keyframes moveRight {
-    0% {
-      transform: translateX(50%); /* Start from the right */
-    }
-    100% {
-      transform: translateX(-200%); /* Move to the left */
-    }
-  }
-</style>
-</head>
-<body>
-
-
-
-</body>
-</html>
-
-<!--<!DOCTYPE html>
-<html>
-<head>
-<style>
-  .image-container {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .image-container img {
-    display: inline-block;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-
-  .move-left {
-    animation-name: moveLeft;
-    animation-duration: 10s; /* Adjust the animation duration for slower movement */
-  }
-
-  .move-right {
-    animation-name: moveRight;
-    animation-duration: 10s; /* Adjust the animation duration for slower movement */
-  }
-
-  @keyframes moveLeft {
-    0% {
-      transform: translateX(-100%); /* Start from the left */
-    }
-    100% {
-      transform: translateX(100%); /* Move to the right */
-    }
-  }
-
-  @keyframes moveRight {
-    0% {
-      transform: translateX(100%); /* Start from the right */
-    }
-    100% {
-      transform: translateX(-100%); /* Move to the left */
-    }
-  }
-</style>
-</head>
-<body>
-
-<div class="image-container">
-  <img src="images/cloudbg.png" alt="Image 1" class="move-left">
-  <img src="images/cloud.png" alt="Image 2" class="h-100 move-right">
-</div>
-
-</body>
-</html>-->
-
