@@ -7,182 +7,128 @@
     <title>User Management</title>
 </head>
 <body class="bg-white text-black">
-    <div class="m-10">
-        <form action="{{ route('search-users') }}" method="GET">
-            <input type="text" name="search" placeholder="Search users" class="border border-black">
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded">Search</button>
-        </form>
-    </div>
-    <div class="container flex justify-center mx-auto mt-10">
-        <div class="flex flex-col">
-            <div class="w-full">
-                <div class="border-b border-gray-200 shadow">
-                    <a href="{{ url('add-management') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1"> Add New Management</a>
-                    <!-- Display Active Users -->
-                    <table>
-                        <thead>
+    <div class="p-8">
+        <div class="flex items-center mb-6">
+            <a href="{{ url('add-management') }}" class="bg-green-500 hover:bg-green-700 text-white text-xl font-bold py-2 px-4 rounded-full mt-1">Add New Management</a>
+            <form action="{{ route('search-users') }}" method="GET" class="ml-4 flex">
+                <input type="text" name="search" placeholder="Search users" class="border py-1 px-2 rounded-l-full text-xl">
+                <button type="submit" class="bg-indigo-600 hover:bg-indigo-800 text-white text-xl font-bold rounded-r-full py-2 px-6 mr-2">Search</button>
+            </form>
+        </div>
+        <!-- Display Active Users -->
+        <div class="shadow overflow-hidden border-b border-gray-200">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead>
+                <tr>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Name
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Email
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Admission Number
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Year of Registration
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Status
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Actions
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                @if ($user->count() == 0)
+                    <tr>
+                        <td colspan="6" class="px-6 py-4 text-center text-gray-500">No users found.</td>
+                    </tr>
+                @else
+                    @foreach ($user as $user)
+                        @if ($user->role_id == 2 || $user->role_id == 3 || $user->role_id == 4)
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Admission Number</th>
-                                <th>Year of Registration</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $user->email }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $user->admission_number }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $user->year_of_registration }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $user->is_archived ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800' }}">
+                                        {{ $user->is_archived ? 'Inactive' : 'Active' }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                                    <a href="{{ url('edit-user/'.$user->id) }}" class="text-blue-600 hover:underline">Edit</a>
+                                    <form action="{{ url('archive-user/'.$user->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        <button type="submit" class="text-red-600 hover:underline">Archive</button>
+                                    </form>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @if ($user->count() == 0)
-                                <tr>
-                                    <td colspan="6" class="text-center">No users found.</td>
-                                </tr>
-                            @else
-                                @foreach ($user as $user)
-                                    @if ($user->role_id == 2)
-                                        <tr>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->admission_number }}</td>
-                                            <td>{{ $user->year_of_registration }}</td>
-                                            <td>
-                                                <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                                    {{ $user->is_archived ? 'Inactive' : 'Active' }}
-                                                </span>
-                                            </td>
-                                            <td class="px-6 py-4 text-sm text-white">
-                                                <a href="{{ url('edit-user/'.$user->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
-                                                <form action="{{ url('archive-user/'.$user->id) }}" method="POST" class="inline">
-                                                    @csrf
-                                                    <button type="submit" class="bg-gray-500 hover:bg-gray-700 text-white py-1 px-3 rounded my-3 mt-1">Archive</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endif
-                                    @if ($user->role_id == 3)
-                                        <tr>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->admission_number }}</td>
-                                            <td>{{ $user->year_of_registration }}</td>
-                                            <td>
-                                                <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                                    {{ $user->is_archived ? 'Inactive' : 'Active' }}
-                                                </span>
-                                            </td>
-                                            <td class="px-6 py-4 text-sm text-white">
-                                                <a href="{{ url('edit-user/'.$user->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
-                                                <form action="{{ url('archive-user/'.$user->id) }}" method="POST" class="inline">
-                                                    @csrf
-                                                    <button type="submit" class="bg-gray-500 hover:bg-gray-700 text-white py-1 px-3 rounded my-3 mt-1">Archive</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endif
-                                    @if ($user->role_id == 4)
-                                        <tr>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->admission_number }}</td>
-                                            <td>{{ $user->year_of_registration }}</td>
-                                            <td>
-                                                <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                                    {{ $user->is_archived ? 'Inactive' : 'Active' }}
-                                                </span>
-                                            </td>
-                                            <td class="px-6 py-4 text-sm text-white">
-                                                <a href="{{ url('edit-user/'.$user->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
-                                                <form action="{{ url('archive-user/'.$user->id) }}" method="POST" class="inline">
-                                                    @csrf
-                                                    <button type="submit" class="bg-gray-500 hover:bg-gray-700 text-white py-1 px-3 rounded my-3 mt-1">Archive</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                    <!-- Display Archived Users -->
-                    <h2>Archived Users</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Admission Number</th>
-                                <th>Year of Registration</th>
-                                <th>Status</th>
-                                <th>Date of Archive</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($archivedUsers as $user)
-                                @if ($user->role_id == 2)
-                                    <tr>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->admission_number }}</td>
-                                        <td>{{ $user->year_of_registration }}</td>
-                                        <td>
-                                            <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                                {{ $user->is_archived ? 'Inactive' : 'Active' }}
-                                            </span>
-                                        </td>
-                                        <td>{{ $user->date_of_archive }}</td>
-                                        <td class="px-6 py-4 text-sm text-white">
-                                            <form action="{{ url('unarchive-user/'.$user->id) }}" method="POST" class="inline">
-                                                @csrf
-                                                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Unarchive</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endif
-                                @if ($user->role_id == 3)
-                                    <tr>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->admission_number }}</td>
-                                        <td>{{ $user->year_of_registration }}</td>
-                                        <td>
-                                            <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                                {{ $user->is_archived ? 'Inactive' : 'Active' }}
-                                            </span>
-                                        </td>
-                                        <td>{{ $user->date_of_archive }}</td>
-                                        <td class="px-6 py-4 text-sm text-white">
-                                            <form action="{{ url('unarchive-user/'.$user->id) }}" method="POST" class="inline">
-                                                @csrf
-                                                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Unarchive</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endif
-                                @if ($user->role_id == 4)
-                                    <tr>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->admission_number }}</td>
-                                        <td>{{ $user->year_of_registration }}</td>
-                                        <td>
-                                            <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                                {{ $user->is_archived ? 'Inactive' : 'Active' }}
-                                            </span>
-                                        </td>
-                                        <td>{{ $user->date_of_archive }}</td>
-                                        <td class="px-6 py-4 text-sm text-white">
-                                            <form action="{{ url('unarchive-user/'.$user->id) }}" method="POST" class="inline">
-                                                @csrf
-                                                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Unarchive</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <a href="{{ url('dashboard') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 px-3 rounded my-3 mt-1">Back To Dashboard</a>
-                </div>
-            </div>
+                        @endif
+                    @endforeach
+                @endif
+                </tbody>
+            </table>
+        </div>
+        <!-- Display Archived Users -->
+        <h2 class="mt-8 mb-4 text-xl font-semibold">Archived Users</h2>
+        <div class="shadow overflow-hidden border-b border-gray-200">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead>
+                <tr>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Name
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Email
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Admission Number
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Year of Registration
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Status
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Date of Archive
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Actions
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                @foreach ($archivedUsers as $user)
+                    @if ($user->role_id == 2 || $user->role_id == 3 || $user->role_id == 4)
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $user->email }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $user->admission_number }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $user->year_of_registration }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $user->is_archived ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800' }}">
+                                    {{ $user->is_archived ? 'Inactive' : 'Active' }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $user->date_of_archive }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                                <form action="{{ url('unarchive-user/'.$user->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    <button type="submit" class="text-green-600 hover:underline">Unarchive</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endif
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-4">
+            <a href="{{ url('dashboard') }}" class="bg-indigo-600 hover:bg-indigo-800 text-white text-xl font-bold py-1 px-3 rounded-full mt-10">Back To Dashboard</a>
         </div>
     </div>
 </body>

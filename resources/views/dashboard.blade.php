@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>admin</title>
+    <style>
+        .page-container {
+            padding: 2rem;
+        }
+
+        .card {
+            background-color: white;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin: 1rem;
+            border: 2px solid black;
+        }
+    </style>
 </head>
 <body class="bg-white">
 
@@ -31,22 +45,22 @@
 </nav>
 
 <br>
-<p>Logged-in User: {{ auth()->user()->name }}</p>
-<div>
-    <div>
-        <a href="{{ url('add-grade') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 mb-6 px-3 rounded my-3 mt-1">Add Grade</a>
+<p class="text-3xl md:ml-12 text-black font-bold text-center">Welcome {{ auth()->user()->name }}</p>
+<div class="page-container">
+    <div class="p-4">
+        <a href="{{ url('add-grade') }}" class="bg-green-400 hover:bg-green-600 text-white font-bold text-xl p-3 mb-6 px-5 rounded-full my-3 mt-1 block md:inline">Add Grade</a>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         @foreach($grade as $grade)
-            <div class="bg-black text-white p-4 rounded-md shadow-md">
-                <p class="text-xs text-gray-500">Grade</p>
-                <p class="text-sm">{{ $grade->grade }}</p>
+            <div class="card rounded-2xl">
+                <p class="text-2xl text-indigo-600 font-bold">Grade</p>
+                <p class="text-xl text-indigo-600 font-bold">{{ $grade->grade }}</p>
                 <div class="flex justify-end mt-3">
-                    <a href="{{ route('classes.show', $grade) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded">View Classes</a>
-                </div>
-                <div class="flex justify-end mt-3">
-                    <a href="{{ url('edit-grade/'.$grade->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded">Edit</a>
-                    <a href="{{ url('delete-grade/'.$grade->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded ml-2">Delete</a>
+                    <div class="flex">
+                        <a href="{{ route('classes.show', $grade) }}" class="bg-green-500 hover:bg-green-700 text-white text-l font-bold py-2 px-3 rounded-full block md:inline">View Classes</a>
+                        <a href="{{ url('edit-grade/'.$grade->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white text-l font-bold py-2 px-3 rounded-full ml-2 block md:inline">Edit</a>
+                        <a href="{{ url('delete-grade/'.$grade->id) }}" class="bg-red-500 hover:bg-red-700 text-white text-l font-bold py-2 px-3 rounded-full ml-2 block md:inline">Delete</a>
+                    </div>
                 </div>
             </div>
         @endforeach

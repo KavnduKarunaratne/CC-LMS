@@ -1,7 +1,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-1 gap-1">
             
-            <div class="bg-indigo-700 ml-0.5 mr-0.5 p-3 pr-2 mb-4 rounded-b-3xl sticky top-0 z-50" id="topnav">
+            <div class="bg-indigo-600 ml-0.5 mr-0.5 p-3 pr-2 mb-4 rounded-b-3xl sticky top-0 z-50" id="topnav">
                 <div class="relative overflow-hidden">
                     {{--<img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">--}}
                     {{--<div class="absolute inset-0 bg-black opacity-40"></div>

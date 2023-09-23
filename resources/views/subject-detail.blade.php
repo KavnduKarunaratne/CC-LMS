@@ -13,7 +13,7 @@
     
     @include('components.teacheravatardisplay')
     @include('components.subjectdetailscards')
-    @include('components.subjectdetailsdisplaystudents')
+    {{--@include('components.subjectdetailsdisplaystudents')--}}
     
     
 
