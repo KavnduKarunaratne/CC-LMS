@@ -2,10 +2,15 @@
 
 
 <x-guest-layout>
+<div class="min-h-screen flex items-center justify-center bg-grey-100 bg-cover" style="background-image: url('{{ asset('images/background.png') }}');">
     <x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />
         </x-slot>
+
+        <div class="mb-6 text-3xl font-semibold text-gray-900">
+                Register to an account here!
+            </div>
 
         <x-validation-errors class="mb-4" />
 

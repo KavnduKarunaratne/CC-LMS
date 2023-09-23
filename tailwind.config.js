@@ -11,11 +11,17 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+
+
     theme: {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+
+            backgroundColor:{
+                'rgb-83-80-247': 'rgb(83, 80, 247)',
+            }
         },
     },
 

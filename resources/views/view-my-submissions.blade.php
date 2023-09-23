@@ -4,13 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>My Grades</title>
+    
+    <title >My Grades</title>
 </head>
 <body class="bg-white">
 
-<div class="container mx-auto p-4">
-    <h2 class="text-lg font-semibold">My Grades</h2>
+
+@include('components.studentnav-viewmygrades')
+{{--@include('kiddyLMS.kiddygrades')--}}
+
+
+
+{{--<div class="container mx-auto p-4">
+    <h2 class="text-2xl font-semi-bold text-gray-900 mb-8">>My Grades</h2>
     <p>User: {{ auth()->user()->name }}</p><!--display the user name-->
+
+    
 
     @if (count($submissionsBySubject) > 0)
         @foreach ($submissionsBySubject as $subjectName => $submissions)
@@ -45,10 +54,11 @@
             </ul>
         @endforeach
     @else
-        <p>No submissions and feedback available.</p>
-        <!--if there are no submissions and feedback available, display this message-->
+        <p>No feedback available.</p>
+        <!--if there are no feedback available, display this message-->
     @endif
-</div>
+</div>--}}
 
 </body>
 </html>
+

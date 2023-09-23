@@ -7,15 +7,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Submissions</title>
+    @include('components.teacheravatardisplay')
 </head>
 <body>
-        <div class="ml-4"> 
-          <p>Logged-in User: {{ auth()->user()->name }}</p>
-        </div>
         <div class="m-10">
             <form action="{{ route('search-submissions', $assignment->id) }}" method="GET">
                 <input type="text" name="search" placeholder="Search submissions">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded">Search</button>
+                <button type="submit" class="bg-green-400 hover:bg-green-300 text-white py-1 px-3 rounded">Search</button>
             </form>
         </div>
 
@@ -67,8 +65,11 @@
                             <div class="bg-gray-200 p-4 mt-4 rounded-md shadow-md">
                                 <h3 class="text-lg font-semibold mb-2">Feedback for Submission:</h3>
                                 <ul><!--get the feedback and grades for each submission-->
+                               
                                     @foreach ($submission->feedback as $feedback)
+                                    
                                         <li class="mb-2">
+                                         
                                             <strong>Feedback:</strong> {{ $feedback->feedback }}
                                             <br>
                                             <strong>Marks:</strong> {{ $feedback->marks }}
@@ -78,7 +79,15 @@
                                             <a href="{{ url('edit-feedback', $feedback->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-1">Edit</a>
                                             <a href="{{ url('delete-feedback', $feedback->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-1">Delete</a>
                                         </li>
+                                   
                                     @endforeach
+                                    @if ($submission->feedback->isEmpty())
+        <li class="mb-2">
+            <strong>Provide Feedback</strong>
+           
+        </li>
+    @endif
+                                    
                                 </ul>
                             </div>
 
@@ -90,9 +99,36 @@
                 </ul>
             </div>
         @else
-            <p>No submissions available </p>
+            <p class="font-semi-bold text-lg">No submissions available </p>
         @endif
     </div>
-   
+    <div>
+    @if (Auth::user() && Auth::user()->role_id == 4)<!--display this for authenticated user with role id 4-->
+            <div class="bg-white p-4 rounded-md shadow-md mb-4">
+                @if ($subject->class && $subject->grade && $subject->class->students->count() > 0)
+                    <h4>Students in Grade:  {{ $subject->grade->grade}}   class {{ $subject->class->class_name }}:</h4>
+                    <ul class=>
+                        @foreach ($subject->class ->students as $student) <!--display students enrolled in the specific class-->
+                            @if ($student->is_archived == 0 && $student->class_id == $subject->class_id)
+                            <li>
+                                    {{ $student->name }}
+                                    {{ $student->admission_number }}
+                                    @if ($student->hasSubmission($assignment->id)) <!-- Check if the student has a submission for this assignment -->
+                                        <span class="text-green-500">Submitted</span>
+                                    @else
+                                        <span class="text-red-500">Not Submitted</span>
+                                    @endif
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                @else
+                    <p>No students in this class.</p>
+                @endif
+            </div>
+        @endif
+</div>
+       
 </body>
 </html>
+

@@ -39,7 +39,8 @@
                                 <td class="px-6 py-4 text-sm text-white">{{ $material->link }}</td>
                                 <td class="px-6 py-4 text-sm text-white">{{ $material->upload_date }}</td>
                                 <td class="px-6 py-4 text-sm text-white">
-                                    <a href="{{ url('edit-material', $material->id) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
+                                <a href="{{ url('edit-material', ['id' => $material->id, 'subject_id' => $material->subject_id]) }}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
+
                                     <a href="{{ url('delete-material', $material->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
                                 </td>
                                 
@@ -58,3 +59,4 @@
 </div>
 </body>
 </html>
+

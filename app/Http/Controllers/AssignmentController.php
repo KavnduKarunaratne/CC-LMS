@@ -27,7 +27,7 @@ class AssignmentController extends Controller
     public function saveAssignment(Request $request){
         try {
             $request->validate([
-                'assignment_name' => 'required',
+                'assignment_name' => 'required',                              //file size is 204800 kilobytes
                 'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800', // Validating file type
                 'description' => 'nullable',
                 'due_date' => 'required|date|after:today',
@@ -69,7 +69,7 @@ class AssignmentController extends Controller
                 'assignment_name' => 'nullable',
                 'description' => 'nullable',
                 'due_date' => 'required|date|after:today',
-                'file' => 'nullable|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',
+                'file' => 'nullable|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',//file size is 204800 kilobytes
             ]);
 
             $assignment = Assignment::findOrFail($id);

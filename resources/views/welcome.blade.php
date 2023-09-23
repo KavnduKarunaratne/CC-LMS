@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{--<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -140,4 +140,312 @@
             </div>
         </div>
     </body>
+</html>--}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+    <style>
+        /* Add your custom styles here */
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('images/background.png'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        .custom-image {
+            max-width: 100px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 2px; /* Spacing below the image */
+        }
+
+        .custom-button {
+            background-color: #5350F7;
+            color: white;
+            border: none;
+            border-radius: 1rem; /* Increased border-radius for more rounded edges */
+            padding: 1rem 3rem;
+            transition: background-color 0.3s ease;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .custom-title {
+            color: #263238; /* Text color */
+            font-size: 30px; /* Font size */
+            font-weight: bold; /* Bold text */
+            margin-bottom: 20px; /* Spacing below the title */
+            text-shadow: 2px 2px 4px white;
+        }
+
+        .custom-button:hover {
+            background-color: grey; /* Grey color when hovered */
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+    <img src="images/book.png" alt="Your Image" class="custom-image">
+    <h1 class="custom-title">EducateLanka</h1>
+        @auth
+            <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                <button class="custom-button">
+                    Dashboard
+                </button>
+            </a>
+        @else
+            <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                <button class="custom-button">
+                    Log in
+                </button>
+            </a>
+
+            @if (Route::has('register'))
+                <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                    <button class="custom-button">
+                        Register
+                    </button>
+                </a>
+            @endif
+        @endauth
+    </div>
+
+    <!-- Your website content goes here -->
+
+    <!-- Add your JavaScript scripts here -->
+</body>
 </html>
+
+
+
+
+
+{{--<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Add your meta tags, title, and other head content here -->
+
+    <!-- Include your existing CSS stylesheets or links to external stylesheets -->
+
+    <!-- Styles -->
+    <style>
+        /* Apply a background image to the entire page */
+        body {
+            background-image: url('images/background1.png'); /* Replace 'path_to_your_image.jpg' with the actual path to your image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            margin: 0; /* Remove default margin to make sure the background covers the entire viewport */
+            padding: 0;
+        }
+        
+
+        /* Center the buttons */
+        .centered-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Style for the custom button */
+        .custom-button {
+            background-color: #5350F7;
+            color: white;
+            border: none;
+            border-radius: 1rem;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .custom-button:hover {
+            background-color: grey;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Create a container to center the buttons -->
+    <div class="centered-buttons">
+        <!-- Login Button -->
+        <button class="custom-button">
+            Login
+        </button>
+
+        <!-- Register Button -->
+        <button class="custom-button">
+            Register
+        </button>
+    </div>
+
+    <!-- Include your JavaScript scripts if needed -->
+
+</body>
+</html>--}}
+
+
+{{--<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Add your meta tags, title, and other head content here -->
+
+    <!-- Include your existing CSS stylesheets or links to external stylesheets -->
+
+    <!-- Styles -->
+    <style>
+        /* Apply a background image to the entire page */
+        body {
+            background-image: url('images/background.png'); /* Replace 'path_to_your_image.jpg' with the actual path to your image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            margin: 0; /* Remove default margin to make sure the background covers the entire viewport */
+            padding: 0;
+        }
+
+        /* Center the buttons and heading vertically */
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Style for the custom button */
+        .custom-button {
+            background-color: #5350F7;
+            color: white;
+            border: none;
+            border-radius: 1rem;
+            padding: 1rem 2rem; /* Increase padding to make buttons bigger */
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px; /* Increase font size */
+            margin: 8px 0; /* Increase margin for spacing */
+            cursor: pointer;
+        }
+
+        .custom-button:hover {
+            background-color: grey;
+        }
+
+        /* Style for the heading */
+        .heading {
+            font-size: 24px; /* Set the desired font size for the heading */
+            margin-bottom: 20px; /* Add margin to separate it from the buttons */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Create a container to center the content -->
+    <div class="centered-content">
+        <!-- Heading -->
+        <h1 class="heading">Welcome to EducateLanka! How may you like to proceed?</h1>
+
+        <!-- Login Button -->
+        <button class="custom-button">
+            Login
+        </button>
+
+        <!-- Register Button -->
+        <button class="custom-button">
+            Register
+        </button>
+    </div>
+
+    <!-- Include your JavaScript scripts if needed -->
+
+</body>
+</html>--}}
+
+{{--<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Add your meta tags, title, and other head content here -->
+
+    <!-- Include your existing CSS stylesheets or links to external stylesheets -->
+
+    <!-- Styles -->
+    <style>
+        /* Center the buttons */
+        .centered-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Style for the custom button */
+        .custom-button {
+            background-color: #5350F7;
+            color: white;
+            border: none;
+            border-radius: 1rem;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .custom-button:hover {
+            background-color: grey;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Create a container to center the buttons -->
+    <div class="centered-buttons">
+        <!-- Login Button -->
+        <button class="custom-button">
+            Login
+        </button>
+
+        <!-- Register Button -->
+        <button class="custom-button">
+            Register
+        </button>
+    </div>
+
+    <!-- Include your JavaScript scripts if needed -->
+
+</body>
+</html>--}}
+
+
+
