@@ -17,7 +17,7 @@
       <div class="flex items-center">
           <div class="flex items-center ml-3">
             <div>
-              <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+              <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-violet-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                 <span class="sr-only">Open user menu</span>
                 <img class="w-10 h-10 rounded-full border-4 border-gray-800" src="images/avatar.png" alt="user photo">
               </button>
@@ -67,7 +67,7 @@
          </li>
          <li>
             <a href="{{ route('view-my-submissions') }}" class="flex items-center p-2 text-indigo-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               <svg class="flex-shrink-0 w-7 h-7 text-indigo-600 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+               <svg class="flex-shrink-0 w-7 h-7 text-indigo-600 transition duration-75 dark:text-indigo-600 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
                   <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
                </svg>
                <span class="flex-1 ml-3 whitespace-nowrap">My Grades</span>
@@ -121,22 +121,22 @@
    </div>
 </aside>
 
-<div class="p-4 sm:ml-64">
-   <div class="p-4 border-2 border-white border-dashed rounded-lg dark:border-gray-700 mt-14">
+<div class="p-4 sm:ml-64 dark:bg-black">
+   <div class="p-4 border-2 border-white border-dashed rounded-lg dark:border-black mt-14">
       <!--ADDED MY CONTENT HERE-->
       <!--student information-->
-      <div class="text-2xl font-semi-bold text-gray-900 mb-5">My Grades</div>
+      <div class="text-2xl font-semi-bold text-gray-900 mb-5 dark:text-white">My Grades</div>
       @if (count($submissionsBySubject) > 0)
       @foreach ($submissionsBySubject as $subjectName => $submissions)
-      <h2 class="text-xl font-semi-bold text-black mb-3">{{ $subjectName }}</h>
+      <h2 class="text-xl font-semi-bold text-black mb-3 dark:text-white">{{ $subjectName }}</h>
       @foreach ($submissions as $submission)
       <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
-        <div class="bg-white rounded-lg shadow-lg p-8 mt-3 border-solid border-2 border-gray-900">
+        <div class="bg-white rounded-lg shadow-lg p-8 mt-3 border-solid border-2 border-gray-900 dark:border-violet-600">
         <h3 class="text-xl font-bold text-gray-900 mt-1">Assignment Name: {{ $submission->assignment->assignment_name }}</h3>
         <h3 class="text-xl font-bold text-gray-900 mt-1">Description: {{ $submission->assignment->description }}</h3>
         <h3 class="text-xl font-bold text-gray-900 mt-1"></h3>
         @if ($submission->file)
-        <a href="{{ asset('storage/app/submissions/' . $submission->file) }}" download>File: Download Here<h3 class="text-xl font-bold text-gray-900 mt-1"></h3></a>
+        <a href="{{ asset('storage/app/submissions/' . $submission->file) }}" download class="dark:text-black">File: Download Here<h3 class="text-xl font-bold text-gray-900 mt-1 dark:text-black"></h3></a>
         @endif 
         <h3 class="text-xl font-bold text-gray-900 mt-1">Submit Date: {{ $submission->submit_date }}</h3>
         <h3 class="text-xl font-bold text-gray-900 mt-1"></h3>
@@ -144,14 +144,14 @@
         <h3 class="text-xl font-bold text-gray-900 mt-1">No Feedback</h3>
         @else
         @foreach ($submission->feedback as $feedback)
-        <p>Feedback: {{ $feedback->feedback }}</p>
-        <p>Marks: {{ $feedback->marks }}</p>
+        <p class="dark:text-black">Feedback: {{ $feedback->feedback }}</p>
+        <p class="dark:text-black">Marks: {{ $feedback->marks }}</p>
         @endforeach
         @endif
         @endforeach
         @endforeach 
         @else 
-        <p>No Feedback</p>
+        <p class="dark:text-black">No Feedback</p>
         @endif            
         </div>
       </div>           
