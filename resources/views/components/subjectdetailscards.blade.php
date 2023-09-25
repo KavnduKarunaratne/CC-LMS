@@ -1,7 +1,7 @@
 <!--SUBJECT DETAILS-->
-<div class="bg-white mb-11">
+<div class="bg-white mb-11 dark:bg-black">
     <div class="container mx-auto px-4">
-        <h2 class="text-2xl font-bold text-gray-900 mb-3">Subject Details</h2>
+        <h2 class="text-2xl font-bold text-gray-900 mb-3 dark:text-white">Subject Details</h2>
         <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
             <div class="bg-white rounded-lg border-solid border-2 border-gray-900 p-8">
                 <div class="relative overflow-hidden">
@@ -43,8 +43,8 @@
 <html>
     <body>
     @if ($materials->count() > 0)
-    <div class="bg-white py-1 mb-4">
-    <h2 class="text-2xl font-bold text-black mb-3 ml-5">Materials</h2>
+    <div class="bg-white py-1 mb-4 dark:bg-black">
+    <h2 class="text-2xl font-bold text-black mb-3 ml-5 dark:text-white">Materials</h2>
 
     @foreach ($materials as $material)
     @php

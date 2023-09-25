@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Subject Detail</title>
 </head>
-<body class="bg-white">
+<body class="bg-white dark:bg-black">
     <!--ADD CONTENT HERE-->
     
     @include('components.teacheravatardisplay')
