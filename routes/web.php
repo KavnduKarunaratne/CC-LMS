@@ -42,6 +42,8 @@ Route::middleware([
     });
 });
 
+Route::get('/', [UserController::class, 'loginView']);
+
 Route::get('redirects',[UserController::class,'index']);
 
 //admin routes
@@ -145,7 +147,7 @@ Route::middleware(['App\Http\Middleware\ValidateRole:4'])->group(function () {
     Route::get('material-list',[MaterialController::class,'Material']);
     Route::get('add-material/{subject_id}',[MaterialController::class,'addMaterial']);
     Route::post('save-material',[MaterialController::class,'saveMaterial']);
-    Route::get('edit-material/{id}',[MaterialController::class,'editMaterial']);
+    Route::get('edit-material/{id}',[MaterialController::class,'editMaterial'])->name('edit-material');
     Route::post('update-material/{id}',[MaterialController::class,'updateMaterial'])->name('update-material');
     Route::match(['get', 'delete'], 'delete-material/{id}', [MaterialController::class, 'deleteMaterial'])->name('delete-material');
 

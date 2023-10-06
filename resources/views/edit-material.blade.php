@@ -57,7 +57,7 @@
          
             <br>
             <button type="submit" class="w-full bg-blue-500 text-white text-sm font-bold py-2 px-4 mb-4 rounded-md hover:bg-blue-600 transition duration-300">Update</button>
-            <a href="{{ url('material-list') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 px-3 rounded my-3 mt-1">Back</a>
+            <a href="{{ url('subject-detail/' . $subject_id) }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 px-3 rounded my-3 mt-1">Back</a>
         </form>
     </div>
 </body>

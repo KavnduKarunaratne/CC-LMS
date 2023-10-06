@@ -6,7 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Edit Grade</title>
 </head>
-<body class="bg-black">
+<body class="bg-white">
 
 <div class="container mx-auto py-8 mt-12">
         @if (session('error'))

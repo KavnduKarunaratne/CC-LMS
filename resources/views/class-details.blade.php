@@ -6,7 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Class Details</title>
 </head>
-<body class="bg-black">
+<body class="bg-white">
     <div class="bg-white p-4 rounded-md shadow-md">
         <p class="text-xs text-gray-500">Class Name</p>
         <p class="text-sm">{{ $class->class_name }}</p>

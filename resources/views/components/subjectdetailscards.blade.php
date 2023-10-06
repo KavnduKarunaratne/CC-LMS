@@ -78,7 +78,7 @@
                 @if (Auth::user() && Auth::user()->role_id == 4)
 
                 <div class="flex space-x-4 place-content-start">
-                    {{--<a href="{{ route('edit-material', ['subject_id' => $material->subject->id, 'id' => $material->id]) }}"><button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Edit</button></a>--}}
+                    <a href="{{ route('edit-material', ['subject_id' => $material->subject->id, 'id' => $material->id]) }}"><button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Edit</button></a>
                     <a href="#" class= "" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $material->id }}"><button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Delete</button>
                     
                 </div>

@@ -1,29 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>admin</title>
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
+
     <style>
-        .page-container {
-            padding: 2rem;
+        #nav {
+            flex: 0 0 200px;
+            height: 100vh;
+            overflow: auto;
+            position: sticky;
+            top: 0;
+            background-color: white;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.2);
+            /* Add any other styling you need for your navigation bar */
         }
 
-        .card {
-            background-color: white;
-            color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-            margin: 1rem;
-            border: 2px solid black;
+        #content {
+            flex: 1;
+            overflow-y: auto;
+            /* Add any other styling you need for the content on the right side */
         }
     </style>
-</head>
-<body class="bg-white">
 
-            <dh-component>
-                <div class="flex flex-no-wrap  " id="nav">
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Styles -->
+    @livewireStyles
+</head>
+<body class="font-sans antialiased">
+
+<div class="min-h-screen bg-white">
+    <div class="flex h-screen ">
+        <div class="px-4 py-2 text-black bg-white  fixed h-full ">
+           
+        <div id="nav" class="flex flex-no-wrap w-70 absolute sm:relative bg-white shadow-2xl md:h-full flex-col justify-between sm:flex">
                     <!-- Sidebar starts -->
                     <!-- Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] -->
                     <!--- more free and premium Tailwind CSS components at https://tailwinduikit.com/ --->
@@ -114,7 +138,7 @@
                                 <line x1="18" y1="9" x2="18" y2="20" />
                             </svg>
                         </button>
-                        <button aria-label="Close sidebar" id="closeSideBar" class="hidden h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer text-white" onclick="sidebarHandler(false)">
+                        <button aria-label="Close sidebar" id="closeSideBar" class="h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer text-white" onclick="sidebarHandler(false)">
                             <svg  xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
                                 <line x1="18" y1="6" x2="6" y2="18" />
@@ -176,101 +200,26 @@
                                             <line x1="21" y1="21" x2="15" y2="15"></line>
                                         </svg>
                                     </div>
-                                    <input class="bg-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-100  rounded w-full text-sm text-gray-300 placeholder-gray-400  pl-10 py-2" type="text" placeholder="Search" />
+                                    <input class="bg-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-100  rounded w-full text-sm text-gray-300 placeholder-gray-400 pl-10 py-2" type="text" placeholder="Search" />
                                 </div>
                             </div>
                         </div>
                        
                     </div>
-                   
-<div class="page-container">
-    <div class="p-4">
-        <a href="{{ url('add-grade') }}" class="bg-indigo-600 hover:bg-indigo-800 text-white text-xl font-bold py-2 px-4 rounded-full ml-4 mt-1">Add Grade</a>
-    </div>
-   
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-    
-        @foreach($grade as $grade)
-    
-            <div class="card rounded-2xl">
-            <a href="{{ route('classes.show', $grade) }}">
-                <p class=" text-indigo-600 font-bold">Grade {{ $grade->grade }}</p>
-             <!--   <div class="flex justify-end mt-3">
-                    <div class="flex">
-                        <a href="{{ route('classes.show', $grade) }}" class="bg-green-500 hover:bg-green-700 text-white text-l font-bold py-2 px-3 rounded-full block md:inline">View Classes</a>
-                </div>
-                </div>-->
-                <div class="flex justify-end mt-3 space-around ">
-                    <div class="flex flex-row space-x-2">
-                        <a href="{{ url('edit-grade/'.$grade->id) }}"  class="w-20 bg-gray-900 text-white py-1 px-4 rounded-xl  hover:bg-gray-800 text-center">Edit</a>
-                        <a href="{{ url('delete-grade/'.$grade->id) }}" class="bg-gray-900 text-white py-1 px-4 rounded-xl  hover:bg-gray-800">Delete</a>
-                    </div>
-                </div>
-                </a>
-            </div>
-                             
-        @endforeach
-    </div>
-                               
-           </div>
-                </div>
-                <script>
-                    var sideBar = document.getElementById("mobile-nav");
-                    var openSidebar = document.getElementById("openSideBar");
-                    var closeSidebar = document.getElementById("closeSideBar");
-                    sideBar.style.transform = "translateX(-260px)";
 
-                    function sidebarHandler(flag) {
-                        if (flag) {
-                            sideBar.style.transform = "translateX(0px)";
-                            openSidebar.classList.add("hidden");
-                            closeSidebar.classList.remove("hidden");
-                        } else {
-                            sideBar.style.transform = "translateX(-260px)";
-                            closeSidebar.classList.add("hidden");
-                            openSidebar.classList.remove("hidden");
-                        }
-                    }
-                </script>
-                
-            </dh-component>
         </div>
 
+        <div class="px-4 py-2 lg:ml-[250px]">
+            <div class="container mx-auto mt-12">
+                {{ $slot }}
+            </div>
+        </div>
 
+    </div>
+</div>
 
+@stack('modals')
 
-
-        
-       <style>
-            #wrapper {
-  display: flex;
-}
-
-#nav {
-  flex: 0 0 200px; /* Fixed width for the navigation bar */
-  height: 100vh; /* Set the height to the viewport height */
-  overflow: auto; /* Allow content to be scrollable if it overflows */
-  position: sticky;
-  top: 0;
-  background-color: white; /* Set your desired background color */
-  /* Add any other styling you need for your navigation bar */
-  box-shadow: 5px 0 20px rgba(0, 0, 0, 0.2);
-}
-
-#content {
-  flex: 1; /* Allow the content to take up the remaining width */
-  overflow-y: auto; /* Allow content to be scrollable if it overflows vertically */
-  /* Add any other styling you need for the content on the right side */
-}
-
-
-
-
-        </style>
-
-
-
-
-
+@livewireScripts
 </body>
 </html>

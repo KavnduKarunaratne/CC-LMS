@@ -6,7 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Classes</title>
 </head>
-<body class="bg-black">
+<body class="bg-white">
 <nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
@@ -34,7 +34,7 @@
     @if($classes)
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach($classes as $class)
-                <div class="bg-white p-4 m-2 rounded-xl shadow-md">
+                <div class="bg-white border-2 border-black p-4 m-2 rounded-xl shadow-md">
                     <p class="text-black font-bold text-lg">Class Name</p>
                     <p class="text-lg font-bold">{{ $class->class_name }}</p>
 

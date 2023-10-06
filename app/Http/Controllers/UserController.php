@@ -100,9 +100,13 @@ class UserController extends Controller
         User::where('id','=',$id)->delete();
         return redirect('user-management')->with('success', 'user deleted successfully');
     }
+    public function loginView(){
+        return redirect('login');
+    }
 
     public function index(){  //the users are redirected based on their role
         $role_id = Auth::user()->role_id;
+        $grade_id = Auth::user()->grade_id;
 
         if ($role_id == 1) { 
             $grade=Grade::all();
@@ -111,9 +115,6 @@ class UserController extends Controller
         } else if ($role_id == 2) {
             $notice=Notice::all();
             return view('management', compact('notice'));
-        } else if ($role_id == 3) {
-            $notices=Notice::all();
-            return view('student-panel', compact('notices'));
         } else if ($role_id == 4) {
             $grade=Grade::all();
             $classes=Classes::all();
@@ -121,14 +122,24 @@ class UserController extends Controller
             $students=User::all();
             $subjects=Subject::all();
             return view('teacher-panel', compact('grade','classes','notices','students','subjects'));
-        } else {
-            return view('welcome');
+        } else if($grade_id >= 1 && $grade_id <= 5){
+            $notices=Notice::all();
+           return view('kiddy-panel', compact('notices'));
+        }
+        else if($grade_id >= 6 ){
+            $notices=Notice::all();
+            return view('student-panel', compact('notices'));
+        }
+      
+        
+        else {
+            return view('/');
         }
     }
 
     public function logout(Request $request){
         Auth::logout();
-        return view('/welcome');
+        return redirect('/');
     }
 
     public function archiveUser($id) {
