@@ -6,7 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Teacher Panel</title>
 </head>
-<body class="bg-white">
+<body class="bg-white dark:bg-black">
     @if (Auth::check() && Auth::user()->is_archived==0 && Auth::user()->role_id == 4) <!--checks if user is archived and the role id is 4-->
 
 
@@ -34,7 +34,7 @@
                             <!--ADD TO MAIN PAGE-->
                     <!-- Sidebar ends -->
                     <!-- Remove class [ h-64 ] when adding a card block -->
-                    <div class="container mx-auto py-2 md:w-4/5 w-11/12 px-6" id="content">
+                    <div class="container mx-auto py-2 md:w-4/5 w-11/12 px-6 dark:bg-black" id="content">
                         <!-- Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border -->
                         @include('components.teachertopnav')
 

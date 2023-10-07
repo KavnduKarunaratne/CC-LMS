@@ -7,7 +7,7 @@
     <title>Add Class</title>
 </head>
 
-<body class="bg-black">
+<body class=" bg-white dark:bg-black">
 <div class="container mx-auto py-8 mt-12">
         @if (session('error'))
             <div class="bg-red-200 text-red-700 p-2 rounded my-3 mt-1">
@@ -19,7 +19,7 @@
             </div>
         @endif
 
-    <h2 class="text-2xl font-bold mb-6 text-center text-white">Add Class</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center text-black dark:text-white">Add Class</h2>
 
     <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post" action="{{ url('save-Class') }}">
         @csrf 
@@ -39,8 +39,8 @@
         </div>
 
         <br>
-        <button type="submit" class="w-full bg-green-500 text-white text-sm font-bold py-2 px-4 mb-4 rounded-md hover:bg-green-600 transition duration-300">Save</button>
-        <a href="{{ url('dashboard') }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 px-3 rounded my-3 mt-1">Back</a>
+        <button type="submit" class="w-full bg-indigo-500 text-white text-sm font-bold py-2 px-4 mb-4 rounded-md hover:bg-indigo-600 transition duration-300">Save</button>
+        <a href="{{ url('dashboard') }}" class="bg-gray-500 hover:bg-gray-700 text-white py-1 px-3 rounded my-3 mt-1">Back</a>
     </form>
 </div>
 </body>

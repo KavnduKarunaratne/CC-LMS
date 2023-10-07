@@ -62,10 +62,10 @@
     @if ($subjects->count() > 0)
 
 
-    <h3 class="text-lg font-semibold py-px mb-8 ml-3 mt-2">Subjects You Are In Charge Of:</h3>
-    <div class="bg-white ">
-    <div class="container mx-auto px-4">      
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <h3 class="text-lg font-semibold py-px mb-8 ml-3 mt-2 dark:bg-black dark:text-white">Subjects You Are In Charge Of:</h3>
+    <div class="bg-white dark:bg-black">
+    <div class="container mx-auto px-4 ">      
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 ">
         @foreach (Auth::user()->subjects as $subject)
         <div class="relative h-full ml-0 mr-0 sm:mr-10">
         <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-black rounded-lg" style="width:300px;"></span>
@@ -79,7 +79,7 @@
     </div>
     </div>
     @else
-    <div class="bg-white p-4 rounded-md shadow-md mb-4">
+    <div class="bg-white p-4 rounded-md shadow-md mb-4  dark:bg-black dark:text-white">
                     <p>No subjects assigned.</p>
     </div>
     @endif

@@ -7,7 +7,7 @@
     <title>Add Subject</title>
 </head>
 
-<body class="bg-white">
+<body class="bg-white dark:bg-black">
 <div class="container mx-auto py-8 mt-12">
         @if (session('error'))
             <div class="bg-red-200 text-red-700 p-2 rounded my-3 mt-1">
@@ -18,7 +18,7 @@
                 {{ session('success') }}
             </div>
         @endif
-    <h2 class="text-2xl font-bold mb-6 text-center text-black">Add Subject</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center text-black dark:text-white">Add Subject</h2>
 
     <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post" action="{{ url('save-subject') }}">
         @csrf

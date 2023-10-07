@@ -51,20 +51,20 @@
         }
     </style>
 </head>
-<body class="bg-white">
+<body class="bg-white dark:bg-black">
     <div class="container mx-auto p-4">
-        <div class="bg-white p-4 rounded-md shadow-md mb-4">
-            <h2 class="mt-0 text-xl font-semibold">Flashcards for {{ $subject->subject_name }}</h2>
+        <div class="bg-white dark:bg-black p-4 rounded-md shadow-md mb-4">
+            <h2 class="mt-0 text-xl font-semibold dark:text-white">Flashcards for {{ $subject->subject_name }}</h2>
         </div>
         @if (Auth::user() && Auth::user()->role_id == 4)
             <div> 
                 <a href="{{ url('add-card',['subject_id'=>$subject->id])  }}">
-                <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 mt-3">Add Flash Card</button>
+                <button class="bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 mt-3">Add Flash Card</button>
     </a>
             </div>
         @endif
-        <div class="bg-white p-4 rounded-md shadow-md mb-4">
-            <h3 class="text-lg font-semibold mb-4 mt-5">Flashcards:</h3>
+        <div class="bg-white dark:bg-black p-4 rounded-md shadow-md mb-4 border-solid border-white border-2 mt-4">
+            <h3 class="text-lg font-semibold mb-4 mt-5 dark:text-white">Flashcards:</h3>
             @if ($flashcards->count() > 0)
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     @foreach ($flashcards as $flashcard)
