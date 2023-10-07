@@ -35,7 +35,7 @@ class FeedbackController extends Controller
                 'submission_id' => $request->submission_id,
             ]);
 
-            return redirect('feedback-list')->with('success', 'feedback added successfully');
+            return redirect()->back()->with('success', 'feedback added successfully');
         } catch(\Exception $e){
             return redirect()->back()->with('error', 'Error adding feedback');
         }
@@ -68,6 +68,7 @@ class FeedbackController extends Controller
 
     public function deleteFeedback($id){
         Feedback::findOrFail($id)->delete();
-        return redirect('view-submissions')->with('success', 'feedback deleted successfully');
+
+        return redirect()->back()->with('success', 'feedback deleted successfully');
     }
 }

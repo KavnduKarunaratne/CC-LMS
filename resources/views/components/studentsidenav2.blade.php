@@ -168,16 +168,23 @@
                         <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View Product</button>
                     </div>
                 </div>
+                @if (Auth::user()->class->subjects()->where('grade_id', Auth::user()->grade->id)->get()->count() == 0)
+                <h2> No subjects yet</h2>
+                @else{
                 @foreach (Auth::user()->class->subjects()->where('grade_id', Auth::user()->grade->id)->get() as $subject)
                 <a href="{{ route('subject.detail', ['subject_id' => $subject->id]) }}"><h3 class="text-xl font-semi-bold text-indigo-600 hover:text-indigo-300 mt-3">{{ $subject->subject_name }}</h3></a>
                 @endforeach
+                
+                
+                }
+                @endif
             </div>
         </div>
     </div>
 </div>
 @endif
-<!--Notices-->
-{{--<div class="bg-black py-16 mb-10">
+<!--Notices
+<div class="bg-black py-16 mb-10">
     
         @foreach (Auth::user()->grade->notices as $notice)
         @if ($notice->grade_id == Auth::user()->grade->id || $notice->grade_id == null)
@@ -187,13 +194,13 @@
         </li>
         @endif
         @endforeach         
-</div>--}}
+</div>-->
 <!--Notices-->
 <div class="bg-white dark:bg-black py-5 mb-10">
     <h2 class="text-2xl font-semi-bold text-gray-900 dark:text-white ml-4 mb-8">Accouncements</h2>
     @if ($notices->count() > 0)
     @foreach ($notices as $notice)
-    @if ($notice->grade_id == null)
+    @if ($notice->grade_id == null || $notice->grade_id == Auth::user()->grade->id)
     <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
         <div class="bg-white rounded-lg border-solid border-2 border-black p-8 m-4">
             <div class="relative overflow-hidden"></div>

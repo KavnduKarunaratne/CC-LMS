@@ -155,7 +155,7 @@ Route::middleware(['App\Http\Middleware\ValidateRole:4'])->group(function () {
     Route::get('assignment-list',[AssignmentController::class,'Assignment']);
     Route::get('add-assignment/{subject_id}',[AssignmentController::class,'addAssignment']);
     Route::post('save-assignment',[AssignmentController::class,'saveAssignment']);
-    Route::get('edit-assignment/{id}',[AssignmentController::class,'editAssignment']);
+    Route::get('edit-assignment/{id}',[AssignmentController::class,'editAssignment'])->name('edit-assignment');
     Route::post('update-assignment/{id}',[AssignmentController::class,'updateAssignment'])->name('update-assignment');
     Route::match(['get', 'delete'], 'delete-assignment/{id}', [AssignmentController::class, 'deleteAssignment'])->name('delete-assignment');
 

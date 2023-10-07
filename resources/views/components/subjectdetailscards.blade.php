@@ -4,7 +4,31 @@
     <div class="container mx-auto px-4">
         <h2 class="text-2xl font-bold text-gray-900 mb-3 dark:text-white">Subject Details</h2>
         <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+        <div class=" " x-data="{ open: false }">
+                    <button class="bg-indigo-600 text-white p-4" x-on:click="open = ! open" >View students</button>
+                    <div x-show="open" x-transition>
+                    <div class="bg-white text-black m-6  w-1/4 p-4 rounded-2xl fixed ">
+                    @if (Auth::user() && Auth::user()->role_id == 4)
+            @if ($subject->class && $subject->grade && $subject->class->students->count() > 0)
+               <!-- <h4>Students in Grade: {{ $subject->grade->grade }} Class {{ $subject->class->class_name }}:</h4>-->
+              
+               <ul>
+                    @foreach ($subject->class->students as $student)
+                        @if ($student->is_archived == 0 && $student->class_id == $subject->class_id)
+                            <li>{{ $student->name }} {{ $student->admission_number }}</li>
+                        @endif
+                    @endforeach
+                </ul>
+                @else
+                <p>No students in this class.</p>
+               @endif
+                 @endif
+</div>
+                </div>
+                         </div>
             <div class="bg-white rounded-lg border-solid border-2 border-gray-900 p-8">
+            
+
                 <h3 class="text-lg font-semi-bold text-gray-900 mt-2 mb-1">Subject: {{ $subject->subject_name }} </h3>
                 <h3 class="text-lg font-semi-bold text-gray-900 mt-1 mb-2">Teacher in Charge: {{ $subject ->teacher->name}} </h3>
 
@@ -18,7 +42,13 @@
                     <a href="{{ url('add-assignment',['subject_id' => $subject->id]) }}"><button class="bg-green-400 text-white py-2.5 px-4 rounded-full font-bold hover:bg-gray-800">Assigments</button></a>
                     
                 </div>
+             
                 @endif
+                @if (Auth::user() && Auth::user()->role_id == 3)
+                <div class=" mt-6 ">
+            <a href="{{ route('subject.flashcards', ['subject_id' => $subject->id]) }}"  class="bg-indigo-600 p-4 hover:bg-indigo-400 text-white text-center w-[300px]  font-semibold rounded my-3 py-3 mt-1">Flashcards</a>
+        </div>
+        @endif
 
             </div>
 
@@ -50,13 +80,16 @@
                 @if ($material->file)
                 <a href="{{ asset('storage/' . $material->file) }}" download><h3 class="text-lg font-semi-bold text-gray-900 mt-2">resources : DOWNLOAD HERE </h3></a>
                 @endif 
-               <a href="{{ $material->link }}" target="_blank"><h3 class="text-lg font-semi-bold text-gray-900 mt-2 overflow-hidden">Link: {{ $material->link }} </h3></a>
-              <h3 class="text-lg font-semi-bold text-gray-900 mt-2 mb-4">Upload Date: {{ $material->upload_date }} </h3>
+
+                @if($material->link)
+               <a href="{{ $material->link }}" target="_blank"><h3 class="text-lg font-semi-bold text-blue-700 underline mt-2 overflow-hidden">Link: {{ $material->link }} </h3></a>
+             @endif
+               <h3 class="text-lg font-semi-bold text-gray-900 mt-2 mb-4">Upload Date: {{ $material->upload_date }} </h3>
 
                 @if (Auth::user() && Auth::user()->role_id == 4)
 
                 <div class="flex space-x-4 place-content-start">
-                    <a href="{{ route('edit-material', ['subject_id' => $material->subject->id, 'id' => $material->id]) }}"><button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Edit</button></a>
+                    <a href="{{ route('edit-material', $material->id) }}"><button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Edit</button></a>
                     <a href="#" class="" data-bs-toggle="modal" data-bs-target="#deleteMaterialModal{{ $material->id }}">
     <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Delete</button>
 </a>                    
@@ -169,10 +202,26 @@
 
     </div>
     
-
+   
+</div>
+<div class="bg-white dark:bg-black m-4  p-4 rounded-md shadow-md mb-4">
+        @if (Auth::user() && Auth::user()->role_id == 4)
+            @if ($subject->class && $subject->grade && $subject->class->students->count() > 0)
+                <h4>Students in Grade: {{ $subject->grade->grade }} Class {{ $subject->class->class_name }}:</h4>
+                <ul>
+                    @foreach ($subject->class->students as $student)
+                        @if ($student->is_archived == 0 && $student->class_id == $subject->class_id)
+                            <li>{{ $student->name }} {{ $student->admission_number }}</li>
+                        @endif
+                    @endforeach
+                </ul>
+            @else
+                <p>No students in this class.</p>
+            @endif
+        @endif
 </div>
 
-
+</div>
 
 
 

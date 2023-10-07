@@ -30,7 +30,7 @@
         </div>
         <br>
         <button type="submit" class="w-full bg-indigo-500 text-white text-sm font-bold py-2 px-4 mb-4 rounded-md hover:bg-indigo-600 transition duration-300">Save</button>
-        <a href="{{ url('teacher-panel') }}" class="bg-gray-500 hover:bg-gray-700 text-white py-1 px-3 rounded my-3 mt-1">Back</a>
+        <a href="{{ url()->previous() }}" class="bg-gray-500 hover:bg-gray-700 text-white py-1 px-3 rounded my-3 mt-1">Back</a>
     </form>
 </body>
 </html>

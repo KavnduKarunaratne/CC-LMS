@@ -83,17 +83,19 @@
                                     @endforeach
                                     @if ($submission->feedback->isEmpty())
         <li class="mb-2">
-            <strong>Provide Feedback</strong>
-           
+            <strong>Provide Feedback</strong></br>
+            @if (Auth::user() && Auth::user()->role_id == 4 )<!-- display this to authenticated users with role id 4 -->
+              <div  class="mt-3" >  
+            <a href="{{ url('add-feedback', ['submission_id' => $submission->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3  rounded my-3">Provide Feedback</a>
+</div>   
+            @endif
         </li>
     @endif
                                     
                                 </ul>
                             </div>
 
-                            @if (Auth::user() && Auth::user()->role_id == 4)<!-- display this to authenticated users with role id 4 -->
-                                <a href="{{ url('add-feedback', ['submission_id' => $submission->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3">Provide Feedback</a>
-                            @endif
+                            
                         </li>
                     @endforeach
                 </ul>
