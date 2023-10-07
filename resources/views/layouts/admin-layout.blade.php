@@ -41,8 +41,9 @@
                 <div class="avatar flex items-center justify-center  ">
                 <div class="h-16 w-full flex items-center">
                     
-                                <img src="images/logo3.png" alt="" style="width:210px !important; height: auto !important;">
-                            </div>
+                <img src="{{asset('images/logo3.png')}}" alt="" style="width:210px !important; height: auto !important;">
+
+</div>
 
                 </div>
 

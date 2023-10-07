@@ -96,56 +96,9 @@
             @endforeach
         </tbody>
     </table>
-    @else
-    <h2 class="font-bold text-xl mt-2 mb-0 dark:text-white">Assignment not found</h2>
 @endif
 
 
-@foreach($assignments as $assignment)
-    <h2 class="font-bold text-xl mt-2 mb-0 dark:text-white">Student Progress for Assignment: {{ $assignment->assignment_name }}</h2>
-    <table class="mb-5 mt-2">
-        <thead class="text-indigo-600">
-            <tr>
-                <th >Student</th>
-                <th>Admission Number</th>
-                <th>Marks</th>
-            </tr>
-        </thead>
-        <tbody>
-            @php
-                $totalMarks = 0; // Set the initial value to 0
-                $totalStudents = $students->count(); // Get the total number of students
-            @endphp
-
-            @foreach($students as $student)
-                <tr>
-                    <td class="dark:bg-white">{{ $student->name }}</td>
-                    <td class="dark:bg-white">{{ $student->admission_number }}</td>
-                    <td class="dark:bg-white">
-                         @php
-                            $submission = $student->submissions
-                                ->where('assignment_id', $assignment->id)
-                                ->first(); // Get the first submission for this assignment
-
-                            if ($submission) {
-                                $marks = $submission->feedback->pluck('marks')->sum();
-                                $totalMarks += $marks;
-
-                                if ($marks !== null) {
-                                    echo $marks . ' / 100';
-                                } else {
-                                    echo 'Not Marked';
-                                }
-                            } else {
-                                echo 'No submission';
-                            }
-                        @endphp
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-@endforeach
 
 
 <h2 class="font-bold text-xl dark:text-white">Overall Top Scoring Students</h2>
@@ -213,6 +166,7 @@
                 @endforeach
             </tbody>
         </table>
+
 </div>
 </body>
 </html>

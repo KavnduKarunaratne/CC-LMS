@@ -196,3 +196,4 @@ Route::middleware(['App\Http\Middleware\ValidateRole:3'])->group(function () {
 
 Route::get('profile/show',[UserController::class,'showProfile']);
 
+Route::get('search-progress', [ProgressController::class, 'searchProgress'])->name('search-progress');

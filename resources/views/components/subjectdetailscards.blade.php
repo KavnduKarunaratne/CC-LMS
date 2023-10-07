@@ -45,29 +45,25 @@
         @if ($isAccessible || $material->users->isEmpty() || Auth::user()->role_id == 4)
         <div class="grid grid-cols-1 md:grid-cols-1 gap-8 pt-3">
         <div class="bg-white rounded-lg border-solid border-2 border-gray-900 p-8">
-        <h3 class="text-lg font-semi-bold text-gray-900 mt-3">Material name: {{ $material->material_name }} </h3>
-                <h3 class="text-lg font-semi-bold text-gray-900 mt-2">Description: {{ $material->description }} </h3>
+        <h3 class="text-lg font-semi-bold text-gray-900 mt-3">Topic: {{ $material->material_name }} </h3>
+                <h3 class="text-lg font-semi-bold text-gray-900 mt-2"> {{ $material->description }} </h3>
                 @if ($material->file)
-                <a href="{{ asset('storage/' . $material->file) }}" download><h3 class="text-lg font-semi-bold text-gray-900 mt-2">File: DOWNLOAD HERE </h3></a>
+                <a href="{{ asset('storage/' . $material->file) }}" download><h3 class="text-lg font-semi-bold text-gray-900 mt-2">resources : DOWNLOAD HERE </h3></a>
                 @endif 
-
-
-                <a href="{{ $material->link }}" target="_blank"><h3 class="text-lg font-semi-bold text-gray-900 mt-2 overflow-hidden">Link: {{ $material->link }} </h3></a>
-
-
-                <h3 class="text-lg font-semi-bold text-gray-900 mt-2 mb-4">Upload Date: {{ $material->upload_date }} </h3>
+               <a href="{{ $material->link }}" target="_blank"><h3 class="text-lg font-semi-bold text-gray-900 mt-2 overflow-hidden">Link: {{ $material->link }} </h3></a>
+              <h3 class="text-lg font-semi-bold text-gray-900 mt-2 mb-4">Upload Date: {{ $material->upload_date }} </h3>
 
                 @if (Auth::user() && Auth::user()->role_id == 4)
 
                 <div class="flex space-x-4 place-content-start">
                     <a href="{{ route('edit-material', ['subject_id' => $material->subject->id, 'id' => $material->id]) }}"><button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Edit</button></a>
-                    <a href="#" class= "" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $material->id }}"><button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Delete</button>
-                    
+                    <a href="#" class="" data-bs-toggle="modal" data-bs-target="#deleteMaterialModal{{ $material->id }}">
+    <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Delete</button>
+</a>                    
                 </div>
 
                 <!--Delete Confirmation-->
-                <div class="modal fade" id="deleteModal{{ $material->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                <div class="modal fade" id="deleteMaterialModal{{ $material->id }}" tabindex="-1" aria-labelledby="deleteMaterialModalLabel" aria-hidden="true">                    <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
@@ -121,10 +117,11 @@
             @if (Auth::user() && Auth::user()->role_id == 4)
                 <div class="flex space-x-4 place-content-start">
                     <a href="{{ url('edit-assignment', $assignment->id) }}"><button class="bg-gray-900 text-white py-2 px-3 rounded-full font-bold hover:bg-gray-800">Edit</button>
-                    <a a href="#" class="" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $assignment->id }}"><button class="bg-gray-900 text-white py-2 px-3 rounded-full font-bold hover:bg-gray-800">Delete</button></a>
+                    <a href="#" class="" data-bs-toggle="modal" data-bs-target="#deleteAssignmentModal{{ $assignment->id }}">
+    <button class="bg-gray-900 text-white py-2 px-3 rounded-full font-bold hover:bg-gray-800">Delete</button>
+</a>
                     <!--delete confirmation-->
-                    <div class="modal fade" id="deleteModal{{ $assignment->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal fade" id="deleteAssignmentModal{{ $assignment->id }}" tabindex="-1" aria-labelledby="deleteAssignmentModalLabel" aria-hidden="true">                    <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
