@@ -8,6 +8,8 @@ use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class SubjectController extends Controller
 {
@@ -34,17 +36,30 @@ class SubjectController extends Controller
     public function saveSubject(Request $request){
         try{
             $request->validate([
-                'subject_name'=> 'required',
-                'grade_id'=>'required',
-                'class_id'=>'required',
-                'teacher_id'=>'required',
+                'subject_name' => 'required',
+                'grade_id' => 'required',
+                'class_id' => 'required',
+                'teacher_id' => 'required',
+                'image' => 'nullable |file|mimes:jpeg,png,jpg',
             ]);
+        
+            // Upload the image
 
-            $this->createSubject($request);
+           $imagePath = $request->hasFile('image') ? $request->file('image')->store('subject_images', 'public') : null;
+        
+            // Save the subject with the image path
+            $subject = new Subject;
+            $subject->subject_name = $request->subject_name;
+            $subject->grade_id = $request->grade_id;
+            $subject->class_id = $request->class_id;
+            $subject->teacher_id = $request->teacher_id;
+            $subject->image = $imagePath;
+            $subject->save();
 
             return redirect()->back()->with('success', 'subject added successfully');
         } catch(\Exception $e){
-            return redirect()->back()->with('error', 'subject already exists');
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'Error saving subject');
         }
     }
 
@@ -62,14 +77,37 @@ class SubjectController extends Controller
     public function updateSubject(Request $request, $id){
         try{
             $request->validate([
-                'subject_name'=> 'required',
-                'grade_id'=>'required',
-                'class_id'=>'required',
-                'teacher_id'=>'required'
+                'subject_name' => 'required',
+                'grade_id' => 'required',
+                'class_id' => 'required',
+                'teacher_id' => 'required',
+                'image' => 'nullable|file|mimes:jpeg,png,jpg',
             ]);
-
-            $this->update($request, $id);
-
+        
+            // Retrieve the subject
+            $subject = Subject::findOrFail($id);
+        
+            // Check if a new image is provided
+            if ($request->hasFile('image')) {
+                // Delete the old image
+                Storage::disk('public')->delete($subject->image);
+        
+                // Store the new image
+                $imagePath = $request->hasFile('image') ? $request->file('image')->store('subject_images', 'public') : null;
+        
+            } else {
+                // Keep the existing image
+                $imagePath = $subject->image;
+            }
+        
+            // Update the subject
+            $subject->update([
+                'subject_name' => $request->subject_name,
+                'grade_id' => $request->grade_id,
+                'class_id' => $request->class_id,
+                'teacher_id' => $request->teacher_id,
+                'image' => $imagePath,
+            ]);
             return redirect('dashboard')->with('success', 'subject updated successfully');
         } catch(\Exception $e){
             return redirect()->back()->with('error', 'Error updating subject');
@@ -91,23 +129,5 @@ class SubjectController extends Controller
     }
 
     //using private helper functions to break the code down into smaller parts
-    private function createSubject(Request $request)
-    {
-        $subject = new Subject;
-        $subject->subject_name = $request->subject_name;
-        $subject->grade_id = $request->grade_id;
-        $subject->class_id = $request->class_id;
-        $subject->teacher_id = $request->teacher_id;
-        $subject->save();
-    }
 
-    private function update(Request $request, $id)
-    {
-        Subject::where('id', $id)->update([
-            'subject_name' => $request->subject_name,
-            'grade_id' => $request->grade_id,
-            'class_id' => $request->class_id,
-            'teacher_id' => $request->teacher_id,
-        ]);
-    }
 }

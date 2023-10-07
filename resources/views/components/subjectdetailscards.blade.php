@@ -4,11 +4,12 @@
     <div class="container mx-auto px-4">
         <h2 class="text-2xl font-bold text-gray-900 mb-3 dark:text-white">Subject Details</h2>
         <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+        @if (Auth::user() && Auth::user()->role_id == 4)
         <div class=" " x-data="{ open: false }">
                     <button class="bg-indigo-600 text-white p-4" x-on:click="open = ! open" >View students</button>
                     <div x-show="open" x-transition>
                     <div class="bg-white text-black m-6  w-1/4 p-4 rounded-2xl fixed ">
-                    @if (Auth::user() && Auth::user()->role_id == 4)
+                   
             @if ($subject->class && $subject->grade && $subject->class->students->count() > 0)
                <!-- <h4>Students in Grade: {{ $subject->grade->grade }} Class {{ $subject->class->class_name }}:</h4>-->
               

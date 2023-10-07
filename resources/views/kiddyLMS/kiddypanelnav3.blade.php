@@ -176,8 +176,49 @@
 <div class="bg-white py-5 mb-0">
     <div class="container mx-auto px-4">
         <h2 class="text-2xl font-semi-bold text-gray-900 mb-8">Here are Your Subjects!</h2>
-        @include('kiddyLMS.subjects')
-        <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+      
+        
+      
+<div class="grid-cols-1 sm:grid md:grid-cols-3 ">
+   
+@foreach (Auth::user()->class->subjects()->where('grade_id', Auth::user()->grade->id)->get() as $subject)
+
+  <div
+    class="mx-3 mt-6 flex flex-col rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 sm:shrink-0 sm:grow sm:basis-0">
+   
+    @if ($subject->image)
+ 
+      <img src="{{ asset('storage/' . $subject->image) }}"
+
+        class="rounded-t-lg"
+       
+        alt="Header" />
+
+  @elseif ($subject->image == null)
+      <img src="{{asset('images/logo3.png')}}"
+
+        class="rounded-t-lg"
+       
+        alt="Header" />
+    @endif
+    <div class="p-6">
+      <h5
+        class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+        <a href="{{ route('subject.detail', ['subject_id' => $subject->id]) }}">{{ $subject->subject_name }}</a>
+
+      </h5>
+ 
+    </div>
+  </div>
+  @endforeach
+</div>
+
+
+
+
+
+
+       <!-- <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
             <div class="bg-white rounded-lg border-solid border-2 border-black p-8">
                 <div class="relative overflow-hidden">
                     {{--<img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">--}}
@@ -190,7 +231,7 @@
                 <a href="{{ route('subject.detail', ['subject_id' => $subject->id]) }}"><h3 class="text-xl font-bold text-indigo-600 hover:text-indigo-300 mt-3">{{ $subject->subject_name }}</h3></a>
                 @endforeach
             </div>
-        </div>
+        </div>-->
     </div>
 </div>
 @endif
