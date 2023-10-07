@@ -1,17 +1,17 @@
 <x-admin-layout>
                    
-<div class="page-container m-10">
+<div class="page-container m-10 dark:bg-black">
     <div class="p-4">
-        <a href="{{ url('add-grade') }}" class="bg-indigo-600 hover:bg-indigo-800 text-white text-xl font-bold py-2 px-4 rounded-full ml-4 mt-1">Add Grade</a>
+        <a href="{{ url('add-grade') }}" class="bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-800 text-white dark:text-gray-100 text-xl font-bold py-2 px-4 rounded-full ml-4 mt-1">Add Grade</a>
     </div>
    
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
     
         @foreach($grade as $grade)
     
-            <div class="card rounded-2xl border-2 w-full h-2/2 border-black m-4">
+            <div class="card rounded-2xl border-2 w-full h-2/2 border-black dark:border-gray-300 m-4">
             <a href="{{ route('classes.show', $grade) }}">
-                <p class=" text-indigo-600 font-bold text-center mt-4">Grade {{ $grade->grade }}</p>
+                <p class=" text-indigo-600 dark:text-indigo-300 font-bold text-center mt-4">Grade {{ $grade->grade }}</p>
              <!--   <div class="flex justify-end mt-3">
                     <div class="flex">
                         <a href="{{ route('classes.show', $grade) }}" class="bg-green-500 hover:bg-green-700 text-white text-l font-bold py-2 px-3 rounded-full block md:inline">View Classes</a>

@@ -41,9 +41,9 @@
     </style>
 </head>
 <body>
-<div class="container">
+<div class="container dark:bg-black">
 @foreach($assignments as $assignment)
-    <h2 class="font-bold text-xl mt-2 mb-0">Student Progress for Assignment: {{ $assignment->assignment_name }}</h2>
+    <h2 class="font-bold text-xl mt-2 mb-0 dark:text-white">Student Progress for Assignment: {{ $assignment->assignment_name }}</h2>
     <table class="mb-5 mt-2">
         <thead class="text-indigo-600">
             <tr>
@@ -60,9 +60,9 @@
 
             @foreach($students as $student)
                 <tr>
-                    <td>{{ $student->name }}</td>
-                    <td>{{ $student->admission_number }}</td>
-                    <td>
+                    <td class="dark:bg-white">{{ $student->name }}</td>
+                    <td class="dark:bg-white">{{ $student->admission_number }}</td>
+                    <td class="dark:bg-white">
                         @php
                             $marks = $student->submissions
                                 ->where('assignment_id', $assignment->id) // Get submissions for this assignment
@@ -86,9 +86,9 @@
     </table>
 @endforeach
 
-<h2 class="font-bold text-lg mb-5 underline decoration-solid decoration-indigo-600">Class Average: {{ $totalMarks / $totalStudents }} / 100</h2>
+<h2 class="font-bold text-lg mb-5 underline decoration-solid dark:decoration-indigo-200 decoration-indigo-600 dark:text-white">Class Average: {{ $totalMarks / $totalStudents }} / 100</h2>
 
-<h2 class="font-bold text-xl">Overall Top Scoring Students</h2>
+<h2 class="font-bold text-xl dark:text-white">Overall Top Scoring Students</h2>
  <!-- the marks are calculated and the  students are arranged(sorted) in the descending order of marks-->
 <!-- the flatmap function extracts the marks from the feedback-->
    <table class="mb-5">
@@ -111,8 +111,8 @@
         @endphp
          @foreach($overallTopStudents as $student)
             <tr>
-                <td>{{ $student->name }}</td>
-                <td>
+                <td class="dark:bg-white">{{ $student->name }}</td>
+                <td class="dark:bg-white">
                     @php
                         $totalMarks = $student->submissions
                             ->where('assignment.subject_id', $subject->id)
@@ -132,7 +132,7 @@
         </tbody>
     </table>
 
-<h2 class="text-xl font-bold mb-2">Overall Least Scoring Students</h2>
+<h2 class="text-xl font-bold mb-2 dark:text-white">Overall Least Scoring Students</h2>
   <!-- the marks are calculated and the  students are arranged(sorted) in the ascending order of marks.
   the flatmap function extracts the marks from the feedback-->
     <table>
@@ -142,7 +142,7 @@
                 <th>Total Marks</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="dark:bg-white">
         @php
             $overallLeastStudents = $students->sortBy(function ($student) use ($subject) {
                 return $student->submissions
@@ -155,8 +155,8 @@
         @endphp
         @foreach($overallLeastStudents as $student)
             <tr>
-                <td>{{ $student->name }}</td>
-                <td>
+                <td class="dark:bg-white">{{ $student->name }}</td>
+                <td class="dark:bg-white">
                     @php
                         $totalMarks = $student->submissions
                             ->where('assignment.subject_id', $subject->id)

@@ -1,4 +1,4 @@
-{{--<div class="bg-white py-16">
+{{--<div class="bg-white dark:bg-black py-16">
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-white mb-8">Introducing Our Latest Product</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -55,10 +55,10 @@
     </div>
 </div>--}}
 
-<div class="bg-white ">
+<div class="bg-white dark:bg-black ">
     <div class="container mx-auto px-4">
     <a href= "{{ url('add-notice') }}">
-        <button class="bg-custom-color text-white font-bold py-2 px-4 rounded-full">Add Announcement</button>
+        <button class="bg-custom-color text-white font-bold py-2 mb-4 px-4 rounded-full">Add Announcement</button>
     </a>
   
 

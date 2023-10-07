@@ -6,7 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Add student</title>
 </head>
-<body class="bg-white">
+<body class="bg-white dark:bg-black">
 <div class="container mx-auto py-8 mt-12">
         @if (session('error'))
             <div class="bg-red-200 text-red-700 p-2 rounded my-3 mt-1">
@@ -17,7 +17,7 @@
                 {{ session('success') }}
             </div>
         @endif
-    <h2 class="text-2xl font-bold mb-6 text-center text-black">Add Student</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center text-black dark:text-white">Add Student</h2>
 
     <form  class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post" action="{{ url('save-Student') }} ">
         @csrf 
@@ -62,7 +62,8 @@
     
         <br>
         <button type="submit" class="w-20 bg-gray-900 text-white py-1 px-4 rounded-xl  hover:bg-gray-800">Save</button>
-        <a href="{{ url('subject-list') }}" class="w-20 bg-red-700 text-white py-1 px-4 rounded-xl  hover:bg-gray-800"Back</a>
+        <a href="{{ url('subject-list') }}" class="w-20 bg-red-700 text-white py-1 px-4 rounded-xl  hover:bg-gray-800">Back</a>
+        
     </form>
 </div>
 </body>

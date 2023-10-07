@@ -6,7 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Edit User</title>
 </head>
-<body class="bg-black">
+<body class="bg-white dark:bg-black">
 
 <div class="container mx-auto py-8 mt-12">
         @if (session('error'))
@@ -18,7 +18,7 @@
                 {{ session('success') }}
             </div>
         @endif
-    <h2 class="text-2xl font-bold mb-6 text-center text-white">Edit User</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center text-black dark:text-white">Edit User</h2>
     <form method="post" action="{{ route('update-user', ['id' => $user->id]) }}" class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
         @csrf
         <div class="mb-4">
@@ -44,7 +44,7 @@
         <br>
 
         <div class="flex items-center justify-around">
-            <button class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            <button class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                 Update
             </button>
             <a href="{{ url('dashboard') }}" class="text-black no-underline hover:underline">Back</a>

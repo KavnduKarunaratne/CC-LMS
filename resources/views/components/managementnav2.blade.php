@@ -5,7 +5,7 @@
                     <!-- Sidebar starts -->
                     <!-- Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] -->
                     <!--- more free and premium Tailwind CSS components at https://tailwinduikit.com/ --->
-                    <div style="min-height: 716px" class="w-70 absolute sm:relative bg-white shadow-2xl md:h-full flex-col justify-between hidden sm:flex">
+                    <div style="min-height: 716px" class="w-70 absolute sm:relative bg-white dark:bg-gray-800 shadow-2xl md:h-full flex-col justify-between hidden sm:flex">
                         <div class="px-8">
                             <div class="h-16 w-full flex items-center">
                                 {{--<svg aria-label="Ripples. Logo" role="img" xmlns="http://www.w3.org/2000/svg" width="144" height="30" viewBox="0 0 144 30">
@@ -15,10 +15,11 @@
                                     />
                                 </svg>--}}
                                 <img src="images/logo3.png" alt="" style="width:210px !important; height: auto !important;">
+                                {{--<h2>EducateLanka</h2>--}}
                             </div>
                             <ul class="mt-12">
                                 {{--<li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">--}}
-                                <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-indigo-600  text-gray-800 hover:text-white">
+                                <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-indigo-600  text-gray-800 dark:text-white hover:text-white dark:hover:text-gray-800">
 
                                     <a href="{{ url('management') }}" class="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-grid" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -33,7 +34,7 @@
                                     
                                 </li>
                                 {{--<li class="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6">--}}
-                                <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-indigo-600 text-gray-800 hover:text-white">
+                                <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-indigo-600 text-gray-800 dark:text-white hover:text-white dark:hover:text-gray-800">
                                     <a href="{{ url('profile/show') }}" href="{{ url('profile/show') }}" class="flex items-center focus:outline-none ">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-puzzle" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z"></path>
@@ -44,7 +45,7 @@
                                     
                                 </li>
                                 {{--<li class="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6">--}}
-                                <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-indigo-600 text-gray-800 hover:text-white">
+                                <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-indigo-600 text-gray-800 dark:text-white hover:text-white dark:hover:text-gray-800">
                                     <a href="{{ route('logout') }}" class="flex items-center ">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-compass" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z"></path>
@@ -148,7 +149,7 @@
                     </div>
                     <!-- Sidebar ends -->
                     <!-- Remove class [ h-64 ] when adding a card block -->
-                    <div class="container mx-auto py-10 md:w-4/5 w-11/12 px-6" id="content">
+                    <div class="container mx-auto py-10 md:w-4/5 w-11/12 px-6 dark:bg-black" id="content">
                         <!-- Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border -->
                         @include('components.managementcards')
                             <!-- Place your content here -->

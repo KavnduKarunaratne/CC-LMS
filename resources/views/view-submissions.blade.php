@@ -12,19 +12,19 @@
 <body>
         <div class="m-10">
             <form action="{{ route('search-submissions', $assignment->id) }}" method="GET">
-                <input type="text" name="search" placeholder="Search submissions">
-                <button type="submit" class="bg-green-400 hover:bg-green-300 text-white py-1 px-3 rounded">Search</button>
+                <input class="py-2 px-4 mr-1 rounded-md" type="text" name="search" placeholder="Search submissions">
+                <button type="submit" class="bg-indigo-400 hover:bg-indigo-300 text-white py-2 px-3 rounded">Search</button>
             </form>
         </div>
 
         <div class="container mx-auto p-4">
-             <h2 class="text-2xl font-semibold mb-4">Submissions for Assignment: {{ $assignment->assignment_name }}</h2>
+             <h2 class="text-2xl font-semibold mb-4 dark:text-white">Submissions for Assignment: {{ $assignment->assignment_name }}</h2>
             @if ($submissions->count() > 0)
-            <div class="bg-white p-4 rounded-md shadow-md">
+            <div class=" p-4 rounded-md shadow-md dark:bg-gray-300">
                 <ul>
                     @foreach ($submissions as $submission)<!--get the submissions for each assignment-->
                         <li class="mb-4">
-                            <div class="bg-gray-100 p-4 rounded-md shadow-md">
+                            <div class="bg-gray-100 p-4 rounded-md shadow-md ">
                                 <strong>Submission Name:</strong> {{ $submission->name }}
                                 <br>
                                 <strong>Submission Description:</strong> {{ $submission->description }}
@@ -104,7 +104,7 @@
     </div>
     <div>
     @if (Auth::user() && Auth::user()->role_id == 4)<!--display this for authenticated user with role id 4-->
-            <div class="bg-white p-4 rounded-md shadow-md mb-4">
+            <div class="bg-white p-4 rounded-md shadow-md mb-4 mx-4">
                 @if ($subject->class && $subject->grade && $subject->class->students->count() > 0)
                     <h4>Students in Grade:  {{ $subject->grade->grade}}   class {{ $subject->class->class_name }}:</h4>
                     <ul class=>

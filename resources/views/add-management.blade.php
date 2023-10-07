@@ -6,9 +6,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Add Management</title>
 </head>
-<body class="bg-black">
+<body class="bg-white dark:bg-black">
 <div class="container mx-auto py-8 mt-12">
-    <h2 class="text-2xl font-bold mb-6 text-center text-white">Add Management</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center text-black dark:text-white">Add Management</h2>
         @if (session('error'))
             <div class="bg-red-200 text-red-700 p-2 rounded my-3 mt-1">
                 {{ session('error') }}
@@ -45,7 +45,7 @@
         </div>
 
         <br>
-        <button type="submit" class="w-full bg-amber-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-amber-600 transition duration-300">Save</button>
+        <button type="submit" class="w-full bg-indigo-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300">Save</button>
         <a href="{{ url('user-management') }}">Back</a>
     </form>
 </div>
