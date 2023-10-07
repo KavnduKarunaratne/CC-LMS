@@ -100,14 +100,6 @@
                <span class="flex-1 ml-3 whitespace-nowrap">Profile</span>
             </a>
          </li>
-         <!--<li>
-            <a href="{{ route('logout') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               <svg class="flex-shrink-0 w-10 h-10 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                  <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
-               </svg>
-               <span class="flex-1 ml-3 whitespace-nowrap">Logout</span>
-            </a>
-         </li>-->
          <li>
             <a href="{{ route('logout') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white bg-yellow-200 dark:hover:bg-gray-700 group">
                <svg class="flex-shrink-0 w-10 h-10 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
@@ -137,6 +129,8 @@
                     </div>
                 </div>
                 <!DOCTYPE html>
+                
+                <!--Carousel-->
 
 <div class="image-container">
   @include('kiddyLMS.carousel')
@@ -240,116 +234,4 @@
       
    </div>
 </div>
-
-<!--<!DOCTYPE html>
-<html>
-<head>
-<style>
-  .image-container {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .image-container img {
-    display: inline-block;
-    animation-duration: 5s; /* Adjust the animation duration as needed */
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-
-  .move-left {
-    animation-name: moveLeft;
-  }
-
-  .move-right {
-    animation-name: moveRight;
-  }
-
-  @keyframes moveLeft {
-    0% {
-      transform: translateX(-100%); /* Start from the left */
-    }
-    100% {
-      transform: translateX(100%); /* Move to the right */
-    }
-  }
-
-  @keyframes moveRight {
-    0% {
-      transform: translateX(100%); /* Start from the right */
-    }
-    100% {
-      transform: translateX(-100%); /* Move to the left */
-    }
-  }
-</style>
-</head>
-<body>
-
-<div class="image-container">
-  <img src="images/cloudbg.png" alt="Image 1" class="move-left">
-  <img src="images/cloud.png" alt="Image 2" class="move-right">
-</div>
-
-</body>
-</html>-->
-
-
-<!--USING-->
-
-<!--<!DOCTYPE html>
-<html>
-<head>
-<style>
-  .image-container {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .image-container img {
-    display: inline-block;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-
-  .move-left {
-    animation-name: moveLeft;
-    animation-duration: 10s; /* Adjust the animation duration for slower movement */
-  }
-
-  .move-right {
-    animation-name: moveRight;
-    animation-duration: 10s; /* Adjust the animation duration for slower movement */
-  }
-
-  @keyframes moveLeft {
-    0% {
-      transform: translateX(-100%); /* Start from the left */
-    }
-    100% {
-      transform: translateX(100%); /* Move to the right */
-    }
-  }
-
-  @keyframes moveRight {
-    0% {
-      transform: translateX(100%); /* Start from the right */
-    }
-    100% {
-      transform: translateX(-100%); /* Move to the left */
-    }
-  }
-</style>
-</head>
-<body>
-
-<div class="image-container">
-  <img src="images/cloudbg.png" alt="Image 1" class="move-left">
-  <img src="images/cloud.png" alt="Image 2" class="h-100 move-right">
-</div>
-
-</body>
-</html>-->
 
