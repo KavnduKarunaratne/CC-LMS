@@ -17,7 +17,7 @@ body {
 }
 
 .carousel {
-  width: 950px;
+  width: 960px;
   height: 400px;
   position: relative;
   
