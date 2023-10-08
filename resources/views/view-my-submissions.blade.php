@@ -10,8 +10,13 @@
 <body class="bg-white dark:bg-black">
 
 
-@include('components.studentnav-viewmygrades')
-{{--@include('kiddyLMS.kiddygrades')--}}
+
+@if (auth()->user()->grade_id < 5)
+    @include('kiddyLMS.kiddygrades')
+@else
+    @include('components.studentnav-viewmygrades')
+@endif
+
 
 
 
