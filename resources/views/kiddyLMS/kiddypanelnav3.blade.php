@@ -208,18 +208,7 @@
     </div>
 </div>
 @endif
-<!--Notices-->
-{{--<div class="bg-black py-16 mb-10">
-    
-        @foreach (Auth::user()->grade->notices as $notice)
-        @if ($notice->grade_id == Auth::user()->grade->id || $notice->grade_id == null)
-        <li>
-            Notice:{{ $notice->notice }}
-            Date:{{ $notice->date_of_notice }}
-        </li>
-        @endif
-        @endforeach         
-</div>--}}
+
 
 <div class="mx-4 my-8 py-4">
 <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-purple-400 to-blue-700 mb-6">Ready for Todays Adventure?</h2>
@@ -232,6 +221,7 @@
 
 
 
+<!--Notices-->
 
 
 <!--Notices-->
@@ -269,8 +259,36 @@
     @else
     <h3 class="text-xl font-semi-bold text-gray-900 mt-3">No Notices Available</h3>
     @endif
-</div>
-      
+
+
+<div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+@foreach (Auth::user()->grade->notices as $notice)
+@if ($notice->grade_id == Auth::user()->grade->id || $notice->grade_id == null)
+        <div class="bg-white rounded-lg border-solid border-4 p-8 m-4" style="border-color: {{ $borderColor }};">
+            <div class="relative overflow-hidden"></div>
+            <h3 class="text-xl font-semi-bold text-gray-900 mt-3">{{ $notice->notice }}</h3>
+            <h3 class="text-xl font-semi-bold text-gray-900 mt-3">Posted on: {{ $notice->date_of_notice }}</h3>
+            @if ($notice->management)
+            <h3 class="text-xl font-semi-bold text-gray-900 mt-3">Posted by: {{ $notice->management->name }}</h3>
+            @else
+            <h3 class="text-xl font-semi-bold text-gray-900 mt-3">Not Available</h3>
+            @endif
+        </div>
+      @endif
+   @endforeach
+         </div>
+         </div>
+<!--<div class="bg-black py-16 mb-10 text-white">
+    
+    @foreach (Auth::user()->grade->notices as $notice)
+    @if ($notice->grade_id == Auth::user()->grade->id || $notice->grade_id == null)
+    <li>
+        Notice:{{ $notice->notice }}
+        Date:{{ $notice->date_of_notice }}
+    </li>
+    @endif
+    @endforeach         
+</div>-->
       
    </div>
 </div>
