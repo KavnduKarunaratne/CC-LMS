@@ -7,14 +7,14 @@
                     <!--- more free and premium Tailwind CSS components at https://tailwinduikit.com/ --->
                     <div style="min-height: 716px" class="w-70 absolute sm:relative bg-white dark:bg-gray-800 shadow-2xl md:h-full flex-col justify-between hidden sm:flex">
                         <div class="px-8">
-                            <div class="h-16 w-full flex items-center">
+                            <div class="h-16 w-full flex items-center mt-6">
                                 {{--<svg aria-label="Ripples. Logo" role="img" xmlns="http://www.w3.org/2000/svg" width="144" height="30" viewBox="0 0 144 30">
                                     <path
                                         fill="#5F7DF2"
                                         d=""
                                     />
                                 </svg>--}}
-                                <img src="images/logo3.png" alt="" style="width:210px !important; height: auto !important;">
+                                <img src="images/logofinal.png" alt="" style="width:210px !important; height: auto !important;">
                                 {{--<h2>EducateLanka</h2>--}}
                             </div>
                             <ul class="mt-12">

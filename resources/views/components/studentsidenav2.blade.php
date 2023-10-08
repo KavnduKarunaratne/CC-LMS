@@ -121,6 +121,35 @@
    </div>
 </aside>
 
+                       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="p-4 sm:ml-64">
    <div class="p-4 border-2 border-white border-dashed rounded-lg dark:border-black mt-14">
       <!--ADDED MY CONTENT HERE-->
@@ -223,3 +252,16 @@
       
    </div>
 </div>
+
+<script>
+   // Get references to the button and the sidebar
+const toggleButton = document.querySelector('[data-drawer-toggle="logo-sidebar"]');
+const sidebar = document.querySelector('#logo-sidebar');
+
+// Add a click event listener to the button
+toggleButton.addEventListener('click', () => {
+  // Toggle the 'hidden' class on the sidebar to show/hide it
+  sidebar.classList.toggle('hidden');
+});
+
+</script>
