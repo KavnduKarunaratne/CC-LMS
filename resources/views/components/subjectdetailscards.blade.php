@@ -2,8 +2,8 @@
 <!--Subject Details-->
 <div class= "mb-11  dark:bg-black">
     <div class="container mx-auto px-4">
-        <h2 class="text-2xl font-bold text-gray-900 mb-3 dark:text-white">Subject Details</h2>
-        <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-0">Subject Details</h2>
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-2">
         @if (Auth::user() && Auth::user()->role_id == 4)
         <div class=" " x-data="{ open: false }">
                     <button class="bg-indigo-600 text-white p-4" x-on:click="open = ! open" >View students</button>
@@ -27,7 +27,7 @@
 </div>
                 </div>
                          </div>
-            <div class="bg-white rounded-lg border-solid border-2 border-gray-900 p-8">
+            <div class="bg-white rounded-lg border-solid border-2 border-gray-900 p-8 mx-4">
             
 
                 <h3 class="text-lg font-semi-bold text-gray-900 mt-2 mb-1">Subject: {{ $subject->subject_name }} </h3>
@@ -64,7 +64,7 @@
 
 
 <!--Materials-->
-<div class="dark:bg-black">
+<div class="dark:bg-black mt-6">
     <div class="container mx-auto px-4">
     @if ($materials->count() > 0)
         <h2 class="text-2xl font-bold text-gray-900 mb-3 dark:text-white">Materials</h2>
@@ -134,12 +134,12 @@
 
 
 <!--Assignments-->
-<div class="mb-11 dark:bg-black">
+<div class="mb-11 dark:bg-black mt-6">
     <div class="container mx-auto px-4">
     @if ($assignments->count() > 0)
     <h2 class="text-2xl font-bold text-gray-900 mb-3 dark:text-white">Assignments</h2>
     @foreach ($assignments as $assignment)
-    <div class="grid grid-cols-1 md:grid-cols-1 gap-8 pt-3">
+    <div class="grid grid-cols-1 md:grid-cols-1 gap-2 pt-3">
         <div class="bg-white rounded-lg border-solid border-2 border-gray-900 p-8">
             <h3 class="text-lg font-semi-bold text-gray-900 mt-3">Assignment name:  {{ $assignment->assignment_name }}</h3>
             <h3 class="text-lg font-semi-bold text-gray-900 mt-2">Description:  {{ $assignment->description }}</h3>

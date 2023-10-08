@@ -125,27 +125,27 @@
    <div class="p-4 border-2 border-white border-dashed rounded-lg dark:border-black mt-14">
       <!--ADDED MY CONTENT HERE-->
       <!--student information-->
-      <div class="text-2xl font-semi-bold text-gray-900 mb-5 dark:text-white">My Grades</div>
+      <div class="text-3xl font-semi-bold text-gray-900 mb-5 dark:text-white">My Grades</div>
       @if (count($submissionsBySubject) > 0)
       @foreach ($submissionsBySubject as $subjectName => $submissions)
-      <h2 class="text-xl font-semi-bold text-black mb-3 dark:text-white">{{ $subjectName }}</h>
+      <h2 class="text-2xl font-semi-bold text-black mb-3 dark:text-white">{{ $subjectName }}</h>
       @foreach ($submissions as $submission)
-      <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-8 font-semi-bold">
         <div class="bg-white rounded-lg shadow-lg p-8 mt-3 border-solid border-2 border-gray-900 dark:border-violet-600">
-        <h3 class="text-xl font-bold text-gray-900 mt-1">Assignment Name: {{ $submission->assignment->assignment_name }}</h3>
-        <h3 class="text-xl font-bold text-gray-900 mt-1">Description: {{ $submission->assignment->description }}</h3>
-        <h3 class="text-xl font-bold text-gray-900 mt-1"></h3>
+        <h3 class="text-xl font-semi-bold text-gray-900 mt-1">Assignment Name: {{ $submission->assignment->assignment_name }}</h3>
+        <h3 class="text-xl font-semi-bold text-gray-900 mt-1">Description: {{ $submission->assignment->description }}</h3>
+        <h3 class="text-xl font-semi-bold text-gray-900 mt-1"></h3>
         @if ($submission->file)
-        <a href="{{ asset('storage/app/submissions/' . $submission->file) }}" download class="dark:text-black">File: Download Here<h3 class="text-xl font-bold text-gray-900 mt-1 dark:text-black"></h3></a>
+        <a href="{{ asset('storage/app/submissions/' . $submission->file) }}" download class="dark:text-black">File: Download Here<h3 class="text-md font-bold text-gray-900 mt-1 dark:text-black"></h3></a>
         @endif 
-        <h3 class="text-xl font-bold text-gray-900 mt-1">Submit Date: {{ $submission->submit_date }}</h3>
-        <h3 class="text-xl font-bold text-gray-900 mt-1"></h3>
+        <h3 class="text-xl font-semi-bold text-gray-900 mt-1">Submit Date: {{ $submission->submit_date }}</h3>
+        <h3 class="text-xl font-semi-bold text-gray-900 mt-1"></h3>
         @if (count($submission->feedback) == 0)
-        <h3 class="text-xl font-bold text-gray-900 mt-1">No Feedback</h3>
+        <h3 class="text-xl font-semi-bold text-gray-900 mt-1">No Feedback</h3>
         @else
         @foreach ($submission->feedback as $feedback)
-        <p class="dark:text-black">Feedback: {{ $feedback->feedback }}</p>
-        <p class="dark:text-black">Marks: {{ $feedback->marks }}</p>
+        <p class="dark:text-black text-xl">Feedback: {{ $feedback->feedback }}</p>
+        <p class="dark:text-black text-xl">Marks: {{ $feedback->marks }}</p>
         @endforeach
         @endif
         @endforeach

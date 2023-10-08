@@ -127,7 +127,7 @@
       <!--student information-->
 <div class="bg-white dark:bg-black py-5 mb-0">
     <div class="container mx-auto px-4">
-        <h2 class="text-2xl font-semi-bold text-gray-900 dark:text-white mb-8">Welcome to Student Panel</h2>
+        <h2 class="text-3xl font-semi-bold text-gray-900 dark:text-white mb-8">Welcome to Student Panel</h2>
         <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
          <img src="images/kiddy4.png" class="mt-0 rounded-xl">
             <div class="bg-white rounded-lg border-solid border-2 border-indigo-600 p-8">
@@ -158,7 +158,7 @@
 @if (Auth::user()->grade && Auth::user()->class)
 <div class="bg-white dark:bg-black py-5 mb-0">
     <div class="container mx-auto px-4">
-        <h2 class="text-2xl font-semi-bold text-gray-900 dark:text-white mb-8">Your Subjects</h2>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">Your Subjects</h2>
         <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
             <div class="bg-white rounded-lg border-solid border-2 border-black p-8">
                 <div class="relative overflow-hidden">
@@ -170,13 +170,13 @@
                 </div>
                 @if (Auth::user()->class->subjects()->where('grade_id', Auth::user()->grade->id)->get()->count() == 0)
                 <h2> No subjects yet</h2>
-                @else{
+                @else
                 @foreach (Auth::user()->class->subjects()->where('grade_id', Auth::user()->grade->id)->get() as $subject)
                 <a href="{{ route('subject.detail', ['subject_id' => $subject->id]) }}"><h3 class="text-xl font-semi-bold text-indigo-600 hover:text-indigo-300 mt-3">{{ $subject->subject_name }}</h3></a>
                 @endforeach
                 
                 
-                }
+                
                 @endif
             </div>
         </div>
@@ -197,7 +197,7 @@
 </div>-->
 <!--Notices-->
 <div class="bg-white dark:bg-black py-5 mb-10">
-    <h2 class="text-2xl font-semi-bold text-gray-900 dark:text-white ml-4 mb-8">Accouncements</h2>
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white ml-4 mb-8">Accouncements</h2>
     @if ($notices->count() > 0)
     @foreach ($notices as $notice)
     @if ($notice->grade_id == null || $notice->grade_id == Auth::user()->grade->id)
