@@ -70,11 +70,14 @@ class SubjectController extends Controller
     public function editSubject($id){
         $teachers = User::where('role_id', 4)->get();    
         $subject = Subject::findOrFail($id);
+        $grades=Grade::all();
+        $classes=Classes::all();
 
-        return view('edit-subject', compact('subject'), [
+        return view('edit-subject', compact('subject','grades','classes'), [
             'grade' => (new Grade())->all(),
             'classes' => (new Classes())->all(),
             'teachers' => $teachers,
+
         ]);
     }
 
@@ -163,5 +166,14 @@ class SubjectController extends Controller
     return view('filtered-subjects', compact('filteredSubjects', 'classes', 'grades', 'teachers'));
 
    }
+
+   public function getClassesForSubject($gradeId){
+    $classes = Classes::where('grade_id', $gradeId)->get();
+    return response()->json($classes);
+
+    
+   }
+
+   
 
 }

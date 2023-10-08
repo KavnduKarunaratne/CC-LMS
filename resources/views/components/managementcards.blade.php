@@ -86,7 +86,8 @@
         <div class="bg-white rounded-lg shadow-lg p-8">
 
                
-                <p class="text-gray-500 text-sm mt-2">Announcement: {{ $notice->notice }}</p>
+                <p class="text-gray-500 text-sm mt-2">Announcement:</p>
+                <p class="text-black text-sm mt-2">Announcement: {{ $notice->notice }}</p>
                 <h1 class="text-sm  text-gray-900 mt-4">Posted on: {{ $notice->date_of_notice }}</h1>
                 <h1 class="text-sm  text-gray-900 mt-4">For Grade/s : {{ $notice -> grade_id}}</h1>
                 <h1 class="text-sm  text-gray-900 mt-4">By:                                 @if ($notice->management)

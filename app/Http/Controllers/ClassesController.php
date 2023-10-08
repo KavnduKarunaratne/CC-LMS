@@ -32,7 +32,7 @@ class ClassesController extends Controller
                 'class_name' => $request->class_name,
                 'grade_id' => $request->grade_id,
             ]);
-            return redirect('subject-list')->with('success', 'class added successfully');
+            return redirect()->back()->with('success', 'class added successfully');
         }catch(\Exception $e){
             return redirect()->back()->with('error', 'class already exists');
         }
@@ -73,11 +73,13 @@ class ClassesController extends Controller
             ->where('role_id', 3) //role 3 is for students
             ->get();
          
-        $subjects = Subject::where('grade_id', $class->grade_id)
-            ->where('class_id', $class->id)
-            ->with('teacher')
-            ->get();
+         $subjects = Subject::where('grade_id', $class->grade_id)
+        ->where('class_id', $class->id)
+        ->with('teacher')
+        ->get();
 
+    // Add these debug statements
+ 
         return view('class-details', compact('class', 'students', 'subjects'));
     }
 }

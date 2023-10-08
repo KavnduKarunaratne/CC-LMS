@@ -12,8 +12,14 @@ class ProgressController extends Controller
     {
         $subject = Subject::findOrFail($subject_id);
 
-        $students = User::where('role_id', 3)->get(); // 3 is the student role id
+      
         $assignments = Assignment::where('subject_id', $subject_id)->get();
+
+
+        $subject = Subject::find($subject_id); // To send the material under the selected subject
+     
+        $students = $subject->class->students()
+        ->get();
 
         // Calculate Class Average
         $totalMarks = 0;

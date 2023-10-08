@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="pl-6 dark:bg-black">
+    <div class="pl-6 dark:bg-black h-screen">
         <div class="flex items-center mb-6 dark:bg-black">
             <a href="{{ url('add-management') }}" class="bg-green-500 hover:bg-green-700 text-white text-xl font-bold py-2 px-4 rounded-full mt-1">Add New Management</a>
             <form action="{{ route('search-users') }}" method="GET" class="ml-4 flex">
@@ -9,6 +9,15 @@
 
 
             <form action="{{ route('users.filter') }}" method="GET">
+
+
+            <!-- Grade filter -->
+        <select name="grade_id"  class="bg-white py-2 px-2 m-2  border-black border-2" >
+            <option value="">All Grades</option>
+            @foreach ($grades as $grade)
+                <option value="{{ $grade->id }}">{{ $grade->grade }}</option>
+            @endforeach
+        </select>
         <!-- Class filter filter -->
         <select name="class_id" class="bg-white  py-2 px-2 m-2  border-black border-2" >
             <option value="">All Classes</option>
@@ -17,14 +26,7 @@
             @endforeach
         </select>
 
-        <!-- Grade filter -->
-        <select name="grade_id"  class="bg-white py-2 px-2 m-2  border-black border-2" >
-            <option value="">All Grades</option>
-            @foreach ($grades as $grade)
-                <option value="{{ $grade->id }}">{{ $grade->grade }}</option>
-            @endforeach
-        </select>
-
+     
         <input type="text" name="year_of_registration" placeholder="Year of Registration" class="bg-white py-2 px-2 m-2 border-black border-2">
 
         <select name="role_id" class="bg-white py-2 px-2 m-2 border-black border-2">

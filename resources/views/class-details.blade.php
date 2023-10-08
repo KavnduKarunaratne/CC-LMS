@@ -65,23 +65,6 @@
 </div>
     <div class="m-4">
         <h2 class="text-black text-lg font-semibold">Subject details</h2>
-
-
-
-       <!-- <ul class="text-black">
-            @foreach ($subjects as $subject)
-                <li>
-                    Subject: {{ $subject->subject_name }}
-                    @if ($subject->teacher)
-                        | Teacher: {{ $subject->teacher->name }}
-                    @else
-                        | No Teacher Assigned
-                    @endif
-                    <a href="{{ url('edit-subject/'.$subject->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
-                    <a href="{{ url('delete-subject/'.$subject->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
-                </li>
-            @endforeach
-        </ul>-->
     </div>
 
     
@@ -125,7 +108,7 @@
             </td>
             <td class="p-4">
             <a href="{{ url('edit-subject/'.$subject->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded my-3 mt-1">Edit</a>
-                    <a href="{{ url('delete-subject/'.$subject->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>
+           <!--         <a href="{{ url('delete-subject/'.$subject->id) }}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded my-3 mt-1">Delete</a>-->
        
             </td>
          </tr>

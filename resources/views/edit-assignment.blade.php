@@ -48,14 +48,14 @@
 
             
 
-            <div class="mb-4">
+          <!---  <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="subject_id">Select Subject</label>
                 <select name="subject_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">
                     @foreach($subjects as $subject)
                         <option value="{{$subject->id}}" @if($subject->id === $assignment->subject_id) selected @endif>{{$subject->subject_name}}</option>
                     @endforeach
                 </select>
-            </div>
+            </div>-->
 
             <br>
             <button type="submit" class="w-full bg-green-500 text-white text-sm font-bold py-2 px-4 mb-4 rounded-md hover:bg-green-600 transition duration-300">Update</button>

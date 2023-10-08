@@ -12,6 +12,16 @@
         
         <div class="flex flex-row flex-wrap justify-end mb-3">
             <form action="{{ route('users.filter') }}" method="GET">
+
+            <!-- Grade filter -->
+        <select name="grade_id"  class="bg-white py-2 px-2 m-2  border-black border-2" >
+            <option value="">All Grades</option>
+            @foreach ($grades as $grade)
+                <option value="{{ $grade->id }}">{{ $grade->grade }}</option>
+            @endforeach
+        </select>
+
+
         <!-- Class filter filter -->
         <select name="class_id" class="bg-white  py-2 px-2 m-2  border-black border-2" >
             <option value="">All Classes</option>
@@ -20,13 +30,7 @@
             @endforeach
         </select>
 
-        <!-- Grade filter -->
-        <select name="grade_id"  class="bg-white py-2 px-2 m-2  border-black border-2" >
-            <option value="">All Grades</option>
-            @foreach ($grades as $grade)
-                <option value="{{ $grade->id }}">{{ $grade->grade }}</option>
-            @endforeach
-        </select>
+        
 
         <input type="text" name="year_of_registration" placeholder="Year of Registration" class="bg-white py-2 px-2 m-2 border-black border-2">
 
@@ -145,8 +149,10 @@
                                     {{ $user->is_archived ? 'Inactive' : 'Active' }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $user->date_of_archive }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                        {{ $user->archived_at ? \Carbon\Carbon::parse($user->archived_at)->format('Y-m-d H:i:s') : '' }}
+                    </td>                            
+                    <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                                 <form action="{{ url('unarchive-user/'.$user->id) }}" method="POST" class="inline">
                                     @csrf
                                     <button type="submit" class="text-green-600 hover:underline">Unarchive</button>

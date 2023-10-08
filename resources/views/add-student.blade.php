@@ -51,10 +51,10 @@
                 @endforeach
             </select>
         </div>
-        <div class="mb-4">
+    <div class="mb-4">
     <label class="block text-gray-700 text-sm font-bold mb-2" for="class_id">Select Class</label>
     <select id="classSelect" name="class_id" required>
-        <!-- Classes will be dynamically populated based on the selected grade -->
+       
     </select>
 </div>
     
@@ -65,7 +65,7 @@
     </form>
 </div>
 
-<!-- ... (other HTML code) ... -->
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const gradeSelect = document.getElementById('gradeSelect');
@@ -79,6 +79,7 @@
             fetch(`/get-classes/${selectedGradeId}`)
                 .then(response => response.json())
                 .then(classes => {
+                    
                     // Clear existing options
                     classSelect.innerHTML = '';
 
@@ -93,7 +94,7 @@
         });
     });
 </script>
-<!-- ... (other HTML code) ... -->
+
 
 </body>
 </html>

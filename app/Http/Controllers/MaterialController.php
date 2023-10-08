@@ -36,7 +36,8 @@ class MaterialController extends Controller
         $assignedClass = $teacher->assignedClass;
         $assignedGrade = $teacher->grade;
 
-        $classStudents = $assignedClass->students()->where('grade_id', $assignedGrade->id)->get();
+        $classStudents = $subject->class->students()
+        ->get();
 
         $relatedSubjects = Subject::where('subject_name', $subject->subject_name)
         ->where('grade_id', $subject->grade_id)
@@ -98,7 +99,7 @@ class MaterialController extends Controller
             return redirect()->back()->with('error', 'An error occurred while saving the material. Check file type.');
         }
     }
-    public function editMaterial($id)
+    public function editMaterial($id )
     {
         try {
             $material = Material::findOrFail($id);
@@ -109,14 +110,15 @@ class MaterialController extends Controller
             $assignedClass = $teacher->assignedClass;
             $assignedGrade = $teacher->grade;
     
-            $classStudents = $assignedClass->students()->where('grade_id', $assignedGrade->id)->get();
-    
+         
             $relatedSubjects = Subject::where('subject_name', $material->subject->subject_name)
                 ->where('grade_id', $material->subject->grade_id)
                 ->where('id', '!=', $material->subject->id) // Exclude the current subject
                 ->get();
     
             $subject_id = $material->subject->id; // Add this line to get the subject_id
+            $classStudents = $material->subject->class->students()
+                ->get();
     
             return view('edit-material', compact('material', 'subjects', 'classStudents', 'relatedSubjects', 'subject_id'));
         } catch (\Exception $e) {

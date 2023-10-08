@@ -1,6 +1,6 @@
 <!-- component -->
 <div class="w-full h-full" id="wrapper">
-            <dh-component>
+            <dh-component class="w-full" >
                 <div class="flex flex-no-wrap " id="nav">
                     <!-- Sidebar starts -->
                     <!-- Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] -->

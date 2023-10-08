@@ -42,33 +42,64 @@
             
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="year_of_registration">Year of registration</label>
-                <input type="text" name="year_of_registration" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" required/>
+                <input type="text" name="year_of_registration" value="{{ date('Y') }}" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" required/>
             </div>
             
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="class_id">Class</label>
-                <select name="class_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none">
-                    <option value="">Select Class</option>
-                    @foreach($classes as $class)
-                    <option value="{{ $class->id }}">{{ $class->class_name }}</option>
-                    @endforeach
-                </select>
-            </div>
+            
 
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="grade_id">Grade</label>
-                <select name="grade_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" >
-                    <option value="">Select Grade</option>
-                    @foreach($grades as $grade)
-                    <option value="{{ $grade->id }}">{{ $grade->grade }}</option>
-                    @endforeach
-                </select>
-            </div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="grade_id">Select Grade</label>
+            <select id="gradeSelect" name="grade_id" required>
+                @foreach($grades as $grade)
+                <option value="{{$grade->id}}">{{$grade->grade}}</option>
+                @endforeach
+            </select>
+        </div>
+    <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="class_id">Select Class</label>
+    <select id="classSelect" name="class_id" required>
+       
+    </select>
+</div>
         
             <br>
             <button type="submit" class="w-20 bg-gray-900 text-white py-1 px-4 rounded-xl  hover:bg-gray-800">Save</button>
             <a href="{{ url('subject-list') }}" class="w-20 bg-red-700 text-white py-1 px-4 rounded-xl  hover:bg-gray-800">Back</a>
         </form>
     </div>
+
+
+    <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const gradeSelect = document.getElementById('gradeSelect');
+    const classSelect = document.getElementById('classSelect');
+
+    // Event listener for grade selection change
+    gradeSelect.addEventListener('change', function () {
+        console.log('Grade selected:', gradeSelect.value);
+
+        const selectedGradeId = gradeSelect.value;
+
+        // Fetch classes based on the selected grade
+        fetch(`/get-classes-teacher/${selectedGradeId}`)
+            .then(response => response.json())
+            .then(classes => {
+                console.log('Fetched classes:', classes);
+
+                // Clear existing options
+                classSelect.innerHTML = '';
+
+                // Add new options
+                classes.forEach(classItem => {
+                    const option = document.createElement('option');
+                    option.value = classItem.id;
+                    option.textContent = classItem.class_name;
+                    classSelect.appendChild(option);
+                });
+            });
+    });
+});
+
+</script>
 </body>
 </html>

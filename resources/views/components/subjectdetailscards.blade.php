@@ -75,7 +75,7 @@
                 @if (Auth::user() && Auth::user()->role_id == 4)
 
                 <div class="flex space-x-4 place-content-start">
-                    <a href="{{ route('edit-material', $material->id) }}"><button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Edit</button></a>
+                    <a href="{{ route('edit-material', $material->id ) }}"><button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Edit</button></a>
                     <a href="#" class="" data-bs-toggle="modal" data-bs-target="#deleteMaterialModal{{ $material->id }}">
     <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Delete</button>
 </a>                    
@@ -109,8 +109,11 @@
         </div>
         </div>
         @endif
-        @endforeach
-    @endif  
+    @endforeach
+    @else
+        <p class="text-sm m-4  text-white">No materials available for this subject.</p>
+    
+    @endif
         
 
     </div>
@@ -167,30 +170,30 @@
             @endif
         </div>
         @if (Auth::user() && Auth::user()->role_id == 3)
-                                    @php
-                                        $hasSubmitted = Auth::user()->submissions->contains('assignment_id', $assignment->id);
-                                    @endphp
-                                    @if ($hasSubmitted)
-                                        <div class=" text-white p-2 bg-green-500 rounded my-3 mt-1">
-                                            <p>You have  submitted for this assignment.</p>
-                                        </div>
-                                
-                                    @else (strtotime($assignment->due_date) > time())
-                            <a href="{{ url('add-submission', ['assignment_id' => $assignment->id]) }}" class="bg-indigo-600  hover:bg-indigo-400 text-white text-center w-[300px] hidden rounded my-3 py-3 mt-1">Add Submission for Assignment</a>
-                        
-                            <div class="bg-red-500 text-white p-2 rounded my-3 mt-1">
-                                <p>This assignment is past its due date. You cannot submit now.</p>
-                            </div>
-                            @endif
+    @php
+        $hasSubmitted = Auth::user()->submissions->contains('assignment_id', $assignment->id);
+    @endphp
 
-                          
-                    
+    @if ($hasSubmitted)
+        <div class="text-white p-2 bg-green-500 rounded my-3 mt-1">
+            <p>You have submitted for this assignment.</p>
+        </div>
+    @else
+        @if (strtotime($assignment->due_date) > time())
+            <a href="{{ url('add-submission', ['assignment_id' => $assignment->id]) }}" class="bg-indigo-600 hover:bg-indigo-400 text-white text-center w-[300px]  rounded my-3 py-3 mt-1">Add Submission for Assignment</a>
+        @else
+            <div class="bg-red-500 text-white p-2 rounded my-3 mt-1">
+                <p>This assignment is past its due date. You cannot submit now.</p>
+            </div>
         @endif
+    @endif
+@endif
+
                 
     
         @endforeach
     @else 
-    <p>No assignments available for this subject.</p>
+    <p class="text-sm m-4 text-white">No assignments available for this subject.</p>
     @endif
 
     </div>

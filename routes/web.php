@@ -200,3 +200,5 @@ Route::get('search-progress', [ProgressController::class, 'searchProgress'])->na
 Route::get('/get-classes/{gradeId}', [StudentController::class,'getClasses']);
 Route::get('filtered-users', [UserController::class, 'filterUser'])->name('users.filter');
 Route::get('filtered-subjects', [SubjectController::class, 'filterSubjects'])->name('subjects.filter');
+Route::get('/get-classes-teacher/{gradeId}', [TeacherController::class,'getClassesForTeacher']);
+Route::get('/get-classes-subject/{gradeId}', [SubjectController::class,'getClassesForSubject']);

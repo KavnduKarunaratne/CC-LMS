@@ -47,7 +47,7 @@
             <button class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                 Update
             </button>
-            <a href="{{ url('dashboard') }}" class="text-black no-underline hover:underline">Back</a>
+            <a href="{{ url('user-management') }}" class="text-black no-underline hover:underline">Back</a>
         </div>
     </form>
 </div>

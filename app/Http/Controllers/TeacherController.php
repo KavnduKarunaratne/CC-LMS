@@ -18,6 +18,15 @@ class TeacherController extends Controller
         return view('teacher-list', compact('teachers'));
     }
 
+    public function Grade(){
+        $grade = Grade::all();
+        return view('add-student', compact('grade'));
+    }
+
+    public function  Classes(){
+        $classes = Classes::all();
+        return view('add-student', compact('classes'));
+    }
     public function addTeacher(){
 
         $grades=Grade::all();
@@ -45,7 +54,7 @@ class TeacherController extends Controller
 
             $this->createTeacher($request);
 
-            return redirect('teacher-list')->with('success', 'Teacher added successfully');
+            return redirect('subject-list')->with('success', 'Teacher added successfully');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['admission_number' => 'The admission number is not valid'])->withInput();
         }
@@ -85,7 +94,7 @@ class TeacherController extends Controller
 
             $this->update($request, $id);
 
-            return redirect('teacher-list')->with('success', 'Teacher updated successfully');
+            return redirect('subject-list')->with('success', 'Teacher updated successfully');
         } catch (\Exception $e){
             return redirect()->back()->withErrors(['admission_number' => 'The admission number is not valid'])->withInput();
         }
@@ -122,6 +131,13 @@ class TeacherController extends Controller
         ]);
 
     }
+
+    public function getClassesForTeacher($gradeId)
+{
+    $classes = Classes::where('grade_id', $gradeId)->get();
+    return response()->json($classes);
+}
+
 
 
 }

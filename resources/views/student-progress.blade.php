@@ -96,9 +96,7 @@
             @endforeach
         </tbody>
     </table>
-    @else
-    <h2 class="font-bold text-xl mt-2 mb-0 dark:text-white">Assignment not found</h2>
-@endif
+   @endif
 
 
 @foreach($assignments as $assignment)
