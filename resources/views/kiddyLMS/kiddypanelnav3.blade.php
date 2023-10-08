@@ -117,59 +117,33 @@
       <!--ADDED MY CONTENT HERE-->
 <div class="bg-white py-0 mb-0">
     <div class="container mx-auto px-0">
-        <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-purple-400 to-blue-700 mb-6">Hey Alex! Ready to have an Adventure?</h2>
+        
         <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
             <div class="bg-white rounded-lg b p-1">
                 <div class="relative overflow-hidden">
+                <h2 class="text-2xl font-semi-bold text-gray-900 mt-2 ml-4 mb-2">Dashboard</h2>
    
-                    <div class="absolute inset-0 bg-black opacity-40"></div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View Product</button>
-                    </div>
+                   
+
                 </div>
                 <!DOCTYPE html>
                 
                 <!--Carousel-->
+                <div class="columns-2">
+        <div class=""><img class="h-[500px]" src="images/redmonster.jpg"></div>
+        <div>
+        @include('kiddyLMS.nametag')
+        </div>
+      
+        </div>
 
-<div class="image-container">
-  @include('kiddyLMS.carousel')
-</div>
     
 
             </div>
         </div>
     </div>
 </div>
-      <!--student information-->
-<div class="bg-white pb-5 mt-4 mb-4">
-    <div class="container mx-auto px-4">
-        <h2 class="text-2xl font-semi-bold text-gray-900 mb-1"></h2>
-        <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
-            <div class="bg-white rounded-lg border-dashed border-4 mt-4 border-indigo-500 p-8">
-                {{--<div class="object-left overflow-hidden">
-                    <img class=" object-cover w-full h-full" src="images/kiddylogin.png" alt="Product">
-                    <div class="absolute inset-0 bg-black opacity-40"></div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View Product</button>
-                    </div>
-                </div>--}}
-                <!--<img src="images/kiddy4.png" class="place-self: start;">-->
-                <h3 class="text-xl font-semi-bold text-gray-900 mt-1">You're logged in as: {{ auth()->user()->name }} </h3>
-                <h3 class="text-xl font-semi-bold text-gray-900 mt-1">Your role ID: {{ Auth::user()->role_id }}</h3>
-                @if (Auth::user()->grade)
-                <h3 class="text-xl font-semi-bold text-gray-900 mt-1">Your Grade: {{ Auth::user()->grade->grade }}</h3>
-                @else
-                <h3 class="text-xl font-semi-bold text-red-600 mt-1">Not assigned to a grade</h3>
-                @endif
-                @if (Auth::user()->class)
-                <h3 class="text-xl font-semi-bold text-gray-900 mt-1">Your Class: {{ Auth::user()->class->class_name }}</h3>
-                @else 
-                <h3 class="text-xl font-semi-bold text-red-600 mt-1">Not assigned to a class</h3>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
+
 <!--Subjects for student-->
 @if (Auth::user()->grade && Auth::user()->class)
 <div class="bg-white py-5 mb-4">
@@ -246,6 +220,20 @@
         @endif
         @endforeach         
 </div>--}}
+
+<div class="mx-4 my-8 py-4">
+<h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-purple-400 to-blue-700 mb-6">Ready for Todays Adventure?</h2>
+<div class="image-container">
+  @include('kiddyLMS.carousel')
+</div>
+
+</div>
+
+
+
+
+
+
 <!--Notices-->
 <div class="bg-white py-5 mb-10">
     <h2 class="text-2xl font-bold text-gray-900 mt-2 ml-4 mb-2">Announcements</h2>

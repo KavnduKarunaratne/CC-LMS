@@ -129,8 +129,8 @@
       @if (count($submissionsBySubject) > 0)
       @foreach ($submissionsBySubject as $subjectName => $submissions)
       <h2 class="text-2xl font-semi-bold text-black mb-3 dark:text-white">{{ $subjectName }}</h>
-      @foreach ($submissions as $submission)
       <div class="grid grid-cols-1 md:grid-cols-1 gap-8 font-semi-bold">
+      @foreach ($submissions as $submission)
         <div class="bg-white rounded-lg shadow-lg p-8 mt-3 border-solid border-2 border-gray-900 dark:border-violet-600">
         <h3 class="text-xl font-semi-bold text-gray-900 mt-1">Assignment Name: {{ $submission->assignment->assignment_name }}</h3>
         <h3 class="text-xl font-semi-bold text-gray-900 mt-1">Description: {{ $submission->assignment->description }}</h3>
@@ -146,15 +146,16 @@
         @foreach ($submission->feedback as $feedback)
         <p class="dark:text-black text-xl">Feedback: {{ $feedback->feedback }}</p>
         <p class="dark:text-black text-xl">Marks: {{ $feedback->marks }}</p>
-        @endforeach
-        @endif
+        @endforeach          
+        </div>
+      </div> 
+      @endif
         @endforeach
         @endforeach 
+
         @else 
         <p class="dark:text-black">No Feedback</p>
         @endif            
-        </div>
-      </div>           
    </div>
 </div>
 
