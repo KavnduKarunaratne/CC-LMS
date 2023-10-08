@@ -124,7 +124,7 @@ Route::get('logout', [UserController::class, 'logout'])->name('logout');
 //management routes
 Route::middleware(['App\Http\Middleware\ValidateRole:2'])->group(function () {
     Route::post('update-notice/{id}',[NoticeController::class,'updateNotice'])->name('update-annoucement');
-    Route::get('delete-notice/{id}',[NoticeController::class,'deleteNotice']);
+    Route::get('delete-notice/{id}',[NoticeController::class,'deleteNotice'])->name('delete-notice');
     Route::get('management',[NoticeController::class,'Notice']);
     Route::get('add-notice',[NoticeController::class,'addNotice']);
     Route::post('save-notice',[NoticeController::class,'saveNotice']);

@@ -39,10 +39,22 @@ class NoticeController extends Controller
         try{
             $request->validate([
                 'notice' => 'required',
-                'grade_id' => 'nullable',
+                'grade_id' => 'nullable|array',
             ]);
 
-            $this->createNotice($request);
+            $grades = $request->grade_id ?? [];
+
+        // Check if any grade is selected
+        if (count($grades) > 0) {
+            // Iterate through selected grades and create notices
+            foreach ($grades as $gradeId) {
+                $request->merge(['grade_id' => $gradeId]); // Update grade_id in the request
+                $this->createNotice($request);
+            }
+        } else {
+            // Handle the case where no grade is selected
+            return redirect()->back()->with('error', 'Please select at least one grade.');
+        }
 
             return redirect('management')->with('success', 'notice added successfully');
         } catch(\Exception $e){
@@ -60,7 +72,7 @@ class NoticeController extends Controller
         try{
             $request->validate([
                 'notice' => 'required',
-                'grade_id' => 'nullable', // Validate it as an array
+                'grade_id' => 'nullable', 
             ]);
 
             $this->updateTheNotice($request, $id);
@@ -91,9 +103,11 @@ class NoticeController extends Controller
         $newNotice = $request->notice;
         $newGradeValues = $request->grade_id;
 
+        $gradeId = is_array($newGradeValues) ? reset($newGradeValues) : $newGradeValues;
+
         Notice::where('id', $id)->update([
             'notice' => $newNotice,
-            'grade_id' => $newGradeValues,
+            'grade_id' => $gradeId,
         ]);
     }
 

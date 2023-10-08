@@ -103,6 +103,10 @@
                     <a href="{{ url ('delete-notice/'.$notice->id)}}">
                         <button class="bg-gray-900 text-white py-1 px-4 rounded-xl  hover:bg-gray-800">Delete</button>
                     </a>
+                   
+
+
+                    
 
                     
                 </div>
@@ -110,17 +114,6 @@
         
         @endforeach
 
-
-       
-           
-
-
-
-
-
-
-            
-            
         </div>
 
     </div>

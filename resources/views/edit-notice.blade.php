@@ -28,14 +28,14 @@
             </div>
 
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="grade_id">Select Grade</label>
-                <select name="grade_id" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" >
-                <option value="">Select a Grade</option>
-                    @foreach($grades as $grade)
-                        <option value="{{$grade->id}}">{{$grade->grade}}</option>
-                    @endforeach
-                </select>
-            </div>
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="grade_id">Select Grade</label>
+    @foreach($grades as $grade)
+        <div class="flex items-center mt-2">
+            <input type="checkbox" name="grade_id[]" value="{{$grade->id}}" class="mr-2">
+            <label>{{ $grade->grade }}</label>
+        </div>
+    @endforeach
+</div>
 
             <br>
             <a href= "{{ url('add-notice') }}">
