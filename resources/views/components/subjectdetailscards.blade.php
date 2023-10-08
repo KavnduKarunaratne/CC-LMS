@@ -4,26 +4,7 @@
     <div class="container mx-auto px-4">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-0">Subject Details</h2>
         <div class="grid grid-cols-1 md:grid-cols-1 gap-2">
-        @if (Auth::user() && Auth::user()->role_id == 4)
-        <div class=" " x-data="{ open: false }">
-                    <button class="bg-indigo-600 text-white p-4" x-on:click="open = ! open" >View students</button>
-                    <div x-show="open" x-transition>
-                    <div class="bg-white text-black m-6  w-1/4 p-4 rounded-2xl fixed ">
-                   
-            @if ($subject->class && $subject->grade && $subject->class->students->count() > 0)
-               <!-- <h4>Students in Grade: {{ $subject->grade->grade }} Class {{ $subject->class->class_name }}:</h4>-->
-              
-               <ul>
-                    @foreach ($subject->class->students as $student)
-                        @if ($student->is_archived == 0 && $student->class_id == $subject->class_id)
-                            <li>{{ $student->name }} {{ $student->admission_number }}</li>
-                        @endif
-                    @endforeach
-                </ul>
-                @else
-                <p>No students in this class.</p>
-               @endif
-                 @endif
+
 </div>
                 </div>
                          </div>
@@ -36,11 +17,15 @@
                 @if (Auth::user() && Auth::user()->role_id == 4)
 
                 <a href="{{ route('student-progress', ['subject_id' => $subject->id]) }}"><h3 class="text-lg font-bold text-indigo-700 mt-3 hover:text-indigo-400">View Student Progress</h3></a>
+                <a href="#bottom-of-page">
+                   <h3 class="text-lg font-bold text-indigo-700 hover:text-indigo-400 mt-2 mb-3">View Students in Class</h3>
+                </a>
+
                 <a href="{{ route('subject.flashcards', ['subject_id' => $subject->id]) }}"><h3 class="text-lg font-bold text-indigo-700 hover:text-indigo-400 mt-2 mb-3">View Flashcards</h3></a>
 
                 <div class="flex space-x-4 place-content-start">
-                    <a href="{{ url('add-material', ['subject_id' => $subject->id]) }}"><button class="bg-green-400 text-white py-2.5 px-4 rounded-full font-bold hover:bg-gray-800">Materials</button></a>
-                    <a href="{{ url('add-assignment',['subject_id' => $subject->id]) }}"><button class="bg-green-400 text-white py-2.5 px-4 rounded-full font-bold hover:bg-gray-800">Assigments</button></a>
+                    <a href="{{ url('add-material', ['subject_id' => $subject->id]) }}"><button class="bg-green-400 text-white py-2.5 px-4 rounded-full font-bold hover:bg-gray-800">+ Materials</button></a>
+                    <a href="{{ url('add-assignment',['subject_id' => $subject->id]) }}"><button class="bg-green-400 text-white py-2.5 px-4 rounded-full font-bold hover:bg-gray-800">+ Assigments</button></a>
                     
                 </div>
              
@@ -186,7 +171,7 @@
                                         $hasSubmitted = Auth::user()->submissions->contains('assignment_id', $assignment->id);
                                     @endphp
                                     @if ($hasSubmitted)
-                                        <div class="border border-green-500 text-green-700 bg-green-400">
+                                        <div class=" text-white p-2 bg-green-500 rounded my-3 mt-1">
                                             <p>You have  submitted for this assignment.</p>
                                         </div>
                                 
@@ -215,22 +200,25 @@
     
    
 </div>
-<div class="bg-white dark:bg-black m-4  p-4 rounded-md shadow-md mb-4">
+
         @if (Auth::user() && Auth::user()->role_id == 4)
+        <h2 id="bottom-of-page"class="text-2xl font-bold text-gray-900 mb-3 dark:text-white mx-4 mt-5">Students in Grade: {{ $subject->grade->grade }} Class {{ $subject->class->class_name }}:</h2>
+        <div class="bg-white dark:bg-black m-4  p-4 rounded-md shadow-md mb-4">
             @if ($subject->class && $subject->grade && $subject->class->students->count() > 0)
-                <h4>Students in Grade: {{ $subject->grade->grade }} Class {{ $subject->class->class_name }}:</h4>
+                
                 <ul>
                     @foreach ($subject->class->students as $student)
                         @if ($student->is_archived == 0 && $student->class_id == $subject->class_id)
-                            <li>{{ $student->name }} {{ $student->admission_number }}</li>
+                            <li class="my-1">{{ $student->name }} {{ $student->admission_number }}</li>
                         @endif
                     @endforeach
                 </ul>
             @else
                 <p>No students in this class.</p>
             @endif
+            </div>
         @endif
-</div>
+
 
 </div>
 
