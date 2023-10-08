@@ -51,7 +51,7 @@ class AssignmentController extends Controller
                 'upload_date' => now(),
             ]);
 
-            return redirect('assignment-list')->with('success', 'Assignment Added Successfully');
+            return redirect()->back()->with('success', 'Assignment Added Successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error adding assignment.');
         }

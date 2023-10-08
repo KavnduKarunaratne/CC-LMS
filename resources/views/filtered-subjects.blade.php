@@ -1,12 +1,6 @@
 <x-admin-layout>
 <div class="p-8 w-full dark:bg-black">
-    <div class="flex items-center mb-6 ">
-        <a href="{{ url('add-class') }}"   class="bg-indigo-600 hover:bg-indigo-800 text-white text-xl font-bold py-2 px-4 rounded-full ml-4 mt-1">Add Class</a>
-        <a href="{{ url('add-subject') }}" class="bg-indigo-600 hover:bg-indigo-800 text-white text-xl font-bold py-2 px-4 rounded-full ml-4 mt-1">Add New Subject</a>
-        <a href="{{ url('add-teacher') }}" class="bg-indigo-600 hover:bg-indigo-800 text-white text-xl font-bold py-2 px-4 rounded-full ml-4 mt-1">Enroll Teacher</a>
-        <a href="{{ url('add-student') }}" class="bg-indigo-600 hover:bg-indigo-800 text-white text-xl font-bold py-2 px-4 rounded-full ml-4 mt-1">Enroll Student</a>
-                      
-    </div>
+
     <div class="flex flex-row flex-wrap justify-end mb-3">
             <form action="{{ route('subjects.filter') }}" method="GET">
         <!-- Class filter filter -->
@@ -67,7 +61,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($subject as $subject)
+            @foreach($filteredSubjects as $subject)
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap bg-white">{{ $subject->id }}</td>
                     <td class="px-6 py-4 whitespace-nowrap bg-white">{{ $subject->subject_name }}</td>

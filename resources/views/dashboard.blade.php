@@ -1,6 +1,6 @@
 <x-admin-layout>
                    
-<div class="page-container m-10 dark:bg-black">
+<div class="page-container  m-10 dark:bg-black">
     <div class="p-4">
         <a href="{{ url('add-grade') }}" class="bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-800 text-white dark:text-gray-100 text-xl font-bold py-2 px-4 rounded-full ml-4 mt-1">Add Grade</a>
     </div>

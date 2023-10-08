@@ -189,10 +189,20 @@
                                         <div class="border border-green-500 text-green-700 bg-green-400">
                                             <p>You have  submitted for this assignment.</p>
                                         </div>
-                                    @elseif (strtotime($assignment->due_date) > time())<!--checks if the due date is passed. if so the link is hidden-->
-                                        <a href="{{ url('add-submission', ['assignment_id' => $assignment->id]) }}" class="bg-indigo-600 hover:bg-indigo-400 text-white text-center w-[300px] rounded my-3 py-3 mt-1">Add Submission for Assignment</a>
-                                    @endif
-    @endif
+                                
+                                    @else (strtotime($assignment->due_date) > time())
+                            <a href="{{ url('add-submission', ['assignment_id' => $assignment->id]) }}" class="bg-indigo-600  hover:bg-indigo-400 text-white text-center w-[300px] hidden rounded my-3 py-3 mt-1">Add Submission for Assignment</a>
+                        
+                            <div class="bg-red-500 text-white p-2 rounded my-3 mt-1">
+                                <p>This assignment is past its due date. You cannot submit now.</p>
+                            </div>
+                            @endif
+
+                          
+                    
+        @endif
+                
+    
         @endforeach
     @else 
     <p>No assignments available for this subject.</p>

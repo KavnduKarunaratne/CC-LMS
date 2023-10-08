@@ -197,3 +197,6 @@ Route::middleware(['App\Http\Middleware\ValidateRole:3'])->group(function () {
 Route::get('profile/show',[UserController::class,'showProfile']);
 
 Route::get('search-progress', [ProgressController::class, 'searchProgress'])->name('search-progress');
+Route::get('/get-classes/{gradeId}', [StudentController::class,'getClasses']);
+Route::get('filtered-users', [UserController::class, 'filterUser'])->name('users.filter');
+Route::get('filtered-subjects', [SubjectController::class, 'filterSubjects'])->name('subjects.filter');

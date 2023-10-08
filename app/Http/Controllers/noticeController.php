@@ -2,15 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classes;
 use App\Models\Grade;
 use App\Models\Notice;
 use Illuminate\Http\Request;
 
 class NoticeController extends Controller
 {
-    public function Notice(){
+    public function Notice(Request $request){
         $notice = Notice::all();
-        return view('management', compact('notice'));
+    
+        $gradeId=$request->grade_id;
+        $date=$request->date;
+        $grades=Grade::all();
+      
+        $filteredNotices = Notice::where(function ($query) use ( $gradeId, $date) {
+          
+            if ($gradeId) {
+                $query->where('grade_id', $gradeId);
+            }
+            if ($date) {
+                $query->whereDate('date_of_notice', $date);
+            }
+       
+        })
+        ->get();
+        return view('management', compact('notice','grades','filteredNotices','gradeId','date'));
     }
 
     public function addNotice(){

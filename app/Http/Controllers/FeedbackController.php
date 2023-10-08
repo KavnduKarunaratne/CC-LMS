@@ -60,7 +60,7 @@ class FeedbackController extends Controller
                 'marks' => $request->marks,
             ]);
 
-            return redirect('teacher-panel')->with('success', 'feedback updated successfully');
+            return redirect()->back()->with('success', 'feedback updated successfully');
         } catch(\Exception $e){
             return redirect()->back()->with('error', 'Error adding feedback');
         }

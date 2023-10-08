@@ -128,6 +128,11 @@ class StudentController extends Controller
         return redirect('student-list')->with('success', 'student deleted successfully');
     }
 
+public function getClasses($gradeId)
+{
+    $classes = Classes::where('grade_id', $gradeId)->get();
+    return response()->json($classes);
+}
 
 
    

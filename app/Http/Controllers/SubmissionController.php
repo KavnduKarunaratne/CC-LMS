@@ -67,7 +67,7 @@ class SubmissionController extends Controller
 
     public function deleteSubmission($id){
         Submission::where('id', $id)->delete();
-        return redirect('submission-list')->with('success', 'submission deleted successfully');
+        return redirect()->back()->with('success', 'submission deleted successfully');
     }
 
     public function viewSubmissions($assignment_id){ //get the submissions under each assignment

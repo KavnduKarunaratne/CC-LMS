@@ -12,10 +12,10 @@
                     <div class="flex justify-end mt-3">
                         <a href="{{ route('class.details', ['class' => $class->id]) }}" class="bg-indigo-600 hover:bg-indigo-800 text-white text-xl font-bold py-2 px-4 rounded-full ml-4 mt-1">View Details</a>
                     </div>
-
+<!--
                     <div class="flex justify-end mt-3">
                         <a href="{{ url('delete-class/'.$class->id) }}" class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Delete</a>
-                    </div>
+                    </div>-->
                 </div>
             @endforeach
         </div>

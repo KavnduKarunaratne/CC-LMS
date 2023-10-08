@@ -17,9 +17,12 @@ class UserController extends Controller
 
     public function User(){  
         $user = User::where('is_archived', 0)->get();
+        $classes = Classes::all();
+        $grades = Grade::all();
+        
         $archivedUsers = User::where('is_archived', true)->get();
 
-        return view('user-management', compact('user', 'archivedUsers'));
+        return view('user-management', compact('user', 'archivedUsers','classes','grades'));
     }
 
     public function addUser(){
@@ -114,7 +117,11 @@ class UserController extends Controller
             return view('dashboard',compact('grade','classes'));
         } else if ($role_id == 2) {
             $notice=Notice::all();
-            return view('management', compact('notice'));
+            $grades=Grade::all();
+            $filteredNotices = Notice::where('grade_id', $grade_id)->get();
+            
+         
+            return view('management', compact('notice','grades','filteredNotices'));
         } else if ($role_id == 4) {
             $grade=Grade::all();
             $classes=Classes::all();
@@ -189,5 +196,41 @@ class UserController extends Controller
     public function showProfile(){  //get the built in laravel profile page for each user
         $user = Auth::user();
         return view('profile/show', compact('user'));
+    }
+
+    public function filterUser(Request $request){
+
+        $classId=$request->class_id;
+        $gradeId=$request->grade_id;
+        $role_id=$request->role_id;
+        $year_of_registration=$request->year_of_registration;
+        $status = $request->status;
+        $classes=Classes::all();
+        $grades=Grade::all();
+        $user=User::all();
+
+
+        $filteredUsers = User::where(function ($query) use ($classId, $gradeId, $role_id, $year_of_registration, $status) {
+            if ($classId) {
+                $query->where('class_id', $classId);
+            }
+            if ($gradeId) {
+                $query->where('grade_id', $gradeId);
+            }
+            if ($role_id) {
+                $query->where('role_id', $role_id);
+            }
+            if ($year_of_registration) {
+                $query->where('year_of_registration', $year_of_registration);
+            }
+            if ($status) {
+                $query->where('is_archived', $status === 'archived');
+            }
+        })
+        ->get();
+
+        return view('filtered-users', compact('filteredUsers', 'classes', 'grades', 'user'));
+
+
     }
 }

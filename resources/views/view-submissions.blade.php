@@ -101,7 +101,7 @@
                 </ul>
             </div>
         @else
-            <p class="font-semi-bold text-lg">No submissions available </p>
+            <p class="font-semi-bold text-lg text-white">No submissions available </p>
         @endif
     </div>
     <div>

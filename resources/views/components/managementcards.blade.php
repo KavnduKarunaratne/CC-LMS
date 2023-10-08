@@ -60,14 +60,29 @@
     <a href= "{{ url('add-notice') }}">
         <button class="bg-custom-color text-white font-bold py-2 mb-4 px-4 rounded-full">Add Announcement</button>
     </a>
-  
+    <div class="flex flex-row flex-wrap justify-end mb-3">
+            <form action="" method="GET">
+    
+        <!-- Grade filter -->
+        <select name="grade_id"  class="bg-white py-2 px-2 m-2  border-black border-2" >
+            <option value="">All Grades</option>
+            @foreach ($grades as $grade)
+                <option value="{{ $grade->id }}">{{ $grade->grade }}</option>
+            @endforeach
+        </select>
+
+        <input type="date" name="date" class="bg-white py-2 px-2 m-2 border-black border-2">
+
+   <button type="submit"  class="bg-white text-black hover:text-white hover:bg-black py-2 px-2 m-2 border-black border-2" >Filter</button>
+    </form>
+</div>
 
 
 
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
 
-        @foreach ($notice as $notice)
+        @foreach ($filteredNotices as $notice)
         <div class="bg-white rounded-lg shadow-lg p-8">
 
                

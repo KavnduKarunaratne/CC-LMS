@@ -28,8 +28,8 @@
 </head>
 <body class="font-sans antialiased">
 
-<div class="min-h-screen bg-white dark:bg-gray-800">
-    <div class="flex h-screen ">
+<div class="h-full bg-white dark:bg-gray-800">
+    <div class="flex h-full ">
         <div class="px-4 py-2 text-black dark:text-white bg-white dark:bg-gray-800  fixed h-full ">
             <svg xmlns="http://www.w3.org/2000/svg" class="inline w-8 h-8 text-black dark:text-white lg:hidden" fill="none"
                  viewBox="0 0 24 24" stroke="currentColor" id="menu-button">
@@ -130,8 +130,8 @@
 
         </div>
 
-        <div class="px-4 py-2 lg:ml-[250px] w-full dark:bg-black">
-            <div class="container mx-auto mt-12 ">
+        <div class="px-4 py-2 lg:ml-[250px] w-full dark:bg-black h-full">
+            <div class="container mx-auto mt-12  ">
                 {{ $slot }}
             </div>
         </div>

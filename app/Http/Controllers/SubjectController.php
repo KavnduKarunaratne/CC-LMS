@@ -15,7 +15,11 @@ class SubjectController extends Controller
 {
     public function Subjects(){
         $subject = Subject::all();
-        return view('subject-list', compact('subject'));
+        $classes = Classes::all();
+        $grades = Grade::all();
+        $teachers = User::where('role_id', 4)->get();
+
+        return view('subject-list', compact('subject','classes','grades','teachers'));
     }
 
     public function Teacher(){
@@ -77,10 +81,10 @@ class SubjectController extends Controller
     public function updateSubject(Request $request, $id){
         try{
             $request->validate([
-                'subject_name' => 'required',
-                'grade_id' => 'required',
-                'class_id' => 'required',
-                'teacher_id' => 'required',
+                'subject_name' => 'nullable',
+                'grade_id' => 'nullable',
+                'class_id' => 'nullable',
+                'teacher_id' => 'nullable',
                 'image' => 'nullable|file|mimes:jpeg,png,jpg',
             ]);
         
@@ -108,15 +112,17 @@ class SubjectController extends Controller
                 'teacher_id' => $request->teacher_id,
                 'image' => $imagePath,
             ]);
-            return redirect('dashboard')->with('success', 'subject updated successfully');
+            return redirect()->back()->with('success', 'subject updated successfully');
         } catch(\Exception $e){
             return redirect()->back()->with('error', 'Error updating subject');
         }
     }
 
+   
+
     public function deleteSubject($id){
         Subject::where('id','=',$id)->delete();
-        return redirect('dashboard')->with('success', 'subject deleted successfully');
+        return redirect()->back()->with('success', 'subject deleted successfully');
     }
 
     public function showDynamicDetail($subject_id){
@@ -128,6 +134,34 @@ class SubjectController extends Controller
         return view('subject-detail', compact('subject', 'materials', 'assignments'));
     }
 
-    //using private helper functions to break the code down into smaller parts
+   public function filterSubjects (Request $request){
+    
+    $classId=$request->class_id;
+    $gradeId=$request->grade_id;
+    $teacherId=$request->teacher_id;
+   
+    $classes=Classes::all();
+    $grades=Grade::all();
+    $teachers=User::where('role_id', 4)->get();
+ 
+
+
+    $filteredSubjects = Subject::where(function ($query) use ($classId, $gradeId,$teacherId) {
+        if ($classId) {
+            $query->where('class_id', $classId);
+        }
+        if ($gradeId) {
+            $query->where('grade_id', $gradeId);
+        }
+        if ($teacherId) {
+            $query->where('teacher_id', $teacherId);
+        }
+   
+    })
+    ->get();
+
+    return view('filtered-subjects', compact('filteredSubjects', 'classes', 'grades', 'teachers'));
+
+   }
 
 }

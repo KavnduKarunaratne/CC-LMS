@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
-            $table->integer('grade')->unique();
+            $table->integer('grade')->unique()->onDelete('cascade');
             $table->timestamps();
         });
     }
