@@ -48,7 +48,14 @@
                     @endforeach
                 </select>
             </div>
-            <br>
+            <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="image">Image</label>
+            <input type="file" name="image" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
+            @error('image')
+            <p class="text-red-500 text-sm">{{ $message }}</p>
+            @enderror
+        </div>
+
             <div class="flex items-center justify-around">
                 <button class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                     Update

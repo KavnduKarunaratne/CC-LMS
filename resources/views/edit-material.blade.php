@@ -19,9 +19,8 @@
         @endif
         <h2 class="text-2xl font-bold mb-6 text-center text-black">Edit Material</h2>
 
-        <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post" action="{{ route('update-material', ['id' => $material->id]) }}">
+        <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post" action="{{ route('update-material', ['id' => $material->id]) }}"    enctype="multipart/form-data">
             @csrf
-
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="material_name">Material Name</label>
                 <input type="text" name="material_name" value="{{ $material->material_name }}" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none" />
@@ -46,6 +45,16 @@
             </div>
 
             <div class="mb-4">
+               <label class="block text-gray-700 text-sm font-bold mb-2">Select Related Subjects</label>
+                @foreach ($relatedSubjects as $relatedSubject)
+        <div class="flex items-center mt-2">
+            <input type="checkbox" name="subject_ids[]" value="{{ $relatedSubject->id }}" class="mr-2">
+            <label>{{ $relatedSubject->subject_name }} {{ $relatedSubject->class->class_name }} {{ $relatedSubject->grade->grade }}</label>
+        </div>
+         @endforeach
+</div>
+
+            <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2">Select Students to Make Material Accessible To:</label>
                 @foreach ($classStudents as $student)
                     <div class="flex items-center mt-2">
@@ -57,7 +66,7 @@
          
             <br>
             <button type="submit" class="w-full bg-blue-500 text-white text-sm font-bold py-2 px-4 mb-4 rounded-md hover:bg-blue-600 transition duration-300">Update</button>
-            <a href="{{ url('subject-detail/' . $subject_id) }}" class="bg-amber-500 hover:bg-amber-700 text-white py-1 px-3 rounded my-3 mt-1">Back</a>
+            <a href="{{ url()->previous() }}" class="bg-gray-500 hover:bg-gray-700 text-white py-1 px-3 rounded my-3 mt-1">Back</a>
         </form>
     </div>
 </body>

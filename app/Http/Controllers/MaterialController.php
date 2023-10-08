@@ -7,6 +7,9 @@ use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Psy\Readline\Hoa\Console;
+use Illuminate\Support\Facades\Log;
+
 
 class MaterialController extends Controller
 {
@@ -14,6 +17,15 @@ class MaterialController extends Controller
         $materials = Material::all();
         $subject=Subject::all();
         return view('material-list', compact('materials','subject'));
+    }
+
+    public function getRelatedSubjects($subjectName, $gradeId)
+   {
+    $relatedSubjects = Subject::where('subject_name', $subjectName)
+        ->where('grade_id', $gradeId)
+        ->get();
+
+    return response()->json($relatedSubjects);
     }
 
     public function addMaterial($subject_id){
@@ -139,15 +151,22 @@ public function updateMaterial(Request $request, $id)
             $material->file = $filePath;
         }
 
-        // Detach all related subjects first
-        $material->subjects()->detach();
-
+     
         // Attach selected related subjects
         if ($request->has('subject_ids')) {
             $subject_ids = $request->input('subject_ids');
-            $material->subjects()->attach($subject_ids);
+            foreach ($subject_ids as $subject_id) {
+                $relatedMaterial = new Material;
+                $relatedMaterial->material_name = $request->material_name;
+                $relatedMaterial->file = $filePath;
+                $relatedMaterial->description = $request->description;
+                $relatedMaterial->upload_date = now();
+                $relatedMaterial->link = $request->link;
+                $relatedMaterial->subject_id = $subject_id;
+                $relatedMaterial->teacher_id = Auth::id();
+                $relatedMaterial->save();
+            }
         }
-
         // Update accessible users
         if ($request->has('users')) {
             $material->users()->sync($request->input('users'));
@@ -157,29 +176,18 @@ public function updateMaterial(Request $request, $id)
 
         return redirect()->back()->with('success', 'Material Updated Successfully');
     } catch (\Exception $e) {
+       
         return redirect()->back()->with('error', 'An error occurred');
     }
 }
 
    
-    
 
-    
-    
 
     public function deleteMaterial($id){
         Material::where('id', '=', $id)->delete();
         return redirect()->back()->with('success', 'Material Deleted Successfully');
     }
-
-    public function getRelatedSubjects($subjectName, $gradeId)
-{
-    $relatedSubjects = Subject::where('subject_name', $subjectName)
-        ->where('grade_id', $gradeId)
-        ->get();
-
-    return response()->json($relatedSubjects);
-}
 
  
 

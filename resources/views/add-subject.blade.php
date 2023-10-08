@@ -20,7 +20,7 @@
         @endif
     <h2 class="text-2xl font-bold mb-6 text-center text-black dark:text-white">Add Subject</h2>
 
-    <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post" action="{{ url('save-subject') }}">
+    <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post" action="{{ url('save-subject') }}"  enctype="multipart/form-data">
         @csrf
 
         <div class="mb-4">
@@ -57,6 +57,13 @@
                 <option value="">No Teachers Available</option>
                 @endif
             </select>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="image">Image</label>
+            <input type="file" name="image" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-purple-300 focus:bg-white focus:outline-none"/>
+            @error('image')
+            <p class="text-red-500 text-sm">{{ $message }}</p>
+            @enderror
         </div>
 
 

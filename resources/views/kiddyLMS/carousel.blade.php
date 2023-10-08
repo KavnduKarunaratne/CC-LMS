@@ -17,7 +17,11 @@ body {
 }
 
 .carousel {
+<<<<<<< HEAD
   width: 950px;
+=======
+  width: 960px;
+>>>>>>> 95993d21cd44a15969ce7c5423aca76c4bba3a36
   height: 400px;
   position: relative;
   

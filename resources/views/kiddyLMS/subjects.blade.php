@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <!--@if (Auth::user()->grade && Auth::user()->class)
+=======
+@if (Auth::user()->grade && Auth::user()->class)
+>>>>>>> 95993d21cd44a15969ce7c5423aca76c4bba3a36
 <div class="grid-cols-1 sm:grid md:grid-cols-3 ">
     @foreach($subject as $subject)
 
@@ -7,21 +11,36 @@
     <a href="#!">
       <img
         class="rounded-t-lg"
+<<<<<<< HEAD
         src="https://tecdn.b-cdn.net/img/new/standard/city/041.webp"
+=======
+        src="#"
+>>>>>>> 95993d21cd44a15969ce7c5423aca76c4bba3a36
         alt="Hollywood Sign on The Hill" />
     </a>
     <div class="p-6">
       <h5
         class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+<<<<<<< HEAD
         Card title
       </h5>
       <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
         This is a longer card with supporting text below as a natural
         lead-in to additional content. This content is a little bit
         longer.
+=======
+        Subject Name.
+      </h5>
+      <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+         Subject Info.
+>>>>>>> 95993d21cd44a15969ce7c5423aca76c4bba3a36
       </p>
     </div>
   </div>
   @endforeach
 </div>
+<<<<<<< HEAD
 @endif -->
+=======
+@endif
+>>>>>>> 95993d21cd44a15969ce7c5423aca76c4bba3a36

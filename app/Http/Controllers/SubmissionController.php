@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
+use App\Models\Subject;
 use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,6 +81,8 @@ class SubmissionController extends Controller
     public function searchSubmissions(Request $request, $assignment_id){
         $assignment = Assignment::findOrFail($assignment_id);
         $searchTerm = $request->input('search');
+        $subject = $assignment->subject; 
+      
 
         $submissions = Submission::where('assignment_id', $assignment_id)
             ->where(function ($query) use ($searchTerm) {
@@ -88,7 +91,7 @@ class SubmissionController extends Controller
             })
             ->get();
 
-        return view('view-submissions', compact('assignment', 'submissions'));
+        return view('view-submissions', compact('assignment', 'submissions','subject'));
     }
 
     public function viewMySubmissions(){
