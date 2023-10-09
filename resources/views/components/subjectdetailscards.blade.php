@@ -23,9 +23,9 @@
 
                 <a href="{{ route('subject.flashcards', ['subject_id' => $subject->id]) }}"><h3 class="text-lg font-bold text-indigo-700 hover:text-indigo-400 mt-2 mb-3">View Flashcards</h3></a>
 
-                <div class="flex space-x-4 place-content-start">
-                    <a href="{{ url('add-material', ['subject_id' => $subject->id]) }}"><button class="bg-green-400 text-white py-2.5 px-4 rounded-full font-bold hover:bg-gray-800">+ Materials</button></a>
-                    <a href="{{ url('add-assignment',['subject_id' => $subject->id]) }}"><button class="bg-green-400 text-white py-2.5 px-4 rounded-full font-bold hover:bg-gray-800">+ Assigments</button></a>
+                <div class="flex space-x-4 flex-row justify-center">
+                    <a href="{{ url('add-material', ['subject_id' => $subject->id]) }}"><button class="bg-green-400 text-white py-2.5 px-4 rounded-full font-bold hover:bg-gray-800">+Materials</button></a>
+                    <a href="{{ url('add-assignment',['subject_id' => $subject->id]) }}"><button class="bg-green-400 text-white py-2.5 px-4 rounded-full font-bold hover:bg-gray-800">+Assigments</button></a>
                     
                 </div>
              
