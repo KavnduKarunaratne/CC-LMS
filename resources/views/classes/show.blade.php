@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="m-6 ">
+    <div class="m-6 h-[700px] dark:bg-black ">
     <h1 class="text-white p-4 font-bold text-xl">Classes for Grade {{ $grade->grade }}</h1>
 
     @if($classes)

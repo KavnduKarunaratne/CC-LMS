@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classes;
 use App\Models\Grade;
+use App\Models\Notice;
 use App\Models\User;
 use App\Rules\ValidSuNumber;
 use Illuminate\Http\Request;
@@ -133,7 +134,11 @@ public function getClasses($gradeId)
     $classes = Classes::where('grade_id', $gradeId)->get();
     return response()->json($classes);
 }
+public function studentPanel(){
+    $notices=Notice::all();
 
+    return view ('student-panel', compact('notices'));
+}
 
    
 }

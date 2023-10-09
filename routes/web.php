@@ -189,7 +189,7 @@ Route::middleware(['App\Http\Middleware\ValidateRole:4'])->group(function () {
 });
 
 Route::middleware(['App\Http\Middleware\ValidateRole:3'])->group(function () {
-    Route::get('student-panel',[StudentController::class,'studentPanel']);
+    Route::get('student-panel',[StudentController::class,'studentPanel'])->name('student-panel');
     Route::get('view-my-submissions', [SubmissionController::class,'viewMySubmissions'])->name('view-my-submissions');
 });
 

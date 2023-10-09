@@ -57,7 +57,7 @@
    <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
       <ul class="space-y-2 font-medium">
          <li>
-            <a href="#" class="flex items-center p-2 text-indigo-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <a href="{{ url('student-panel') }}" class="flex items-center p-2 text-indigo-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <svg class="w-7 h-7 text-indigo-600 transition duration-75 dark:text- group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                   <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
                   <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
@@ -157,7 +157,7 @@
                             <ul class="mt-12">
                                 
                                 <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-indigo-600  text-gray-800 hover:text-white">
-                                    <a href="{{ url('management') }}" class="flex items-center  focus:outline-none">
+                                    <a href="{{ url('student-panel') }}" class="flex items-center  focus:outline-none">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-grid" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"></path>
                                             <rect x="4" y="4" width="6" height="6" rx="1"></rect>
@@ -170,7 +170,7 @@
 
                                 </li>
                                 <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-indigo-600  text-gray-800 hover:text-white">
-                                    <a href="{{ url('profile/show') }}" class="flex items-center">
+                                    <a href="{{ route('view-my-submissions') }}" class="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-puzzle" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z"></path>
                                             <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1"></path>
@@ -180,7 +180,7 @@
 
                                 </li>
                                 <li class="p-4 mt-3 flex items-center rounded-md px-6 duration-300 cursor-pointer hover:bg-indigo-600  text-gray-800 hover:text-white">
-                                    <a href="{{ route('logout') }}" class="flex items-center " >
+                                    <a href="{{ url('profile/show') }}" class="flex items-center " >
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-compass" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z"></path>
                                             <polyline points="8 16 10 10 16 8 14 14 8 16"></polyline>
@@ -281,7 +281,7 @@
                         <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View Product</button>
                     </div>
                 </div>
-                <h3 class="text-xl font-semi-bold text-gray-900 mt-1">You're logged in as: {{ auth()->user()->name }} </h3>
+                <h3 class=" text-xl  font-semi-bold text-gray-900 mt-1">You're logged in as: {{ auth()->user()->name }} </h3>
                 <h3 class="text-xl font-semi-bold text-gray-900 mt-1">Your role ID: {{ Auth::user()->role_id }}</h3>
                 @if (Auth::user()->grade)
                 <h3 class="text-xl font-semi-bold text-gray-900 mt-1">Your Grade: {{ Auth::user()->grade->grade }}</h3>
